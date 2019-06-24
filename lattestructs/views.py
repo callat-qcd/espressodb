@@ -1,3 +1,7 @@
-from django.shortcuts import render
+"""Views for the lattestrucs module
+"""
+from django.http import HttpResponse
 
-# Create your views here.
+
+def index(request):  # pylint: disable=W0613
+    return HttpResponse("Hello, world. You're at the polls index.")
