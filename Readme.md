@@ -21,8 +21,8 @@ You can access the interface in your browser.
 
 
 ## Authors
-* cchang
-* ckoerber
+* [@cchang5](https://github.com/cchang5)
+* [@ckoerber](https://github.com/ckoerber)
 
 ## Contribute
 To be discussed...
