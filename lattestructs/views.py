@@ -1,4 +1,4 @@
-"""Views for the lattestrucs module
+"""Views for the lattestructs module
 """
 from django.http import HttpResponse
 

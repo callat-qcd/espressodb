@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class LattestructsConfig(AppConfig):
-    name = 'lattestructs'
+class lattestructsConfig(AppConfig):
+    name = "lattestructs"

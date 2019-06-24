@@ -1,5 +1,5 @@
 # pylint: disable=C0103
-"""Url patters for lattestrucs
+"""Url patters for lattestructs
 """
 from django.urls import path
 
