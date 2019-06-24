@@ -13,9 +13,9 @@ pip install [--user] [-e] .
 ## Run
 If you start the app for the first time, run
 ```
-python manage.py makemigrations  # this updates schemas incase changes where pushed
+python manage.py makemigrations  # this updates schemas in case changes where pushed
 python manage.py migrate   # this creates the database
-python manage.py createsuperuser  # this creates a superuser fo the database
+python manage.py createsuperuser  # this creates a superuser for the database
 ```
 The following command in your bash to initiate an interactive server
 
