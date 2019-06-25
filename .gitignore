@@ -6,3 +6,4 @@ gauge_smearing/
 interaction_operators/
 interpolation_operators/
 analysis_*/
+*/migrations/0*.py
