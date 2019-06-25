@@ -1,24 +1,28 @@
 from django.contrib import admin
-from lattestructs.models import Source, Hisq, Clover, GaugeConfiguration
+
+from lattestructs.models import HisqGaugeConfig
+from lattestructs.models import CloverGaugeConfig
+from lattestructs.models import HisqPropagator
+from lattestructs.models import CloverPropagator
 
 
-class SourceAdmin(admin.ModelAdmin):
+class HisqGaugeConfigAdmin(admin.ModelAdmin):
     pass
 
 
-class HisqAdmin(admin.ModelAdmin):
+class CloverGaugeConfigAdmin(admin.ModelAdmin):
     pass
 
 
-class CloverAdmin(admin.ModelAdmin):
+class HisqPropagatorAdmin(admin.ModelAdmin):
     pass
 
 
-class GaugeConfigurationAdmin(admin.ModelAdmin):
+class CloverPropagatorAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Source, SourceAdmin)
-admin.site.register(Hisq, HisqAdmin)
-admin.site.register(Clover, CloverAdmin)
-admin.site.register(GaugeConfiguration, GaugeConfigurationAdmin)
+admin.site.register(HisqGaugeConfig, HisqGaugeConfigAdmin)
+admin.site.register(CloverGaugeConfig, CloverGaugeConfigAdmin)
+admin.site.register(HisqPropagator, HisqPropagatorAdmin)
+admin.site.register(CloverPropagator, CloverPropagatorAdmin)
