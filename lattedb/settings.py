@@ -27,11 +27,23 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+POSTGRES_DB = False
 
 # Application definition
 
-INSTALLED_APPS = [
-    "lattestructs",
+LATTE_DB_APPS = [
+    "base",
+    "propagators",
+    "gauge_configs",
+    # "gauge_smearing",
+    # "interaction_operators",
+    # "interpolation_operators",
+    # "correlator_data",
+    # "correlation_functions",
+    # "bootstrap",
+]
+
+INSTALLED_APPS = LATTE_DB_APPS + [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -74,12 +86,33 @@ WSGI_APPLICATION = "lattedb.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+if POSTGRES_DB:
+    DEFAULT_DB_CONFIG = {
+        "ENGINE": "django.db.backends.postgresql",
+        "OPTIONS": {"options": "-c search_path=django,public"},
+        "NAME": "chriskan",
+        "USER": "postgres",
+        "PASSWORD": "",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
-}
+    DATABASES = {"default": DEFAULT_DB_CONFIG}
+    DATABASE_ROUTERS = [
+        f"lattedb.routers.{app}Router" for app in ["Base", "Propagator", "GaugeConfig"]
+    ]
+    for app in LATTE_DB_APPS:
+        DATABASES[app] = DEFAULT_DB_CONFIG.copy()
+        if POSTGRES_DB:
+            DATABASES[app]["OPTIONS"]["options"] = f"-c search_path={app},public"
+
+
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }
 
 
 # Password validation

@@ -1,8 +1,8 @@
 # pylint: disable=C0103
-"""Url patters for lattestructs
+"""Url patters for base
 """
 from django.urls import path
 
-from lattestructs import views
+from base import views
 
 urlpatterns = [path("", views.index, name="index")]
