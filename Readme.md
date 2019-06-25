@@ -26,7 +26,7 @@ python manage.py runserver
 You can access the interface in your browser.
 
 ## Development
-Table schemas are implemented in `lattestructs.modeles`.
+Table schemas are implemented in `base.modeles`.
 See also [the Django model doc](https://docs.djangoproject.com/en/2.2/topics/db/models/).
 
 ## Management interface
