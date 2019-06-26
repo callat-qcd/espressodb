@@ -1,7 +1,7 @@
 
 clean-migrations:
 	$(RM) base/migrations/0*.py
-	$(RM) gauge_configs/migrations/0*.py
+	$(RM) gaugeconfigs/migrations/0*.py
 	$(RM) propagators/migrations/0*.py
 
 clean-sqlite:

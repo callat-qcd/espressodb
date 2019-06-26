@@ -4,8 +4,8 @@ from django.contrib import admin
 
 from base.admin import BaseAdmin
 
-from gauge_configs.models import HisqGaugeConfig
-from gauge_configs.models import CloverGaugeConfig
+from gaugeconfigs.models import HisqGaugeConfig
+from gaugeconfigs.models import CloverGaugeConfig
 
 
 admin.site.register(HisqGaugeConfig, BaseAdmin)
