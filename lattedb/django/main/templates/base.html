@@ -1,0 +1,26 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>LatteDB</title>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+    </head>
+    <body>
+        <header>
+            <h1>
+                LatteDB
+            </h1>
+        </header>
+        <main role="main">
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
+    </body>
+</html>
