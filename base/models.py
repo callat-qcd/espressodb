@@ -33,3 +33,7 @@ class GaugeConfig(Base):
 class Propagator(Base):
     """
     """
+
+class LinkSmearing(Base):
+    """
+    """
