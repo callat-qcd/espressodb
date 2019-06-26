@@ -24,7 +24,7 @@ class HisqGaugeConfig(GaugeConfig):
     mpi = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     alpha_s = models.FloatField(null=True)
     directory = models.TextField(null=False, blank=True)
-    misc = JSONField(null=True)
+    misc = JSONField(null=True, blank=True)
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=['stream', 'nl', 'nt', 'ml', 'ms', 'mc', 'beta'],
