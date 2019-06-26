@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from base.admin import BaseAdmin
+from lattedb.django.base.admin import BaseAdmin
 
-from linksmearing.models import Unsmeared
-from linksmearing.models import WilsonFlow
+from lattedb.django.linksmearing.models import Unsmeared
+from lattedb.django.linksmearing.models import WilsonFlow
 
 # Register your models here.
 admin.site.register(Unsmeared, BaseAdmin)
