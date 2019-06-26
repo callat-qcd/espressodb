@@ -34,16 +34,11 @@ READ_CONFIG = True
 # Application definition
 
 LATTE_DB_APPS = [
+    "lattedb.django.main",
     "lattedb.django.base",
     "lattedb.django.propagators",
     "lattedb.django.gaugeconfigs",
-    "lattedb.django.main",
-    # "gauge_smearing",
-    # "interaction_operators",
-    # "interpolation_operators",
-    # "correlator_data",
-    # "correlation_functions",
-    # "bootstrap",
+    "lattedb.django.linksmearing",
 ]
 
 INSTALLED_APPS = LATTE_DB_APPS + [
