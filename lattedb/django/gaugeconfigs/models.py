@@ -21,6 +21,12 @@ class HisqGaugeConfig(GaugeConfig):
         blank=True,
         help_text="(Optional) Char(20): Short name for ensemble (e.g. 'a15m310')",
     )
+    stream = models.CharField(
+        max_length=3,
+        null=False,
+        blank=False,
+        help_text="Charfield(3): Stream tag for Monte Carlo"
+    )
     nl = models.PositiveSmallIntegerField(
         null=False, help_text="PositiveSmallInt: Spatial length in lattice units"
     )
@@ -55,7 +61,7 @@ class HisqGaugeConfig(GaugeConfig):
         max_digits=4,
         decimal_places=3,
         null=True,
-        help_text="(Optional) Decimal(4,3): Lattice spaing in fermi",
+        help_text="(Optional) Decimal(4,3): Lattice spacing in fermi",
     )
     l_fm = models.DecimalField(
         max_digits=5,
@@ -77,14 +83,6 @@ class HisqGaugeConfig(GaugeConfig):
     )
     alpha_s = models.FloatField(
         null=True, help_text="(Optional) Float: Running coupling"
-    )
-    directory = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Directory path to gauge field",
-    )
-    misc = JSONField(
-        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
 
     class Meta:

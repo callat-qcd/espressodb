@@ -1,10 +1,10 @@
-from lattedb.django.base.models import Propagator
+from lattedb.django.base.models import Propagators
 from django.db import models
 
 # Create your models here.
 
 
-class HisqPropagator(Propagator):
+class HisqPropagators(Propagators):
     """
     """
 
@@ -14,7 +14,7 @@ class HisqPropagator(Propagator):
         help_text="ForeignKey pointing to gauge field",
     )
     linksmearing = models.ForeignKey(
-        "base.LinkSmearing",
+        "base.LinkSmearings",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to link smearing",
     )
@@ -25,8 +25,7 @@ class HisqPropagator(Propagator):
         help_text="Decimal(7,6): Input valence quark mass",
     )
 
-
-class MobiusPropagator(Propagator):
+class MobiusPropagators(Propagators):
     """
     """
 
@@ -36,7 +35,7 @@ class MobiusPropagator(Propagator):
         help_text="ForeignKey pointing to gauge field",
     )
     linksmearing = models.ForeignKey(
-        "base.LinkSmearing",
+        "base.LinkSmearings",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to link smearing",
     )
@@ -81,6 +80,6 @@ class MobiusPropagator(Propagator):
     )
 
 
-class CloverPropagator(Propagator):
+class CloverPropagators(Propagators):
     """
     """

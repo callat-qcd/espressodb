@@ -3,6 +3,7 @@
 """
 from django.db import models
 from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 
 
 class Base(models.Model):
@@ -29,11 +30,37 @@ class Base(models.Model):
 class GaugeConfig(Base):
     """
     """
+    directory = models.TextField(
+        null=False,
+        blank=True,
+        help_text="(Optional) Text: Directory path to gauge field",
+    )
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
 
-class Propagator(Base):
+class Propagators(Base):
     """
     """
+    directory = models.TextField(
+        null=False,
+        blank=True,
+        help_text="(Optional) Text: Directory path to propagator",
+    )
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
 
-class LinkSmearing(Base):
+class LinkSmearings(Base):
     """
     """
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
+
+class InterpolatingOperators(Base):
+    """
+    """
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
