@@ -22,6 +22,6 @@ from lattedb.django.propagators.views import MobiusPropagatorsTableView
 urlpatterns = [
     path("hisq/", HisqPropagatorsTableView.as_view(), name="propagators-hisq-table"),
     path(
-        "clover/", MobiusPropagatorsTableView.as_view(), name="propagators-mobius-table"
+        "mobius/", MobiusPropagatorsTableView.as_view(), name="propagators-mobius-table"
     ),
 ]

@@ -1,4 +1,4 @@
-import django_tables2 as tables
+from lattedb.django.main.views import TableView
 
 from lattedb.django.propagators.models import HisqPropagators
 from lattedb.django.propagators.models import MobiusPropagators
@@ -7,15 +7,13 @@ from lattedb.django.propagators.tables import HisqPropagatorsTable
 from lattedb.django.propagators.tables import MobiusPropagatorsTable
 
 
-class HisqPropagatorsTableView(tables.SingleTableView):
+class HisqPropagatorsTableView(TableView):
     table_class = HisqPropagatorsTable
     queryset = HisqPropagators.objects.all()
-    template_name = "tables.html"
-    paginator_class = tables.paginators.LazyPaginator
+    page_name = "Hisq propagators"
 
 
-class MobiusPropagatorsTableView(tables.SingleTableView):
+class MobiusPropagatorsTableView(TableView):
     table_class = MobiusPropagatorsTable
     queryset = MobiusPropagators.objects.all()
-    template_name = "tables.html"
-    paginator_class = tables.paginators.LazyPaginator
+    page_name = "Mobius propagators"
