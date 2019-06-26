@@ -3,6 +3,6 @@
 """
 from django.urls import path
 
-from base import views
+from lattedb.django.base import views
 
 urlpatterns = [path("", views.index, name="index")]

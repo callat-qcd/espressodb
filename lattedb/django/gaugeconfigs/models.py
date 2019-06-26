@@ -3,12 +3,13 @@ from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
 
-from base.models import GaugeConfig
+from lattedb.django.base.models import GaugeConfig
 
 
 class HisqGaugeConfig(GaugeConfig):
     """
     """
+
     long_tag = models.TextField(null=False, blank=True)
     short_tag = models.CharField(max_length=20, null=False, blank=True)
     stream = models.CharField(max_length=5, null=False, blank=False)
@@ -27,9 +28,12 @@ class HisqGaugeConfig(GaugeConfig):
     misc = JSONField(null=True)
 
     class Meta:
-        constraints = [models.UniqueConstraint(fields=['stream', 'nl', 'nt', 'ml', 'ms', 'mc', 'beta'],
-                       name = 'unique_hisqgaugeconfigs')]
-
+        constraints = [
+            models.UniqueConstraint(
+                fields=["stream", "nl", "nt", "ml", "ms", "mc", "beta"],
+                name="unique_hisqgaugeconfigs",
+            )
+        ]
 
 
 class CloverGaugeConfig(GaugeConfig):
@@ -37,4 +41,3 @@ class CloverGaugeConfig(GaugeConfig):
     """
 
     lattice_spacing = models.FloatField()
-

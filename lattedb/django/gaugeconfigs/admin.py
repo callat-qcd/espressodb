@@ -2,10 +2,10 @@
 """
 from django.contrib import admin
 
-from base.admin import BaseAdmin
+from lattedb.django.base.admin import BaseAdmin
 
-from gaugeconfigs.models import HisqGaugeConfig
-from gaugeconfigs.models import CloverGaugeConfig
+from lattedb.django.gaugeconfigs.models import HisqGaugeConfig
+from lattedb.django.gaugeconfigs.models import CloverGaugeConfig
 
 
 admin.site.register(HisqGaugeConfig, BaseAdmin)
