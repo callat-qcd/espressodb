@@ -1,14 +1,14 @@
 from django.db import models
 
-from lattedb.django.base.models import LinkSmearing
+from lattedb.django.base.models import LinkSmearings
 
 # Create your models here.
-class Unsmeared(LinkSmearing):
+class Unsmeared(LinkSmearings):
     """
     """
 
 
-class WilsonFlow(LinkSmearing):
+class WilsonFlow(LinkSmearings):
     """
     """
 
