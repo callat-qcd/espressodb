@@ -17,30 +17,30 @@ See also [connecting-to-the-database](https://docs.djangoproject.com/en/2.2/ref/
 
 2. Next, you must create the database by running
 ```
-python manage.py makemigrations # this prepares sql
-python manage.py migrate   # this is sql
+lattedb makemigrations # this prepares sql
+lattedb migrate   # this is sql
 ```
 This step must be repeated each time you change tables.
 
 3. Create a super user:
 ```
-python manage.py createsuperuser
+lattedb createsuperuser
 ```
 
 4. The following command in your bash to initiate an interactive server
 ```
-python manage.py runserver
+lattedb runserver
 ```
 
 You can access the interface in your browser.
 
 ## Development
-Table schemas are implemented in `base.modeles`.
+Table schemas are implemented in `lattedb.django.base.modeles`.
 See also [the Django model doc](https://docs.djangoproject.com/en/2.2/topics/db/models/).
 
 ## Management interface
 Go to the admin page [http://127.0.0.1:8000](http://127.0.0.1:8000) (once the server is running.)
-Note that the address might change (look at the output of `manage.py runserver`).
+Note that the address might change (look at the output of `lattedb runserver`).
 
 ## Authors
 * [@cchang5](https://github.com/cchang5)
