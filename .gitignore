@@ -2,3 +2,5 @@ db-config.yaml
 __pycache__/
 .lattedb
 lattedb.egg-info/
+.idea/
+
