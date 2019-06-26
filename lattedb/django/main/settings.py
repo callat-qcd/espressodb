@@ -13,11 +13,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import yaml
 
-from lattedb.private.settings import SECRET_KEY  # pylint: disable=W0611
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
 
+with open(os.path.join(ROOT_DIR, "settings.yaml"), "r") as fin:
+    SECRET_KEY = yaml.safe_load(fin.read())["SECRET_KEY"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -33,9 +34,9 @@ READ_CONFIG = True
 # Application definition
 
 LATTE_DB_APPS = [
-    "base",
-    "propagators",
-    "gaugeconfigs",
+    "lattedb.django.base",
+    "lattedb.django.propagators",
+    "lattedb.django.gaugeconfigs",
     # "gauge_smearing",
     # "interaction_operators",
     # "interpolation_operators",
@@ -63,7 +64,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "lattedb.urls"
+ROOT_URLCONF = "lattedb.django.main.urls"
 
 TEMPLATES = [
     {
@@ -81,14 +82,15 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "lattedb.wsgi.application"
+WSGI_APPLICATION = "lattedb.django.main.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
 if READ_CONFIG:
-    with open("db-config.yaml", "r") as fin:
+    with open(os.path.join(ROOT_DIR, "db-config.yaml"), "r") as fin:
         CONFIG = yaml.safe_load(fin.read())
     DATABASES = {"default": CONFIG}
 
