@@ -39,7 +39,7 @@ Table schemas are implemented in `base.modeles`.
 See also [the Django model doc](https://docs.djangoproject.com/en/2.2/topics/db/models/).
 
 ## Management interface
-Go to the admin page [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) (once the server is running.)
+Go to the admin page [http://127.0.0.1:8000](http://127.0.0.1:8000) (once the server is running.)
 Note that the address might change (look at the output of `manage.py runserver`).
 
 ## Authors
