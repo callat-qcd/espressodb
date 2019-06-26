@@ -7,7 +7,7 @@ import sys
 def main():
     """Launches the web app.
     """
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lattedb.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lattedb.django.main.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
