@@ -40,6 +40,7 @@ LATTE_DB_APPS = [
     "lattedb.django.gaugeconfigs",
     "lattedb.django.linksmearings",
     "lattedb.django.interpolatingoperators",
+    "lattedb.django.interactionoperators"
 ]
 
 INSTALLED_APPS = LATTE_DB_APPS + [
