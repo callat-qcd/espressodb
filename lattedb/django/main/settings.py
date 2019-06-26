@@ -17,15 +17,16 @@ import yaml
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(os.path.dirname(BASE_DIR))
 
-with open(os.path.join(ROOT_DIR, "settings.yaml"), "r") as fin:
-    SECRET_KEY = yaml.safe_load(fin.read())["SECRET_KEY"]
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
+SETTINGS_FILE = os.path.join(ROOT_DIR, "settings.yaml")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+with open(SETTINGS_FILE, "r") as fin:
+    _SETTINGS = yaml.safe_load(fin.read())
+    SECRET_KEY = _SETTINGS["SECRET_KEY"]
+    PROJECT_APPS = _SETTINGS["PROJECT_APPS"]
+
 
 ALLOWED_HOSTS = []
 
@@ -33,15 +34,8 @@ READ_CONFIG = True
 
 # Application definition
 
-LATTE_DB_APPS = [
+INSTALLED_APPS = PROJECT_APPS + [
     "lattedb.django.main",
-    "lattedb.django.base",
-    "lattedb.django.propagators",
-    "lattedb.django.gaugeconfigs",
-    "lattedb.django.linksmearing",
-]
-
-INSTALLED_APPS = LATTE_DB_APPS + [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
