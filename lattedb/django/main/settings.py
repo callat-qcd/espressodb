@@ -34,15 +34,12 @@ READ_CONFIG = True
 # Application definition
 
 LATTE_DB_APPS = [
+    "lattedb.django.main",
     "lattedb.django.base",
     "lattedb.django.propagators",
     "lattedb.django.gaugeconfigs",
     "lattedb.django.linksmearings",
-    # "interaction_operators",
     "lattedb.django.interpolatingoperators",
-    # "correlator_data",
-    # "correlation_functions",
-    # "bootstrap",
 ]
 
 INSTALLED_APPS = LATTE_DB_APPS + [
@@ -107,9 +104,7 @@ else:
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
