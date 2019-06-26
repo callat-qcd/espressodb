@@ -30,7 +30,6 @@ class GaugeConfig(Base):
     """
     """
 
-
 class Propagator(Base):
     """
     """

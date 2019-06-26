@@ -27,14 +27,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-POSTGRES_DB = False
+POSTGRES_DB = True
 
 # Application definition
 
 LATTE_DB_APPS = [
     "base",
     "propagators",
-    "gauge_configs",
+    "gaugeconfigs",
     # "gauge_smearing",
     # "interaction_operators",
     # "interpolation_operators",
@@ -87,24 +87,15 @@ WSGI_APPLICATION = "lattedb.wsgi.application"
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 if POSTGRES_DB:
-    DEFAULT_DB_CONFIG = {
-        "ENGINE": "django.db.backends.postgresql",
-        "OPTIONS": {"options": "-c search_path=django,public"},
-        "NAME": "chriskan",
-        "USER": "postgres",
-        "PASSWORD": "",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": "chriskan",
+            "USER": "postgres",
+            "PASSWORD": "",
+            "HOST": "localhost",
+        }
     }
-    DATABASES = {"default": DEFAULT_DB_CONFIG}
-    DATABASE_ROUTERS = [
-        f"lattedb.routers.{app}Router" for app in ["Base", "Propagator", "GaugeConfig"]
-    ]
-    for app in LATTE_DB_APPS:
-        DATABASES[app] = DEFAULT_DB_CONFIG.copy()
-        if POSTGRES_DB:
-            DATABASES[app]["OPTIONS"]["options"] = f"-c search_path={app},public"
-
 
 else:
     DATABASES = {
