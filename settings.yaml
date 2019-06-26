@@ -5,3 +5,4 @@ PROJECT_APPS:
     - lattedb.django.linksmearing
     - lattedb.django.propagators
     - lattedb.django.interpolatingoperators
+    - lattedb.django.interactionoperators
