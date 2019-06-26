@@ -15,6 +15,13 @@ class HisqGaugeConfigTableView(tables.SingleTableView):
     template_name = "tables.html"
     paginator_class = tables.paginators.LazyPaginator
 
+    def get_context_data(self, **kwargs):
+        """Adds the name of the app to the context
+        """
+        context = super().get_context_data(**kwargs)
+        context["header"] = "Hisq gauge configs"
+        return context
+
 
 class CloverGaugeConfigTableView(tables.SingleTableView):
     table_class = CloverGaugeConfigTable
