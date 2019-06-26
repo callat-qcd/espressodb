@@ -36,6 +36,8 @@ READ_CONFIG = True
 
 INSTALLED_APPS = PROJECT_APPS + [
     "lattedb.django.main",
+    "django_tables2",
+    "bootstrap4",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -131,3 +133,5 @@ LOGGING = {
         "main.commands": {"handlers": ["console"], "level": "DEBUG", "propagate": True}
     },
 }
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
