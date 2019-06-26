@@ -7,4 +7,6 @@ interaction_operators/
 interpolation_operators/
 analysis_*/
 */migrations/0*.py
+*/__pycache__/*
+.idea/
 db-config.yaml
