@@ -11,14 +11,23 @@ pip install [--user] [-e] .
 ```
 
 ## Run
-If you start the app for the first time, run
-```
-python manage.py makemigrations  # this updates schemas in case changes where pushed
-python manage.py migrate   # this creates the database
-python manage.py createsuperuser  # this creates a superuser for the database
-```
-The following command in your bash to initiate an interactive server
+1. If you start the app for the first time you must configure the database setup file `db-config.yaml`.
+An example file is given by `postgres-example.yaml`. Simply adjust and copy this to `db-config.yaml`.
+See also [connecting-to-the-database](https://docs.djangoproject.com/en/2.2/ref/databases/#connecting-to-the-database).
 
+2. Next, you must create the database by running
+```
+python manage.py makemigrations # this prepares sql
+python manage.py migrate   # this is sql
+```
+This step must be repeated each time you change tables.
+
+3. Create a super user:
+```
+python manage.py createsuperuser
+```
+
+4. The following command in your bash to initiate an interactive server
 ```
 python manage.py runserver
 ```

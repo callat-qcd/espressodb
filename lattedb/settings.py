@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import yaml
 
 from lattedb.private.settings import SECRET_KEY  # pylint: disable=W0611
 
@@ -27,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-POSTGRES_DB = True
+READ_CONFIG = True
 
 # Application definition
 
@@ -86,16 +87,10 @@ WSGI_APPLICATION = "lattedb.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-if POSTGRES_DB:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "chriskan",
-            "USER": "postgres",
-            "PASSWORD": "",
-            "HOST": "localhost",
-        }
-    }
+if READ_CONFIG:
+    with open("db-config.yaml", "r") as fin:
+        CONFIG = yaml.safe_load(fin.read())
+    DATABASES = {"default": CONFIG}
 
 else:
     DATABASES = {

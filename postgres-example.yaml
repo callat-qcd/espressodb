@@ -1,0 +1,5 @@
+ENGINE: django.db.backends.postgresql
+NAME: my-db
+USER: postgres
+PASSWORD: ""
+HOST: localhost
