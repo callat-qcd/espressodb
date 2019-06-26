@@ -37,6 +37,7 @@ LATTE_DB_APPS = [
     "lattedb.django.base",
     "lattedb.django.propagators",
     "lattedb.django.gaugeconfigs",
+    "lattedb.django.main",
     # "gauge_smearing",
     # "interaction_operators",
     # "interpolation_operators",
