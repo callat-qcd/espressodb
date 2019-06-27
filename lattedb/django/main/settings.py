@@ -62,7 +62,10 @@ ROOT_URLCONF = "lattedb.django.main.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "lattedb", "templates")],
+        "DIRS": [
+            os.path.join(BASE_DIR, "lattedb", "templates"),
+            os.path.join(BASE_DIR, "correlators", "templates"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
