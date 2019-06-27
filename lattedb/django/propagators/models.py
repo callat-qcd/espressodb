@@ -15,15 +15,15 @@ class HisqPropagators(Propagators):
         help_text="(Optional) Char(20): User defined tag for easy searches",
     )
 
-    gaugeconfig = models.OneToOneField(
+    gaugeconfig = models.ForeignKey(
         "base.GaugeConfig",
         on_delete=models.CASCADE,
-        help_text="OneToOneField pointing to gauge field",
+        help_text="ForeignKey pointing to gauge field",
     )
-    linksmearing = models.OneToOneField(
+    linksmearing = models.ForeignKey(
         "base.LinkSmearings",
         on_delete=models.CASCADE,
-        help_text="OneToOneField pointing to link smearing",
+        help_text="ForeignKey pointing to link smearing",
     )
     mval = models.DecimalField(
         max_digits=7,
@@ -51,15 +51,15 @@ class MobiusPropagators(Propagators):
         blank=True,
         help_text="(Optional) Char(20): User defined tag for easy searches",
     )
-    gaugeconfig = models.OneToOneField(
+    gaugeconfig = models.ForeignKey(
         "base.GaugeConfig",
         on_delete=models.CASCADE,
-        help_text="OneToOneField pointing to gauge field",
+        help_text="ForeignKey pointing to gauge field",
     )
-    linksmearing = models.OneToOneField(
+    linksmearing = models.ForeignKey(
         "base.LinkSmearings",
         on_delete=models.CASCADE,
-        help_text="OneToOneField pointing to link smearing",
+        help_text="ForeignKey pointing to link smearing",
     )
     mval = models.DecimalField(
         max_digits=7,

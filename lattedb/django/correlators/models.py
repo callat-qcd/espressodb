@@ -7,35 +7,35 @@ class MesonTwoPoints(Correlators):
         max_length=20,
         null=False,
         blank=True,
-        help_text='(Optional) Char(20): User defined tag for easy searches'
+        help_text="(Optional) Char(20): User defined tag for easy searches",
     )
-    propagator0 = models.OneToOneField(
+    propagator0 = models.ForeignKey(
         "base.Propagators",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="OneToOneField: Pointer to first propagator"
+        help_text="ForeignKey: Pointer to first propagator",
     )
-    propagator1 = models.OneToOneField(
+    propagator1 = models.ForeignKey(
         "base.Propagators",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="OneToOneField: Pointer to second propagator"
+        help_text="ForeignKey: Pointer to second propagator",
     )
-    sourceoperator = models.OneToOneField(
+    sourceoperator = models.ForeignKey(
         "base.interpolatingoperators",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="OneToOneField: Pointer to source interpolating operator"
+        help_text="ForeignKey: Pointer to source interpolating operator",
     )
-    sourcesmearing = models.OneToOneField(
+    sourcesmearing = models.ForeignKey(
         "base.operatorsmearings",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="OneToOneField: Pointer to source operator smearing"
+        help_text="ForeignKey: Pointer to source operator smearing",
     )
-    sinkoperator = models.OneToOneField(
+    sinkoperator = models.ForeignKey(
         "base.interpolatingoperators",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="OneToOneField: Pointer to sink interpolating operator"
+        help_text="ForeignKey: Pointer to sink interpolating operator",
     )
