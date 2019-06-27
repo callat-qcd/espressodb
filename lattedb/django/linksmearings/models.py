@@ -17,3 +17,8 @@ class WilsonFlow(LinkSmearings):
         decimal_places=2,
         help_text="Decimal(3,2): Flow time in lattice units",
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["flowtime"], name="unique_wilsonflow")
+        ]

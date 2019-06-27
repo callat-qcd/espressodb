@@ -6,3 +6,4 @@ PROJECT_APPS:
     - lattedb.django.propagators
     - lattedb.django.interpolatingoperators
     - lattedb.django.interactionoperators
+    - lattedb.django.correlators

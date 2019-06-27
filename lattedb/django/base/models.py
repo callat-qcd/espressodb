@@ -71,3 +71,10 @@ class InteractionOperators(Base):
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
+
+class Correlators(Base):
+    """
+    """
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )

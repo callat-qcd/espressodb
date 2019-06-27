@@ -5,39 +5,31 @@ from lattedb.django.base.models import InterpolatingOperators
 class Basak(InterpolatingOperators):
     """
     """
+
     hadron = models.CharField(
-        max_length=20,
-        null=False,
-        blank=False,
-        help_text="Char(20): Hadron name"
+        max_length=20, null=False, blank=False, help_text="Char(20): Hadron name"
     )
 
     lambda_index = models.CharField(
         max_length=10,
         null=False,
         blank=False,
-        help_text="Char(10): Irreducible representations of O^D_h (improper point group)"
+        help_text="Char(10): Irreducible representations of O^D_h (improper point group)",
     )
 
     k_index = models.CharField(
         max_length=1,
         null=False,
         blank=False,
-        help_text="Char(1): k-th representation of O^D_h irrep."
+        help_text="Char(1): k-th representation of O^D_h irrep.",
     )
 
     spin = models.CharField(
-        max_length=3,
-        null=False,
-        blank=False,
-        help_text="Char(3): Total spin"
+        max_length=3, null=False, blank=False, help_text="Char(3): Total spin"
     )
 
     spin_z = models.CharField(
-        max_length=3,
-        null=False,
-        blank=False,
-        help_text="Char(3): Spin in z-direction"
+        max_length=3, null=False, blank=False, help_text="Char(3): Spin in z-direction"
     )
 
     description = models.TextField(
@@ -45,3 +37,11 @@ class Basak(InterpolatingOperators):
         blank=True,
         help_text="(Optional) Text: Description of the interpolating operator",
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["hadron", "lambda_index", "k_index", "spin", "spin_z"],
+                name="unique_basak",
+            )
+        ]

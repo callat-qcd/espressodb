@@ -8,15 +8,15 @@ class HisqPropagators(Propagators):
     """
     """
 
-    gaugeconfig = models.ForeignKey(
+    gaugeconfig = models.OneToOneField(
         "base.GaugeConfig",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to gauge field",
+        help_text="OneToOneField pointing to gauge field",
     )
-    linksmearing = models.ForeignKey(
+    linksmearing = models.OneToOneField(
         "base.LinkSmearings",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to link smearing",
+        help_text="OneToOneField pointing to link smearing",
     )
     mval = models.DecimalField(
         max_digits=7,
@@ -25,19 +25,28 @@ class HisqPropagators(Propagators):
         help_text="Decimal(7,6): Input valence quark mass",
     )
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["gaugeconfig", "linksmearing", "mval"],
+                name="unique_hisqpropagators",
+            )
+        ]
+
+
 class MobiusPropagators(Propagators):
     """
     """
 
-    gaugeconfig = models.ForeignKey(
+    gaugeconfig = models.OneToOneField(
         "base.GaugeConfig",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to gauge field",
+        help_text="OneToOneField pointing to gauge field",
     )
-    linksmearing = models.ForeignKey(
+    linksmearing = models.OneToOneField(
         "base.LinkSmearings",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to link smearing",
+        help_text="OneToOneField pointing to link smearing",
     )
     mval = models.DecimalField(
         max_digits=7,
@@ -69,15 +78,33 @@ class MobiusPropagators(Propagators):
     b5 = models.DecimalField(
         max_digits=3,
         decimal_places=2,
-        null=True,
-        help_text="(Optional) Decimal(3,2): Mobius kernel parameter [a5 = b5 - c5, alpha5 * a5 = b5 + c5]",
+        null=False,
+        help_text="Decimal(3,2): Mobius kernel parameter [a5 = b5 - c5, alpha5 * a5 = b5 + c5]",
     )
     c5 = models.DecimalField(
         max_digits=3,
         decimal_places=2,
-        null=True,
-        help_text="(Optional) Decimal(3,2): Mobius kernal perameter",
+        null=False,
+        help_text="Decimal(3,2): Mobius kernal perameter",
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=[
+                    "gaugeconfig",
+                    "linksmearing",
+                    "mval",
+                    "l5",
+                    "m5",
+                    "alpha5",
+                    "a5",
+                    "b5",
+                    "c5",
+                ],
+                name="unique_mobiuspropagators",
+            )
+        ]
 
 
 class CloverPropagators(Propagators):
