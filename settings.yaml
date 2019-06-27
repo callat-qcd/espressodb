@@ -7,3 +7,4 @@ PROJECT_APPS:
     - lattedb.django.interpolatingoperators
     - lattedb.django.interactionoperators
     - lattedb.django.correlators
+    - lattedb.django.operatorsmearings

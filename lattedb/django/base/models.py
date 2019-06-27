@@ -78,3 +78,10 @@ class Correlators(Base):
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
+
+class OperatorSmearings(Base):
+    """
+    """
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )

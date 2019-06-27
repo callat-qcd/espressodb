@@ -12,6 +12,13 @@ class WilsonFlow(LinkSmearings):
     """
     """
 
+    tag = models.CharField(
+        max_length=20,
+        null=False,
+        blank=True,
+        help_text='(Optional) Char(20): User defined tag for easy searches'
+    )
+
     flowtime = models.DecimalField(
         max_digits=3,
         decimal_places=2,

@@ -8,6 +8,13 @@ class HisqPropagators(Propagators):
     """
     """
 
+    tag = models.CharField(
+        max_length=20,
+        null=False,
+        blank=True,
+        help_text="(Optional) Char(20): User defined tag for easy searches",
+    )
+
     gaugeconfig = models.OneToOneField(
         "base.GaugeConfig",
         on_delete=models.CASCADE,
@@ -38,6 +45,12 @@ class MobiusPropagators(Propagators):
     """
     """
 
+    tag = models.CharField(
+        max_length=20,
+        null=False,
+        blank=True,
+        help_text="(Optional) Char(20): User defined tag for easy searches",
+    )
     gaugeconfig = models.OneToOneField(
         "base.GaugeConfig",
         on_delete=models.CASCADE,

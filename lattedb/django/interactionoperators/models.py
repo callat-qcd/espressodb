@@ -5,6 +5,12 @@ from lattedb.django.base.models import InteractionOperators
 class LocalCurrents(InteractionOperators):
     """
     """
+    tag = models.CharField(
+        maxlength=20,
+        null=False,
+        blank=True,
+        help_text='(Optional) Char(20): User defined tag for easy searches'
+    )
 
     diracstructure = models.CharField(
         max_length=20,
