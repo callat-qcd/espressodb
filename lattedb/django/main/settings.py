@@ -36,6 +36,9 @@ READ_CONFIG = True
 
 INSTALLED_APPS = PROJECT_APPS + [
     "lattedb.django.main",
+    "django_tables2",
+    "bootstrap4",
+    "django_extensions",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -59,7 +62,10 @@ ROOT_URLCONF = "lattedb.django.main.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "lattedb", "templates")],
+        "DIRS": [
+            os.path.join(BASE_DIR, "lattedb", "templates"),
+            os.path.join(BASE_DIR, "correlators", "templates"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -123,6 +129,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "main", "static")]
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
@@ -130,4 +138,22 @@ LOGGING = {
     "loggers": {
         "main.commands": {"handlers": ["console"], "level": "DEBUG", "propagate": True}
     },
+}
+
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
+
+GRAPH_MODELS = {
+    "all_applications": True,
+    "layout": "dot",
+    "group_models": True,
+    "exclude_models": [
+        "Group",
+        "AbstractUser",
+        "LogEntry",
+        "Permission",
+        "ContentType",
+        "Session",
+        "AbstractBaseSession",
+    ],
+    "output": "models.pdf",
 }

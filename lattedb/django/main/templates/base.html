@@ -1,0 +1,63 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>LatteDB</title>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+        {% block head-extra %}
+        {% endblock%}
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-light bg-light">
+              <!-- Brand -->
+              <a class="navbar-brand" href="{% url 'index' %}">
+                  <img src="{% static "LatteDB_logo.png" %}" alt="LatteDB" style="height: 35px" class="align-top">
+             </a>
+
+              <!-- Links -->
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Gauge configs
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'gaugeconfigs-hisq-table' %}">Hisq</a>
+                    <a class="dropdown-item" href="{% url 'gaugeconfigs-clover-table' %}">Clover</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Propagators
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'propagators-hisq-table' %}">Hisq</a>
+                    <a class="dropdown-item" href="{% url 'propagators-mobius-table' %}">Mobius</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'correlator-index' %}">
+                      Correlator
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'admin:index' %}">
+                      Admin
+                    </a>
+                </li>
+              </ul>
+            </nav>
+        </header>
+        <main role="main">
+
+            {% block content %}
+            {% endblock %}
+
+        </main>
+    </body>
+</html>
