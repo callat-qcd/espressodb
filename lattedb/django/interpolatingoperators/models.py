@@ -7,7 +7,7 @@ class Basak(InterpolatingOperators):
     """
 
     tag = models.CharField(
-        maxlength=20,
+        max_length=20,
         null=False,
         blank=True,
         help_text='(Optional) Char(20): User defined tag for easy searches'
