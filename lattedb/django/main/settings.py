@@ -129,7 +129,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "main", "static")]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "main", "static"),
+    os.path.join(BASE_DIR, "correlators", "static"),
+]
 
 LOGGING = {
     "version": 1,
