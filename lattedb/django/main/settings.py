@@ -38,6 +38,7 @@ INSTALLED_APPS = PROJECT_APPS + [
     "lattedb.django.main",
     "django_tables2",
     "bootstrap4",
+    "django_extensions",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -137,3 +138,19 @@ LOGGING = {
 }
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
+
+GRAPH_MODELS = {
+    "all_applications": True,
+    "layout": "dot",
+    "group_models": True,
+    "exclude_models": [
+        "Group",
+        "AbstractUser",
+        "LogEntry",
+        "Permission",
+        "ContentType",
+        "Session",
+        "AbstractBaseSession",
+    ],
+    "output": "models.pdf",
+}

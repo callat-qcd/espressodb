@@ -4,3 +4,4 @@ __pycache__/
 lattedb.egg-info/
 .idea/
 .ipynb_checkpoints
+models.pdf
