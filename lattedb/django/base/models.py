@@ -5,6 +5,8 @@ from django.db import models
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 
+from django_pandas.managers import DataFrameManager
+
 
 class Base(models.Model):
     """
@@ -14,6 +16,8 @@ class Base(models.Model):
     type = models.TextField(editable=False)  # autofield by inheritance
     last_modified = models.DateTimeField(auto_now=True)  # also update
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    objects = DataFrameManager()
 
     def __str__(self):
         return f"{self.__class__.__name__}(id={self.id})"
@@ -30,6 +34,7 @@ class Base(models.Model):
 class GaugeConfig(Base):
     """
     """
+
     directory = models.TextField(
         null=False,
         blank=True,
@@ -39,42 +44,50 @@ class GaugeConfig(Base):
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
 
+
 class Propagators(Base):
     """
     """
+
     directory = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Directory path to propagator",
+        null=False, blank=True, help_text="(Optional) Text: Directory path to propagator"
     )
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
+
 
 class LinkSmearings(Base):
     """
     """
+
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
+
 
 class InterpolatingOperators(Base):
     """
     """
+
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
+
 
 class InteractionOperators(Base):
     """
     """
+
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
 
+
 class Correlators(Base):
     """
     """
+
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )

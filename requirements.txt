@@ -2,3 +2,4 @@ Django
 PyYAML
 django-tables2
 django-bootstrap4
+django-pandas
