@@ -31,15 +31,19 @@ class Base(models.Model):
         self.type = self.__class__.__name__
 
 
-class GaugeConfig(Base):
+class GaugeConfigurations(Base):
     """
     """
 
-    directory = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Directory path to gauge field",
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
+
+
+class BootstrapIndices(Base):
+    """
+    """
+
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
@@ -49,9 +53,6 @@ class Propagators(Base):
     """
     """
 
-    directory = models.TextField(
-        null=False, blank=True, help_text="(Optional) Text: Directory path to propagator"
-    )
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
@@ -66,7 +67,7 @@ class LinkSmearings(Base):
     )
 
 
-class InterpolatingOperators(Base):
+class StateOperators(Base):
     """
     """
 
@@ -92,9 +93,11 @@ class Correlators(Base):
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
 
+
 class OperatorSmearings(Base):
     """
     """
+
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )

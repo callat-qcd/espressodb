@@ -15,8 +15,8 @@ class HisqPropagators(Propagators):
         help_text="(Optional) Char(20): User defined tag for easy searches",
     )
 
-    gaugeconfig = models.ForeignKey(
-        "base.GaugeConfig",
+    gaugeconfiguration = models.ForeignKey(
+        "base.GaugeConfigurations",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to gauge field",
     )
@@ -32,10 +32,18 @@ class HisqPropagators(Propagators):
         help_text="Decimal(7,6): Input valence quark mass",
     )
 
+    origin = models.TextField(
+        null=False, blank=False, help_text="Text: Origin location of the propagator"
+    )
+
+    directory = models.TextField(
+        null=False, blank=True, help_text="(Optional) Text: Directory path to propagator"
+    )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig", "linksmearing", "mval"],
+                fields=["gaugeconfiguration", "linksmearing", "mval", "origin"],
                 name="unique_hisqpropagators",
             )
         ]
@@ -51,8 +59,8 @@ class MobiusPropagators(Propagators):
         blank=True,
         help_text="(Optional) Char(20): User defined tag for easy searches",
     )
-    gaugeconfig = models.ForeignKey(
-        "base.GaugeConfig",
+    gaugeconfiguration = models.ForeignKey(
+        "base.GaugeConfigurations",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to gauge field",
     )
@@ -101,11 +109,19 @@ class MobiusPropagators(Propagators):
         help_text="Decimal(3,2): Mobius kernal perameter",
     )
 
+    origin = models.TextField(
+        null=False, blank=False, help_text="Text: Origin location of the propagator"
+    )
+
+    directory = models.TextField(
+        null=False, blank=True, help_text="(Optional) Text: Directory path to propagator"
+    )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "gaugeconfig",
+                    "gaugeconfiguration",
                     "linksmearing",
                     "mval",
                     "l5",
@@ -114,6 +130,7 @@ class MobiusPropagators(Propagators):
                     "a5",
                     "b5",
                     "c5",
+                    "origin",
                 ],
                 name="unique_mobiuspropagators",
             )

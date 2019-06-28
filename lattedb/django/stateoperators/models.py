@@ -1,8 +1,8 @@
 from django.db import models
-from lattedb.django.base.models import InterpolatingOperators
+from lattedb.django.base.models import StateOperators
 
 # Create your models here.
-class Basak(InterpolatingOperators):
+class Basak(StateOperators):
     """
     """
 
@@ -10,11 +10,17 @@ class Basak(InterpolatingOperators):
         max_length=20,
         null=False,
         blank=True,
-        help_text='(Optional) Char(20): User defined tag for easy searches'
+        help_text="(Optional) Char(20): User defined tag for easy searches",
     )
 
     hadron = models.CharField(
         max_length=20, null=False, blank=False, help_text="Char(20): Hadron name"
+    )
+
+    smearing = models.ForeignKey(
+        "base.operatorsmearings",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey: Pointer to operator smearing",
     )
 
     lambda_index = models.CharField(
@@ -48,7 +54,14 @@ class Basak(InterpolatingOperators):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["hadron", "lambda_index", "k_index", "spin", "spin_z"],
+                fields=[
+                    "hadron",
+                    "smearing",
+                    "lambda_index",
+                    "k_index",
+                    "spin",
+                    "spin_z",
+                ],
                 name="unique_basak",
             )
         ]

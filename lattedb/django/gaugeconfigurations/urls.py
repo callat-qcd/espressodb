@@ -16,12 +16,12 @@ Including another URLconf
 """
 from django.urls import path
 
-from lattedb.django.gaugeconfigs.views import HisqGaugeConfigTableView
-from lattedb.django.gaugeconfigs.views import CloverGaugeConfigTableView
+from lattedb.django.gaugeconfigurations.views import HisqGaugeConfigurationsTableView
+from lattedb.django.gaugeconfigurations.views import CloverGaugeConfigurationsTableView
 
 urlpatterns = [
-    path("hisq/", HisqGaugeConfigTableView.as_view(), name="gaugeconfigs-hisq-table"),
+    path("hisq/", HisqGaugeConfigurationsTableView.as_view(), name="gaugeconfigurations-hisq-table"),
     path(
-        "clover/", CloverGaugeConfigTableView.as_view(), name="gaugeconfigs-clover-table"
+        "clover/", CloverGaugeConfigurationsTableView.as_view(), name="gaugeconfigurations-clover-table"
     ),
 ]

@@ -103,7 +103,9 @@ else:
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+    },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -147,8 +149,10 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
 
 GRAPH_MODELS = {
     "all_applications": True,
-    "layout": "dot",
-    "group_models": True,
+    "pygraphviz": True,
+    "layout": "circo",
+    "group_models": False,
+    "hide_edge_labels": False,
     "exclude_models": [
         "Group",
         "AbstractUser",
@@ -157,6 +161,7 @@ GRAPH_MODELS = {
         "ContentType",
         "Session",
         "AbstractBaseSession",
+        "User",
     ],
     "output": "models.pdf",
 }

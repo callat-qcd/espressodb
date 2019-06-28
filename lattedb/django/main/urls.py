@@ -20,7 +20,7 @@ from django.urls import path, include
 from lattedb.django.main.views import IndexView
 
 urlpatterns = [
-    path("gaugeconfigs/", include("lattedb.django.gaugeconfigs.urls")),
+    path("gaugeconfigurations/", include("lattedb.django.gaugeconfigurations.urls")),
     path("propagators/", include("lattedb.django.propagators.urls")),
     path("correlators/", include("lattedb.django.correlators.urls")),
     path("admin/", admin.site.urls),

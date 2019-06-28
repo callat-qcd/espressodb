@@ -1,12 +1,8 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
-
-# Create your models here.
-
-from lattedb.django.base.models import GaugeConfig
+from lattedb.django.base.models import GaugeConfigurations
 
 
-class HisqGaugeConfig(GaugeConfig):
+class HisqGaugeConfigurations(GaugeConfigurations):
     """
     """
 
@@ -20,12 +16,6 @@ class HisqGaugeConfig(GaugeConfig):
         null=False,
         blank=True,
         help_text="(Optional) Char(20): Short name for ensemble (e.g. 'a15m310')",
-    )
-    stream = models.CharField(
-        max_length=3,
-        null=False,
-        blank=False,
-        help_text="Charfield(3): Stream tag for Monte Carlo"
     )
     nl = models.PositiveSmallIntegerField(
         null=False, help_text="PositiveSmallInt: Spatial length in lattice units"
@@ -84,18 +74,59 @@ class HisqGaugeConfig(GaugeConfig):
     alpha_s = models.FloatField(
         null=True, help_text="(Optional) Float: Running coupling"
     )
+    directory = models.TextField(
+        null=False,
+        blank=True,
+        help_text="(Optional) Text: Directory path to gauge field",
+    )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["stream", "nl", "nt", "ml", "ms", "mc", "beta"],
-                name="unique_hisqgaugeconfigs",
+                fields=["nl", "nt", "ml", "ms", "mc", "beta"],
+                name="unique_hisqgaugeconfigurations",
             )
         ]
 
 
-class CloverGaugeConfig(GaugeConfig):
+class HisqGaugeConfigurations_streams_samples(GaugeConfigurations):
+    hisqgaugeconfigurations_ptr = models.ForeignKey(
+        "gaugeconfigurations.HisqGaugeConfigurations",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to HISQ ensemble"
+    )
+
+    stream = models.CharField(
+        max_length=3,
+        null=False,
+        blank=False,
+        help_text="Charfield(3): Stream tag for Monte Carlo",
+    )
+    num_configurations = models.PositiveSmallIntegerField(
+        help_text="PositiveSmallInt: Number of configurations"
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=[
+                    "hisqgaugeconfigurations_ptr",
+                    "stream",
+                    "num_configurations",
+                ],
+                name="unique_hisqgaugeconfigurations_streams_samples",
+            )
+        ]
+
+
+class CloverGaugeConfigurations(GaugeConfigurations):
     """
     """
 
     lattice_spacing = models.FloatField()
+
+    directory = models.TextField(
+        null=False,
+        blank=True,
+        help_text="(Optional) Text: Directory path to gauge field",
+    )

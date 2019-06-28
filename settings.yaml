@@ -1,10 +1,11 @@
 SECRET_KEY: s5icy)=l+((ds60p!+)ypf@8!ey))bb^(mf0v(0&kd=ut!xfbu
 PROJECT_APPS:
     - lattedb.django.base
-    - lattedb.django.gaugeconfigs
+    - lattedb.django.gaugeconfigurations
+    - lattedb.django.bootstrapindices
     - lattedb.django.linksmearings
     - lattedb.django.propagators
-    - lattedb.django.interpolatingoperators
+    - lattedb.django.stateoperators
     - lattedb.django.interactionoperators
     - lattedb.django.correlators
     - lattedb.django.operatorsmearings

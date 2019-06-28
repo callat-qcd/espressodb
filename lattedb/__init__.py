@@ -6,5 +6,5 @@ from lattedb.interface.init import init
 
 init()
 
-from lattedb.django.gaugeconfigs.models import CloverGaugeConfig
-from lattedb.django.gaugeconfigs.models import HisqGaugeConfig
+from lattedb.django.gaugeconfigurations.models import CloverGaugeConfig
+from lattedb.django.gaugeconfigurations.models import HisqGaugeConfig

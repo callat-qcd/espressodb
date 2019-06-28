@@ -22,20 +22,15 @@ class MesonTwoPoints(Correlators):
         help_text="ForeignKey: Pointer to second propagator",
     )
     sourceoperator = models.ForeignKey(
-        "base.interpolatingoperators",
+        "base.stateoperators",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to source interpolating operator",
     )
-    sourcesmearing = models.ForeignKey(
-        "base.operatorsmearings",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="ForeignKey: Pointer to source operator smearing",
-    )
     sinkoperator = models.ForeignKey(
-        "base.interpolatingoperators",
+        "base.stateoperators",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
+

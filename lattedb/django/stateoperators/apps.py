@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class InterpolatingoperatorConfig(AppConfig):
-    name = 'interpolatingoperators'
+    name = 'stateoperators'
