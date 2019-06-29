@@ -35,6 +35,11 @@ class GaugeConfigurations(Base):
     """
     """
 
+    directory = models.TextField(
+        null=False,
+        blank=True,
+        help_text="(Optional) Text: Directory path to gauge field",
+    )
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
@@ -53,6 +58,11 @@ class Propagators(Base):
     """
     """
 
+    directory = models.TextField(
+        null=False,
+        blank=True,
+        help_text="(Optional) Text: Directory path to gauge field",
+    )
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
@@ -89,6 +99,11 @@ class Correlators(Base):
     """
     """
 
+    directory = models.TextField(
+        null=False,
+        blank=True,
+        help_text="(Optional) Text: Directory path to gauge field",
+    )
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )

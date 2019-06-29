@@ -32,22 +32,34 @@ class HisqPropagators(Propagators):
         help_text="Decimal(7,6): Input valence quark mass",
     )
 
-    origin = models.TextField(
-        null=False, blank=False, help_text="Text: Origin location of the propagator"
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["gaugeconfiguration", "linksmearing", "mval"],
+                name="unique_hisqpropagators",
+            )
+        ]
+
+class HisqPropagators_SimulationParams(Propagators):
+    """
+    """
+    hisqpropagators_ptr = models.ForeignKey(
+        "propagators.HisqPropagators",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey to HISQ propagator table"
     )
 
-    directory = models.TextField(
-        null=False, blank=True, help_text="(Optional) Text: Directory path to propagator"
+    origin = models.TextField(
+        null=False, blank=False, help_text="Text: Origin location of the propagator"
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfiguration", "linksmearing", "mval", "origin"],
-                name="unique_hisqpropagators",
+                fields=["hisqpropagators_ptr", "origin"],
+                name='unique_hisqpropagators_simulationparams'
             )
         ]
-
 
 class MobiusPropagators(Propagators):
     """
@@ -109,14 +121,6 @@ class MobiusPropagators(Propagators):
         help_text="Decimal(3,2): Mobius kernal perameter",
     )
 
-    origin = models.TextField(
-        null=False, blank=False, help_text="Text: Origin location of the propagator"
-    )
-
-    directory = models.TextField(
-        null=False, blank=True, help_text="(Optional) Text: Directory path to propagator"
-    )
-
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -130,13 +134,31 @@ class MobiusPropagators(Propagators):
                     "a5",
                     "b5",
                     "c5",
-                    "origin",
                 ],
                 name="unique_mobiuspropagators",
             )
         ]
 
+class MobiusPropagators_SimulationParams(Propagators):
+    """
+    """
+    mobiuspropagators_ptr = models.ForeignKey(
+        "propagators.MobiusPropagators",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey to HISQ propagator table"
+    )
+    origin = models.TextField(
+        null=False, blank=False, help_text="Text: Origin location of the propagator"
+    )
 
-class CloverPropagators(Propagators):
-    """
-    """
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["mobiuspropagators_ptr", "origin"],
+                name='unique_mobiuspropagators_simulationparams'
+            )
+        ]
+
+# class CloverPropagators(Propagators):
+#    """
+#    """

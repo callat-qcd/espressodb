@@ -74,11 +74,6 @@ class HisqGaugeConfigurations(GaugeConfigurations):
     alpha_s = models.FloatField(
         null=True, help_text="(Optional) Float: Running coupling"
     )
-    directory = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Directory path to gauge field",
-    )
 
     class Meta:
         constraints = [
@@ -89,11 +84,11 @@ class HisqGaugeConfigurations(GaugeConfigurations):
         ]
 
 
-class HisqGaugeConfigurations_streams_samples(GaugeConfigurations):
+class HisqGaugeConfigurations_SimulationParams(GaugeConfigurations):
     hisqgaugeconfigurations_ptr = models.ForeignKey(
         "gaugeconfigurations.HisqGaugeConfigurations",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to HISQ ensemble"
+        help_text="ForeignKey pointing to HISQ ensemble",
     )
 
     stream = models.CharField(
@@ -109,12 +104,8 @@ class HisqGaugeConfigurations_streams_samples(GaugeConfigurations):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=[
-                    "hisqgaugeconfigurations_ptr",
-                    "stream",
-                    "num_configurations",
-                ],
-                name="unique_hisqgaugeconfigurations_streams_samples",
+                fields=["hisqgaugeconfigurations_ptr", "stream", "num_configurations"],
+                name="unique_hisqgaugeconfigurations_simulationparams",
             )
         ]
 
@@ -124,9 +115,3 @@ class CloverGaugeConfigurations(GaugeConfigurations):
     """
 
     lattice_spacing = models.FloatField()
-
-    directory = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Directory path to gauge field",
-    )
