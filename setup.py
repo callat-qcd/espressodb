@@ -28,5 +28,5 @@ setup(
     keywords=[],
     packages=find_packages(exclude=["docs", "tests"]),
     install_requires=REQUIREMENTS,
-    entry_points={"console_scripts": ["lattedb=scripts.manage:main"]},
+    entry_points={"console_scripts": ["lattedb=lattedb.django.manage:main"]},
 )
