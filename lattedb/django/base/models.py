@@ -30,6 +30,22 @@ class Base(models.Model):
         """
         self.type = self.__class__.__name__
 
+    @classmethod
+    def get_class_name(cls) -> str:
+        """Returns the name of the class
+        """
+        return cls.__name__
+
+    @classmethod
+    def get_unique_class_name(cls) -> str:
+        """Returns unique name which consist of it's own and parent class names.
+        """
+        parent = cls.__base__
+        parent_name = (
+            parent.get_unique_class_name() + "_" if parent is not models.Model else ""
+        )
+        return parent_name + cls.get_class_name()
+
 
 class StatusBase(Base):
     home = models.CharField(
