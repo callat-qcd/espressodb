@@ -31,15 +31,33 @@ class Base(models.Model):
         self.type = self.__class__.__name__
 
 
+class StatusBase(Base):
+    home = models.CharField(
+        max_length=20,
+        null=False,
+        blank=True,
+        help_text="(Optional) Char(20): Computing facility where the object resides at",
+    )
+    runscript = models.TextField(
+        null=False,
+        blank=True,
+        help_text="(Optional) Text: Path to, or content of run script",
+    )
+    directory = models.TextField(
+        null=False, blank=True, help_text="(Optional) Text: Path to result"
+    )
+    statusencoder = models.PositiveSmallIntegerField(
+        help_text="PositiveSmallInt: Encode categorical status labels with values between 0 and n_classes-1"
+    )
+
+    class Meta:
+        abstract = True
+
+
 class GaugeConfigurations(Base):
     """
     """
 
-    directory = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Directory path to gauge field",
-    )
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
@@ -58,11 +76,6 @@ class Propagators(Base):
     """
     """
 
-    directory = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Directory path to gauge field",
-    )
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
@@ -99,11 +112,6 @@ class Correlators(Base):
     """
     """
 
-    directory = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Directory path to gauge field",
-    )
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )

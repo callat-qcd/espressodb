@@ -1,5 +1,6 @@
 from django.db import models
 from lattedb.django.base.models import Correlators
+from lattedb.django.base.models import StatusBase
 
 # Create your models here.
 class MesonTwoPoints(Correlators):
@@ -34,3 +35,26 @@ class MesonTwoPoints(Correlators):
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["propagator0", "propagator1", "sourceoperator", "sinkoperator"],
+                name="unique_mesontwopoints",
+            )
+        ]
+
+
+class MesonTwoPointsSimulationDetail(Correlators, StatusBase):
+    mesontwopoints_ptr = models.ForeignKey(
+        "correlators.MesonTwoPoints",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to meson two point correlation function",
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["mesontwopoints_ptr"],
+                name="unique_mesontwopointssimulationdetail",
+            )
+        ]
