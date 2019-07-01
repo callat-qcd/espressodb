@@ -14,15 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-from lattedb.django.main.views import IndexView
+from lattedb.django.correlator.views import index
 
-urlpatterns = [
-    path("gaugeconfig/", include("lattedb.django.gaugeconfig.urls")),
-    path("propagator/", include("lattedb.django.propagator.urls")),
-    path("correlator/", include("lattedb.django.correlator.urls")),
-    path("admin/", admin.site.urls),
-    path("", IndexView.as_view(), name="index"),
-]
+urlpatterns = [path("", index, name="correlator-index")]

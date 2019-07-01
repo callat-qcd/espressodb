@@ -6,4 +6,4 @@ from lattedb.interface.init import init
 
 init()
 
-from lattedb.django.gaugeconfigurations.models import HisqGaugeConfigurations
+from lattedb.django.gaugeconfig.models import HisqGaugeConfigurations

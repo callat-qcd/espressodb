@@ -14,15 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-from lattedb.django.main.views import IndexView
+from lattedb.django.propagator.views import HisqPropagatorsTableView
+from lattedb.django.propagator.views import MobiusPropagatorsTableView
 
 urlpatterns = [
-    path("gaugeconfig/", include("lattedb.django.gaugeconfig.urls")),
-    path("propagator/", include("lattedb.django.propagator.urls")),
-    path("correlator/", include("lattedb.django.correlator.urls")),
-    path("admin/", admin.site.urls),
-    path("", IndexView.as_view(), name="index"),
+    path("hisq/", HisqPropagatorsTableView.as_view(), name="propagator-hisq-table"),
+    path(
+        "mobius/", MobiusPropagatorsTableView.as_view(), name="propagator-mobius-table"
+    ),
 ]

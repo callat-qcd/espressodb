@@ -31,7 +31,7 @@ class Base(models.Model):
         self.type = self.__class__.__name__
 
 
-class StatusBase(Base):
+class Status(Base):
     home = models.CharField(
         max_length=20,
         null=False,
@@ -57,7 +57,7 @@ class StatusBase(Base):
         abstract = True
 
 
-class GaugeConfigurations(Base):
+class GaugeConfig(Base):
     """
     """
 
@@ -66,7 +66,7 @@ class GaugeConfigurations(Base):
     )
 
 
-class BootstrapIndices(Base):
+class Bootstrap(Base):
     """
     """
 
@@ -75,7 +75,7 @@ class BootstrapIndices(Base):
     )
 
 
-class Propagators(Base):
+class Propagator(Base):
     """
     """
 
@@ -84,7 +84,7 @@ class Propagators(Base):
     )
 
 
-class LinkSmearings(Base):
+class GaugeSmear(Base):
     """
     """
 
@@ -93,7 +93,7 @@ class LinkSmearings(Base):
     )
 
 
-class StateOperators(Base):
+class HadronOp(Base):
     """
     """
 
@@ -102,7 +102,7 @@ class StateOperators(Base):
     )
 
 
-class InteractionOperators(Base):
+class CurrentOp(Base):
     """
     """
 
@@ -111,7 +111,7 @@ class InteractionOperators(Base):
     )
 
 
-class Correlators(Base):
+class Correlator(Base):
     """
     """
 
@@ -119,11 +119,3 @@ class Correlators(Base):
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
 
-
-class OperatorSmearings(Base):
-    """
-    """
-
-    misc = JSONField(
-        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
-    )
