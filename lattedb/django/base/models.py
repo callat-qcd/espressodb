@@ -62,6 +62,9 @@ class StatusBase(Base):
     directory = models.TextField(
         null=False, blank=True, help_text="(Optional) Text: Path to result"
     )
+    size = models.IntegerField(
+        null=True, help_text="(Optional) Int: file size"
+    )
     statusencoder = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Encode categorical status labels with values between 0 and n_classes-1"
     )
