@@ -1,5 +1,6 @@
 from django.db import models
 from lattedb.django.base.models import GaugeConfigurations
+from lattedb.django.base.models import StatusBase
 
 
 class HisqGaugeConfigurations(GaugeConfigurations):
@@ -17,7 +18,7 @@ class HisqGaugeConfigurations(GaugeConfigurations):
         blank=True,
         help_text="(Optional) Char(20): Short name for ensemble (e.g. 'a15m310')",
     )
-    nl = models.PositiveSmallIntegerField(
+    nx = models.PositiveSmallIntegerField(
         null=False, help_text="PositiveSmallInt: Spatial length in lattice units"
     )
     nt = models.PositiveSmallIntegerField(
@@ -42,10 +43,22 @@ class HisqGaugeConfigurations(GaugeConfigurations):
         help_text="Decimal(5,4): Input charm quark mass",
     )
     beta = models.DecimalField(
-        max_digits=5,
-        decimal_places=3,
+        max_digits=6,
+        decimal_places=4,
         null=False,
-        help_text="Decimal(5,3): Coupling constant",
+        help_text="Decimal(6,4): Coupling constant",
+    )
+    naik = models.DecimalField(
+        max_digits=7,
+        decimal_places=6,
+        null=False,
+        help_text="Decimal(7,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
+    )
+    u0 = models.DecimalField(
+        max_digits=7,
+        decimal_places=6,
+        null=True,
+        help_text="(Optional) Decimal(7,6): Tadpole improvement coefficient",
     )
     a_fm = models.DecimalField(
         max_digits=4,
@@ -71,20 +84,17 @@ class HisqGaugeConfigurations(GaugeConfigurations):
         null=True,
         help_text="(Optional) Decimal(5,2): Pion mass in MeV",
     )
-    alpha_s = models.FloatField(
-        null=True, help_text="(Optional) Float: Running coupling"
-    )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["nl", "nt", "ml", "ms", "mc", "beta"],
+                fields=["nx", "nt", "ml", "ms", "mc", "beta", "naik"],
                 name="unique_hisqgaugeconfigurations",
             )
         ]
 
 
-class HisqGaugeConfigurations_SimulationParams(GaugeConfigurations):
+class HisqGaugeConfigurationsSimulationDetail(GaugeConfigurations, StatusBase):
     hisqgaugeconfigurations_ptr = models.ForeignKey(
         "gaugeconfigurations.HisqGaugeConfigurations",
         on_delete=models.CASCADE,
@@ -105,7 +115,7 @@ class HisqGaugeConfigurations_SimulationParams(GaugeConfigurations):
         constraints = [
             models.UniqueConstraint(
                 fields=["hisqgaugeconfigurations_ptr", "stream", "num_configurations"],
-                name="unique_hisqgaugeconfigurations_simulationparams",
+                name="unique_hisqgaugeconfigurationssimulationdetail",
             )
         ]
 

@@ -6,8 +6,10 @@ from lattedb.django.base.admin import BaseAdmin
 
 from lattedb.django.gaugeconfigurations.models import HisqGaugeConfigurations
 from lattedb.django.gaugeconfigurations.models import CloverGaugeConfigurations
+from lattedb.django.gaugeconfigurations.models import HisqGaugeConfigurationsSimulationDetail
 
 admin.site.register(HisqGaugeConfigurations, BaseAdmin)
+admin.site.register(HisqGaugeConfigurationsSimulationDetail, BaseAdmin)
 admin.site.register(CloverGaugeConfigurations, BaseAdmin)
 
 #class HisqGaugeConfigurationsAdmin(BaseAdmin):
