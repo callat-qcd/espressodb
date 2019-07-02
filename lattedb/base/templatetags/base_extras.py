@@ -1,16 +1,19 @@
 """Additional in template functions for the lattedb module
 """
+import os
 from django import template
+from django.urls import reverse
 
 from django_extensions.management.commands.show_urls import Command as URLFinder
 
 from lattedb.config.urls import urlpatterns
+from lattedb.config.settings import PROJECT_APPS, BASE_DIR
 
 register = template.Library()  # pylint: disable=C0103
 
 
 @register.inclusion_tag("link-list.html")
-def render_link_list(exclude=("", "base", "admin")):
+def render_link_list(exclude=("", "base", "admin", "documentation")):
     """Renders all links as a nested list
     """
     u = URLFinder()
@@ -35,6 +38,22 @@ def render_link_list(exclude=("", "base", "admin")):
         else:
             urls[app_name] = [(link_name, reverse_name)]
 
-    context = {"urls": urls}
+    if "lattedb.documentation" in PROJECT_APPS:
+        documentation = []
+        for app_name in PROJECT_APPS:
+            app_name = app_name.split(".")[-1]
+            if app_name in exclude:
+                continue
+
+            if os.path.exists(
+                os.path.join(
+                    BASE_DIR, "documentation", "templates", "apps", app_name + ".html"
+                )
+            ):
+                documentation.append((app_name.capitalize(), app_name))
+
+    print(documentation)
+
+    context = {"urls": urls, "documentation": documentation}
 
     return context

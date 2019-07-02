@@ -11,6 +11,18 @@
      </div>
     </li>
 {% endfor %}
+{% if documentation %}
+<li class="nav-item dropdown">
+ <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+   Documentation
+ </a>
+ <div class="dropdown-menu">
+ {% for link_name, reverse_link in documentation %}
+   <a class="dropdown-item" href="{% url 'documentation:details' reverse_link %}">{{link_name}}</a>
+ {% endfor%}
+ </div>
+</li>
+{% endif %}
 <li class="nav-item">
    <a class="nav-link" href="{% url 'admin:index' %}">
      Admin
