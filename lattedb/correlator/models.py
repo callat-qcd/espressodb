@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 
 from lattedb.base.models import Base
 
@@ -7,18 +6,8 @@ class Correlator(Base):
     """ Base table for application
     """
 
-    misc = JSONField(
-        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
-    )
-
 # Create your models here.
 class Meson2pt(Correlator):
-    tag = models.CharField(
-        max_length=20,
-        null=False,
-        blank=True,
-        help_text="(Optional) Char(20): User defined tag for easy searches",
-    )
     propagator0 = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
@@ -57,12 +46,6 @@ class Meson2pt(Correlator):
 
 
 class Baryon4DSeq3pt(Correlator):
-    tag = models.CharField(
-        max_length=20,
-        null=False,
-        blank=True,
-        help_text="(Optional) Char(20): User defined tag for easy searches",
-    )
     source = models.ForeignKey(
         "hadron.Hadron",
         on_delete=models.CASCADE,
@@ -109,12 +92,6 @@ class Baryon4DSeq3pt(Correlator):
 
 
 class BaryonFH3pt(Correlator):
-    tag = models.CharField(
-        max_length=20,
-        null=False,
-        blank=True,
-        help_text="(Optional) Char(20): User defined tag for easy searches",
-    )
     source = models.ForeignKey(
         "hadron.Hadron",
         on_delete=models.CASCADE,

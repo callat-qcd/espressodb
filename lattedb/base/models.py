@@ -3,7 +3,7 @@
 """
 from django.db import models
 from django.conf import settings
-
+from django.contrib.postgres.fields import JSONField
 from django_pandas.managers import DataFrameManager
 
 
@@ -15,6 +15,16 @@ class Base(models.Model):
     type = models.TextField(editable=False)  # autofield by inheritance
     last_modified = models.DateTimeField(auto_now=True)  # also update
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    tag = models.CharField(
+        max_length=20,
+        null=False,
+        blank=True,
+        help_text="(Optional) Char(20): User defined tag for easy searches",
+    )
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
 
     objects = DataFrameManager()
 

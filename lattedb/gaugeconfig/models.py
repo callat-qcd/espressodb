@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 
 from lattedb.base.models import Base
 
@@ -7,19 +6,9 @@ class GaugeConfig(Base):
     """ Base table for application
     """
 
-    misc = JSONField(
-        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
-    )
-
 class Hisq(GaugeConfig):
     """
     """
-
-    long_tag = models.TextField(
-        null=False,
-        blank=True,
-        help_text="(Optional) Text: Full name for ensemble (e.g. 'l1648f211b580m013m065m838')",
-    )
     short_tag = models.CharField(
         max_length=20,
         null=False,

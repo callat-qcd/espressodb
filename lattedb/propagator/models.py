@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 
 from lattedb.base.models import Base
 
@@ -7,21 +6,9 @@ class Propagator(Base):
     """ Base table for application
     """
 
-    misc = JSONField(
-        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
-    )
-
 class Hisq(Propagator):
     """
     """
-
-    tag = models.CharField(
-        max_length=20,
-        null=False,
-        blank=True,
-        help_text="(Optional) Char(20): User defined tag for easy searches",
-    )
-
     gaugeconfig = models.ForeignKey(
         "gaugeconfig.GaugeConfig",
         on_delete=models.CASCADE,
