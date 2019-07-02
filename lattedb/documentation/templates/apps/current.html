@@ -1,0 +1,381 @@
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+ <div itemprop="articleBody">
+  <div class="section" id="current">
+   <h1>
+    current
+    <a class="headerlink" href="#current" title="Permalink to this headline">
+     ¶
+    </a>
+   </h1>
+   <div class="toctree-wrapper compound">
+   </div>
+   <span class="target" id="module-lattedb.current.models">
+   </span>
+   <dl class="class">
+    <dt id="lattedb.current.models.Current">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.current.models.
+     </code>
+     <code class="descname">
+      Current
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      *args
+     </em>
+     ,
+     <em>
+      **kwargs
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.current.models.Current" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <code class="xref py py-class docutils literal notranslate">
+       <span class="pre">
+        lattedb.base.models.Base
+       </span>
+      </code>
+     </p>
+     <p>
+      Base table for application
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.current.models.Current.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.current.models.Current.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          django.core.exceptions.ObjectDoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.current.models.Current.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.current.models.Current.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          django.core.exceptions.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+   <dl class="class">
+    <dt id="lattedb.current.models.Local">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.current.models.
+     </code>
+     <code class="descname">
+      Local
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      *args
+     </em>
+     ,
+     <em>
+      **kwargs
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.current.models.Local" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <a class="reference internal" href="#lattedb.current.models.Current" title="lattedb.current.models.Current">
+       <code class="xref py py-class docutils literal notranslate">
+        <span class="pre">
+         lattedb.current.models.Current
+        </span>
+       </code>
+      </a>
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+          <li>
+           <strong>
+            current_ptr_id
+           </strong>
+           (
+           <em>
+            OneToOneField
+           </em>
+           ) – Current ptr
+          </li>
+          <li>
+           <strong>
+            tag
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(20): User defined tag for easy searches
+          </li>
+          <li>
+           <strong>
+            diracstruct
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – Char(20): Dirac structure of the current
+          </li>
+          <li>
+           <strong>
+            flavor0
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(1): Incoming quark field flavor. Useful to specify for nucleons.
+          </li>
+          <li>
+           <strong>
+            flavor1
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(1): Outgoing quark field flavor. Useful to specify for nucleons.
+          </li>
+          <li>
+           <strong>
+            description
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Description of current
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.current.models.Local.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.current.models.Local.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.current.models.DoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.current.models.Local.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.current.models.Local.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.current.models.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div>

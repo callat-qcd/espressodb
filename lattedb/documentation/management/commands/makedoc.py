@@ -9,10 +9,23 @@ from sphinx.application import Sphinx
 
 from django.core.management.base import BaseCommand
 
-from lattedb.config.settings import BASE_DIR
+from lattedb.config.settings import BASE_DIR, PROJECT_APPS
 
 
 LOGGER = logging.getLogger("main.commands")
+
+RST_TEMPLATE = r"""####################
+{app_name}
+####################
+
+.. toctree::
+   :maxdepth: 4
+   :glob:
+
+.. automodule:: lattedb.{app_name}.models
+   :members:
+   :show-inheritance:
+"""
 
 
 class Command(BaseCommand):
@@ -27,10 +40,18 @@ class Command(BaseCommand):
     builder = "html"
 
     doc_dir = os.path.join(BASE_DIR, "documentation", "templates", "apps")
+    exclude = ("base", "admin", "documentation")
 
     def handle(self, *args, **options):
         """Installs app in `lattedb`
         """
+        for app in PROJECT_APPS:
+            app_name = app.split(".")[-1]
+            if not app_name in self.exclude:
+                rst_address = os.path.join(self.sourcedir, "apps", app_name + ".rst")
+                with open(rst_address, "w") as fout:
+                    fout.write(RST_TEMPLATE.format(app_name=app_name))
+
         Sphinx(
             self.sourcedir, self.confdir, self.outputdir, self.doctreedir, self.builder
         ).build()

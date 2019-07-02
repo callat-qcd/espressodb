@@ -1,0 +1,411 @@
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+ <div itemprop="articleBody">
+  <div class="section" id="hadron">
+   <h1>
+    hadron
+    <a class="headerlink" href="#hadron" title="Permalink to this headline">
+     ¶
+    </a>
+   </h1>
+   <div class="toctree-wrapper compound">
+   </div>
+   <span class="target" id="module-lattedb.hadron.models">
+   </span>
+   <dl class="class">
+    <dt id="lattedb.hadron.models.Basak">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.hadron.models.
+     </code>
+     <code class="descname">
+      Basak
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      *args
+     </em>
+     ,
+     <em>
+      **kwargs
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.hadron.models.Basak" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <a class="reference internal" href="#lattedb.hadron.models.Hadron" title="lattedb.hadron.models.Hadron">
+       <code class="xref py py-class docutils literal notranslate">
+        <span class="pre">
+         lattedb.hadron.models.Hadron
+        </span>
+       </code>
+      </a>
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+          <li>
+           <strong>
+            hadron_ptr_id
+           </strong>
+           (
+           <em>
+            OneToOneField
+           </em>
+           ) – Hadron ptr
+          </li>
+          <li>
+           <strong>
+            tag
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(20): User defined tag for easy searches
+          </li>
+          <li>
+           <strong>
+            hadron
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – Char(20): Hadron name
+          </li>
+          <li>
+           <strong>
+            lambda_index
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – Char(10): Irreducible representations of O^D_h (improper point group)
+          </li>
+          <li>
+           <strong>
+            k_index
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – Char(1): k-th representation of O^D_h irrep.
+          </li>
+          <li>
+           <strong>
+            spin
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – Char(3): Total spin
+          </li>
+          <li>
+           <strong>
+            spin_z
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – Char(3): Spin in z-direction
+          </li>
+          <li>
+           <strong>
+            smearing
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(255): Operator smearing
+          </li>
+          <li>
+           <strong>
+            description
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Description of the interpolating operator
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.hadron.models.Basak.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.hadron.models.Basak.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.hadron.models.DoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.hadron.models.Basak.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.hadron.models.Basak.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.hadron.models.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+   <dl class="class">
+    <dt id="lattedb.hadron.models.Hadron">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.hadron.models.
+     </code>
+     <code class="descname">
+      Hadron
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      *args
+     </em>
+     ,
+     <em>
+      **kwargs
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.hadron.models.Hadron" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <code class="xref py py-class docutils literal notranslate">
+       <span class="pre">
+        lattedb.base.models.Base
+       </span>
+      </code>
+     </p>
+     <p>
+      Base table for application
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.hadron.models.Hadron.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.hadron.models.Hadron.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          django.core.exceptions.ObjectDoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.hadron.models.Hadron.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.hadron.models.Hadron.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          django.core.exceptions.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div>
