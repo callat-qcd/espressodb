@@ -8,3 +8,4 @@ PROJECT_APPS:
     - lattedb.hadron
     - lattedb.current
     - lattedb.correlator
+    - lattedb.documentation

@@ -18,12 +18,8 @@ import inspect
 
 import django
 from django.utils.html import strip_tags
+from lattedb.config.settings import ROOT_DIR, BASE_DIR
 
-ROOT_DIR = os.path.abspath(
-    os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), os.path.pardir, os.path.pardir
-    )
-)
 sys.path.insert(0, ROOT_DIR)
 
 os.environ["DJANGO_SETTINGS_MODULE"] = "lattedb.config.settings"
@@ -97,7 +93,6 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.coverage",
     "sphinx.ext.mathjax",
-    "sphinx.ext.viewcode",
 ]
 
 source_parsers = {".md": "recommonmark.parser.CommonMarkParser"}
@@ -145,7 +140,7 @@ html_theme = "sphinx_rtd_theme"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ["_static"]
+html_static_path = [os.path.join(BASE_DIR, "documentation", "static")]
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
