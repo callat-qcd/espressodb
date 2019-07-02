@@ -31,6 +31,8 @@ django.setup()
 
 
 def process_docstring(app, what, name, obj, options, lines):
+    """Method to parse members of model coppied from https://stackoverflow.com/a/12914272
+    """
     # This causes import errors if left outside the function
     from django.db import models
 
