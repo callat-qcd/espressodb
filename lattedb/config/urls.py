@@ -24,9 +24,6 @@ from lattedb.config.views import IndexView
 
 urlpatterns = []
 
-print(PROJECT_APPS)
-print(urlpatterns)
-
 for app in PROJECT_APPS:
     url_file = os.path.join(ROOT_DIR, app.replace(".", "/"), "urls.py")
     if os.path.exists(url_file):
@@ -42,5 +39,3 @@ urlpatterns += [
     path("admin/", admin.site.urls),
     path("", IndexView.as_view(), name="index"),
 ]
-
-print(urlpatterns)

@@ -27,8 +27,6 @@ def render_link_list(exclude=("", "base", "admin")):
         if import_path[0] != "lattedb":
             continue
 
-        print(view, path, reverse_name)
-
         app_name = import_path[1].capitalize()
         link_name = reverse_name.split(":")[-1].capitalize()
 
@@ -37,7 +35,6 @@ def render_link_list(exclude=("", "base", "admin")):
         else:
             urls[app_name] = [(link_name, reverse_name)]
 
-    print(urls)
     context = {"urls": urls}
 
     return context
