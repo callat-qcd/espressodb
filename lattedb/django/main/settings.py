@@ -148,8 +148,8 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
 GRAPH_MODELS = {
     "all_applications": True,
     "pygraphviz": True,
-    "layout": "circo",
-    "group_models": False,
+    "layout": "dot",
+    "group_models": True,
     "hide_edge_labels": False,
     "exclude_models": [
         "Group",
