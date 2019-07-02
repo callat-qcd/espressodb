@@ -5,3 +5,4 @@ django-bootstrap4
 django-pandas
 django-extensions
 bokeh
+sphinx
