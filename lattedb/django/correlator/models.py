@@ -56,7 +56,7 @@ class Meson2pt(Correlator):
         ]
 
 
-class Baryon2DSeq3pt(Correlator):
+class Baryon4DSeq3pt(Correlator):
     tag = models.CharField(
         max_length=20,
         null=False,

@@ -18,7 +18,10 @@ class Status(Base):
         help_text="(Optional) Text: Path to, or content of run script",
     )
     directory = models.TextField(
-        null=False, blank=True, help_text="(Optional) Text: Path to result"
+        null=False, blank=True, help_text="(Optional) Text: Directory path to result"
+    )
+    hdf5path = models.TextField(
+        null=False, blank=True, help_text="(Optional) Text: Folder path in hdf5 file"
     )
     size = models.IntegerField(null=True, help_text="(Optional) Int: file size")
     statusencoder = models.PositiveSmallIntegerField(
@@ -28,8 +31,8 @@ class Status(Base):
     class Meta:
         abstract = True
 
-class HisqGaugeConfigurationsSimulationDetail(Status):
-    hisqgaugeconfigurations_ptr = models.ForeignKey(
+class GaugeConfig_Hisq(Status):
+    gaugeconfig = models.ForeignKey(
         "gaugeconfig.Hisq",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to HISQ ensemble",
@@ -38,17 +41,17 @@ class HisqGaugeConfigurationsSimulationDetail(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["hisqgaugeconfigurations_ptr"],
-                name="unique_hisqgaugeconfigurationssimulationdetail",
+                fields=["gaugeconfig"],
+                name="unique_status_gaugeconfig_hisq",
             )
         ]
 
 
-class HisqPropagatorsSimulationDetail(Status):
+class Propagator_Hisq(Status):
     """
     """
 
-    hisqpropagators_ptr = models.ForeignKey(
+    propagator = models.ForeignKey(
         "propagator.Hisq",
         on_delete=models.CASCADE,
         help_text="ForeignKey to HISQ propagator table",
@@ -57,16 +60,16 @@ class HisqPropagatorsSimulationDetail(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["hisqpropagators_ptr"],
-                name="unique_hisqpropagators_simulationparams",
+                fields=["propagator"],
+                name="unique_status_propagator_hisq",
             )
         ]
 
-class MobiusPropagatorsSimulationDetail(Status):
+class Propagator_MobiusDWF(Status):
     """
     """
 
-    mobiuspropagators_ptr = models.ForeignKey(
+    propagator = models.ForeignKey(
         "propagator.MobiusDWF",
         on_delete=models.CASCADE,
         help_text="ForeignKey to HISQ propagator table",
@@ -75,16 +78,16 @@ class MobiusPropagatorsSimulationDetail(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["mobiuspropagators_ptr"],
-                name="unique_mobiuspropagatorssimulationdetail",
+                fields=["propagator"],
+                name="unique_status_propagator_mobiusdwf",
             )
         ]
 
-class CoherentSequentialPropagatorsSimulationDetail(Status):
+class Propagator_CoherentSeq(Status):
     """
     """
 
-    coherentsequentialpropagators_ptr = models.ForeignKey(
+    propagator = models.ForeignKey(
         "propagator.CoherentSeq",
         on_delete=models.CASCADE,
         help_text="ForeignKey to coherent sequential propagator table",
@@ -93,16 +96,16 @@ class CoherentSequentialPropagatorsSimulationDetail(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["coherentsequentialpropagators_ptr"],
-                name="unique_coherentsequentialpropagatorssimulationdetail",
+                fields=["propagator"],
+                name="unique_status_propagator_coherentseq",
             )
         ]
 
-class FeynmanHellmannPropagatorsSimulationDetail(Status):
+class Propagator_FeynmanHellmann(Status):
     """
     """
 
-    feynmanhellmannpropagators_ptr = models.ForeignKey(
+    propagator = models.ForeignKey(
         "propagator.FeynmanHellmann",
         on_delete=models.CASCADE,
         help_text="ForeignKey to Feynman-Hellmann propagator table",
@@ -111,13 +114,13 @@ class FeynmanHellmannPropagatorsSimulationDetail(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["feynmanhellmannpropagators_ptr"],
-                name="unique_feynmanhellmannpropagatorssimulationdetail",
+                fields=["propagator"],
+                name="unique_status_propagator_feynmanhellmann",
             )
         ]
 
-class MesonTwoPointsSimulationDetail(Status):
-    mesontwopoints_ptr = models.ForeignKey(
+class Correlator_Meson2pt(Status):
+    correlator = models.ForeignKey(
         "correlator.meson2pt",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to meson two point correlation function",
@@ -126,14 +129,14 @@ class MesonTwoPointsSimulationDetail(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["mesontwopoints_ptr"],
-                name="unique_mesontwopointssimulationdetail",
+                fields=["correlator"],
+                name="unique_status_correlator_meson2pt",
             )
         ]
 
-class BaryonSequentialThreePointsSimulationDetail(Status):
-    baryonsequentialthreepoints_ptr = models.ForeignKey(
-        "correlator.baryon2dseq3pt",
+class Correlator_Baryon4DSeq3pt(Status):
+    correlator = models.ForeignKey(
+        "correlator.baryon4dseq3pt",
         on_delete=models.CASCADE,
         help_text="Foreign Key to a sequential three point correlation function"
     )
@@ -141,13 +144,13 @@ class BaryonSequentialThreePointsSimulationDetail(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["baryonsequentialthreepoints_ptr"],
-                name="unique_baryonsequentialthreepointssimulationdetail",
+                fields=["correlator"],
+                name="unique_status_correlator_baryon4dseq3pt",
             )
         ]
 
-class BaryonFeynmanHellmannThreePointsSimulationDetail(Status):
-    baryonfeynmanhellmannthreepoints_ptr = models.ForeignKey(
+class Correlator_BaryonFH3pt(Status):
+    correlator = models.ForeignKey(
         "correlator.BaryonFH3pt",
         on_delete=models.CASCADE,
         help_text="Foreign Key to a Feynman-Hellmann three point correlation function"
@@ -156,7 +159,7 @@ class BaryonFeynmanHellmannThreePointsSimulationDetail(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["baryonfeynmanhellmannthreepoints_ptr"],
-                name="unique_baryonfeynmanhellmannthreepointssimulationdetail",
+                fields=["correlator"],
+                name="unique_status_correlator_baryonfh3pt",
             )
         ]
