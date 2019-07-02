@@ -1,0 +1,69 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>LatteDB</title>
+        <link rel="icon" sizes="32x32" type="image/vnd.microsoft.icon" href="{% static 'icons/favicon.ico' %}"/>
+        <link rel="icon" sizes="128x128" type="image/icns" href="{% static 'icons/favicon.icns' %}"/>
+        <link rel="icon" sizes="144x144" type="image/x-icon" href="{% static 'icons/favicon.png' %}"/>
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'icons/favicon.png' %}">
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+        {% block head-extra %}
+        {% endblock%}
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-light bg-light">
+              <!-- Brand -->
+              <a class="navbar-brand" href="{% url 'index' %}">
+                  <img src="{% static "LatteDB_logo.png" %}" alt="LatteDB" style="height: 35px" class="align-top">
+             </a>
+
+              <!-- Links -->
+              <ul class="navbar-nav">
+                 {% comment %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Gauge configs
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'gaugeconfig-hisq-table' %}">Hisq</a>
+                    <a class="dropdown-item" href="{% url 'gaugeconfig-clover-table' %}">Clover</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Propagator
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'propagator-hisq-table' %}">Hisq</a>
+                    <a class="dropdown-item" href="{% url 'propagator-mobius-table' %}">Mobius</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'correlator-index' %}">
+                      Correlator
+                    </a>
+                </li>
+                {% endcomment %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'admin:index' %}">
+                      Admin
+                    </a>
+                </li>
+              </ul>
+            </nav>
+        </header>
+        <main role="main">
+
+            {% block content %}
+            {% endblock %}
+
+        </main>
+    </body>
+</html>

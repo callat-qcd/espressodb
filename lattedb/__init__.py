@@ -5,5 +5,3 @@
 from lattedb.interface.init import init
 
 init()
-
-from lattedb.django.gaugeconfig.models import Hisq
