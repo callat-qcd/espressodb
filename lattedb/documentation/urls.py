@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from lattedb.correlator.views import index
+from lattedb.documentation.views import DocView
 
 app_name = "Documentation"
-urlpatterns = [path("", index, name="index")]
+urlpatterns = [path("", DocView.as_view(), name="index")]

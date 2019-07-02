@@ -1,0 +1,491 @@
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+ <div itemprop="articleBody">
+  <div class="section" id="gaugeconfig">
+   <h1>
+    gaugeconfig
+    <a class="headerlink" href="#gaugeconfig" title="Permalink to this headline">
+     ¶
+    </a>
+   </h1>
+   <div class="toctree-wrapper compound">
+   </div>
+   <span class="target" id="module-lattedb.gaugeconfig.models">
+   </span>
+   <dl class="class">
+    <dt id="lattedb.gaugeconfig.models.GaugeConfig">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.gaugeconfig.models.
+     </code>
+     <code class="descname">
+      GaugeConfig
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      *args
+     </em>
+     ,
+     <em>
+      **kwargs
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <code class="xref py py-class docutils literal notranslate">
+       <span class="pre">
+        lattedb.base.models.Base
+       </span>
+      </code>
+     </p>
+     <p>
+      Base table for application
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.gaugeconfig.models.GaugeConfig.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          django.core.exceptions.ObjectDoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.gaugeconfig.models.GaugeConfig.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          django.core.exceptions.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+   <dl class="class">
+    <dt id="lattedb.gaugeconfig.models.Hisq">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.gaugeconfig.models.
+     </code>
+     <code class="descname">
+      Hisq
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      *args
+     </em>
+     ,
+     <em>
+      **kwargs
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.gaugeconfig.models.Hisq" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <a class="reference internal" href="#lattedb.gaugeconfig.models.GaugeConfig" title="lattedb.gaugeconfig.models.GaugeConfig">
+       <code class="xref py py-class docutils literal notranslate">
+        <span class="pre">
+         lattedb.gaugeconfig.models.GaugeConfig
+        </span>
+       </code>
+      </a>
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+          <li>
+           <strong>
+            gaugeconfig_ptr_id
+           </strong>
+           (
+           <em>
+            OneToOneField
+           </em>
+           ) – Gaugeconfig ptr
+          </li>
+          <li>
+           <strong>
+            long_tag
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Full name for ensemble (e.g. ‘l1648f211b580m013m065m838’)
+          </li>
+          <li>
+           <strong>
+            short_tag
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(20): Short name for ensemble (e.g. ‘a15m310’)
+          </li>
+          <li>
+           <strong>
+            stream
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – Charfield(3): Stream tag for Monte Carlo
+          </li>
+          <li>
+           <strong>
+            nconfig
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Number of configurations
+          </li>
+          <li>
+           <strong>
+            nx
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            nt
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Temporal length in lattice units
+          </li>
+          <li>
+           <strong>
+            ml
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(7,6): Input light quark mass
+          </li>
+          <li>
+           <strong>
+            ms
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(6,5): Input strange quark mass
+          </li>
+          <li>
+           <strong>
+            mc
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(5,4): Input charm quark mass
+          </li>
+          <li>
+           <strong>
+            beta
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(6,4): Coupling constant
+          </li>
+          <li>
+           <strong>
+            naik
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(7,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0
+          </li>
+          <li>
+           <strong>
+            u0
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(7,6): Tadpole improvement coefficient
+          </li>
+          <li>
+           <strong>
+            a_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(4,3): Lattice spacing in fermi
+          </li>
+          <li>
+           <strong>
+            l_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(5,3): Spatial length in fermi
+          </li>
+          <li>
+           <strong>
+            mpil
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(5,3): Spatial length in mpiL
+          </li>
+          <li>
+           <strong>
+            mpi
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(5,2): Pion mass in MeV
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.gaugeconfig.models.Hisq.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.gaugeconfig.models.Hisq.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.gaugeconfig.models.DoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.gaugeconfig.models.Hisq.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.gaugeconfig.models.Hisq.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.gaugeconfig.models.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div>

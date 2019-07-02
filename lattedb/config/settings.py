@@ -65,6 +65,7 @@ TEMPLATES = [
         "DIRS": [
             os.path.join(BASE_DIR, "config", "templates"),
             os.path.join(BASE_DIR, "correlator", "templates"),
+            os.path.join(BASE_DIR, "documentation", "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
