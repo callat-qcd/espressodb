@@ -1,8 +1,16 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
-from lattedb.django.base.models import GaugeSmear
+from lattedb.django.base.models import Base
 
-# Create your models here.
+class GaugeSmear(Base):
+    """ Base table for application"
+    """
+
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
+
 class Unsmeared(GaugeSmear):
     """
     """
@@ -16,7 +24,7 @@ class WilsonFlow(GaugeSmear):
         max_length=20,
         null=False,
         blank=True,
-        help_text='(Optional) Char(20): User defined tag for easy searches'
+        help_text="(Optional) Char(20): User defined tag for easy searches",
     )
 
     flowtime = models.DecimalField(
@@ -25,7 +33,13 @@ class WilsonFlow(GaugeSmear):
         help_text="Decimal(3,2): Flow time in lattice units",
     )
 
+    steps = models.PositiveSmallIntegerField(
+        help_text="PositiveSmallInt: Number of steps"
+    )
+
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["flowtime"], name="unique_wilsonflow")
+            models.UniqueConstraint(
+                fields=["flowtime", "steps"], name="unique_gaugesmear_wilsonflow"
+            )
         ]

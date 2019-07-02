@@ -6,6 +6,6 @@ PROJECT_APPS:
     - lattedb.django.bootstrap
     - lattedb.django.gaugesmear
     - lattedb.django.propagator
-    - lattedb.django.hadronop
-    - lattedb.django.currentop
+    - lattedb.django.hadron
+    - lattedb.django.current
     - lattedb.django.correlator

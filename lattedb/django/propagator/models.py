@@ -1,12 +1,17 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
-from lattedb.django.base.models import Propagator
-from lattedb.django.base.models import Status
+from lattedb.django.base.models import Base
 
-# Create your models here.
+class Propagator(Base):
+    """ Base table for application
+    """
 
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
 
-class HisqPropagators(Propagator):
+class Hisq(Propagator):
     """
     """
 
@@ -18,14 +23,16 @@ class HisqPropagators(Propagator):
     )
 
     gaugeconfig = models.ForeignKey(
-        "base.GaugeConfig",
+        "gaugeconfig.GaugeConfig",
         on_delete=models.CASCADE,
+        related_name="+",
         help_text="ForeignKey pointing to gauge field",
     )
-    linksmearing = models.ForeignKey(
-        "base.GaugeSmear",
+    gaugesmear = models.ForeignKey(
+        "gaugesmear.GaugeSmear",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to link smearing",
+        related_name="+",
+        help_text="ForeignKey pointing to gauge link smearing",
     )
     mval = models.DecimalField(
         max_digits=7,
@@ -40,25 +47,6 @@ class HisqPropagators(Propagator):
         help_text="Decimal(7,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
     )
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["gaugeconfig", "linksmearing", "mval", "naik"],
-                name="unique_hisqpropagators",
-            )
-        ]
-
-
-class HisqPropagatorsSimulationDetail(Propagator, Status):
-    """
-    """
-
-    hisqpropagators_ptr = models.ForeignKey(
-        "propagator.HisqPropagators",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey to HISQ propagator table",
-    )
-
     origin = models.TextField(
         null=False, blank=False, help_text="Text: Origin location of the propagator"
     )
@@ -66,13 +54,12 @@ class HisqPropagatorsSimulationDetail(Propagator, Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["hisqpropagators_ptr", "origin"],
-                name="unique_hisqpropagators_simulationparams",
+                fields=["gaugeconfig", "gaugesmear", "mval", "naik", "origin"],
+                name="unique_propagator_hisq",
             )
         ]
 
-
-class MobiusPropagators(Propagator):
+class MobiusDWF(Propagator):
     """
     """
 
@@ -83,14 +70,14 @@ class MobiusPropagators(Propagator):
         help_text="(Optional) Char(20): User defined tag for easy searches",
     )
     gaugeconfig = models.ForeignKey(
-        "base.GaugeConfig",
+        "gaugeconfig.GaugeConfig",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to gauge field",
     )
-    linksmearing = models.ForeignKey(
-        "base.GaugeSmear",
+    gaugesmear = models.ForeignKey(
+        "gaugesmear.GaugeSmear",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to link smearing",
+        help_text="ForeignKey pointing to gauge link smearing",
     )
     mval = models.DecimalField(
         max_digits=7,
@@ -131,35 +118,6 @@ class MobiusPropagators(Propagator):
         null=False,
         help_text="Decimal(3,2): Mobius kernal perameter",
     )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=[
-                    "gaugeconfig",
-                    "linksmearing",
-                    "mval",
-                    "l5",
-                    "m5",
-                    "alpha5",
-                    "a5",
-                    "b5",
-                    "c5",
-                ],
-                name="unique_mobiuspropagators",
-            )
-        ]
-
-
-class MobiusPropagatorsSimulationDetail(Propagator, Status):
-    """
-    """
-
-    mobiuspropagators_ptr = models.ForeignKey(
-        "propagator.MobiusPropagators",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey to HISQ propagator table",
-    )
     origin = models.TextField(
         null=False, blank=False, help_text="Text: Origin location of the propagator"
     )
@@ -167,13 +125,23 @@ class MobiusPropagatorsSimulationDetail(Propagator, Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["mobiuspropagators_ptr", "origin"],
-                name="unique_mobiuspropagatorssimulationdetail",
+                fields=[
+                    "gaugeconfig",
+                    "gaugesmear",
+                    "mval",
+                    "l5",
+                    "m5",
+                    "alpha5",
+                    "a5",
+                    "b5",
+                    "c5",
+                    "origin",
+                ],
+                name="unique_propagator_mobiusdwf",
             )
         ]
 
-
-class CoherentSequentialPropagators(Propagator):
+class CoherentSeq(Propagator):
     """
     """
 
@@ -183,25 +151,25 @@ class CoherentSequentialPropagators(Propagator):
         blank=True,
         help_text="(Optional) Char(20): User defined tag for easy searches",
     )
-    listofpropagators = models.ForeignKey(
-        "base.Propagator",
+    propagator = models.ForeignKey(
+        "propagator.Propagator",
         on_delete=models.CASCADE,
         related_name='+',
-        help_text="ForeignKey that link to a list of coherent propagator",
+        help_text="ForeignKey that link to a coherent propagator",
     )
     groupsize = models.PositiveSmallIntegerField(
-        help_text="PositiveSmallint: Total number of propagator"
+        help_text="PositiveSmallint: Total number of propagators sharing a coherent sink"
     )
     groupindex = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: A group index indicating which coherent sink group the propagator belongs to"
     )
     sink = models.ForeignKey(
-        "base.hadronop",
+        "hadron.Hadron",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
-    sinkseparationtime = models.SmallIntegerField(
+    sinksep = models.SmallIntegerField(
         help_text="SmallInt: Source-sink separation time"
     )
     momentum = models.SmallIntegerField(
@@ -211,30 +179,13 @@ class CoherentSequentialPropagators(Propagator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["listofpropagators", "groupsize", "groupindex", "sink", "sinkseparationtime", "momentum"],
-                name="unique_coherentsequentialpropagators",
+                fields=["propagator", "groupsize", "groupindex", "sink", "sinksep", "momentum"],
+                name="unique_propagator_coherentseq",
             )
         ]
 
-class CoherentSequentialPropagatorsSimulationDetail(Propagator, Status):
-    """
-    """
 
-    coherentsequentialpropagators_ptr = models.ForeignKey(
-        "propagator.CoherentSequentialPropagators",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey to coherent sequential propagator table",
-    )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["coherentsequentialpropagators_ptr"],
-                name="unique_coherentsequentialpropagatorssimulationdetail",
-            )
-        ]
-
-class FeynmanHellmannPropagators(Propagator):
+class FeynmanHellmann(Propagator):
     """
     """
     tag = models.CharField(
@@ -243,20 +194,20 @@ class FeynmanHellmannPropagators(Propagator):
         blank=True,
         help_text="(Optional) Char(20): User defined tag for easy searches",
     )
-    sourcepropagator = models.ForeignKey(
-        "base.Propagator",
+    propagator0 = models.ForeignKey(
+        "propagator.Propagator",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey linking source side propagator"
     )
-    currentoperator = models.ForeignKey(
-        "base.currentop",
+    current = models.ForeignKey(
+        "current.Current",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey linking current insertion operator"
     )
-    sinkpropagator = models.ForeignKey(
-        "base.Propagator",
+    propagator1 = models.ForeignKey(
+        "propagator.Propagator",
         on_delete = models.CASCADE,
         related_name="+",
         help_text="ForeignKey linking sink side propagator"
@@ -268,25 +219,7 @@ class FeynmanHellmannPropagators(Propagator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["sourcepropagator", "currentoperator", "sinkpropagator", "momentum"],
-                name="unique_feynmanhellmannpropagators"
-            )
-        ]
-
-class FeynmanHellmannPropagatorsSimulationDetail(Propagator, Status):
-    """
-    """
-
-    feynmanhellmannpropagators_ptr = models.ForeignKey(
-        "propagator.FeynmanHellmannPropagators",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey to Feynman-Hellmann propagator table",
-    )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["feynmanhellmannpropagators_ptr"],
-                name="unique_feynmanhellmannpropagatorssimulationdetail",
+                fields=["propagator0", "current", "propagator1", "momentum"],
+                name="unique_propagator_feynmanhellmann"
             )
         ]

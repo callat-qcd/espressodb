@@ -1,8 +1,17 @@
 from django.db import models
-from lattedb.django.base.models import CurrentOp
+from django.contrib.postgres.fields import JSONField
 
-# Create your models here.
-class Local(CurrentOp):
+from lattedb.django.base.models import Base
+
+class Current(Base):
+    """ Base table for application
+    """
+
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
+
+class Local(Current):
     """
     """
 
@@ -42,6 +51,6 @@ class Local(CurrentOp):
         constraints = [
             models.UniqueConstraint(
                 fields=["diracstruct", "flavor0", "flavor1"],
-                name="unique_currentop_local",
+                name="unique_current_local",
             )
         ]

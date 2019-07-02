@@ -1,9 +1,17 @@
 from django.db import models
-from lattedb.django.base.models import GaugeConfig
-from lattedb.django.base.models import Status
+from django.contrib.postgres.fields import JSONField
 
+from lattedb.django.base.models import Base
 
-class HisqGaugeConfigurations(GaugeConfig):
+class GaugeConfig(Base):
+    """ Base table for application
+    """
+
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
+
+class Hisq(GaugeConfig):
     """
     """
 
@@ -24,7 +32,7 @@ class HisqGaugeConfigurations(GaugeConfig):
         blank=False,
         help_text="Charfield(3): Stream tag for Monte Carlo",
     )
-    num_configurations = models.PositiveSmallIntegerField(
+    nconfig = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Number of configurations"
     )
     nx = models.PositiveSmallIntegerField(
@@ -99,7 +107,7 @@ class HisqGaugeConfigurations(GaugeConfig):
             models.UniqueConstraint(
                 fields=[
                     "stream",
-                    "num_configurations",
+                    "nconfig",
                     "nx",
                     "nt",
                     "ml",
@@ -108,29 +116,6 @@ class HisqGaugeConfigurations(GaugeConfig):
                     "beta",
                     "naik",
                 ],
-                name="unique_hisqgaugeconfigurations",
+                name="unique_gaugeconfig_hisq",
             )
         ]
-
-
-class HisqGaugeConfigurationsSimulationDetail(GaugeConfig, Status):
-    hisqgaugeconfigurations_ptr = models.ForeignKey(
-        "gaugeconfig.HisqGaugeConfigurations",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to HISQ ensemble",
-    )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["hisqgaugeconfigurations_ptr"],
-                name="unique_hisqgaugeconfigurationssimulationdetail",
-            )
-        ]
-
-
-class CloverGaugeConfigurations(GaugeConfig):
-    """
-    """
-
-    lattice_spacing = models.FloatField()

@@ -1,8 +1,17 @@
 from django.db import models
-from lattedb.django.base.models import HadronOp
+from django.contrib.postgres.fields import JSONField
 
-# Create your models here.
-class Basak(HadronOp):
+from lattedb.django.base.models import Base
+
+class Hadron(Base):
+    """ Base table for application
+    """
+
+    misc = JSONField(
+        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
+    )
+
+class Basak(Hadron):
     """
     """
 
@@ -63,6 +72,6 @@ class Basak(HadronOp):
                     "spin_z",
                     "smearing",
                 ],
-                name="unique_basak",
+                name="unique_hadron_basak",
             )
         ]

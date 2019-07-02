@@ -3,22 +3,17 @@
 from django.contrib import admin
 
 from lattedb.django.base.admin import BaseAdmin
+from lattedb.django.gaugeconfig.models import Hisq
 
-from lattedb.django.gaugeconfig.models import HisqGaugeConfigurations
-from lattedb.django.gaugeconfig.models import CloverGaugeConfigurations
-from lattedb.django.gaugeconfig.models import HisqGaugeConfigurationsSimulationDetail
-
-admin.site.register(HisqGaugeConfigurations, BaseAdmin)
-admin.site.register(HisqGaugeConfigurationsSimulationDetail, BaseAdmin)
-admin.site.register(CloverGaugeConfigurations, BaseAdmin)
+admin.site.register(Hisq, BaseAdmin)
 
 #class HisqGaugeConfigurationsAdmin(BaseAdmin):
 #    list_filter = ("nl", "nt", "short_tag")
 #    list_display = [
 #        field.name
-#        for field in HisqGaugeConfigurations._meta.get_fields()
+#        for field in Hisq._meta.get_fields()
 #        if field.name
-#        not in ["gaugeconfigurations_ptr", "type", "hisqpropagators", "mobiuspropagators"]
+#        not in ["gaugeconfigurations_ptr", "type", "hisq", "mobiusdwf"]
 #    ]
 
 
@@ -28,9 +23,9 @@ admin.site.register(CloverGaugeConfigurations, BaseAdmin)
 #        field.name
 #        for field in CloverGaugeConfigurations._meta.get_fields()
 #        if field.name
-#        not in ["gaugeconfigurations_ptr", "type", "hisqpropagators", "mobiuspropagators"]
+#        not in ["gaugeconfigurations_ptr", "type", "hisq", "mobiusdwf"]
 #    ]
 
 
-#admin.site.register(HisqGaugeConfigurations, HisqGaugeConfigurationsAdmin)
+#admin.site.register(Hisq, HisqGaugeConfigurationsAdmin)
 #admin.site.register(CloverGaugeConfigurations, CloverGaugeConfigurationsAdmin)
