@@ -19,9 +19,8 @@ from django.urls import path
 from lattedb.propagator.views import HisqPropagatorsTableView
 from lattedb.propagator.views import MobiusPropagatorsTableView
 
+app_name = "Propagators"
 urlpatterns = [
-    path("hisq/", HisqPropagatorsTableView.as_view(), name="propagator-hisq-table"),
-    path(
-        "mobius/", MobiusPropagatorsTableView.as_view(), name="propagator-mobius-table"
-    ),
+    path("hisq/", HisqPropagatorsTableView.as_view(), name="hisq-table"),
+    path("mobius/", MobiusPropagatorsTableView.as_view(), name="mobius-table"),
 ]

@@ -14,15 +14,33 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+
 from django.contrib import admin
 from django.urls import path, include
 
+from lattedb.config.settings import PROJECT_APPS, ROOT_DIR
 from lattedb.config.views import IndexView
 
-urlpatterns = [
-    # path("gaugeconfig/", include("lattedb.gaugeconfig.urls")),
-    #    path("propagator/", include("lattedb.propagator.urls")),
-    #    path("correlator/", include("lattedb.correlator.urls")),
+urlpatterns = []
+
+print(PROJECT_APPS)
+print(urlpatterns)
+
+for app in PROJECT_APPS:
+    url_file = os.path.join(ROOT_DIR, app.replace(".", "/"), "urls.py")
+    if os.path.exists(url_file):
+        _, app_name = app.split(".")
+        if app_name == "config":
+            continue
+        urlpatterns.append(
+            path(rf"{app_name}/", include(app + ".urls", namespace=app_name))
+        )
+
+
+urlpatterns += [
     path("admin/", admin.site.urls),
     path("", IndexView.as_view(), name="index"),
 ]
+
+print(urlpatterns)

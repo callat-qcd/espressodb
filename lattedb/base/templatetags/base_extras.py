@@ -10,15 +10,34 @@ register = template.Library()  # pylint: disable=C0103
 
 
 @register.inclusion_tag("link-list.html")
-def render_link_list(exclude=("", "admin")):
+def render_link_list(exclude=("", "base", "admin")):
     """Renders all links as a nested list
     """
     u = URLFinder()
-    views = u.extract_views_from_urlpatterns(urlpatterns)
+    view_infos = u.extract_views_from_urlpatterns(urlpatterns)
 
-    urls = [view[1] for view in views if not view[1].split("/")[0] in exclude]
+    urls = {}
+    for view, path, reverse_name in view_infos:
+
+        if path.split("/")[0] in exclude:
+            continue
+
+        import_path = view.__module__.split(".")
+
+        if import_path[0] != "lattedb":
+            continue
+
+        print(view, path, reverse_name)
+
+        app_name = import_path[1].capitalize()
+        link_name = reverse_name.split(":")[-1].capitalize()
+
+        if app_name in urls:
+            urls[app_name].append((link_name, reverse_name))
+        else:
+            urls[app_name] = [(link_name, reverse_name)]
 
     print(urls)
-    context = {}
+    context = {"urls": urls}
 
     return context
