@@ -52,8 +52,6 @@ def render_link_list(exclude=("", "base", "admin", "documentation")):
             ):
                 documentation.append((app_name.capitalize(), app_name))
 
-    print(documentation)
-
     context = {"urls": urls, "documentation": documentation}
 
     return context
