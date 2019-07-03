@@ -2,13 +2,16 @@ from django.db import models
 
 from lattedb.base.models import Base
 
+
 class Propagator(Base):
     """ Base table for application
     """
 
+
 class Hisq(Propagator):
     """
     """
+
     gaugeconfig = models.ForeignKey(
         "gaugeconfig.GaugeConfig",
         on_delete=models.CASCADE,
@@ -46,16 +49,11 @@ class Hisq(Propagator):
             )
         ]
 
+
 class MobiusDWF(Propagator):
     """
     """
 
-    tag = models.CharField(
-        max_length=20,
-        null=False,
-        blank=True,
-        help_text="(Optional) Char(20): User defined tag for easy searches",
-    )
     gaugeconfig = models.ForeignKey(
         "gaugeconfig.GaugeConfig",
         on_delete=models.CASCADE,
@@ -128,20 +126,15 @@ class MobiusDWF(Propagator):
             )
         ]
 
+
 class CoherentSeq(Propagator):
     """
     """
 
-    tag = models.CharField(
-        max_length=20,
-        null=False,
-        blank=True,
-        help_text="(Optional) Char(20): User defined tag for easy searches",
-    )
     propagator = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
-        related_name='+',
+        related_name="+",
         help_text="ForeignKey that link to a coherent propagator",
     )
     groupsize = models.PositiveSmallIntegerField(
@@ -156,9 +149,7 @@ class CoherentSeq(Propagator):
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
-    sinksep = models.SmallIntegerField(
-        help_text="SmallInt: Source-sink separation time"
-    )
+    sinksep = models.SmallIntegerField(help_text="SmallInt: Source-sink separation time")
     momentum = models.SmallIntegerField(
         help_text="SmallInt: Sink momentum in units of 2 pi / L"
     )
@@ -166,7 +157,14 @@ class CoherentSeq(Propagator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator", "groupsize", "groupindex", "sink", "sinksep", "momentum"],
+                fields=[
+                    "propagator",
+                    "groupsize",
+                    "groupindex",
+                    "sink",
+                    "sinksep",
+                    "momentum",
+                ],
                 name="unique_propagator_coherentseq",
             )
         ]
@@ -175,29 +173,24 @@ class CoherentSeq(Propagator):
 class FeynmanHellmann(Propagator):
     """
     """
-    tag = models.CharField(
-        max_length=20,
-        null=False,
-        blank=True,
-        help_text="(Optional) Char(20): User defined tag for easy searches",
-    )
+
     propagator0 = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="ForeignKey linking source side propagator"
+        help_text="ForeignKey linking source side propagator",
     )
     current = models.ForeignKey(
         "current.Current",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="ForeignKey linking current insertion operator"
+        help_text="ForeignKey linking current insertion operator",
     )
     propagator1 = models.ForeignKey(
         "propagator.Propagator",
-        on_delete = models.CASCADE,
+        on_delete=models.CASCADE,
         related_name="+",
-        help_text="ForeignKey linking sink side propagator"
+        help_text="ForeignKey linking sink side propagator",
     )
     momentum = models.SmallIntegerField(
         help_text="SmallInt: Current insertion momentum in units of 2 pi / L"
@@ -207,6 +200,6 @@ class FeynmanHellmann(Propagator):
         constraints = [
             models.UniqueConstraint(
                 fields=["propagator0", "current", "propagator1", "momentum"],
-                name="unique_propagator_feynmanhellmann"
+                name="unique_propagator_feynmanhellmann",
             )
         ]
