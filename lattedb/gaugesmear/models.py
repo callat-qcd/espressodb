@@ -18,9 +18,9 @@ class WilsonFlow(GaugeSmear):
     """
 
     flowtime = models.DecimalField(
-        max_digits=3,
-        decimal_places=2,
-        help_text="Decimal(3,2): Flow time in lattice units",
+        max_digits=20,
+        decimal_places=10,
+        help_text="Decimal(20,10): Flow time in lattice units",
     )
     flowstep = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Number of diffusion steps"

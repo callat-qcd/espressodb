@@ -6,11 +6,10 @@ from lattedb.base.models import Base
 class Status(Base):
     """ Base table for application
     """
-    home = models.CharField(
-        max_length=20,
+    home = models.TextField(
         null=False,
         blank=True,
-        help_text="(Optional) Char(20): Computing facility where the object resides at",
+        help_text="(Optional) Text: Computing facility where the object resides at",
     )
     runscript = models.TextField(
         null=False,

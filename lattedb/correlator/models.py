@@ -6,7 +6,32 @@ class Correlator(Base):
     """ Base table for application
     """
 
-# Create your models here.
+# Create your models here.admin@ithems.lbl.gov
+class DWFTuning(Correlator):
+    propagator = models.ForeignKey(
+        "propagator.Propagator",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey: Pointer to first propagator",
+    )
+    source = models.ForeignKey(
+        "hadron.Hadron",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey: Pointer to source interpolating operator",
+    )
+    sink5 = models.BooleanField(
+        null=False,
+        help_text="Boolean: Is the sink on the domain wall?"
+    )
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["propagator", "source", "sink5"],
+                name="unique_correlator_dwftuning",
+            )
+        ]
+
 class Meson2pt(Correlator):
     propagator0 = models.ForeignKey(
         "propagator.Propagator",

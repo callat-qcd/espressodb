@@ -25,26 +25,52 @@ class Hisq(Propagator):
         help_text="ForeignKey pointing to gauge link smearing",
     )
     mval = models.DecimalField(
-        max_digits=7,
-        decimal_places=6,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(7,6): Input valence quark mass",
+        help_text="Decimal(20,10): Input valence quark mass",
     )
     naik = models.DecimalField(
-        max_digits=7,
-        decimal_places=6,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(7,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
+        help_text="Decimal(20,10): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
     )
 
-    origin = models.TextField(
-        null=False, blank=False, help_text="Text: Origin location of the propagator"
+    origin_x = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        help_text="PositiveSmallInt: x-coordinate origin location of the propagator",
+    )
+    origin_y = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        help_text="PositiveSmallInt: y-coordinate origin location of the propagator",
+    )
+    origin_z = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        help_text="PositiveSmallInt: z-coordinate origin location of the propagator",
+    )
+    origin_t = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        help_text="PositiveSmallInt: t-coordinate origin location of the propagator",
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig", "gaugesmear", "mval", "naik", "origin"],
+                fields=[
+                    "gaugeconfig",
+                    "gaugesmear",
+                    "mval",
+                    "naik",
+                    "origin_x",
+                    "origin_y",
+                    "origin_z",
+                    "origin_t",
+                ],
                 name="unique_propagator_hisq",
             )
         ]
@@ -65,46 +91,63 @@ class MobiusDWF(Propagator):
         help_text="ForeignKey pointing to gauge link smearing",
     )
     mval = models.DecimalField(
-        max_digits=7,
-        decimal_places=6,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(7,6): Input valence quark mass",
+        help_text="Decimal(20,10): Input valence quark mass",
     )
     l5 = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Length of 5th dimension"
     )
     m5 = models.DecimalField(
-        max_digits=3,
-        decimal_places=2,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(3,2): 5th dimensional mass",
+        help_text="Decimal(20,10): 5th dimensional mass",
     )
     alpha5 = models.DecimalField(
-        max_digits=3,
-        decimal_places=2,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(3,2): Mobius coefficient [D_mobius(M5) = alpha5 * D_Shamir(M5)]",
+        help_text="Decimal(20,10): Mobius coefficient [D_mobius(M5) = alpha5 * D_Shamir(M5)]",
     )
     a5 = models.DecimalField(
-        max_digits=3,
-        decimal_places=2,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(3,2): Mobius kernel parameter [D_mobius = alpha5 * a5 * D_Wilson / (2 + a5 * D_Wilson)]",
+        help_text="Decimal(20,10): Mobius kernel parameter [D_mobius = alpha5 * a5 * D_Wilson / (2 + a5 * D_Wilson)]",
     )
     b5 = models.DecimalField(
-        max_digits=3,
-        decimal_places=2,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(3,2): Mobius kernel parameter [a5 = b5 - c5, alpha5 * a5 = b5 + c5]",
+        help_text="Decimal(20,10): Mobius kernel parameter [a5 = b5 - c5, alpha5 * a5 = b5 + c5]",
     )
     c5 = models.DecimalField(
-        max_digits=3,
-        decimal_places=2,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(3,2): Mobius kernal perameter",
+        help_text="Decimal(20,10): Mobius kernal perameter",
     )
-    origin = models.TextField(
-        null=False, blank=False, help_text="Text: Origin location of the propagator"
+    origin_x = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        help_text="PositiveSmallInt: x-coordinate origin location of the propagator",
+    )
+    origin_y = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        help_text="PositiveSmallInt: y-coordinate origin location of the propagator",
+    )
+    origin_z = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        help_text="PositiveSmallInt: z-coordinate origin location of the propagator",
+    )
+    origin_t = models.PositiveSmallIntegerField(
+        null=False,
+        blank=False,
+        help_text="PositiveSmallInt: t-coordinate origin location of the propagator",
     )
 
     class Meta:
@@ -120,7 +163,10 @@ class MobiusDWF(Propagator):
                     "a5",
                     "b5",
                     "c5",
-                    "origin",
+                    "origin_x",
+                    "origin_y",
+                    "origin_z",
+                    "origin_t",
                 ],
                 name="unique_propagator_mobiusdwf",
             )
@@ -149,7 +195,9 @@ class CoherentSeq(Propagator):
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
-    sinksep = models.SmallIntegerField(help_text="SmallInt: Source-sink separation time")
+    sinksep = models.SmallIntegerField(
+        help_text="SmallInt: Source-sink separation time"
+    )
     momentum = models.SmallIntegerField(
         help_text="SmallInt: Sink momentum in units of 2 pi / L"
     )

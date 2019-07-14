@@ -9,17 +9,15 @@ class GaugeConfig(Base):
 class Hisq(GaugeConfig):
     """
     """
-    short_tag = models.CharField(
-        max_length=20,
+    short_tag = models.TextField(
         null=False,
         blank=True,
-        help_text="(Optional) Char(20): Short name for ensemble (e.g. 'a15m310')",
+        help_text="(Optional) Text: Short name for ensemble (e.g. 'a15m310')",
     )
-    stream = models.CharField(
-        max_length=3,
+    stream = models.TextField(
         null=False,
         blank=False,
-        help_text="Charfield(3): Stream tag for Monte Carlo",
+        help_text="Text: Stream tag for Monte Carlo",
     )
     nconfig = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Number of configurations"
@@ -31,64 +29,64 @@ class Hisq(GaugeConfig):
         null=False, help_text="PositiveSmallInt: Temporal length in lattice units"
     )
     ml = models.DecimalField(
-        max_digits=7,
-        decimal_places=6,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(7,6): Input light quark mass",
+        help_text="Decimal(20,10): Input light quark mass",
     )
     ms = models.DecimalField(
-        max_digits=6,
-        decimal_places=5,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(6,5): Input strange quark mass",
+        help_text="Decimal(20,10): Input strange quark mass",
     )
     mc = models.DecimalField(
-        max_digits=5,
-        decimal_places=4,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(5,4): Input charm quark mass",
+        help_text="Decimal(20,10): Input charm quark mass",
     )
     beta = models.DecimalField(
-        max_digits=6,
-        decimal_places=4,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(6,4): Coupling constant",
+        help_text="Decimal(20,10): Coupling constant",
     )
     naik = models.DecimalField(
-        max_digits=7,
-        decimal_places=6,
+        max_digits=20,
+        decimal_places=10,
         null=False,
-        help_text="Decimal(7,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
+        help_text="Decimal(20,10): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
     )
     u0 = models.DecimalField(
-        max_digits=7,
-        decimal_places=6,
+        max_digits=20,
+        decimal_places=10,
         null=True,
-        help_text="(Optional) Decimal(7,6): Tadpole improvement coefficient",
+        help_text="Decimal(20,10): Tadpole improvement coefficient",
     )
     a_fm = models.DecimalField(
-        max_digits=4,
-        decimal_places=3,
+        max_digits=20,
+        decimal_places=10,
         null=True,
-        help_text="(Optional) Decimal(4,3): Lattice spacing in fermi",
+        help_text="(Optional) Decimal(20,10): Lattice spacing in fermi",
     )
     l_fm = models.DecimalField(
-        max_digits=5,
-        decimal_places=3,
+        max_digits=20,
+        decimal_places=10,
         null=True,
-        help_text="(Optional) Decimal(5,3): Spatial length in fermi",
+        help_text="(Optional) Decimal(20,10): Spatial length in fermi",
     )
     mpil = models.DecimalField(
-        max_digits=5,
-        decimal_places=3,
+        max_digits=20,
+        decimal_places=10,
         null=True,
-        help_text="(Optional) Decimal(5,3): Spatial length in mpiL",
+        help_text="(Optional) Decimal(20,10): Spatial length in mpiL",
     )
     mpi = models.DecimalField(
-        max_digits=5,
-        decimal_places=2,
+        max_digits=20,
+        decimal_places=10,
         null=True,
-        help_text="(Optional) Decimal(5,2): Pion mass in MeV",
+        help_text="(Optional) Decimal(20,10): Pion mass in MeV",
     )
 
     class Meta:
@@ -104,6 +102,7 @@ class Hisq(GaugeConfig):
                     "mc",
                     "beta",
                     "naik",
+                    "u0",
                 ],
                 name="unique_gaugeconfig_hisq",
             )
