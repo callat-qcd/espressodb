@@ -138,9 +138,15 @@ STATICFILES_DIRS = [
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {"console": {"level": "INFO", "class": "logging.StreamHandler"}},
+    "handlers": {
+        "console": {
+            "level": "DEBUG" if DEBUG else "INFO",
+            "class": "logging.StreamHandler",
+        }
+    },
     "loggers": {
-        "main.commands": {"handlers": ["console"], "level": "DEBUG", "propagate": True}
+        "main.commands": {"handlers": ["console"], "level": "DEBUG", "propagate": True},
+        "base": {"handlers": ["console"], "level": "DEBUG", "propagate": True},
     },
 }
 
