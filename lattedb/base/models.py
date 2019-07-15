@@ -15,7 +15,7 @@ from django.contrib.postgres.fields import JSONField
 from django_pandas.managers import DataFrameManager
 
 
-LOGGER = logging.getLogger(__name__)
+LOGGER = logging.getLogger("base")
 
 
 class Base(models.Model):
@@ -31,7 +31,7 @@ class Base(models.Model):
 
     tag = models.CharField(
         max_length=20,
-        null=False,
+        null=True,
         blank=True,
         help_text="(Optional) Char(20): User defined tag for easy searches",
     )
@@ -147,12 +147,19 @@ class Base(models.Model):
         kwargs = {}
         all_instances = []
         for field in cls._meta.get_fields():  # pylint: disable=W0212
+            if (
+                field.name in ["id", "type"]
+                or not field.editable
+                or field.name.endswith("_ptr")
+            ):
+                continue
+
             if isinstance(field, models.ForeignKey):
 
                 instance, instances = cls._get_or_creage_fk(  # pylint: disable=W0212
                     field, parameters, tree=tree, overwrite=overwrite, dry_run=dry_run
                 )
-                all_instances.append(instances)
+                all_instances += instances
 
             else:
                 kwargs[field.name] = parameters.get(field.name, None)
@@ -166,7 +173,7 @@ class Base(models.Model):
                 "Overwriting of default kwargs not yet implmented."
             )
 
-        instance, created = cls.get_or_create(**kwargs)
+        instance, created = cls.objects.get_or_create(**kwargs)
         if created:
             LOGGER.debug("Created %s", instance)
         else:
