@@ -43,7 +43,9 @@ class HisqTestCase(TestCase):
     def test_get_or_create_from_parameters(self):
         """
         """
-        instances = Hisq.get_or_create_from_parameters(self.creation_parameters)
+        instance, instances = Hisq.get_or_create_from_parameters(
+            self.creation_parameters
+        )
 
         self.assertEqual(len(instances), 1)
 

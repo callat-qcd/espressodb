@@ -65,13 +65,15 @@ class Base(models.Model):
                 In case no or more then one class matches the name.
         """
         class_family = [cls] + cls.__subclasses__()
-        matched_cls = [el for el in class_family if el.__name__ == class_name]
+        matched_cls = [
+            el for el in class_family if el.__name__.split(".")[-1] == class_name
+        ]
         if len(matched_cls) != 1:
             raise KeyError(
                 f"Could not find specialization {class_name}"
-                f" for base class {cls}."
-                "\nPossible options:\n\t"
-                "\n\t".join([str(el) for el in class_family])
+                + f" for base class {cls}."
+                + "\nPossible options:\n\t"
+                + "\n\t".join([el.__name__.split(".")[-1] for el in class_family])
             )
         else:
             expected_cls = matched_cls[0]
@@ -107,7 +109,7 @@ class Base(models.Model):
                     f" received {type(sub_class_info)}"
                 )
 
-            instance, all_instances = field.model.get_or_create_from_parameters(
+            instance, all_instances = field.related_model.get_or_create_from_parameters(
                 parameters,
                 tree=sub_tree,
                 class_name=sub_class_name,
@@ -136,6 +138,8 @@ class Base(models.Model):
     ) -> List[Tuple[models.Model, bool]]:
         """
         """
+        # parse full dependency and warn if duplicate columns
+
         LOGGER.debug(
             "Receiving `get_or_create_from_parameters` from %s for %s",
             calling_cls,
@@ -148,7 +152,7 @@ class Base(models.Model):
         all_instances = []
         for field in cls._meta.get_fields():  # pylint: disable=W0212
             if (
-                field.name in ["id", "type"]
+                field.name in ["id", "type", "user"]
                 or not field.editable
                 or field.name.endswith("_ptr")
             ):
@@ -165,7 +169,8 @@ class Base(models.Model):
                 kwargs[field.name] = parameters.get(field.name, None)
                 if kwargs[field.name] is None and not field.null:
                     raise KeyError(
-                        f"Parameters did not contain value for non-null key {field.name}"
+                        f"Missing value for constructing {cls}."
+                        f" Parameter dictionary has no value for {field.name}"
                     )
 
         if overwrite is not None:
@@ -183,4 +188,4 @@ class Base(models.Model):
             instance.save()
         all_instances.append((instance, created))
 
-        return all_instances
+        return instance, all_instances
