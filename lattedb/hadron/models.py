@@ -8,7 +8,7 @@ class Hadron(Base):
     """
 
     description = models.TextField(
-        null=False,
+        null=True,
         blank=True,
         help_text="(Optional) Text: Description of the interpolating operator",
     )

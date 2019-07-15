@@ -2,22 +2,23 @@ from django.db import models
 
 from lattedb.base.models import Base
 
+
 class GaugeConfig(Base):
     """ Base table for application
     """
 
+
 class Hisq(GaugeConfig):
     """
     """
+
     short_tag = models.TextField(
-        null=False,
+        null=True,
         blank=True,
         help_text="(Optional) Text: Short name for ensemble (e.g. 'a15m310')",
     )
     stream = models.TextField(
-        null=False,
-        blank=False,
-        help_text="Text: Stream tag for Monte Carlo",
+        null=False, blank=False, help_text="Text: Stream tag for Monte Carlo"
     )
     nconfig = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Number of configurations"

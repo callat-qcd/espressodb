@@ -3,24 +3,26 @@ from django.contrib.postgres.fields import JSONField
 
 from lattedb.base.models import Base
 
+
 class Status(Base):
     """ Base table for application
     """
+
     home = models.TextField(
-        null=False,
+        null=True,
         blank=True,
         help_text="(Optional) Text: Computing facility where the object resides at",
     )
     runscript = models.TextField(
-        null=False,
+        null=True,
         blank=True,
         help_text="(Optional) Text: Path to, or content of run script",
     )
     directory = models.TextField(
-        null=False, blank=True, help_text="(Optional) Text: Directory path to result"
+        null=True, blank=True, help_text="(Optional) Text: Directory path to result"
     )
     hdf5path = models.TextField(
-        null=False, blank=True, help_text="(Optional) Text: Folder path in hdf5 file"
+        null=True, blank=True, help_text="(Optional) Text: Folder path in hdf5 file"
     )
     size = models.IntegerField(null=True, help_text="(Optional) Int: file size")
     statusencoder = models.PositiveSmallIntegerField(
@@ -29,6 +31,7 @@ class Status(Base):
 
     class Meta:
         abstract = True
+
 
 class GaugeConfig_Hisq(Status):
     gaugeconfig = models.ForeignKey(
@@ -40,8 +43,7 @@ class GaugeConfig_Hisq(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig"],
-                name="unique_status_gaugeconfig_hisq",
+                fields=["gaugeconfig"], name="unique_status_gaugeconfig_hisq"
             )
         ]
 
@@ -59,10 +61,10 @@ class Propagator_Hisq(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator"],
-                name="unique_status_propagator_hisq",
+                fields=["propagator"], name="unique_status_propagator_hisq"
             )
         ]
+
 
 class Propagator_MobiusDWF(Status):
     """
@@ -77,10 +79,10 @@ class Propagator_MobiusDWF(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator"],
-                name="unique_status_propagator_mobiusdwf",
+                fields=["propagator"], name="unique_status_propagator_mobiusdwf"
             )
         ]
+
 
 class Propagator_CoherentSeq(Status):
     """
@@ -95,10 +97,10 @@ class Propagator_CoherentSeq(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator"],
-                name="unique_status_propagator_coherentseq",
+                fields=["propagator"], name="unique_status_propagator_coherentseq"
             )
         ]
+
 
 class Propagator_FeynmanHellmann(Status):
     """
@@ -113,10 +115,10 @@ class Propagator_FeynmanHellmann(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator"],
-                name="unique_status_propagator_feynmanhellmann",
+                fields=["propagator"], name="unique_status_propagator_feynmanhellmann"
             )
         ]
+
 
 class Correlator_Meson2pt(Status):
     correlator = models.ForeignKey(
@@ -128,37 +130,36 @@ class Correlator_Meson2pt(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["correlator"],
-                name="unique_status_correlator_meson2pt",
+                fields=["correlator"], name="unique_status_correlator_meson2pt"
             )
         ]
+
 
 class Correlator_Baryon4DSeq3pt(Status):
     correlator = models.ForeignKey(
         "correlator.baryon4dseq3pt",
         on_delete=models.CASCADE,
-        help_text="Foreign Key to a sequential three point correlation function"
+        help_text="Foreign Key to a sequential three point correlation function",
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["correlator"],
-                name="unique_status_correlator_baryon4dseq3pt",
+                fields=["correlator"], name="unique_status_correlator_baryon4dseq3pt"
             )
         ]
+
 
 class Correlator_BaryonFH3pt(Status):
     correlator = models.ForeignKey(
         "correlator.BaryonFH3pt",
         on_delete=models.CASCADE,
-        help_text="Foreign Key to a Feynman-Hellmann three point correlation function"
+        help_text="Foreign Key to a Feynman-Hellmann three point correlation function",
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["correlator"],
-                name="unique_status_correlator_baryonfh3pt",
+                fields=["correlator"], name="unique_status_correlator_baryonfh3pt"
             )
         ]

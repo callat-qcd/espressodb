@@ -8,16 +8,18 @@ class HadronSmear(Base):
     """
 
     description = models.TextField(
-        null=False,
+        null=True,
         blank=True,
         help_text="(Optional) Text: Description of the interpolating operator",
     )
+
 
 class Unsmeared(HadronSmear):
     """
     Table for unsmeared operators.
     The table should only have one row with a foreign key.
     """
+
 
 class Gaussian(HadronSmear):
     """ Gauge invariant Gaussian smearing
