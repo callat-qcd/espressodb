@@ -34,19 +34,19 @@ class Meson(Hadron):
         help_text="Decimal(1,0): Parity of hadronic operator",
     )
     spin_x2 = models.PositiveSmallIntegerField(
-        null=False, blank=False, help_text="Text: Total spin times two"
+        null=False, help_text="Text: Total spin times two"
     )
 
     spin_z_x2 = models.SmallIntegerField(
-        null=False, blank=False, help_text="Text: Spin in z-direction"
+        null=False, help_text="Text: Spin in z-direction"
     )
 
     isospin_x2 = models.PositiveSmallIntegerField(
-        null=False, blank=False, help_text="Text: Total isospin times two"
+        null=False, help_text="Text: Total isospin times two"
     )
 
     isospin_z_x2 = models.SmallIntegerField(
-        null=False, blank=False, help_text="Text: Isospin in z-direction times two"
+        null=False, help_text="Text: Isospin in z-direction times two"
     )
 
     strangeness = models.DecimalField(
@@ -63,10 +63,10 @@ class Meson(Hadron):
                     "hadronsmear",
                     "structure",
                     "parity",
-                    "spin",
-                    "spin_z",
-                    "isospin",
-                    "isospin_z",
+                    "spin_x2",
+                    "spin_z_x2",
+                    "isospin_x2",
+                    "isospin_z_x2",
                     "strangeness",
                 ],
                 name="unique_hadron_meson",
@@ -104,16 +104,20 @@ class Basak(Hadron):
         help_text="Decimal(1,0): k-th embedding of O^D_h irrep.",
     )
 
-    spin = models.TextField(null=False, blank=False, help_text="Text: Total spin")
-
-    spin_z = models.TextField(
-        null=False, blank=False, help_text="Text: Spin in z-direction"
+    spin_x2 = models.PositiveSmallIntegerField(
+        null=False, help_text="Text: Total spin times two"
     )
 
-    isospin = models.TextField(null=False, blank=False, help_text="Text: Total isospin")
+    spin_z_x2 = models.SmallIntegerField(
+        null=False, help_text="Text: Spin in z-direction times two"
+    )
 
-    isospin_z = models.TextField(
-        null=False, blank=False, help_text="Text: Isospin in z-direction"
+    isospin_x2 = models.PositiveSmallIntegerField(
+        null=False, help_text="Text: Total isospin times two"
+    )
+
+    isospin_z_x2 = models.SmallIntegerField(
+        null=False, help_text="Text: Isospin in z-direction times two"
     )
 
     strangeness = models.DecimalField(
@@ -131,10 +135,10 @@ class Basak(Hadron):
                     "irrep",
                     "parity",
                     "embedding",
-                    "spin",
-                    "spin_z",
-                    "isospin",
-                    "isospin_z",
+                    "spin_x2",
+                    "spin_z_x2",
+                    "isospin_x2",
+                    "isospin_z_x2",
                     "strangeness",
                 ],
                 name="unique_hadron_basak",
