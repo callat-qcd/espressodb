@@ -164,28 +164,33 @@ class Base(models.Model):
                     field, parameters, tree=tree, overwrite=overwrite, dry_run=dry_run
                 )
                 all_instances += instances
+                kwargs[field.name] = instance
 
             else:
-                kwargs[field.name] = parameters.get(field.name, None)
-                if kwargs[field.name] is None and not field.null:
+                value = parameters.get(field.name, None)
+                if value is None and not field.null:
                     raise KeyError(
                         f"Missing value for constructing {cls}."
                         f" Parameter dictionary has no value for {field.name}"
                     )
+                elif value is not None:
+                    kwargs[field.name] = value
 
         if overwrite is not None:
             raise NotImplementedError(
                 "Overwriting of default kwargs not yet implmented."
             )
 
-        instance, created = cls.objects.get_or_create(**kwargs)
-        if created:
+        LOGGER.debug("Trying get or create for %s with kwargs %s", cls, kwargs)
+        instance, not_exist = cls.objects.get_or_create(**kwargs)
+        if not_exist:
             LOGGER.debug("Created %s", instance)
         else:
             LOGGER.debug("Fetched %s from db", instance)
 
-        if not dry_run:
+        if not dry_run and not_exist:
+            LOGGER.debug("Trying to save %s", instance)
             instance.save()
-        all_instances.append((instance, created))
+        all_instances.append((instance, not_exist))
 
         return instance, all_instances
