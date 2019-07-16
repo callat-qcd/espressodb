@@ -2,9 +2,11 @@ from django.db import models
 
 from lattedb.base.models import Base
 
+
 class Correlator(Base):
     """ Base table for application
     """
+
 
 # Create your models here.admin@ithems.lbl.gov
 class DWFTuning(Correlator):
@@ -21,9 +23,9 @@ class DWFTuning(Correlator):
         help_text="ForeignKey: Pointer to source interpolating operator",
     )
     sink5 = models.BooleanField(
-        null=False,
-        help_text="Boolean: Is the sink on the domain wall?"
+        null=False, help_text="Boolean: Is the sink on the domain wall?"
     )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
@@ -31,6 +33,7 @@ class DWFTuning(Correlator):
                 name="unique_correlator_dwftuning",
             )
         ]
+
 
 class Meson2pt(Correlator):
     propagator0 = models.ForeignKey(

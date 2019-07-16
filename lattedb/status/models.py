@@ -120,6 +120,21 @@ class Propagator_FeynmanHellmann(Status):
         ]
 
 
+class Correlator_DWFTuning(Status):
+    correlator = models.ForeignKey(
+        "correlator.dwftuning",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to mres and phi_qq correlation functions",
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["correlator"], name="unique_status_correlator_dwftuning"
+            )
+        ]
+
+
 class Correlator_Meson2pt(Status):
     correlator = models.ForeignKey(
         "correlator.meson2pt",
