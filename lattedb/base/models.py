@@ -41,16 +41,67 @@ class Base(models.Model):
 
     objects = DataFrameManager()
 
-    def __str__(self):
-        return f"{self.__class__.__name__}(id={self.id})"
-
     class Meta:
         abstract = True
+
+    @classmethod
+    def get_open_fields(cls):
+        """Returns keys which are editable and non ForeignKeys
+        """
+        fields = []
+        for field in cls._meta.get_fields():  # pylint: disable=W0212
+            if not (
+                field.name in ["id", "type", "user"]
+                or not field.editable
+                or field.name.endswith("_ptr")
+            ):
+                fields.append(field)
+        return fields
+
+    def __str__(self):
+        kwargs = {
+            field.name: getattr(self, field.name)
+            for field in self.get_open_fields()
+            if getattr(self, field.name) is not None
+            and not isinstance(field, models.ForeignKey)
+        }
+        base = f"[{self.__class__.mro()[1].__name__}]" if type(self) != Base else ""
+        info = ", ".join([f"{key}={val}" for key, val in kwargs.items()])
+        return f"{self.__class__.__name__}{base}({info})"
 
     def clean(self):
         """Sets the type name to the class instance name
         """
         self.type = self.__class__.__name__
+
+    def __init__(self, *args, **kwargs):
+        """Default init but adds specialization attribute
+        """
+        super().__init__(*args, **kwargs)
+        self._specialization = None
+
+    @property
+    def specialization(self):
+        """Returns the specialization of the instance (children with the same id).
+
+        If the class has no children which match the id, this will be the same object.
+        """
+        if self._specialization is None:
+            self._specialization = self.get_specialization()
+        return self._specialization
+
+    def get_specialization(self) -> "Base":
+        """Queries the dependency tree and returns the most specialized instance of the
+        table.
+        """
+        instance = self
+        for cls in self.__class__.__subclasses__():
+            match = cls.objects.filter(id=self.id).first()
+            if match:  # use that the id is share among other subclasses.
+                instance = match.get_specialization()
+                break
+
+        return instance
 
     @classmethod
     def _get_child_by_name(cls, class_name=str) -> "Base":
@@ -88,12 +139,11 @@ class Base(models.Model):
         tree: Optional[Dict[str, Any]] = None,
         overwrite: Dict[str, Any] = None,
         dry_run: bool = False,
+        _recursion_level: int = 0,
     ):
         """
         """
         tree = tree or {}
-
-        LOGGER.debug("Parsing FK field %s", field.name)
 
         sub_class_info = tree.get(field.name, None)
         if sub_class_info is not None:
@@ -112,9 +162,10 @@ class Base(models.Model):
             instance, all_instances = field.related_model.get_or_create_from_parameters(
                 parameters,
                 tree=sub_tree,
-                class_name=sub_class_name,
                 overwrite=overwrite,
                 dry_run=dry_run,
+                _class_name=sub_class_name,
+                _recursion_level=_recursion_level,
             )
 
         else:
@@ -132,36 +183,33 @@ class Base(models.Model):
         calling_cls,
         parameters: Dict[str, Any],
         tree: Optional[Dict[str, Any]] = None,
-        class_name: Optional[str] = None,
         overwrite: Optional[Dict[str, Any]] = None,
         dry_run: bool = False,
+        _class_name: Optional[str] = None,
+        _recursion_level: int = 0,
     ) -> List[Tuple[models.Model, bool]]:
         """
         """
         # parse full dependency and warn if duplicate columns
+        indent = "|" if _recursion_level else ""
+        indent += "-" * _recursion_level * 2
 
-        LOGGER.debug(
-            "Receiving `get_or_create_from_parameters` from %s for %s",
-            calling_cls,
-            class_name,
-        )
+        cls = calling_cls._get_child_by_name(_class_name) if _class_name else calling_cls
 
-        cls = calling_cls._get_child_by_name(class_name) if class_name else calling_cls
+        LOGGER.debug("%sPreparing creation of %s", indent, cls)
 
         kwargs = {}
         all_instances = []
-        for field in cls._meta.get_fields():  # pylint: disable=W0212
-            if (
-                field.name in ["id", "type", "user"]
-                or not field.editable
-                or field.name.endswith("_ptr")
-            ):
-                continue
-
+        for field in cls.get_open_fields():
             if isinstance(field, models.ForeignKey):
 
                 instance, instances = cls._get_or_creage_fk(  # pylint: disable=W0212
-                    field, parameters, tree=tree, overwrite=overwrite, dry_run=dry_run
+                    field,
+                    parameters,
+                    tree=tree,
+                    overwrite=overwrite,
+                    dry_run=dry_run,
+                    _recursion_level=_recursion_level + 1,
                 )
                 all_instances += instances
                 kwargs[field.name] = instance
@@ -181,15 +229,13 @@ class Base(models.Model):
                 "Overwriting of default kwargs not yet implmented."
             )
 
-        LOGGER.debug("Trying get or create for %s with kwargs %s", cls, kwargs)
         instance, not_exist = cls.objects.get_or_create(**kwargs)
         if not_exist:
-            LOGGER.debug("Created %s", instance)
+            LOGGER.debug("%sCreated %s", indent, instance)
         else:
-            LOGGER.debug("Fetched %s from db", instance)
+            LOGGER.debug("%sFetched %s from db", indent, instance)
 
         if not dry_run and not_exist:
-            LOGGER.debug("Trying to save %s", instance)
             instance.save()
         all_instances.append((instance, not_exist))
 
