@@ -60,12 +60,12 @@ class Meson2ptTestCase(TestCase):
             "c5": 5,
         },
         "hadron": {
-            "structure": "$\gamma_5$",
+            "structure": r"$\gamma_5$",
             "parity": 1,
-            "spin": "up",
-            "spin_z": "down",
-            "isospin": "bla",
-            "isospin_z": "100k",
+            "spin_x2": 1,
+            "spin_z_x2": 2,
+            "isospin_x2": 3,
+            "isospin_z_x2": 10000,
             "strangeness": 1,
         },
         "hadronsmear": {"radius": 10, "step": 2},
@@ -80,7 +80,7 @@ class Meson2ptTestCase(TestCase):
         for pars in self.parameters.values():
             parameters.update(pars)
 
-        instances = Meson2pt.get_or_create_from_parameters(
+        Meson2pt.get_or_create_from_parameters(
             parameters,
             tree={
                 "propagator0": (
@@ -98,11 +98,10 @@ class Meson2ptTestCase(TestCase):
 
         hadron_smears = HadronSmear.objects.all()
         for hadron_smear, cls in zip(hadron_smears, [Gaussian, Unsmeared]):
-            hadron_smear_specialization = hadron_smear.get_specialization()
-            self.assertIsInstance(hadron_smear_specialization, cls)
+            self.assertIsInstance(hadron_smear.specialization, cls)
             for key, val in parameters.items():
                 if key in cls.__dict__:
-                    self.assertEqual(val, getattr(hadron_smear_specialization, key))
+                    self.assertEqual(val, getattr(hadron_smear.specialization, key))
 
         mesons = Meson.objects.all()
         for meson, smearing in zip(mesons, hadron_smears):
