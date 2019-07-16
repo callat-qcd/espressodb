@@ -44,8 +44,14 @@ class Base(models.Model):
     class Meta:
         abstract = True
 
+    def __init__(self, *args, **kwargs):
+        """Default init but adds specialization attribute
+        """
+        super().__init__(*args, **kwargs)
+        self._specialization = None
+
     @classmethod
-    def get_open_fields(cls):
+    def get_open_fields(cls) -> List["Field"]:
         """Returns keys which are editable and non ForeignKeys
         """
         fields = []
@@ -58,14 +64,20 @@ class Base(models.Model):
                 fields.append(field)
         return fields
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Verbose description of instance name, parent and column values.
+        """
         kwargs = {
             field.name: getattr(self, field.name)
             for field in self.get_open_fields()
             if getattr(self, field.name) is not None
             and not isinstance(field, models.ForeignKey)
         }
-        base = f"[{self.__class__.mro()[1].__name__}]" if type(self) != Base else ""
+        base = (
+            f"[{self.__class__.mro()[1].__name__}]"
+            if type(self) != Base  # pylint: disable=C0123
+            else ""
+        )
         info = ", ".join([f"{key}={val}" for key, val in kwargs.items()])
         return f"{self.__class__.__name__}{base}({info})"
 
@@ -73,12 +85,6 @@ class Base(models.Model):
         """Sets the type name to the class instance name
         """
         self.type = self.__class__.__name__
-
-    def __init__(self, *args, **kwargs):
-        """Default init but adds specialization attribute
-        """
-        super().__init__(*args, **kwargs)
-        self._specialization = None
 
     @property
     def specialization(self):
@@ -137,13 +143,67 @@ class Base(models.Model):
         field: models.ForeignKey,
         parameters: Dict[str, Any],
         tree: Optional[Dict[str, Any]] = None,
-        overwrite: Dict[str, Any] = None,
+        specialized_parameters: Dict[str, Any] = None,
         dry_run: bool = False,
         _recursion_level: int = 0,
     ):
-        """
+        """Recursively iterates ForeignKey field and tries to construc the foreign keys
+        from parameters and parse tree using `get_or_create_from_parameters`.
+
+        **Arguments**
+            field: models.ForeignKey
+                The foreign key field to get or create.
+
+            parameters: Dict[str, Any]
+                The construction / query arguments. These parameters are shared among
+                all constructions.
+
+            tree: Optional[Dict[str, Any]] = None
+                The tree of ForeignKey dependencies. This specify which class the
+                ForeignKey will take since only the base class is linked against.
+                Keys are strings corresponding to model fields, values are either
+                strings corresponding to classes
+
+                Example:
+                ```
+                class B(Base):
+                    key2 = IntegerField() # or ForeignKey(C)
+
+                class A(Base):
+                    key1 = ForeignKey(B)
+
+                tree={"key1": "B"}
+                # or if B also depends on Foreign Keys
+                tree={"key1": ("B", {"key2": "C"})}
+                ```
+
+            specialized_parameters: Dict[str, Any] = None
+                The construction / query arguments for special foreign keys (in case
+                there is overlap). Follows a similar syntax as the tree.
+
+                Example:
+                ```
+                class B(Base):
+                    key2 = IntegerField()
+
+                class A(Base):
+                    key1 = ForeignKey(B)
+
+                specialized_parameters={"key1": {"key2": 2}}
+                ```
+
+            dry_run: bool = False
+                Do not insert in database.
+
+            _recursion_level: int = 0
+                This key is used internaly to track number of recursions.
         """
         tree = tree or {}
+
+        if specialized_parameters is not None:
+            raise NotImplementedError(
+                "Overwriting of default kwargs not yet implmented."
+            )
 
         sub_class_info = tree.get(field.name, None)
         if sub_class_info is not None:
@@ -162,7 +222,7 @@ class Base(models.Model):
             instance, all_instances = field.related_model.get_or_create_from_parameters(
                 parameters,
                 tree=sub_tree,
-                overwrite=overwrite,
+                specialized_parameters=specialized_parameters,
                 dry_run=dry_run,
                 _class_name=sub_class_name,
                 _recursion_level=_recursion_level,
@@ -183,16 +243,100 @@ class Base(models.Model):
         calling_cls,
         parameters: Dict[str, Any],
         tree: Optional[Dict[str, Any]] = None,
-        overwrite: Optional[Dict[str, Any]] = None,
+        specialized_parameters: Optional[Dict[str, Any]] = None,
         dry_run: bool = False,
         _class_name: Optional[str] = None,
         _recursion_level: int = 0,
-    ) -> List[Tuple[models.Model, bool]]:
-        """
+    ) -> Tuple["Base", List[Tuple["Base", bool]]]:
+        """Creates class and dependencies through top down approach from parameters.
+
+        Populates columns from parameters and recursevily creates foreign keys need for
+        construction.
+        Foreign keys must be specified by the tree in order to instanciate the right
+        tables.
+        In case some tables have shared column names but want to use differnt values,
+        use the `specialized_parameters` argument.
+
+        **Example**
+            ```
+            class BA(BaseB):
+                b1 = IntegerField()
+                b2 = IntegerField()
+
+            class BB(BaseB):
+                b1 = IntegerField()
+                b2 = IntegerField()
+                b3 = IntegerField()
+
+            class C(BaseC):
+                c1 = IntegerField()
+                c2 = ForeignKey(BaseB)
+
+            class A(BaseA):
+                a = IntegerField()
+                b1 = ForeignKey(BaseB)
+                b2 = ForeignKey(BaseB)
+                c = ForeignKey(BaseC)
+
+            instance, instances = A.get_or_create_from_parameters(
+                parameters={"a": 1, "b1": 2, "b2": 3, "b3": 4, "c1": 5},
+                tree={"b1": "BA", "b2": "BB", "c": ("C", {"c2": "BA"})}
+                specialized_parameters={"b2": {"b2": 10}}
+            )
+            ```
+            will get or create the instances
+            ```
+            a = A.objects.all()[-1]
+            a == instance
+            a == instances[-1]
+
+            a.a == 1        # key of A from pars
+            a.b1.b1 == 2    # a.b1 is BA through tree and a.b1.b1 is two from pars
+            a.b1.b2 == 3
+            a.b2.b1 == 2    # a.b2 is BB through tree and a.b1.b1 is two from pars
+            a.b2.b2 == 10   # a.b2.b2 is overwriten by specialized_parameters
+            a.b2.b3 == 4
+            a.c.c1 == 5     # a.c is C through tree
+            a.c.c2.b1 == 2  # a.c.c2 is BA through tree
+            a.c.c2.b2 == 3
+            ```
+
+        **Arguments**
+            calling_cls: Base
+                The top class which starts the get or create chain.
+
+            parameters: Dict[str, Any]
+                The construction / query arguments. These parameters are shared among
+                all constructions.
+
+            tree: Optional[Dict[str, Any]] = None
+                The tree of ForeignKey dependencies. This specify which class the
+                ForeignKey will take since only the base class is linked against.
+                Keys are strings corresponding to model fields, values are either
+                strings corresponding to classes
+
+            specialized_parameters: Dict[str, Any] = None
+                The construction / query arguments for special foreign keys (in case
+                there is overlap). Follows a similar syntax as the tree.
+
+            dry_run: bool = False
+                Do not insert in database.
+
+            _class_name: Optional[str] = None
+                This key is used internaly to identified the specialization of the base
+                object.
+
+            _recursion_level: int = 0
+                This key is used internaly to track number of recursions.
         """
         # parse full dependency and warn if duplicate columns
         indent = "|" if _recursion_level else ""
         indent += "-" * _recursion_level * 2
+
+        if specialized_parameters is not None:
+            raise NotImplementedError(
+                "Overwriting of default kwargs not yet implmented."
+            )
 
         cls = calling_cls._get_child_by_name(_class_name) if _class_name else calling_cls
 
@@ -207,7 +351,7 @@ class Base(models.Model):
                     field,
                     parameters,
                     tree=tree,
-                    overwrite=overwrite,
+                    specialized_parameters=specialized_parameters,
                     dry_run=dry_run,
                     _recursion_level=_recursion_level + 1,
                 )
@@ -223,11 +367,6 @@ class Base(models.Model):
                     )
                 elif value is not None:
                     kwargs[field.name] = value
-
-        if overwrite is not None:
-            raise NotImplementedError(
-                "Overwriting of default kwargs not yet implmented."
-            )
 
         instance, not_exist = cls.objects.get_or_create(**kwargs)
         if not_exist:
