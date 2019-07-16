@@ -30,64 +30,64 @@ class Hisq(GaugeConfig):
         null=False, help_text="PositiveSmallInt: Temporal length in lattice units"
     )
     ml = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=False,
-        help_text="Decimal(20,10): Input light quark mass",
+        help_text="Decimal(10,6): Input light quark mass",
     )
     ms = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=False,
-        help_text="Decimal(20,10): Input strange quark mass",
+        help_text="Decimal(10,6): Input strange quark mass",
     )
     mc = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=False,
-        help_text="Decimal(20,10): Input charm quark mass",
+        help_text="Decimal(10,6): Input charm quark mass",
     )
     beta = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=False,
-        help_text="Decimal(20,10): Coupling constant",
+        help_text="Decimal(10,6): Coupling constant",
     )
     naik = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=False,
-        help_text="Decimal(20,10): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
+        help_text="Decimal(10,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
     )
     u0 = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=True,
-        help_text="Decimal(20,10): Tadpole improvement coefficient",
+        help_text="Decimal(10,6): Tadpole improvement coefficient",
     )
     a_fm = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=True,
-        help_text="(Optional) Decimal(20,10): Lattice spacing in fermi",
+        help_text="(Optional) Decimal(10,6): Lattice spacing in fermi",
     )
     l_fm = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=True,
-        help_text="(Optional) Decimal(20,10): Spatial length in fermi",
+        help_text="(Optional) Decimal(10,6): Spatial length in fermi",
     )
     mpil = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=True,
-        help_text="(Optional) Decimal(20,10): Spatial length in mpiL",
+        help_text="(Optional) Decimal(10,6): Spatial length in mpiL",
     )
     mpi = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
+        max_digits=10,
+        decimal_places=6,
         null=True,
-        help_text="(Optional) Decimal(20,10): Pion mass in MeV",
+        help_text="(Optional) Decimal(10,6): Pion mass in MeV",
     )
 
     class Meta:

@@ -26,9 +26,9 @@ class Gaussian(HadronSmear):
     """
 
     radius = models.DecimalField(
-        max_digits=20,
-        decimal_places=10,
-        help_text="Decimal(20,10): Smearing radius in lattice units",
+        max_digits=10,
+        decimal_places=6,
+        help_text="Decimal(10,6): Smearing radius in lattice units",
     )
     step = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Number of smearing steps"
