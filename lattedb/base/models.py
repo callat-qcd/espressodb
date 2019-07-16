@@ -13,6 +13,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django_pandas.managers import DataFrameManager
+from django.db import connection
 
 from django.db.utils import IntegrityError
 
@@ -367,7 +368,7 @@ class Base(models.Model):
                         f" Parameter dictionary has no value for {field.name}"
                     )
                 elif value is not None:
-                    kwargs[field.name] = value
+                    kwargs[field.name] = field.get_db_prep_value(value, connection)
 
         try:
             instance, not_exist = cls.objects.get_or_create(**kwargs)
