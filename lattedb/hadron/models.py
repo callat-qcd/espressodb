@@ -33,16 +33,20 @@ class Meson(Hadron):
         null=False,
         help_text="Decimal(1,0): Parity of hadronic operator",
     )
-    spin = models.TextField(null=False, blank=False, help_text="Text: Total spin")
+    spin_x2 = models.PositiveSmallIntegerField(
+        null=False, blank=False, help_text="Text: Total spin times two"
+    )
 
-    spin_z = models.TextField(
+    spin_z_x2 = models.SmallIntegerField(
         null=False, blank=False, help_text="Text: Spin in z-direction"
     )
 
-    isospin = models.TextField(null=False, blank=False, help_text="Text: Total isospin")
+    isospin_x2 = models.PositiveSmallIntegerField(
+        null=False, blank=False, help_text="Text: Total isospin times two"
+    )
 
-    isospin_z = models.TextField(
-        null=False, blank=False, help_text="Text: Isospin in z-direction"
+    isospin_z_x2 = models.SmallIntegerField(
+        null=False, blank=False, help_text="Text: Isospin in z-direction times two"
     )
 
     strangeness = models.DecimalField(
