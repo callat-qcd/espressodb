@@ -14,6 +14,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django_pandas.managers import DataFrameManager
 
+from django.db.utils import IntegrityError
 
 LOGGER = logging.getLogger("base")
 
@@ -368,7 +369,12 @@ class Base(models.Model):
                 elif value is not None:
                     kwargs[field.name] = value
 
-        instance, not_exist = cls.objects.get_or_create(**kwargs)
+        try:
+            instance, not_exist = cls.objects.get_or_create(**kwargs)
+        except IntegrityError as e:
+            LOGGER.debug("Get or create call for %s failed with kwargs\n%s", cls, kwargs)
+            raise e
+
         if not_exist:
             LOGGER.debug("%sCreated %s", indent, instance)
         else:
