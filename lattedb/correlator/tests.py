@@ -1,9 +1,29 @@
+"""
+"""
+import logging
+
 from django.test import TestCase
 
 from lattedb.correlator.models import Meson2pt
-from lattedb.gaugeconfig.models import Hisq
+
+from lattedb.gaugeconfig.models import Hisq as HisqGauge
+
+from lattedb.propagator.models import Hisq as HisqProp
+from lattedb.propagator.models import MobiusDWF as MobiusDWFProp
+
+from lattedb.gaugesmear.models import Unsmeared
+from lattedb.gaugesmear.models import WilsonFlow
+
+from lattedb.hadron.models import Meson
+
+from lattedb.hadronsmear.models import HadronSmear
+from lattedb.hadronsmear.models import Gaussian
+from lattedb.hadronsmear.models import Unsmeared
 
 # Create your tests here.
+
+
+LOGGER = logging.getLogger("base")
 
 
 class Meson2ptTestCase(TestCase):
@@ -39,8 +59,6 @@ class Meson2ptTestCase(TestCase):
             "b5": 2,
             "c5": 5,
         },
-        "source": {},
-        "sink": {},
         "hadron": {
             "structure": "$\gamma_5$",
             "parity": 1,
@@ -77,3 +95,35 @@ class Meson2ptTestCase(TestCase):
                 "sink": ("Meson", {"hadronsmear": "Unsmeared"}),
             },
         )
+
+        hadron_smears = HadronSmear.objects.all()
+        for hadron_smear, cls in zip(hadron_smears, [Gaussian, Unsmeared]):
+            hadron_smear_specialization = hadron_smear.get_specialization()
+            self.assertIsInstance(hadron_smear_specialization, cls)
+            for key, val in parameters.items():
+                if key in cls.__dict__:
+                    self.assertEqual(val, getattr(hadron_smear_specialization, key))
+
+        mesons = Meson.objects.all()
+        for meson, smearing in zip(mesons, hadron_smears):
+            self.assertEqual(meson.hadronsmear, smearing)
+            for key, val in parameters.items():
+                if key in Meson.__dict__:
+                    self.assertEqual(val, getattr(meson, key))
+
+        meson2pts = Meson2pt.objects.all()
+        self.assertEqual(len(meson2pts), 1)
+        meson2pt = meson2pts[0]
+        for key, val in parameters.items():
+            if key in meson2pt.__dict__:
+                self.assertEqual(val, getattr(meson2pt, key))
+
+        self.assertEqual(HisqProp.objects.count(), 1)
+        self.assertEqual(MobiusDWFProp.objects.count(), 1)
+
+        self.assertEqual(meson2pt.propagator0.specialization, HisqProp.objects.first())
+        self.assertEqual(
+            meson2pt.propagator1.specialization, MobiusDWFProp.objects.first()
+        )
+        self.assertEqual(meson2pt.source.specialization, mesons[0])
+        self.assertEqual(meson2pt.sink.specialization, mesons[1])
