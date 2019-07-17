@@ -7,21 +7,14 @@ class Propagator(Base):
     """ Base table for application
     """
 
-
-class Hisq(Propagator):
-    """
-    """
-
     gaugeconfig = models.ForeignKey(
         "gaugeconfig.GaugeConfig",
         on_delete=models.CASCADE,
-        related_name="+",
         help_text="ForeignKey pointing to gauge field",
     )
     gaugesmear = models.ForeignKey(
         "gaugesmear.GaugeSmear",
         on_delete=models.CASCADE,
-        related_name="+",
         help_text="ForeignKey pointing to gauge link smearing",
     )
     mval = models.DecimalField(
@@ -30,6 +23,26 @@ class Hisq(Propagator):
         null=False,
         help_text="Decimal(10,6): Input valence quark mass",
     )
+
+    def __lt__(self, other):
+        if not isinstance(other, self.__class__):
+            raise TypeError(
+                "Can only compare propagator with other propagator." f" Received {other}"
+            )
+        return self.mval < other.mval
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["gaugeconfig", "gaugesmear", "mval"], name="unique_propagator"
+            )
+        ]
+
+
+class Hisq(Propagator):
+    """
+    """
+
     naik = models.DecimalField(
         max_digits=10,
         decimal_places=6,
@@ -62,9 +75,7 @@ class Hisq(Propagator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "gaugeconfig",
-                    "gaugesmear",
-                    "mval",
+                    "propagator_ptr_id",
                     "naik",
                     "origin_x",
                     "origin_y",
@@ -80,22 +91,6 @@ class MobiusDWF(Propagator):
     """
     """
 
-    gaugeconfig = models.ForeignKey(
-        "gaugeconfig.GaugeConfig",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to gauge field",
-    )
-    gaugesmear = models.ForeignKey(
-        "gaugesmear.GaugeSmear",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to gauge link smearing",
-    )
-    mval = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Input valence quark mass",
-    )
     l5 = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Length of 5th dimension"
     )
@@ -129,6 +124,7 @@ class MobiusDWF(Propagator):
         null=False,
         help_text="Decimal(10,6): Mobius kernal perameter",
     )
+
     origin_x = models.PositiveSmallIntegerField(
         null=False,
         blank=False,
@@ -154,9 +150,7 @@ class MobiusDWF(Propagator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "gaugeconfig",
-                    "gaugesmear",
-                    "mval",
+                    "propagator_ptr_id",
                     "l5",
                     "m5",
                     "alpha5",
@@ -195,9 +189,7 @@ class CoherentSeq(Propagator):
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
-    sinksep = models.SmallIntegerField(
-        help_text="SmallInt: Source-sink separation time"
-    )
+    sinksep = models.SmallIntegerField(help_text="SmallInt: Source-sink separation time")
     momentum = models.SmallIntegerField(
         help_text="SmallInt: Sink momentum in units of 2 pi / L"
     )
