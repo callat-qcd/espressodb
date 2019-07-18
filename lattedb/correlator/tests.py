@@ -6,13 +6,11 @@ from django.test import TestCase
 
 from lattedb.correlator.models import Meson2pt
 
-from lattedb.ensemble.models import Flavor211 as HisqGauge
+from lattedb.ensemble.models import Flavor211
 
-from lattedb.propagator.models import Hisq as HisqProp
-from lattedb.propagator.models import MobiusDWF as MobiusDWFProp
+from lattedb.propagator.models import OneToAll
 
 from lattedb.gaugesmear.models import Unsmeared
-from lattedb.gaugesmear.models import WilsonFlow
 
 from lattedb.hadron.models import Meson
 
@@ -71,6 +69,7 @@ class Meson2ptTestCase(TestCase):
         "hadronsmear": {"radius": 10, "step": 2},
         "gaugesmear": {"flowtime": 1.0, "flowstep": 100},
         "meson2pt": {"momentum": 100},
+        "action": {"ny": 1, "nx": 2, "nz": 3},
     }
 
     def test_get_or_create_from_parameters(self):
@@ -84,12 +83,24 @@ class Meson2ptTestCase(TestCase):
             parameters,
             tree={
                 "propagator0": (
-                    "Hisq",
-                    {"ensemble": "Hisq", "gaugesmear": "Unsmeared"},
+                    "OneToAll",
+                    {
+                        "ensemble": (
+                            "Flavor211",
+                            {"action": "Hisq", "gaugesmear": "WilsonFlow"},
+                        ),
+                        "action": "Hisq",
+                    },
                 ),
                 "propagator1": (
-                    "MobiusDWF",
-                    {"ensemble": "Hisq", "gaugesmear": "WilsonFlow"},
+                    "OneToAll",
+                    {
+                        "ensemble": (
+                            "Flavor211",
+                            {"action": "Hisq", "gaugesmear": "WilsonFlow"},
+                        ),
+                        "action": "MobiusDW",
+                    },
                 ),
                 "source": ("Meson", {"hadronsmear": "Gaussian"}),
                 "sink": ("Meson", {"hadronsmear": "Unsmeared"}),
@@ -117,12 +128,9 @@ class Meson2ptTestCase(TestCase):
             if key in meson2pt.__dict__:
                 self.assertEqual(val, getattr(meson2pt, key))
 
-        self.assertEqual(HisqProp.objects.count(), 1)
-        self.assertEqual(MobiusDWFProp.objects.count(), 1)
+        self.assertEqual(OneToAll.objects.count(), 2)
 
-        self.assertEqual(meson2pt.propagator0.specialization, HisqProp.objects.first())
-        self.assertEqual(
-            meson2pt.propagator1.specialization, MobiusDWFProp.objects.first()
-        )
+        self.assertEqual(meson2pt.propagator0.specialization, OneToAll.objects.first())
+        self.assertEqual(meson2pt.propagator1.specialization, OneToAll.objects.last())
         self.assertEqual(meson2pt.source.specialization, mesons[0])
         self.assertEqual(meson2pt.sink.specialization, mesons[1])
