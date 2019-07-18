@@ -285,10 +285,6 @@ class Base(models.Model):
         """
         tree = tree or {}
 
-        for key, tables in cls.get_recursive_columns(tree).items():
-            if len(tables) > 1:
-                LOGGER.info("Column %s is used by the following tables %s", key, tables)
-
         if specialized_parameters is not None:
             raise NotImplementedError(
                 "Overwriting of default kwargs not yet implmented."
@@ -416,6 +412,13 @@ class Base(models.Model):
             )
 
         cls = calling_cls._get_child_by_name(_class_name) if _class_name else calling_cls
+
+        if _recursion_level == 0:
+            for key, tables in cls.get_recursive_columns(tree).items():
+                if len(tables) > 1:
+                    LOGGER.info(
+                        "Column %s is used by the following tables %s", key, tables
+                    )
 
         LOGGER.debug("%sPreparing creation of %s", indent, cls)
 
