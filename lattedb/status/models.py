@@ -7,7 +7,10 @@ from lattedb.base.models import Base
 class Status(Base):
     """ Base table for application
     """
-
+    trajectory = models.PositiveSmallIntegerField(
+        null=False,
+        help_text="PositiveSmallInt: Monte Carlo trajectory (config number) of object"
+    )
     home = models.TextField(
         null=True,
         blank=True,
@@ -33,9 +36,9 @@ class Status(Base):
         abstract = True
 
 
-class GaugeConfig_Flavor211(Status):
-    gaugeconfig = models.ForeignKey(
-        "gaugeconfig.Flavor211",
+class Ensemble_Flavor211(Status):
+    ensemble = models.ForeignKey(
+        "ensemble.Flavor211",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to 2+1+1 flavor ensemble",
     )
@@ -43,7 +46,7 @@ class GaugeConfig_Flavor211(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig"], name="unique_status_gaugeconfig_flavor211"
+                fields=["trajectory", "ensemble"], name="unique_status_ensemble_flavor211"
             )
         ]
 
@@ -61,7 +64,7 @@ class Propagator_OneToAll(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator"], name="unique_status_propagator_onetoall"
+                fields=["trajectory", "propagator"], name="unique_status_propagator_onetoall"
             )
         ]
 
@@ -79,7 +82,7 @@ class Propagator_CoherentSeq(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator"], name="unique_status_propagator_coherentseq"
+                fields=["trajectory", "propagator"], name="unique_status_propagator_coherentseq"
             )
         ]
 
@@ -97,7 +100,7 @@ class Propagator_FeynmanHellmann(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator"], name="unique_status_propagator_feynmanhellmann"
+                fields=["trajectory", "propagator"], name="unique_status_propagator_feynmanhellmann"
             )
         ]
 
@@ -112,7 +115,7 @@ class Correlator_DWFTuning(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["correlator"], name="unique_status_correlator_dwftuning"
+                fields=["trajectory", "correlator"], name="unique_status_correlator_dwftuning"
             )
         ]
 
@@ -127,7 +130,7 @@ class Correlator_Meson2pt(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["correlator"], name="unique_status_correlator_meson2pt"
+                fields=["trajectory", "correlator"], name="unique_status_correlator_meson2pt"
             )
         ]
 
@@ -142,7 +145,7 @@ class Correlator_Baryon4DSeq3pt(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["correlator"], name="unique_status_correlator_baryon4dseq3pt"
+                fields=["trajectory", "correlator"], name="unique_status_correlator_baryon4dseq3pt"
             )
         ]
 
@@ -157,6 +160,6 @@ class Correlator_BaryonFH3pt(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["correlator"], name="unique_status_correlator_baryonfh3pt"
+                fields=["trajectory", "correlator"], name="unique_status_correlator_baryonfh3pt"
             )
         ]

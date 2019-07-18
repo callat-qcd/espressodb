@@ -6,7 +6,7 @@ from django.test import TestCase
 
 from lattedb.correlator.models import Meson2pt
 
-from lattedb.gaugeconfig.models import Flavor211 as HisqGauge
+from lattedb.ensemble.models import Flavor211 as HisqGauge
 
 from lattedb.propagator.models import Hisq as HisqProp
 from lattedb.propagator.models import MobiusDWF as MobiusDWFProp
@@ -85,11 +85,11 @@ class Meson2ptTestCase(TestCase):
             tree={
                 "propagator0": (
                     "Hisq",
-                    {"gaugeconfig": "Hisq", "gaugesmear": "Unsmeared"},
+                    {"ensemble": "Hisq", "gaugesmear": "Unsmeared"},
                 ),
                 "propagator1": (
                     "MobiusDWF",
-                    {"gaugeconfig": "Hisq", "gaugesmear": "WilsonFlow"},
+                    {"ensemble": "Hisq", "gaugesmear": "WilsonFlow"},
                 ),
                 "source": ("Meson", {"hadronsmear": "Gaussian"}),
                 "sink": ("Meson", {"hadronsmear": "Unsmeared"}),

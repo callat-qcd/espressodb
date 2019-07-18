@@ -4,8 +4,8 @@
 from django.test import TestCase
 
 
-from lattedb.gaugeconfig.models import GaugeConfig
-from lattedb.gaugeconfig.models import Flavor211
+from lattedb.ensemble.models import Ensemble
+from lattedb.ensemble.models import Flavor211
 
 # Create your tests here.
 

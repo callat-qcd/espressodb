@@ -80,7 +80,7 @@ class Meson2pt(Correlator):
         ]
 
     def clean(self):
-        """Sets tag of the correlator based on propagators, the gaugeconfig and source.
+        """Sets tag of the correlator based on propagators, the ensemble and source.
 
         Operators are sorted by their `mval` key.
         """
@@ -91,15 +91,15 @@ class Meson2pt(Correlator):
             self.propagator1 = p0
 
         if self.tag is None:
-            gc0 = self.propagator0.gaugeconfig.specialization  # pylint: disable=E1101
+            gc0 = self.propagator0.ensemble.specialization  # pylint: disable=E1101
             p0 = self.propagator0.specialization  # pylint: disable=E1101
-            gc1 = self.propagator1.gaugeconfig.specialization  # pylint: disable=E1101
+            gc1 = self.propagator1.ensemble.specialization  # pylint: disable=E1101
             p1 = self.propagator1.specialization  # pylint: disable=E1101
 
             if gc0 != gc1:
                 raise ValidationError(
                     "What are you smoking?"
-                    " Propagators not on the same gaugeconfig?!"
+                    " Propagators not on the same ensemble?!"
                     f"\n{gc0} != {gc1}"
                 )
 

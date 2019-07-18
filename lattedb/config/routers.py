@@ -51,9 +51,9 @@ class BaseRouter(DBRouter):
 
 
 class GaugeConfigRouter(DBRouter):
-    """Router for `gaugeconfig` models"""
+    """Router for `ensemble` models"""
 
-    app = "gaugeconfig"
+    app = "ensemble"
 
 
 class PropagatorRouter(DBRouter):
