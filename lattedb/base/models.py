@@ -140,6 +140,89 @@ class Base(models.Model):
         return expected_cls
 
     @classmethod
+    def get_sub_info(
+        cls, key: str, tree: Dict[str, Any]
+    ) -> Tuple[str, Optional[Dict[str, Any]]]:
+        """Extracts the class name and sub tree for a given tree and key
+
+        **Arguments**
+            key: str
+                The key to look up in the dictionary
+
+            tree: Dict[str, Any]
+                The tree of ForeignKey dependencies. This specify which class the
+                ForeignKey will take since only the base class is linked against.
+                Keys are strings corresponding to model fields, values are either
+                strings corresponding to classes
+
+        **Raises**
+            TypeError:
+                If the values of the dictionary are not of type string or Tuple
+
+            KeyError:
+                If the key was not found in the dictionary
+        """
+        sub_tree_info = tree.get(key, None)
+        if sub_tree_info is not None:
+            if isinstance(sub_tree_info, tuple) and len(sub_tree_info) == 2:
+                sub_class_name, sub_tree = sub_tree_info
+            elif isinstance(sub_tree_info, str):
+                sub_class_name, sub_tree = sub_tree_info, None
+            else:
+                raise TypeError(
+                    "Error in parsing dependency tree."
+                    " Sub class info must be either a tuple of type str"
+                    " and dictionary or a string."
+                    f" received {type(sub_tree_info)}"
+                )
+        else:
+            raise KeyError(
+                "Key '%s' was not specified in tree but needed for instantiating %s"
+                % (key, cls)
+            )
+
+        return sub_class_name, sub_tree
+
+    @classmethod
+    def get_recursive_columns(
+        cls, tree: Optional[Dict[str, Any]] = None, _class_name: Optional[str] = None
+    ) -> Tuple[Dict[str, List[str]]]:
+        """Recursively parses table including foreign keys to extract all column names.
+
+        **Arguments**
+            tree: Optional[Dict[str, Any]] = None
+                The tree of ForeignKey dependencies. This specify which class the
+                ForeignKey will take since only the base class is linked against.
+                Keys are strings corresponding to model fields, values are either
+                strings corresponding to classes
+
+            _class_name: Optional[str] = None
+                This key is used internaly to identified the specialization of the base
+                object.
+        """
+        tree = tree or {}
+
+        specialization = cls._get_child_by_name(_class_name) if _class_name else cls
+
+        columns = {}
+        for field in specialization.get_open_fields():
+            if isinstance(field, models.ForeignKey):
+
+                sub_class_name, sub_tree = specialization.get_sub_info(field.name, tree)
+                if sub_class_name is not None:
+                    for key, val in field.related_model.get_recursive_columns(
+                        tree=sub_tree, _class_name=sub_class_name
+                    ).items():
+                        columns.setdefault(key, []).extend(
+                            [f"{specialization.__name__}.{col}" for col in val]
+                        )
+
+            else:
+                columns.setdefault(field.name, []).append(specialization.__name__)
+
+        return columns
+
+    @classmethod
     def _get_or_create_fk(  # pylint: disable=R0913
         cls,
         field: models.ForeignKey,
@@ -202,25 +285,17 @@ class Base(models.Model):
         """
         tree = tree or {}
 
+        for key, tables in cls.get_recursive_columns(tree).items():
+            if len(tables) > 1:
+                LOGGER.info("Column %s is used by the following tables %s", key, tables)
+
         if specialized_parameters is not None:
             raise NotImplementedError(
                 "Overwriting of default kwargs not yet implmented."
             )
 
-        sub_class_info = tree.get(field.name, None)
-        if sub_class_info is not None:
-            if isinstance(sub_class_info, tuple) and len(sub_class_info) == 2:
-                sub_class_name, sub_tree = sub_class_info
-            elif isinstance(sub_class_info, str):
-                sub_class_name, sub_tree = sub_class_info, None
-            else:
-                raise ValueError(
-                    "Error in parsing dependency tree."
-                    " Sub class info must be either a tuple of type str"
-                    " and dictionary or a string."
-                    f" received {type(sub_class_info)}"
-                )
-
+        sub_class_name, sub_tree = cls.get_sub_info(field.name, tree)
+        if sub_class_name is not None:
             instance, all_instances = field.related_model.get_or_create_from_parameters(
                 parameters,
                 tree=sub_tree,
