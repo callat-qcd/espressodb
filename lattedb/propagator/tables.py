@@ -1,15 +1,10 @@
 import django_tables2 as tables
 
-from lattedb.propagator.models import Hisq, MobiusDWF
+from lattedb.propagator.models import OneToAll
 
 
-class HisqPropagatorsTable(tables.Table):
+class OneToAllTable(tables.Table):
     class Meta:
-        model = Hisq
+        model = OneToAll
         exclude = ("type", "last_modified", "user", "misc", "propagators_ptr")
 
-
-class MobiusPropagatorsTable(tables.Table):
-    class Meta:
-        model = MobiusDWF
-        exclude = ("type", "last_modified", "user", "misc", "propagators_ptr")

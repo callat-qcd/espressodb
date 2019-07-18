@@ -33,53 +33,35 @@ class Status(Base):
         abstract = True
 
 
-class GaugeConfig_Hisq(Status):
+class GaugeConfig_Flavor211(Status):
     gaugeconfig = models.ForeignKey(
-        "gaugeconfig.Hisq",
+        "gaugeconfig.Flavor211",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to HISQ ensemble",
+        help_text="ForeignKey pointing to 2+1+1 flavor ensemble",
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig"], name="unique_status_gaugeconfig_hisq"
+                fields=["gaugeconfig"], name="unique_status_gaugeconfig_flavor211"
             )
         ]
 
 
-class Propagator_Hisq(Status):
+class Propagator_OneToAll(Status):
     """
     """
 
     propagator = models.ForeignKey(
-        "propagator.Hisq",
+        "propagator.OneToAll",
         on_delete=models.CASCADE,
-        help_text="ForeignKey to HISQ propagator table",
+        help_text="ForeignKey to one-to-all propagator table",
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator"], name="unique_status_propagator_hisq"
-            )
-        ]
-
-
-class Propagator_MobiusDWF(Status):
-    """
-    """
-
-    propagator = models.ForeignKey(
-        "propagator.MobiusDWF",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey to HISQ propagator table",
-    )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["propagator"], name="unique_status_propagator_mobiusdwf"
+                fields=["propagator"], name="unique_status_propagator_onetoall"
             )
         ]
 

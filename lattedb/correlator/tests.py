@@ -6,7 +6,7 @@ from django.test import TestCase
 
 from lattedb.correlator.models import Meson2pt
 
-from lattedb.gaugeconfig.models import Hisq as HisqGauge
+from lattedb.gaugeconfig.models import Flavor211 as HisqGauge
 
 from lattedb.propagator.models import Hisq as HisqProp
 from lattedb.propagator.models import MobiusDWF as MobiusDWFProp

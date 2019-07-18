@@ -16,11 +16,11 @@ Including another URLconf
 """
 from django.urls import path
 
-from lattedb.propagator.views import HisqPropagatorsTableView
-from lattedb.propagator.views import MobiusPropagatorsTableView
+#from lattedb.propagator.views import HisqPropagatorsTableView
+#from lattedb.propagator.views import MobiusPropagatorsTableView
 
 app_name = "Propagators"
 urlpatterns = [
-    path("hisq/", HisqPropagatorsTableView.as_view(), name="hisq-table"),
-    path("mobius/", MobiusPropagatorsTableView.as_view(), name="mobius-table"),
+    #path("hisq/", HisqPropagatorsTableView.as_view(), name="hisq-table"),
+    #path("mobius/", MobiusPropagatorsTableView.as_view(), name="mobius-table"),
 ]

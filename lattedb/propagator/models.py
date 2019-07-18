@@ -12,10 +12,10 @@ class Propagator(Base):
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to gauge field",
     )
-    gaugesmear = models.ForeignKey(
-        "gaugesmear.GaugeSmear",
+    action = models.ForeignKey(
+        "action.Action",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to gauge link smearing",
+        help_text="ForeignKey pointing to valence lattice action",
     )
     mval = models.DecimalField(
         max_digits=10,
@@ -27,28 +27,23 @@ class Propagator(Base):
     def __lt__(self, other):
         if not isinstance(other, self.__class__):
             raise TypeError(
-                "Can only compare propagator with other propagator." f" Received {other}"
+                "Can only compare propagator with other propagator."
+                f" Received {other}"
             )
         return self.mval < other.mval
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig", "gaugesmear", "mval"], name="unique_propagator"
+                fields=["gaugeconfig", "action", "mval"],
+                name="unique_propagator",
             )
         ]
 
 
-class Hisq(Propagator):
+class OneToAll(Propagator):
     """
     """
-
-    naik = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
-    )
 
     origin_x = models.PositiveSmallIntegerField(
         null=False,
@@ -75,94 +70,13 @@ class Hisq(Propagator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "propagator_ptr_id",
-                    "naik",
+                    "propagator_ptr_id",  # this has sea and valence action info
                     "origin_x",
                     "origin_y",
                     "origin_z",
                     "origin_t",
                 ],
-                name="unique_propagator_hisq",
-            )
-        ]
-
-
-class MobiusDWF(Propagator):
-    """
-    """
-
-    l5 = models.PositiveSmallIntegerField(
-        help_text="PositiveSmallInt: Length of 5th dimension"
-    )
-    m5 = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): 5th dimensional mass",
-    )
-    alpha5 = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Mobius coefficient [D_mobius(M5) = alpha5 * D_Shamir(M5)]",
-    )
-    a5 = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Mobius kernel parameter [D_mobius = alpha5 * a5 * D_Wilson / (2 + a5 * D_Wilson)]",
-    )
-    b5 = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Mobius kernel parameter [a5 = b5 - c5, alpha5 * a5 = b5 + c5]",
-    )
-    c5 = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Mobius kernal perameter",
-    )
-
-    origin_x = models.PositiveSmallIntegerField(
-        null=False,
-        blank=False,
-        help_text="PositiveSmallInt: x-coordinate origin location of the propagator",
-    )
-    origin_y = models.PositiveSmallIntegerField(
-        null=False,
-        blank=False,
-        help_text="PositiveSmallInt: y-coordinate origin location of the propagator",
-    )
-    origin_z = models.PositiveSmallIntegerField(
-        null=False,
-        blank=False,
-        help_text="PositiveSmallInt: z-coordinate origin location of the propagator",
-    )
-    origin_t = models.PositiveSmallIntegerField(
-        null=False,
-        blank=False,
-        help_text="PositiveSmallInt: t-coordinate origin location of the propagator",
-    )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=[
-                    "propagator_ptr_id",
-                    "l5",
-                    "m5",
-                    "alpha5",
-                    "a5",
-                    "b5",
-                    "c5",
-                    "origin_x",
-                    "origin_y",
-                    "origin_z",
-                    "origin_t",
-                ],
-                name="unique_propagator_mobiusdwf",
+                name="unique_propagator_onetoall",
             )
         ]
 
@@ -189,7 +103,9 @@ class CoherentSeq(Propagator):
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
-    sinksep = models.SmallIntegerField(help_text="SmallInt: Source-sink separation time")
+    sinksep = models.SmallIntegerField(
+        help_text="SmallInt: Source-sink separation time"
+    )
     momentum = models.SmallIntegerField(
         help_text="SmallInt: Sink momentum in units of 2 pi / L"
     )
@@ -198,6 +114,7 @@ class CoherentSeq(Propagator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
+                    "propagator_ptr_id",
                     "propagator",
                     "groupsize",
                     "groupindex",
@@ -214,7 +131,7 @@ class FeynmanHellmann(Propagator):
     """
     """
 
-    propagator0 = models.ForeignKey(
+    propagator = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
         related_name="+",
@@ -226,12 +143,6 @@ class FeynmanHellmann(Propagator):
         related_name="+",
         help_text="ForeignKey linking current insertion operator",
     )
-    propagator1 = models.ForeignKey(
-        "propagator.Propagator",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="ForeignKey linking sink side propagator",
-    )
     momentum = models.SmallIntegerField(
         help_text="SmallInt: Current insertion momentum in units of 2 pi / L"
     )
@@ -239,7 +150,7 @@ class FeynmanHellmann(Propagator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator0", "current", "propagator1", "momentum"],
+                fields=["propagator_ptr_id", "propagator", "current", "momentum"],
                 name="unique_propagator_feynmanhellmann",
             )
         ]

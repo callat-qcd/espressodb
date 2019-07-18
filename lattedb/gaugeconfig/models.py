@@ -7,11 +7,6 @@ class GaugeConfig(Base):
     """ Base table for application
     """
 
-
-class Hisq(GaugeConfig):
-    """
-    """
-
     short_tag = models.TextField(
         null=True,
         blank=True,
@@ -23,11 +18,63 @@ class Hisq(GaugeConfig):
     nconfig = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Number of configurations"
     )
+    action = models.ForeignKey(
+        "action.Action",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to lattice action",
+    )
     nx = models.PositiveSmallIntegerField(
+        null=False, help_text="PositiveSmallInt: Spatial length in lattice units"
+    )
+    ny = models.PositiveSmallIntegerField(
+        null=False, help_text="PositiveSmallInt: Spatial length in lattice units"
+    )
+    nz = models.PositiveSmallIntegerField(
         null=False, help_text="PositiveSmallInt: Spatial length in lattice units"
     )
     nt = models.PositiveSmallIntegerField(
         null=False, help_text="PositiveSmallInt: Temporal length in lattice units"
+    )
+    l_fm = models.DecimalField(
+        max_digits=10,
+        decimal_places=6,
+        null=True,
+        help_text="(Optional) Decimal(10,6): Spatial length in fermi",
+    )
+    gaugesmear = models.ForeignKey(
+        "gaugesmear.GaugeSmear",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to gauge link smearing",
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=[
+                    "stream",
+                    "nconfig",
+                    "action",
+                    "nx",
+                    "ny",
+                    "nz",
+                    "nt",
+                    "gaugesmear",
+                ],
+                name="unique_gaugeconfig",
+            )
+        ]
+
+
+class Flavor211(GaugeConfig):
+    """
+    """
+
+    gaugeconfig = models.ForeignKey(
+        "gaugeconfig.GaugeConfig",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to base gauge config",
     )
     ml = models.DecimalField(
         max_digits=10,
@@ -47,36 +94,6 @@ class Hisq(GaugeConfig):
         null=False,
         help_text="Decimal(10,6): Input charm quark mass",
     )
-    beta = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Coupling constant",
-    )
-    naik = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
-    )
-    u0 = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=True,
-        help_text="Decimal(10,6): Tadpole improvement coefficient",
-    )
-    a_fm = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=True,
-        help_text="(Optional) Decimal(10,6): Lattice spacing in fermi",
-    )
-    l_fm = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=True,
-        help_text="(Optional) Decimal(10,6): Spatial length in fermi",
-    )
     mpil = models.DecimalField(
         max_digits=10,
         decimal_places=6,
@@ -93,18 +110,7 @@ class Hisq(GaugeConfig):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=[
-                    "stream",
-                    "nconfig",
-                    "nx",
-                    "nt",
-                    "ml",
-                    "ms",
-                    "mc",
-                    "beta",
-                    "naik",
-                    "u0",
-                ],
-                name="unique_gaugeconfig_hisq",
+                fields=["gaugeconfig_ptr_id", "ml", "ms", "mc"],
+                name="unique_gaugeconfig_flavor211",
             )
         ]

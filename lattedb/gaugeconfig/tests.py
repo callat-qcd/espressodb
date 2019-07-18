@@ -5,7 +5,7 @@ from django.test import TestCase
 
 
 from lattedb.gaugeconfig.models import GaugeConfig
-from lattedb.gaugeconfig.models import Hisq
+from lattedb.gaugeconfig.models import Flavor211
 
 # Create your tests here.
 
@@ -33,7 +33,7 @@ class HisqTestCase(TestCase):
     def test_get_or_create(self):
         """
         """
-        hisq, created = Hisq.objects.get_or_create(**self.creation_parameters)
+        hisq, created = Flavor211.objects.get_or_create(**self.creation_parameters)
         self.assertTrue(created)
 
         for key, val in self.creation_parameters.items():
@@ -43,7 +43,7 @@ class HisqTestCase(TestCase):
     def test_get_or_create_from_parameters(self):
         """
         """
-        instance, instances = Hisq.get_or_create_from_parameters(
+        instance, instances = Flavor211.get_or_create_from_parameters(
             self.creation_parameters
         )
 

@@ -3,9 +3,9 @@
 from django.contrib import admin
 
 from lattedb.base.admin import BaseAdmin
-from lattedb.gaugeconfig.models import Hisq
+from lattedb.gaugeconfig.models import Flavor211
 
-admin.site.register(Hisq, BaseAdmin)
+admin.site.register(Flavor211, BaseAdmin)
 
 #class HisqGaugeConfigurationsAdmin(BaseAdmin):
 #    list_filter = ("nl", "nt", "short_tag")
