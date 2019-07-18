@@ -140,7 +140,7 @@ class Base(models.Model):
         return expected_cls
 
     @classmethod
-    def _get_or_creage_fk(  # pylint: disable=R0913
+    def _get_or_create_fk(  # pylint: disable=R0913
         cls,
         field: models.ForeignKey,
         parameters: Dict[str, Any],
@@ -241,7 +241,7 @@ class Base(models.Model):
         return instance, all_instances
 
     @classmethod
-    def get_or_create_from_parameters(  # pylint: disable=C0202, R0913
+    def get_or_create_from_parameters(  # pylint: disable=C0202, R0913, R0914
         calling_cls,
         parameters: Dict[str, Any],
         tree: Optional[Dict[str, Any]] = None,
@@ -349,7 +349,7 @@ class Base(models.Model):
         for field in cls.get_open_fields():
             if isinstance(field, models.ForeignKey):
 
-                instance, instances = cls._get_or_creage_fk(  # pylint: disable=W0212
+                instance, instances = cls._get_or_create_fk(  # pylint: disable=W0212
                     field,
                     parameters,
                     tree=tree,
