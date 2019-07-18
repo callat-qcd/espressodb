@@ -3,7 +3,7 @@ PROJECT_APPS:
     - lattedb.base
     - lattedb.status
     - lattedb.action
-    - lattedb.gaugeconfig
+    - lattedb.ensemble
     - lattedb.gaugesmear
     - lattedb.propagator
     - lattedb.hadron

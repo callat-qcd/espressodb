@@ -3,7 +3,7 @@ from django.db import models
 from lattedb.base.models import Base
 
 
-class GaugeConfig(Base):
+class Ensemble(Base):
     """ Base table for application
     """
 
@@ -61,21 +61,14 @@ class GaugeConfig(Base):
                     "nt",
                     "gaugesmear",
                 ],
-                name="unique_gaugeconfig",
+                name="unique_ensemble",
             )
         ]
 
 
-class Flavor211(GaugeConfig):
+class Flavor211(Ensemble):
     """
     """
-
-    gaugeconfig = models.ForeignKey(
-        "gaugeconfig.GaugeConfig",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="ForeignKey pointing to base gauge config",
-    )
     ml = models.DecimalField(
         max_digits=10,
         decimal_places=6,
@@ -110,7 +103,7 @@ class Flavor211(GaugeConfig):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig_ptr_id", "ml", "ms", "mc"],
-                name="unique_gaugeconfig_flavor211",
+                fields=["ensemble_ptr_id", "ml", "ms", "mc"],
+                name="unique_ensemble_flavor211",
             )
         ]

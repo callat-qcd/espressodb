@@ -3,7 +3,7 @@
 from django.contrib import admin
 
 from lattedb.base.admin import BaseAdmin
-from lattedb.gaugeconfig.models import Flavor211
+from lattedb.ensemble.models import Flavor211
 
 admin.site.register(Flavor211, BaseAdmin)
 

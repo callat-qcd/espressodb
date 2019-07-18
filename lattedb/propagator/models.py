@@ -7,8 +7,8 @@ class Propagator(Base):
     """ Base table for application
     """
 
-    gaugeconfig = models.ForeignKey(
-        "gaugeconfig.GaugeConfig",
+    ensemble = models.ForeignKey(
+        "ensemble.Ensemble",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to gauge field",
     )
@@ -35,7 +35,7 @@ class Propagator(Base):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig", "action", "mval"],
+                fields=["ensemble", "action", "mval"],
                 name="unique_propagator",
             )
         ]

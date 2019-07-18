@@ -1,11 +1,11 @@
 ####################
-gaugeconfig
+ensemble
 ####################
 
 .. toctree::
    :maxdepth: 4
    :glob:
 
-.. automodule:: lattedb.gaugeconfig.models
+.. automodule:: lattedb.ensemble.models
    :members:
    :show-inheritance:
