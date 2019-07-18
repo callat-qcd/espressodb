@@ -20,20 +20,11 @@ class Action(Base):
         help_text="(Optional) Decimal(10,6): Lattice spacing in fermi",
     )
 
-    class Meta:
-        constraints = [models.UniqueConstraint(fields=["beta"], name="unique_action")]
-
 
 class Hisq(Action):
     """
     """
 
-    action = models.ForeignKey(
-        "action.Action",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="ForeignKey pointing to action base table",
-    )
     naik = models.DecimalField(
         max_digits=10,
         decimal_places=6,
@@ -58,13 +49,6 @@ class Hisq(Action):
 class MobiusDW(Action):
     """
     """
-
-    action = models.ForeignKey(
-        "action.Action",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="ForeignKey pointing to action base table",
-    )
 
     l5 = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Length of 5th dimension"
