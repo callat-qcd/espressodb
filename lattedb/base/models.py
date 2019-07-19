@@ -10,12 +10,11 @@ from typing import Any
 import logging
 
 from django.db import models
+from django.db import connection
+from django.db.utils import IntegrityError
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django_pandas.managers import DataFrameManager
-from django.db import connection
-
-from django.db.utils import IntegrityError
 
 LOGGER = logging.getLogger("base")
 

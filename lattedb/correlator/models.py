@@ -9,7 +9,7 @@ class Correlator(Base):
     """
 
 
-# Create your models here.admin@ithems.lbl.gov
+# Create your models here.
 class DWFTuning(Correlator):
     propagator = models.ForeignKey(
         "propagator.Propagator",
