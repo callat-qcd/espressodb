@@ -285,11 +285,6 @@ class Base(models.Model):
         """
         tree = tree or {}
 
-        if specialized_parameters is not None:
-            raise NotImplementedError(
-                "Overwriting of default kwargs not yet implmented."
-            )
-
         sub_class_name, sub_tree = cls.get_sub_info(field.name, tree)
         if sub_class_name is not None:
             instance, all_instances = field.related_model.get_or_create_from_parameters(
@@ -312,7 +307,7 @@ class Base(models.Model):
         return instance, all_instances
 
     @classmethod
-    def get_or_create_from_parameters(  # pylint: disable=C0202, R0913, R0914
+    def get_or_create_from_parameters(  # pylint: disable=C0202, R0913, R0914, R0912
         calling_cls,
         parameters: Dict[str, Any],
         tree: Optional[Dict[str, Any]] = None,
@@ -406,11 +401,6 @@ class Base(models.Model):
         indent = "|" if _recursion_level else ""
         indent += "-" * _recursion_level * 2
 
-        if specialized_parameters is not None:
-            raise NotImplementedError(
-                "Overwriting of default kwargs not yet implmented."
-            )
-
         cls = calling_cls._get_child_by_name(_class_name) if _class_name else calling_cls
 
         if _recursion_level == 0:
@@ -425,13 +415,18 @@ class Base(models.Model):
         kwargs = {}
         all_instances = []
         for field in cls.get_open_fields():
+            field_specialized_pars = (
+                specialized_parameters.get(field.name, None)
+                if specialized_parameters
+                else None
+            )
             if isinstance(field, models.ForeignKey):
 
                 instance, instances = cls._get_or_create_fk(  # pylint: disable=W0212
                     field,
                     parameters,
                     tree=tree,
-                    specialized_parameters=specialized_parameters,
+                    specialized_parameters=field_specialized_pars,
                     dry_run=dry_run,
                     _recursion_level=_recursion_level + 1,
                 )
@@ -439,7 +434,12 @@ class Base(models.Model):
                 kwargs[field.name] = instance
 
             else:
-                value = parameters.get(field.name, None)
+
+                value = (
+                    field_specialized_pars
+                    if field_specialized_pars is not None
+                    else parameters.get(field.name, None)
+                )
                 if value is None and not field.null:
                     raise KeyError(
                         f"Missing value for constructing {cls}."

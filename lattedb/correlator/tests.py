@@ -79,6 +79,8 @@ class Meson2ptTestCase(TestCase):
         for pars in self.parameters.values():
             parameters.update(pars)
 
+        specialized_parameters = {"propagator1": {"mval": 0}}
+
         Meson2pt.get_or_create_from_parameters(
             parameters,
             tree={
@@ -105,6 +107,7 @@ class Meson2ptTestCase(TestCase):
                 "source": ("Meson", {"hadronsmear": "Gaussian"}),
                 "sink": ("Meson", {"hadronsmear": "Unsmeared"}),
             },
+            specialized_parameters=specialized_parameters,
         )
 
         hadron_smears = HadronSmear.objects.all()
@@ -134,3 +137,8 @@ class Meson2ptTestCase(TestCase):
         self.assertEqual(meson2pt.propagator1.specialization, OneToAll.objects.last())
         self.assertEqual(meson2pt.source.specialization, mesons[0])
         self.assertEqual(meson2pt.sink.specialization, mesons[1])
+
+        self.assertEqual(meson2pt.propagator0.mval, parameters["mval"])
+        self.assertEqual(
+            meson2pt.propagator1.mval, specialized_parameters["propagator1"]["mval"]
+        )
