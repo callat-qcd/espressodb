@@ -121,6 +121,106 @@
            </em>
            ) – (Optional) JSON: {‘anything’: ‘you want’}
           </li>
+          <li>
+           <strong>
+            short_tag
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Short name for ensemble (e.g. ‘a15m310’)
+          </li>
+          <li>
+           <strong>
+            stream
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Text: Stream tag for Monte Carlo
+          </li>
+          <li>
+           <strong>
+            nconfig
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Number of configurations
+          </li>
+          <li>
+           <strong>
+            action_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to lattice action
+          </li>
+          <li>
+           <strong>
+            nx
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            ny
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            nz
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            nt
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Temporal length in lattice units
+          </li>
+          <li>
+           <strong>
+            l_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Spatial length in fermi
+          </li>
+          <li>
+           <strong>
+            gaugesmear_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to gauge link smearing
+          </li>
          </ul>
         </td>
        </tr>
@@ -175,7 +275,7 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.ensemble.models.Hisq">
+    <dt id="lattedb.ensemble.models.Flavor211">
      <em class="property">
       class
      </em>
@@ -183,7 +283,7 @@
       lattedb.ensemble.models.
      </code>
      <code class="descname">
-      Hisq
+      Flavor211
      </code>
      <span class="sig-paren">
       (
@@ -198,7 +298,7 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.ensemble.models.Hisq" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.ensemble.models.Flavor211" title="Permalink to this definition">
       ¶
      </a>
     </dt>
@@ -285,23 +385,13 @@
           </li>
           <li>
            <strong>
-            ensemble_ptr_id
-           </strong>
-           (
-           <em>
-            OneToOneField
-           </em>
-           ) – ensemble ptr
-          </li>
-          <li>
-           <strong>
             short_tag
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Short name for ensemble (e.g. ‘a15m310’)
+           ) – (Optional) Text: Short name for ensemble (e.g. ‘a15m310’)
           </li>
           <li>
            <strong>
@@ -309,9 +399,9 @@
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – Charfield(3): Stream tag for Monte Carlo
+           ) – Text: Stream tag for Monte Carlo
           </li>
           <li>
            <strong>
@@ -325,7 +415,37 @@
           </li>
           <li>
            <strong>
+            action_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to lattice action
+          </li>
+          <li>
+           <strong>
             nx
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            ny
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            nz
            </strong>
            (
            <em>
@@ -345,13 +465,43 @@
           </li>
           <li>
            <strong>
+            l_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Spatial length in fermi
+          </li>
+          <li>
+           <strong>
+            gaugesmear_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to gauge link smearing
+          </li>
+          <li>
+           <strong>
+            ensemble_ptr_id
+           </strong>
+           (
+           <em>
+            OneToOneField
+           </em>
+           ) – Ensemble ptr
+          </li>
+          <li>
+           <strong>
             ml
            </strong>
            (
            <em>
             DecimalField
            </em>
-           ) – Decimal(7,6): Input light quark mass
+           ) – Decimal(10,6): Input light quark mass
           </li>
           <li>
            <strong>
@@ -361,7 +511,7 @@
            <em>
             DecimalField
            </em>
-           ) – Decimal(6,5): Input strange quark mass
+           ) – Decimal(10,6): Input strange quark mass
           </li>
           <li>
            <strong>
@@ -371,57 +521,7 @@
            <em>
             DecimalField
            </em>
-           ) – Decimal(5,4): Input charm quark mass
-          </li>
-          <li>
-           <strong>
-            beta
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – Decimal(6,4): Coupling constant
-          </li>
-          <li>
-           <strong>
-            naik
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – Decimal(7,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0
-          </li>
-          <li>
-           <strong>
-            u0
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – (Optional) Decimal(7,6): Tadpole improvement coefficient
-          </li>
-          <li>
-           <strong>
-            a_fm
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – (Optional) Decimal(4,3): Lattice spacing in fermi
-          </li>
-          <li>
-           <strong>
-            l_fm
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – (Optional) Decimal(5,3): Spatial length in fermi
+           ) – Decimal(10,6): Input charm quark mass
           </li>
           <li>
            <strong>
@@ -431,7 +531,7 @@
            <em>
             DecimalField
            </em>
-           ) – (Optional) Decimal(5,3): Spatial length in mpiL
+           ) – (Optional) Decimal(10,6): Spatial length in mpiL
           </li>
           <li>
            <strong>
@@ -441,7 +541,7 @@
            <em>
             DecimalField
            </em>
-           ) – (Optional) Decimal(5,2): Pion mass in MeV
+           ) – (Optional) Decimal(10,6): Pion mass in MeV
           </li>
          </ul>
         </td>
@@ -449,14 +549,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.ensemble.models.Hisq.DoesNotExist">
+      <dt id="lattedb.ensemble.models.Flavor211.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.ensemble.models.Hisq.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.ensemble.models.Flavor211.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -472,14 +572,14 @@
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.ensemble.models.Hisq.MultipleObjectsReturned">
+      <dt id="lattedb.ensemble.models.Flavor211.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.ensemble.models.Hisq.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.ensemble.models.Flavor211.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>

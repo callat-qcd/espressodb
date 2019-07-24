@@ -1,26 +1,26 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
  <div itemprop="articleBody">
-  <div class="section" id="gaugesmear">
+  <div class="section" id="action">
    <h1>
-    gaugesmear
-    <a class="headerlink" href="#gaugesmear" title="Permalink to this headline">
+    action
+    <a class="headerlink" href="#action" title="Permalink to this headline">
      ¶
     </a>
    </h1>
    <div class="toctree-wrapper compound">
    </div>
-   <span class="target" id="module-lattedb.gaugesmear.models">
+   <span class="target" id="module-lattedb.action.models">
    </span>
    <dl class="class">
-    <dt id="lattedb.gaugesmear.models.GaugeSmear">
+    <dt id="lattedb.action.models.Action">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugesmear.models.
+      lattedb.action.models.
      </code>
      <code class="descname">
-      GaugeSmear
+      Action
      </code>
      <span class="sig-paren">
       (
@@ -35,7 +35,7 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.action.models.Action" title="Permalink to this definition">
       ¶
      </a>
     </dt>
@@ -49,7 +49,7 @@
       </code>
      </p>
      <p>
-      Base table for application”
+      Base table for application
      </p>
      <table class="docutils field-list" frame="void" rules="none">
       <col class="field-name"/>
@@ -121,20 +121,40 @@
            </em>
            ) – (Optional) JSON: {‘anything’: ‘you want’}
           </li>
+          <li>
+           <strong>
+            beta
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Coupling constant
+          </li>
+          <li>
+           <strong>
+            a_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Lattice spacing in fermi
+          </li>
          </ul>
         </td>
        </tr>
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.GaugeSmear.DoesNotExist">
+      <dt id="lattedb.action.models.Action.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.action.models.Action.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -150,14 +170,14 @@
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.GaugeSmear.MultipleObjectsReturned">
+      <dt id="lattedb.action.models.Action.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.action.models.Action.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -175,15 +195,15 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.gaugesmear.models.Unsmeared">
+    <dt id="lattedb.action.models.Hisq">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugesmear.models.
+      lattedb.action.models.
      </code>
      <code class="descname">
-      Unsmeared
+      Hisq
      </code>
      <span class="sig-paren">
       (
@@ -198,17 +218,17 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.action.models.Hisq" title="Permalink to this definition">
       ¶
      </a>
     </dt>
     <dd>
      <p>
       Bases:
-      <a class="reference internal" href="#lattedb.gaugesmear.models.GaugeSmear" title="lattedb.gaugesmear.models.GaugeSmear">
+      <a class="reference internal" href="#lattedb.action.models.Action" title="lattedb.action.models.Action">
        <code class="xref py py-class docutils literal notranslate">
         <span class="pre">
-         lattedb.gaugesmear.models.GaugeSmear
+         lattedb.action.models.Action
         </span>
        </code>
       </a>
@@ -285,13 +305,53 @@
           </li>
           <li>
            <strong>
-            gaugesmear_ptr_id
+            beta
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Coupling constant
+          </li>
+          <li>
+           <strong>
+            a_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Lattice spacing in fermi
+          </li>
+          <li>
+           <strong>
+            action_ptr_id
            </strong>
            (
            <em>
             OneToOneField
            </em>
-           ) – Gaugesmear ptr
+           ) – Action ptr
+          </li>
+          <li>
+           <strong>
+            naik
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0
+          </li>
+          <li>
+           <strong>
+            u0
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Tadpole improvement coefficient
           </li>
          </ul>
         </td>
@@ -299,14 +359,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.Unsmeared.DoesNotExist">
+      <dt id="lattedb.action.models.Hisq.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.action.models.Hisq.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -315,21 +375,21 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugesmear.models.DoesNotExist
+          lattedb.action.models.DoesNotExist
          </span>
         </code>
        </p>
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.Unsmeared.MultipleObjectsReturned">
+      <dt id="lattedb.action.models.Hisq.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.action.models.Hisq.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -338,7 +398,7 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugesmear.models.MultipleObjectsReturned
+          lattedb.action.models.MultipleObjectsReturned
          </span>
         </code>
        </p>
@@ -347,15 +407,15 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.gaugesmear.models.WilsonFlow">
+    <dt id="lattedb.action.models.MobiusDW">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugesmear.models.
+      lattedb.action.models.
      </code>
      <code class="descname">
-      WilsonFlow
+      MobiusDW
      </code>
      <span class="sig-paren">
       (
@@ -370,17 +430,17 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.action.models.MobiusDW" title="Permalink to this definition">
       ¶
      </a>
     </dt>
     <dd>
      <p>
       Bases:
-      <a class="reference internal" href="#lattedb.gaugesmear.models.GaugeSmear" title="lattedb.gaugesmear.models.GaugeSmear">
+      <a class="reference internal" href="#lattedb.action.models.Action" title="lattedb.action.models.Action">
        <code class="xref py py-class docutils literal notranslate">
         <span class="pre">
-         lattedb.gaugesmear.models.GaugeSmear
+         lattedb.action.models.Action
         </span>
        </code>
       </a>
@@ -457,33 +517,93 @@
           </li>
           <li>
            <strong>
-            gaugesmear_ptr_id
-           </strong>
-           (
-           <em>
-            OneToOneField
-           </em>
-           ) – Gaugesmear ptr
-          </li>
-          <li>
-           <strong>
-            flowtime
+            beta
            </strong>
            (
            <em>
             DecimalField
            </em>
-           ) – Decimal(10,6): Flow time in lattice units
+           ) – Decimal(10,6): Coupling constant
           </li>
           <li>
            <strong>
-            flowstep
+            a_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Lattice spacing in fermi
+          </li>
+          <li>
+           <strong>
+            action_ptr_id
+           </strong>
+           (
+           <em>
+            OneToOneField
+           </em>
+           ) – Action ptr
+          </li>
+          <li>
+           <strong>
+            l5
            </strong>
            (
            <em>
             PositiveSmallIntegerField
            </em>
-           ) – PositiveSmallInt: Number of diffusion steps
+           ) – PositiveSmallInt: Length of 5th dimension
+          </li>
+          <li>
+           <strong>
+            m5
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): 5th dimensional mass
+          </li>
+          <li>
+           <strong>
+            alpha5
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Mobius coefficient [D_mobius(M5) = alpha5 * D_Shamir(M5)]
+          </li>
+          <li>
+           <strong>
+            a5
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Mobius kernel parameter [D_mobius = alpha5 * a5 * D_Wilson / (2 + a5 * D_Wilson)]
+          </li>
+          <li>
+           <strong>
+            b5
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Mobius kernel parameter [a5 = b5 - c5, alpha5 * a5 = b5 + c5]
+          </li>
+          <li>
+           <strong>
+            c5
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Mobius kernal perameter
           </li>
          </ul>
         </td>
@@ -491,14 +611,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.WilsonFlow.DoesNotExist">
+      <dt id="lattedb.action.models.MobiusDW.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.action.models.MobiusDW.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -507,21 +627,21 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugesmear.models.DoesNotExist
+          lattedb.action.models.DoesNotExist
          </span>
         </code>
        </p>
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.WilsonFlow.MultipleObjectsReturned">
+      <dt id="lattedb.action.models.MobiusDW.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.action.models.MobiusDW.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -530,7 +650,7 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugesmear.models.MultipleObjectsReturned
+          lattedb.action.models.MultipleObjectsReturned
          </span>
         </code>
        </p>

@@ -50,6 +50,10 @@
      </em>
      ,
      <em>
+      trajectory
+     </em>
+     ,
+     <em>
       home
      </em>
      ,
@@ -166,13 +170,23 @@
           </li>
           <li>
            <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
             home
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
+           ) – (Optional) Text: Computing facility where the object resides at
           </li>
           <li>
            <strong>
@@ -326,6 +340,10 @@
      </em>
      ,
      <em>
+      trajectory
+     </em>
+     ,
+     <em>
       home
      </em>
      ,
@@ -442,13 +460,23 @@
           </li>
           <li>
            <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
             home
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
+           ) – (Optional) Text: Computing facility where the object resides at
           </li>
           <li>
            <strong>
@@ -564,6 +592,296 @@
     </dd>
    </dl>
    <dl class="class">
+    <dt id="lattedb.status.models.Correlator_DWFTuning">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.status.models.
+     </code>
+     <code class="descname">
+      Correlator_DWFTuning
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      id
+     </em>
+     ,
+     <em>
+      type
+     </em>
+     ,
+     <em>
+      last_modified
+     </em>
+     ,
+     <em>
+      user
+     </em>
+     ,
+     <em>
+      tag
+     </em>
+     ,
+     <em>
+      misc
+     </em>
+     ,
+     <em>
+      trajectory
+     </em>
+     ,
+     <em>
+      home
+     </em>
+     ,
+     <em>
+      runscript
+     </em>
+     ,
+     <em>
+      directory
+     </em>
+     ,
+     <em>
+      hdf5path
+     </em>
+     ,
+     <em>
+      size
+     </em>
+     ,
+     <em>
+      statusencoder
+     </em>
+     ,
+     <em>
+      correlator
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.status.models.Correlator_DWFTuning" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <a class="reference internal" href="#lattedb.status.models.Status" title="lattedb.status.models.Status">
+       <code class="xref py py-class docutils literal notranslate">
+        <span class="pre">
+         lattedb.status.models.Status
+        </span>
+       </code>
+      </a>
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            tag
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(20): User defined tag for easy searches
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+          <li>
+           <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
+            home
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Computing facility where the object resides at
+          </li>
+          <li>
+           <strong>
+            runscript
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Path to, or content of run script
+          </li>
+          <li>
+           <strong>
+            directory
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Directory path to result
+          </li>
+          <li>
+           <strong>
+            hdf5path
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Folder path in hdf5 file
+          </li>
+          <li>
+           <strong>
+            size
+           </strong>
+           (
+           <em>
+            IntegerField
+           </em>
+           ) – (Optional) Int: file size
+          </li>
+          <li>
+           <strong>
+            statusencoder
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Encode categorical status labels with values between 0 and n_classes-1
+          </li>
+          <li>
+           <strong>
+            correlator_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to mres and phi_qq correlation functions
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.status.models.Correlator_DWFTuning.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.status.models.Correlator_DWFTuning.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          django.core.exceptions.ObjectDoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.status.models.Correlator_DWFTuning.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.status.models.Correlator_DWFTuning.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          django.core.exceptions.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+   <dl class="class">
     <dt id="lattedb.status.models.Correlator_Meson2pt">
      <em class="property">
       class
@@ -599,6 +917,10 @@
      ,
      <em>
       misc
+     </em>
+     ,
+     <em>
+      trajectory
      </em>
      ,
      <em>
@@ -718,13 +1040,23 @@
           </li>
           <li>
            <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
             home
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
+           ) – (Optional) Text: Computing facility where the object resides at
           </li>
           <li>
            <strong>
@@ -840,7 +1172,7 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.status.models.GaugeConfig_Hisq">
+    <dt id="lattedb.status.models.Ensemble_Flavor211">
      <em class="property">
       class
      </em>
@@ -848,7 +1180,7 @@
       lattedb.status.models.
      </code>
      <code class="descname">
-      GaugeConfig_Hisq
+      Ensemble_Flavor211
      </code>
      <span class="sig-paren">
       (
@@ -875,6 +1207,10 @@
      ,
      <em>
       misc
+     </em>
+     ,
+     <em>
+      trajectory
      </em>
      ,
      <em>
@@ -907,7 +1243,7 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.status.models.GaugeConfig_Hisq" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.status.models.Ensemble_Flavor211" title="Permalink to this definition">
       ¶
      </a>
     </dt>
@@ -994,13 +1330,23 @@
           </li>
           <li>
            <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
             home
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
+           ) – (Optional) Text: Computing facility where the object resides at
           </li>
           <li>
            <strong>
@@ -1054,13 +1400,13 @@
           </li>
           <li>
            <strong>
-            gaugeconfig_id
+            ensemble_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to HISQ ensemble
+           ) – ForeignKey pointing to 2+1+1 flavor ensemble
           </li>
          </ul>
         </td>
@@ -1068,14 +1414,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.status.models.GaugeConfig_Hisq.DoesNotExist">
+      <dt id="lattedb.status.models.Ensemble_Flavor211.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.status.models.GaugeConfig_Hisq.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.status.models.Ensemble_Flavor211.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -1091,14 +1437,14 @@
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.status.models.GaugeConfig_Hisq.MultipleObjectsReturned">
+      <dt id="lattedb.status.models.Ensemble_Flavor211.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.status.models.GaugeConfig_Hisq.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.status.models.Ensemble_Flavor211.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -1226,13 +1572,23 @@
           </li>
           <li>
            <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
             home
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
+           ) – (Optional) Text: Computing facility where the object resides at
           </li>
           <li>
            <strong>
@@ -1458,13 +1814,23 @@
           </li>
           <li>
            <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
             home
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
+           ) – (Optional) Text: Computing facility where the object resides at
           </li>
           <li>
            <strong>
@@ -1580,7 +1946,7 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.status.models.Propagator_Hisq">
+    <dt id="lattedb.status.models.Propagator_OneToAll">
      <em class="property">
       class
      </em>
@@ -1588,7 +1954,7 @@
       lattedb.status.models.
      </code>
      <code class="descname">
-      Propagator_Hisq
+      Propagator_OneToAll
      </code>
      <span class="sig-paren">
       (
@@ -1603,7 +1969,7 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.status.models.Propagator_Hisq" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.status.models.Propagator_OneToAll" title="Permalink to this definition">
       ¶
      </a>
     </dt>
@@ -1690,13 +2056,23 @@
           </li>
           <li>
            <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
             home
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
+           ) – (Optional) Text: Computing facility where the object resides at
           </li>
           <li>
            <strong>
@@ -1756,7 +2132,7 @@
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey to HISQ propagator table
+           ) – ForeignKey to one-to-all propagator table
           </li>
          </ul>
         </td>
@@ -1764,14 +2140,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.status.models.Propagator_Hisq.DoesNotExist">
+      <dt id="lattedb.status.models.Propagator_OneToAll.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.status.models.Propagator_Hisq.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.status.models.Propagator_OneToAll.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -1787,246 +2163,14 @@
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.status.models.Propagator_Hisq.MultipleObjectsReturned">
+      <dt id="lattedb.status.models.Propagator_OneToAll.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.status.models.Propagator_Hisq.MultipleObjectsReturned" title="Permalink to this definition">
-        ¶
-       </a>
-      </dt>
-      <dd>
-       <p>
-        Bases:
-        <code class="xref py py-class docutils literal notranslate">
-         <span class="pre">
-          django.core.exceptions.MultipleObjectsReturned
-         </span>
-        </code>
-       </p>
-      </dd>
-     </dl>
-    </dd>
-   </dl>
-   <dl class="class">
-    <dt id="lattedb.status.models.Propagator_MobiusDWF">
-     <em class="property">
-      class
-     </em>
-     <code class="descclassname">
-      lattedb.status.models.
-     </code>
-     <code class="descname">
-      Propagator_MobiusDWF
-     </code>
-     <span class="sig-paren">
-      (
-     </span>
-     <em>
-      *args
-     </em>
-     ,
-     <em>
-      **kwargs
-     </em>
-     <span class="sig-paren">
-      )
-     </span>
-     <a class="headerlink" href="#lattedb.status.models.Propagator_MobiusDWF" title="Permalink to this definition">
-      ¶
-     </a>
-    </dt>
-    <dd>
-     <p>
-      Bases:
-      <a class="reference internal" href="#lattedb.status.models.Status" title="lattedb.status.models.Status">
-       <code class="xref py py-class docutils literal notranslate">
-        <span class="pre">
-         lattedb.status.models.Status
-        </span>
-       </code>
-      </a>
-     </p>
-     <table class="docutils field-list" frame="void" rules="none">
-      <col class="field-name"/>
-      <col class="field-body"/>
-      <tbody valign="top">
-       <tr class="field-odd field">
-        <th class="field-name">
-         Parameters:
-        </th>
-        <td class="field-body">
-         <ul class="first last simple">
-          <li>
-           <strong>
-            id
-           </strong>
-           (
-           <em>
-            AutoField
-           </em>
-           ) – Id
-          </li>
-          <li>
-           <strong>
-            type
-           </strong>
-           (
-           <em>
-            TextField
-           </em>
-           ) – Type
-          </li>
-          <li>
-           <strong>
-            last_modified
-           </strong>
-           (
-           <em>
-            DateTimeField
-           </em>
-           ) – Last modified
-          </li>
-          <li>
-           <strong>
-            user_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – User
-          </li>
-          <li>
-           <strong>
-            tag
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – (Optional) Char(20): User defined tag for easy searches
-          </li>
-          <li>
-           <strong>
-            misc
-           </strong>
-           (
-           <em>
-            JSONField
-           </em>
-           ) – (Optional) JSON: {‘anything’: ‘you want’}
-          </li>
-          <li>
-           <strong>
-            home
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
-          </li>
-          <li>
-           <strong>
-            runscript
-           </strong>
-           (
-           <em>
-            TextField
-           </em>
-           ) – (Optional) Text: Path to, or content of run script
-          </li>
-          <li>
-           <strong>
-            directory
-           </strong>
-           (
-           <em>
-            TextField
-           </em>
-           ) – (Optional) Text: Directory path to result
-          </li>
-          <li>
-           <strong>
-            hdf5path
-           </strong>
-           (
-           <em>
-            TextField
-           </em>
-           ) – (Optional) Text: Folder path in hdf5 file
-          </li>
-          <li>
-           <strong>
-            size
-           </strong>
-           (
-           <em>
-            IntegerField
-           </em>
-           ) – (Optional) Int: file size
-          </li>
-          <li>
-           <strong>
-            statusencoder
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Encode categorical status labels with values between 0 and n_classes-1
-          </li>
-          <li>
-           <strong>
-            propagator_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – ForeignKey to HISQ propagator table
-          </li>
-         </ul>
-        </td>
-       </tr>
-      </tbody>
-     </table>
-     <dl class="exception">
-      <dt id="lattedb.status.models.Propagator_MobiusDWF.DoesNotExist">
-       <em class="property">
-        exception
-       </em>
-       <code class="descname">
-        DoesNotExist
-       </code>
-       <a class="headerlink" href="#lattedb.status.models.Propagator_MobiusDWF.DoesNotExist" title="Permalink to this definition">
-        ¶
-       </a>
-      </dt>
-      <dd>
-       <p>
-        Bases:
-        <code class="xref py py-class docutils literal notranslate">
-         <span class="pre">
-          django.core.exceptions.ObjectDoesNotExist
-         </span>
-        </code>
-       </p>
-      </dd>
-     </dl>
-     <dl class="exception">
-      <dt id="lattedb.status.models.Propagator_MobiusDWF.MultipleObjectsReturned">
-       <em class="property">
-        exception
-       </em>
-       <code class="descname">
-        MultipleObjectsReturned
-       </code>
-       <a class="headerlink" href="#lattedb.status.models.Propagator_MobiusDWF.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.status.models.Propagator_OneToAll.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -2155,13 +2299,23 @@
           </li>
           <li>
            <strong>
+            trajectory
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Monte Carlo trajectory (config number) of object
+          </li>
+          <li>
+           <strong>
             home
            </strong>
            (
            <em>
-            CharField
+            TextField
            </em>
-           ) – (Optional) Char(20): Computing facility where the object resides at
+           ) – (Optional) Text: Computing facility where the object resides at
           </li>
           <li>
            <strong>

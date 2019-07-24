@@ -1,26 +1,26 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
  <div itemprop="articleBody">
-  <div class="section" id="gaugesmear">
+  <div class="section" id="ensemble">
    <h1>
-    gaugesmear
-    <a class="headerlink" href="#gaugesmear" title="Permalink to this headline">
+    ensemble
+    <a class="headerlink" href="#ensemble" title="Permalink to this headline">
      ¶
     </a>
    </h1>
    <div class="toctree-wrapper compound">
    </div>
-   <span class="target" id="module-lattedb.gaugesmear.models">
+   <span class="target" id="module-lattedb.ensemble.models">
    </span>
    <dl class="class">
-    <dt id="lattedb.gaugesmear.models.GaugeSmear">
+    <dt id="lattedb.ensemble.models.Ensemble">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugesmear.models.
+      lattedb.ensemble.models.
      </code>
      <code class="descname">
-      GaugeSmear
+      Ensemble
      </code>
      <span class="sig-paren">
       (
@@ -35,7 +35,7 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.ensemble.models.Ensemble" title="Permalink to this definition">
       ¶
      </a>
     </dt>
@@ -49,7 +49,7 @@
       </code>
      </p>
      <p>
-      Base table for application”
+      Base table for application
      </p>
      <table class="docutils field-list" frame="void" rules="none">
       <col class="field-name"/>
@@ -121,20 +121,120 @@
            </em>
            ) – (Optional) JSON: {‘anything’: ‘you want’}
           </li>
+          <li>
+           <strong>
+            short_tag
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Short name for ensemble (e.g. ‘a15m310’)
+          </li>
+          <li>
+           <strong>
+            stream
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Text: Stream tag for Monte Carlo
+          </li>
+          <li>
+           <strong>
+            nconfig
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Number of configurations
+          </li>
+          <li>
+           <strong>
+            action_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to lattice action
+          </li>
+          <li>
+           <strong>
+            nx
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            ny
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            nz
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            nt
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Temporal length in lattice units
+          </li>
+          <li>
+           <strong>
+            l_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Spatial length in fermi
+          </li>
+          <li>
+           <strong>
+            gaugesmear_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to gauge link smearing
+          </li>
          </ul>
         </td>
        </tr>
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.GaugeSmear.DoesNotExist">
+      <dt id="lattedb.ensemble.models.Ensemble.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.ensemble.models.Ensemble.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -150,14 +250,14 @@
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.GaugeSmear.MultipleObjectsReturned">
+      <dt id="lattedb.ensemble.models.Ensemble.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.ensemble.models.Ensemble.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -175,15 +275,15 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.gaugesmear.models.Unsmeared">
+    <dt id="lattedb.ensemble.models.Flavor211">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugesmear.models.
+      lattedb.ensemble.models.
      </code>
      <code class="descname">
-      Unsmeared
+      Flavor211
      </code>
      <span class="sig-paren">
       (
@@ -198,17 +298,17 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.ensemble.models.Flavor211" title="Permalink to this definition">
       ¶
      </a>
     </dt>
     <dd>
      <p>
       Bases:
-      <a class="reference internal" href="#lattedb.gaugesmear.models.GaugeSmear" title="lattedb.gaugesmear.models.GaugeSmear">
+      <a class="reference internal" href="gaugeconfig.html#lattedb.ensemble.models.Ensemble" title="lattedb.ensemble.models.Ensemble">
        <code class="xref py py-class docutils literal notranslate">
         <span class="pre">
-         lattedb.gaugesmear.models.GaugeSmear
+         lattedb.ensemble.models.Ensemble
         </span>
        </code>
       </a>
@@ -285,205 +385,163 @@
           </li>
           <li>
            <strong>
-            gaugesmear_ptr_id
-           </strong>
-           (
-           <em>
-            OneToOneField
-           </em>
-           ) – Gaugesmear ptr
-          </li>
-         </ul>
-        </td>
-       </tr>
-      </tbody>
-     </table>
-     <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.Unsmeared.DoesNotExist">
-       <em class="property">
-        exception
-       </em>
-       <code class="descname">
-        DoesNotExist
-       </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared.DoesNotExist" title="Permalink to this definition">
-        ¶
-       </a>
-      </dt>
-      <dd>
-       <p>
-        Bases:
-        <code class="xref py py-class docutils literal notranslate">
-         <span class="pre">
-          lattedb.gaugesmear.models.DoesNotExist
-         </span>
-        </code>
-       </p>
-      </dd>
-     </dl>
-     <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.Unsmeared.MultipleObjectsReturned">
-       <em class="property">
-        exception
-       </em>
-       <code class="descname">
-        MultipleObjectsReturned
-       </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared.MultipleObjectsReturned" title="Permalink to this definition">
-        ¶
-       </a>
-      </dt>
-      <dd>
-       <p>
-        Bases:
-        <code class="xref py py-class docutils literal notranslate">
-         <span class="pre">
-          lattedb.gaugesmear.models.MultipleObjectsReturned
-         </span>
-        </code>
-       </p>
-      </dd>
-     </dl>
-    </dd>
-   </dl>
-   <dl class="class">
-    <dt id="lattedb.gaugesmear.models.WilsonFlow">
-     <em class="property">
-      class
-     </em>
-     <code class="descclassname">
-      lattedb.gaugesmear.models.
-     </code>
-     <code class="descname">
-      WilsonFlow
-     </code>
-     <span class="sig-paren">
-      (
-     </span>
-     <em>
-      *args
-     </em>
-     ,
-     <em>
-      **kwargs
-     </em>
-     <span class="sig-paren">
-      )
-     </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow" title="Permalink to this definition">
-      ¶
-     </a>
-    </dt>
-    <dd>
-     <p>
-      Bases:
-      <a class="reference internal" href="#lattedb.gaugesmear.models.GaugeSmear" title="lattedb.gaugesmear.models.GaugeSmear">
-       <code class="xref py py-class docutils literal notranslate">
-        <span class="pre">
-         lattedb.gaugesmear.models.GaugeSmear
-        </span>
-       </code>
-      </a>
-     </p>
-     <table class="docutils field-list" frame="void" rules="none">
-      <col class="field-name"/>
-      <col class="field-body"/>
-      <tbody valign="top">
-       <tr class="field-odd field">
-        <th class="field-name">
-         Parameters:
-        </th>
-        <td class="field-body">
-         <ul class="first last simple">
-          <li>
-           <strong>
-            id
-           </strong>
-           (
-           <em>
-            AutoField
-           </em>
-           ) – Id
-          </li>
-          <li>
-           <strong>
-            type
+            short_tag
            </strong>
            (
            <em>
             TextField
            </em>
-           ) – Type
+           ) – (Optional) Text: Short name for ensemble (e.g. ‘a15m310’)
           </li>
           <li>
            <strong>
-            last_modified
+            stream
            </strong>
            (
            <em>
-            DateTimeField
+            TextField
            </em>
-           ) – Last modified
+           ) – Text: Stream tag for Monte Carlo
           </li>
           <li>
            <strong>
-            user_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – User
-          </li>
-          <li>
-           <strong>
-            tag
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – (Optional) Char(20): User defined tag for easy searches
-          </li>
-          <li>
-           <strong>
-            misc
-           </strong>
-           (
-           <em>
-            JSONField
-           </em>
-           ) – (Optional) JSON: {‘anything’: ‘you want’}
-          </li>
-          <li>
-           <strong>
-            gaugesmear_ptr_id
-           </strong>
-           (
-           <em>
-            OneToOneField
-           </em>
-           ) – Gaugesmear ptr
-          </li>
-          <li>
-           <strong>
-            flowtime
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – Decimal(10,6): Flow time in lattice units
-          </li>
-          <li>
-           <strong>
-            flowstep
+            nconfig
            </strong>
            (
            <em>
             PositiveSmallIntegerField
            </em>
-           ) – PositiveSmallInt: Number of diffusion steps
+           ) – PositiveSmallInt: Number of configurations
+          </li>
+          <li>
+           <strong>
+            action_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to lattice action
+          </li>
+          <li>
+           <strong>
+            nx
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            ny
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            nz
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Spatial length in lattice units
+          </li>
+          <li>
+           <strong>
+            nt
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Temporal length in lattice units
+          </li>
+          <li>
+           <strong>
+            l_fm
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Spatial length in fermi
+          </li>
+          <li>
+           <strong>
+            gaugesmear_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to gauge link smearing
+          </li>
+          <li>
+           <strong>
+            ensemble_ptr_id
+           </strong>
+           (
+           <em>
+            OneToOneField
+           </em>
+           ) – Ensemble ptr
+          </li>
+          <li>
+           <strong>
+            ml
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Input light quark mass
+          </li>
+          <li>
+           <strong>
+            ms
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Input strange quark mass
+          </li>
+          <li>
+           <strong>
+            mc
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Input charm quark mass
+          </li>
+          <li>
+           <strong>
+            mpil
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Spatial length in mpiL
+          </li>
+          <li>
+           <strong>
+            mpi
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – (Optional) Decimal(10,6): Pion mass in MeV
           </li>
          </ul>
         </td>
@@ -491,14 +549,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.WilsonFlow.DoesNotExist">
+      <dt id="lattedb.ensemble.models.Flavor211.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.ensemble.models.Flavor211.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -507,21 +565,21 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugesmear.models.DoesNotExist
+          lattedb.ensemble.models.DoesNotExist
          </span>
         </code>
        </p>
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.WilsonFlow.MultipleObjectsReturned">
+      <dt id="lattedb.ensemble.models.Flavor211.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.ensemble.models.Flavor211.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -530,7 +588,7 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugesmear.models.MultipleObjectsReturned
+          lattedb.ensemble.models.MultipleObjectsReturned
          </span>
         </code>
        </p>

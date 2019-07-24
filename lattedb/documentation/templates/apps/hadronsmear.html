@@ -1,26 +1,26 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
  <div itemprop="articleBody">
-  <div class="section" id="gaugesmear">
+  <div class="section" id="hadronsmear">
    <h1>
-    gaugesmear
-    <a class="headerlink" href="#gaugesmear" title="Permalink to this headline">
+    hadronsmear
+    <a class="headerlink" href="#hadronsmear" title="Permalink to this headline">
      ¶
     </a>
    </h1>
    <div class="toctree-wrapper compound">
    </div>
-   <span class="target" id="module-lattedb.gaugesmear.models">
+   <span class="target" id="module-lattedb.hadronsmear.models">
    </span>
    <dl class="class">
-    <dt id="lattedb.gaugesmear.models.GaugeSmear">
+    <dt id="lattedb.hadronsmear.models.Gaussian">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugesmear.models.
+      lattedb.hadronsmear.models.
      </code>
      <code class="descname">
-      GaugeSmear
+      Gaussian
      </code>
      <span class="sig-paren">
       (
@@ -35,21 +35,23 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.hadronsmear.models.Gaussian" title="Permalink to this definition">
       ¶
      </a>
     </dt>
     <dd>
      <p>
       Bases:
-      <code class="xref py py-class docutils literal notranslate">
-       <span class="pre">
-        lattedb.base.models.Base
-       </span>
-      </code>
+      <a class="reference internal" href="#lattedb.hadronsmear.models.HadronSmear" title="lattedb.hadronsmear.models.HadronSmear">
+       <code class="xref py py-class docutils literal notranslate">
+        <span class="pre">
+         lattedb.hadronsmear.models.HadronSmear
+        </span>
+       </code>
+      </a>
      </p>
      <p>
-      Base table for application”
+      Gauge invariant Gaussian smearing
      </p>
      <table class="docutils field-list" frame="void" rules="none">
       <col class="field-name"/>
@@ -121,20 +123,233 @@
            </em>
            ) – (Optional) JSON: {‘anything’: ‘you want’}
           </li>
+          <li>
+           <strong>
+            description
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Description of the interpolating operator
+          </li>
+          <li>
+           <strong>
+            hadronsmear_ptr_id
+           </strong>
+           (
+           <em>
+            OneToOneField
+           </em>
+           ) – Hadronsmear ptr
+          </li>
+          <li>
+           <strong>
+            radius
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(10,6): Smearing radius in lattice units
+          </li>
+          <li>
+           <strong>
+            step
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – PositiveSmallInt: Number of smearing steps
+          </li>
          </ul>
         </td>
        </tr>
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.GaugeSmear.DoesNotExist">
+      <dt id="lattedb.hadronsmear.models.Gaussian.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.hadronsmear.models.Gaussian.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.hadronsmear.models.DoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.hadronsmear.models.Gaussian.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.hadronsmear.models.Gaussian.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.hadronsmear.models.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+   <dl class="class">
+    <dt id="lattedb.hadronsmear.models.HadronSmear">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.hadronsmear.models.
+     </code>
+     <code class="descname">
+      HadronSmear
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      *args
+     </em>
+     ,
+     <em>
+      **kwargs
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.hadronsmear.models.HadronSmear" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <code class="xref py py-class docutils literal notranslate">
+       <span class="pre">
+        lattedb.base.models.Base
+       </span>
+      </code>
+     </p>
+     <p>
+      Base table for application
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            tag
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(20): User defined tag for easy searches
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+          <li>
+           <strong>
+            description
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Description of the interpolating operator
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.hadronsmear.models.HadronSmear.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.hadronsmear.models.HadronSmear.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -150,14 +365,14 @@
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.GaugeSmear.MultipleObjectsReturned">
+      <dt id="lattedb.hadronsmear.models.HadronSmear.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.GaugeSmear.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.hadronsmear.models.HadronSmear.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -175,12 +390,12 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.gaugesmear.models.Unsmeared">
+    <dt id="lattedb.hadronsmear.models.Unsmeared">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugesmear.models.
+      lattedb.hadronsmear.models.
      </code>
      <code class="descname">
       Unsmeared
@@ -198,20 +413,24 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.hadronsmear.models.Unsmeared" title="Permalink to this definition">
       ¶
      </a>
     </dt>
     <dd>
      <p>
       Bases:
-      <a class="reference internal" href="#lattedb.gaugesmear.models.GaugeSmear" title="lattedb.gaugesmear.models.GaugeSmear">
+      <a class="reference internal" href="#lattedb.hadronsmear.models.HadronSmear" title="lattedb.hadronsmear.models.HadronSmear">
        <code class="xref py py-class docutils literal notranslate">
         <span class="pre">
-         lattedb.gaugesmear.models.GaugeSmear
+         lattedb.hadronsmear.models.HadronSmear
         </span>
        </code>
       </a>
+     </p>
+     <p>
+      Table for unsmeared operators.
+The table should only have one row with a foreign key.
      </p>
      <table class="docutils field-list" frame="void" rules="none">
       <col class="field-name"/>
@@ -285,205 +504,23 @@
           </li>
           <li>
            <strong>
-            gaugesmear_ptr_id
-           </strong>
-           (
-           <em>
-            OneToOneField
-           </em>
-           ) – Gaugesmear ptr
-          </li>
-         </ul>
-        </td>
-       </tr>
-      </tbody>
-     </table>
-     <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.Unsmeared.DoesNotExist">
-       <em class="property">
-        exception
-       </em>
-       <code class="descname">
-        DoesNotExist
-       </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared.DoesNotExist" title="Permalink to this definition">
-        ¶
-       </a>
-      </dt>
-      <dd>
-       <p>
-        Bases:
-        <code class="xref py py-class docutils literal notranslate">
-         <span class="pre">
-          lattedb.gaugesmear.models.DoesNotExist
-         </span>
-        </code>
-       </p>
-      </dd>
-     </dl>
-     <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.Unsmeared.MultipleObjectsReturned">
-       <em class="property">
-        exception
-       </em>
-       <code class="descname">
-        MultipleObjectsReturned
-       </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.Unsmeared.MultipleObjectsReturned" title="Permalink to this definition">
-        ¶
-       </a>
-      </dt>
-      <dd>
-       <p>
-        Bases:
-        <code class="xref py py-class docutils literal notranslate">
-         <span class="pre">
-          lattedb.gaugesmear.models.MultipleObjectsReturned
-         </span>
-        </code>
-       </p>
-      </dd>
-     </dl>
-    </dd>
-   </dl>
-   <dl class="class">
-    <dt id="lattedb.gaugesmear.models.WilsonFlow">
-     <em class="property">
-      class
-     </em>
-     <code class="descclassname">
-      lattedb.gaugesmear.models.
-     </code>
-     <code class="descname">
-      WilsonFlow
-     </code>
-     <span class="sig-paren">
-      (
-     </span>
-     <em>
-      *args
-     </em>
-     ,
-     <em>
-      **kwargs
-     </em>
-     <span class="sig-paren">
-      )
-     </span>
-     <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow" title="Permalink to this definition">
-      ¶
-     </a>
-    </dt>
-    <dd>
-     <p>
-      Bases:
-      <a class="reference internal" href="#lattedb.gaugesmear.models.GaugeSmear" title="lattedb.gaugesmear.models.GaugeSmear">
-       <code class="xref py py-class docutils literal notranslate">
-        <span class="pre">
-         lattedb.gaugesmear.models.GaugeSmear
-        </span>
-       </code>
-      </a>
-     </p>
-     <table class="docutils field-list" frame="void" rules="none">
-      <col class="field-name"/>
-      <col class="field-body"/>
-      <tbody valign="top">
-       <tr class="field-odd field">
-        <th class="field-name">
-         Parameters:
-        </th>
-        <td class="field-body">
-         <ul class="first last simple">
-          <li>
-           <strong>
-            id
-           </strong>
-           (
-           <em>
-            AutoField
-           </em>
-           ) – Id
-          </li>
-          <li>
-           <strong>
-            type
+            description
            </strong>
            (
            <em>
             TextField
            </em>
-           ) – Type
+           ) – (Optional) Text: Description of the interpolating operator
           </li>
           <li>
            <strong>
-            last_modified
-           </strong>
-           (
-           <em>
-            DateTimeField
-           </em>
-           ) – Last modified
-          </li>
-          <li>
-           <strong>
-            user_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – User
-          </li>
-          <li>
-           <strong>
-            tag
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – (Optional) Char(20): User defined tag for easy searches
-          </li>
-          <li>
-           <strong>
-            misc
-           </strong>
-           (
-           <em>
-            JSONField
-           </em>
-           ) – (Optional) JSON: {‘anything’: ‘you want’}
-          </li>
-          <li>
-           <strong>
-            gaugesmear_ptr_id
+            hadronsmear_ptr_id
            </strong>
            (
            <em>
             OneToOneField
            </em>
-           ) – Gaugesmear ptr
-          </li>
-          <li>
-           <strong>
-            flowtime
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – Decimal(10,6): Flow time in lattice units
-          </li>
-          <li>
-           <strong>
-            flowstep
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Number of diffusion steps
+           ) – Hadronsmear ptr
           </li>
          </ul>
         </td>
@@ -491,14 +528,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.WilsonFlow.DoesNotExist">
+      <dt id="lattedb.hadronsmear.models.Unsmeared.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.hadronsmear.models.Unsmeared.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -507,21 +544,21 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugesmear.models.DoesNotExist
+          lattedb.hadronsmear.models.DoesNotExist
          </span>
         </code>
        </p>
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugesmear.models.WilsonFlow.MultipleObjectsReturned">
+      <dt id="lattedb.hadronsmear.models.Unsmeared.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugesmear.models.WilsonFlow.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.hadronsmear.models.Unsmeared.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -530,7 +567,7 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugesmear.models.MultipleObjectsReturned
+          lattedb.hadronsmear.models.MultipleObjectsReturned
          </span>
         </code>
        </p>

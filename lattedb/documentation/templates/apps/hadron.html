@@ -122,6 +122,86 @@
           </li>
           <li>
            <strong>
+            description
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Description of the interpolating operator
+          </li>
+          <li>
+           <strong>
+            hadronsmear_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to operator smearing
+          </li>
+          <li>
+           <strong>
+            parity
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(1,0): Parity of hadronic operator
+          </li>
+          <li>
+           <strong>
+            spin_x2
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – Text: Total spin times two
+          </li>
+          <li>
+           <strong>
+            spin_z_x2
+           </strong>
+           (
+           <em>
+            SmallIntegerField
+           </em>
+           ) – Text: Spin in z-direction
+          </li>
+          <li>
+           <strong>
+            isospin_x2
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – Text: Total isospin times two
+          </li>
+          <li>
+           <strong>
+            isospin_z_x2
+           </strong>
+           (
+           <em>
+            SmallIntegerField
+           </em>
+           ) – Text: Isospin in z-direction times two
+          </li>
+          <li>
+           <strong>
+            strangeness
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(1,0): Strangeness of hadronic operator
+          </li>
+          <li>
+           <strong>
             hadron_ptr_id
            </strong>
            (
@@ -132,73 +212,23 @@
           </li>
           <li>
            <strong>
-            hadron
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – Char(20): Hadron name
-          </li>
-          <li>
-           <strong>
-            lambda_index
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – Char(10): Irreducible representations of O^D_h (improper point group)
-          </li>
-          <li>
-           <strong>
-            k_index
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – Char(1): k-th representation of O^D_h irrep.
-          </li>
-          <li>
-           <strong>
-            spin
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – Char(3): Total spin
-          </li>
-          <li>
-           <strong>
-            spin_z
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – Char(3): Spin in z-direction
-          </li>
-          <li>
-           <strong>
-            smearing
-           </strong>
-           (
-           <em>
-            CharField
-           </em>
-           ) – (Optional) Char(255): Operator smearing
-          </li>
-          <li>
-           <strong>
-            description
+            irrep
            </strong>
            (
            <em>
             TextField
            </em>
-           ) – (Optional) Text: Description of the interpolating operator
+           ) – Text: Irreducible representations of O^D_h (octahedral group)
+          </li>
+          <li>
+           <strong>
+            embedding
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(1,0): k-th embedding of O^D_h irrep.
           </li>
          </ul>
         </td>
@@ -363,6 +393,86 @@
            </em>
            ) – (Optional) JSON: {‘anything’: ‘you want’}
           </li>
+          <li>
+           <strong>
+            description
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Description of the interpolating operator
+          </li>
+          <li>
+           <strong>
+            hadronsmear_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to operator smearing
+          </li>
+          <li>
+           <strong>
+            parity
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(1,0): Parity of hadronic operator
+          </li>
+          <li>
+           <strong>
+            spin_x2
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – Text: Total spin times two
+          </li>
+          <li>
+           <strong>
+            spin_z_x2
+           </strong>
+           (
+           <em>
+            SmallIntegerField
+           </em>
+           ) – Text: Spin in z-direction
+          </li>
+          <li>
+           <strong>
+            isospin_x2
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – Text: Total isospin times two
+          </li>
+          <li>
+           <strong>
+            isospin_z_x2
+           </strong>
+           (
+           <em>
+            SmallIntegerField
+           </em>
+           ) – Text: Isospin in z-direction times two
+          </li>
+          <li>
+           <strong>
+            strangeness
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(1,0): Strangeness of hadronic operator
+          </li>
          </ul>
         </td>
        </tr>
@@ -409,6 +519,268 @@
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
           django.core.exceptions.MultipleObjectsReturned
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+    </dd>
+   </dl>
+   <dl class="class">
+    <dt id="lattedb.hadron.models.Meson">
+     <em class="property">
+      class
+     </em>
+     <code class="descclassname">
+      lattedb.hadron.models.
+     </code>
+     <code class="descname">
+      Meson
+     </code>
+     <span class="sig-paren">
+      (
+     </span>
+     <em>
+      *args
+     </em>
+     ,
+     <em>
+      **kwargs
+     </em>
+     <span class="sig-paren">
+      )
+     </span>
+     <a class="headerlink" href="#lattedb.hadron.models.Meson" title="Permalink to this definition">
+      ¶
+     </a>
+    </dt>
+    <dd>
+     <p>
+      Bases:
+      <a class="reference internal" href="#lattedb.hadron.models.Hadron" title="lattedb.hadron.models.Hadron">
+       <code class="xref py py-class docutils literal notranslate">
+        <span class="pre">
+         lattedb.hadron.models.Hadron
+        </span>
+       </code>
+      </a>
+     </p>
+     <table class="docutils field-list" frame="void" rules="none">
+      <col class="field-name"/>
+      <col class="field-body"/>
+      <tbody valign="top">
+       <tr class="field-odd field">
+        <th class="field-name">
+         Parameters:
+        </th>
+        <td class="field-body">
+         <ul class="first last simple">
+          <li>
+           <strong>
+            id
+           </strong>
+           (
+           <em>
+            AutoField
+           </em>
+           ) – Id
+          </li>
+          <li>
+           <strong>
+            type
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Type
+          </li>
+          <li>
+           <strong>
+            last_modified
+           </strong>
+           (
+           <em>
+            DateTimeField
+           </em>
+           ) – Last modified
+          </li>
+          <li>
+           <strong>
+            user_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – User
+          </li>
+          <li>
+           <strong>
+            tag
+           </strong>
+           (
+           <em>
+            CharField
+           </em>
+           ) – (Optional) Char(20): User defined tag for easy searches
+          </li>
+          <li>
+           <strong>
+            misc
+           </strong>
+           (
+           <em>
+            JSONField
+           </em>
+           ) – (Optional) JSON: {‘anything’: ‘you want’}
+          </li>
+          <li>
+           <strong>
+            description
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – (Optional) Text: Description of the interpolating operator
+          </li>
+          <li>
+           <strong>
+            hadronsmear_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey pointing to operator smearing
+          </li>
+          <li>
+           <strong>
+            parity
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(1,0): Parity of hadronic operator
+          </li>
+          <li>
+           <strong>
+            spin_x2
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – Text: Total spin times two
+          </li>
+          <li>
+           <strong>
+            spin_z_x2
+           </strong>
+           (
+           <em>
+            SmallIntegerField
+           </em>
+           ) – Text: Spin in z-direction
+          </li>
+          <li>
+           <strong>
+            isospin_x2
+           </strong>
+           (
+           <em>
+            PositiveSmallIntegerField
+           </em>
+           ) – Text: Total isospin times two
+          </li>
+          <li>
+           <strong>
+            isospin_z_x2
+           </strong>
+           (
+           <em>
+            SmallIntegerField
+           </em>
+           ) – Text: Isospin in z-direction times two
+          </li>
+          <li>
+           <strong>
+            strangeness
+           </strong>
+           (
+           <em>
+            DecimalField
+           </em>
+           ) – Decimal(1,0): Strangeness of hadronic operator
+          </li>
+          <li>
+           <strong>
+            hadron_ptr_id
+           </strong>
+           (
+           <em>
+            OneToOneField
+           </em>
+           ) – Hadron ptr
+          </li>
+          <li>
+           <strong>
+            structure
+           </strong>
+           (
+           <em>
+            TextField
+           </em>
+           ) – Text: Dirac structure of the operator
+          </li>
+         </ul>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+     <dl class="exception">
+      <dt id="lattedb.hadron.models.Meson.DoesNotExist">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        DoesNotExist
+       </code>
+       <a class="headerlink" href="#lattedb.hadron.models.Meson.DoesNotExist" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.hadron.models.DoesNotExist
+         </span>
+        </code>
+       </p>
+      </dd>
+     </dl>
+     <dl class="exception">
+      <dt id="lattedb.hadron.models.Meson.MultipleObjectsReturned">
+       <em class="property">
+        exception
+       </em>
+       <code class="descname">
+        MultipleObjectsReturned
+       </code>
+       <a class="headerlink" href="#lattedb.hadron.models.Meson.MultipleObjectsReturned" title="Permalink to this definition">
+        ¶
+       </a>
+      </dt>
+      <dd>
+       <p>
+        Bases:
+        <code class="xref py py-class docutils literal notranslate">
+         <span class="pre">
+          lattedb.hadron.models.MultipleObjectsReturned
          </span>
         </code>
        </p>
