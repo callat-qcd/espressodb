@@ -9,25 +9,15 @@ class Current(Base):
 
 
 class Local(Current):
-    """
+    """ Momentum space current
     """
 
     diracstruct = models.TextField(
         null=False, blank=False, help_text="Text: Dirac structure of the current"
     )
 
-    flavor0 = models.CharField(
-        max_length=1,
-        null=False,
-        blank=False,
-        help_text="Char(1): Incoming quark field flavor. Useful to specify for nucleons.",
-    )
-
-    flavor1 = models.CharField(
-        max_length=1,
-        null=False,
-        blank=False,
-        help_text="Char(1): Outgoing quark field flavor. Useful to specify for nucleons.",
+    momentum = models.SmallIntegerField(
+        help_text="SmallInt: Current insertion momentum in units of 2 pi / L"
     )
 
     description = models.TextField(
@@ -37,6 +27,25 @@ class Local(Current):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["diracstruct", "flavor0", "flavor1"], name="unique_current_local"
+                fields=["diracstruct", "momentum"], name="unique_current_local"
+            )
+        ]
+
+class Local4D(Current):
+    """ Spatial current
+    """
+
+    diracstruct = models.TextField(
+        null=False, blank=False, help_text="Text: Dirac structure of the current"
+    )
+
+    description = models.TextField(
+        null=True, blank=True, help_text="(Optional) Text: Description of current"
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["diracstruct"], name="unique_current_local4d"
             )
         ]

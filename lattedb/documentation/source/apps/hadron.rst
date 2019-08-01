@@ -1,11 +1,11 @@
 ####################
-hadron
+interpolator
 ####################
 
 .. toctree::
    :maxdepth: 4
    :glob:
 
-.. automodule:: lattedb.hadron.models
+.. automodule:: lattedb.interpolator.models
    :members:
    :show-inheritance:

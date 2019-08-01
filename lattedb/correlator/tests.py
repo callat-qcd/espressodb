@@ -6,17 +6,17 @@ from django.test import TestCase
 
 from lattedb.correlator.models import Meson2pt
 
-from lattedb.ensemble.models import Flavor211
+from lattedb.gaugeconfig.models import Nf211
 
 from lattedb.propagator.models import OneToAll
 
 from lattedb.gaugesmear.models import Unsmeared
 
-from lattedb.hadron.models import Meson
+from lattedb.interpolator.models import Meson
 
-from lattedb.hadronsmear.models import HadronSmear
-from lattedb.hadronsmear.models import Gaussian
-from lattedb.hadronsmear.models import Unsmeared
+from lattedb.interpolatorsmear.models import InterpolatorSmear
+from lattedb.interpolatorsmear.models import Gaussian
+from lattedb.interpolatorsmear.models import Unsmeared
 
 # Create your tests here.
 
@@ -57,7 +57,7 @@ class Meson2ptTestCase(TestCase):
             "b5": 2,
             "c5": 5,
         },
-        "hadron": {
+        "interpolator": {
             "structure": r"$\gamma_5$",
             "parity": 1,
             "spin_x2": 1,
@@ -66,10 +66,10 @@ class Meson2ptTestCase(TestCase):
             "isospin_z_x2": 10000,
             "strangeness": 1,
         },
-        "hadronsmear": {"radius": 10, "step": 2},
+        "interpolatorsmear": {"radius": 10, "step": 2},
         "gaugesmear": {"flowtime": 1.0, "flowstep": 100},
         "meson2pt": {"momentum": 100},
-        "action": {"ny": 1, "nx": 2, "nz": 3},
+        "fermionaction": {"ny": 1, "nx": 2, "nz": 3},
     }
 
     def test_get_or_create_from_parameters(self):
@@ -87,30 +87,30 @@ class Meson2ptTestCase(TestCase):
                 "propagator0": (
                     "OneToAll",
                     {
-                        "ensemble": (
-                            "Flavor211",
-                            {"action": "Hisq", "gaugesmear": "WilsonFlow"},
+                        "gaugeconfig": (
+                            "Nf211",
+                            {"fermionaction": "Hisq", "gaugesmear": "WilsonFlow"},
                         ),
-                        "action": "Hisq",
+                        "fermionaction": "Hisq",
                     },
                 ),
                 "propagator1": (
                     "OneToAll",
                     {
-                        "ensemble": (
-                            "Flavor211",
-                            {"action": "Hisq", "gaugesmear": "WilsonFlow"},
+                        "gaugeconfig": (
+                            "Nf211",
+                            {"fermionaction": "Hisq", "gaugesmear": "WilsonFlow"},
                         ),
-                        "action": "MobiusDW",
+                        "fermionaction": "MobiusDW",
                     },
                 ),
-                "source": ("Meson", {"hadronsmear": "Gaussian"}),
-                "sink": ("Meson", {"hadronsmear": "Unsmeared"}),
+                "source": ("Meson", {"interpolatorsmear": "Gaussian"}),
+                "sink": ("Meson", {"interpolatorsmear": "Unsmeared"}),
             },
             specialized_parameters=specialized_parameters,
         )
 
-        hadron_smears = HadronSmear.objects.all()
+        hadron_smears = InterpolatorSmear.objects.all()
         for hadron_smear, cls in zip(hadron_smears, [Gaussian, Unsmeared]):
             self.assertIsInstance(hadron_smear.specialization, cls)
             for key, val in parameters.items():
@@ -119,7 +119,7 @@ class Meson2ptTestCase(TestCase):
 
         mesons = Meson.objects.all()
         for meson, smearing in zip(mesons, hadron_smears):
-            self.assertEqual(meson.hadronsmear, smearing)
+            self.assertEqual(meson.interpolatorsmear, smearing)
             for key, val in parameters.items():
                 if key in Meson.__dict__:
                     self.assertEqual(val, getattr(meson, key))

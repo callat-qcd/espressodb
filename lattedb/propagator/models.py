@@ -7,21 +7,15 @@ class Propagator(Base):
     """ Base table for application
     """
 
-    ensemble = models.ForeignKey(
-        "ensemble.Ensemble",
+    gaugeconfig = models.ForeignKey(
+        "gaugeconfig.GaugeConfig",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to gauge field",
+        help_text="ForeignKey pointing to specific gauge configuration inverted on",
     )
-    action = models.ForeignKey(
-        "action.Action",
+    fermionaction = models.ForeignKey(
+        "fermionaction.FermionAction",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to valence lattice action",
-    )
-    mval = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Input valence quark mass",
+        help_text="ForeignKey pointing to valence lattice fermion action",
     )
 
     def __lt__(self, other):
@@ -35,7 +29,7 @@ class Propagator(Base):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["ensemble", "action", "mval"],
+                fields=["gaugeconfig", "fermionaction"],
                 name="unique_propagator",
             )
         ]
@@ -70,7 +64,7 @@ class OneToAll(Propagator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "propagator_ptr_id",  # this has sea and valence action info
+                    "propagator_ptr_id",  # this has sea and valence fermionaction info
                     "origin_x",
                     "origin_y",
                     "origin_z",
@@ -85,11 +79,17 @@ class CoherentSeq(Propagator):
     """
     """
 
-    propagator = models.ForeignKey(
+    propagator0 = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="ForeignKey that link to a coherent propagator",
+        help_text="ForeignKey that link to a coherent propagator (spectator 0)",
+    )
+    propagator1 = models.ForeignKey(
+        "propagator.Propagator",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey that link to a coherent propagator (spectator 1)",
     )
     groupsize = models.PositiveSmallIntegerField(
         help_text="PositiveSmallint: Total number of propagators sharing a coherent sink"
@@ -98,7 +98,7 @@ class CoherentSeq(Propagator):
         help_text="PositiveSmallInt: A group index indicating which coherent sink group the propagator belongs to"
     )
     sink = models.ForeignKey(
-        "hadron.Hadron",
+        "interpolator.Interpolator",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
@@ -106,21 +106,18 @@ class CoherentSeq(Propagator):
     sinksep = models.SmallIntegerField(
         help_text="SmallInt: Source-sink separation time"
     )
-    momentum = models.SmallIntegerField(
-        help_text="SmallInt: Sink momentum in units of 2 pi / L"
-    )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
                 fields=[
                     "propagator_ptr_id",
-                    "propagator",
+                    "propagator0",
+                    "propagator1",
                     "groupsize",
                     "groupindex",
                     "sink",
                     "sinksep",
-                    "momentum",
                 ],
                 name="unique_propagator_coherentseq",
             )
@@ -135,22 +132,19 @@ class FeynmanHellmann(Propagator):
         "propagator.Propagator",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="ForeignKey linking source side propagator",
+        help_text="ForeignKey linking RHS propagator",
     )
     current = models.ForeignKey(
         "current.Current",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="ForeignKey linking current insertion operator",
-    )
-    momentum = models.SmallIntegerField(
-        help_text="SmallInt: Current insertion momentum in units of 2 pi / L"
+        help_text="ForeignKey linking momentum space current insertion",
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator_ptr_id", "propagator", "current", "momentum"],
+                fields=["propagator_ptr_id", "propagator", "current"],
                 name="unique_propagator_feynmanhellmann",
             )
         ]

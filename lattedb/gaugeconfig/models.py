@@ -3,26 +3,26 @@ from django.db import models
 from lattedb.base.models import Base
 
 
-class Ensemble(Base):
+class GaugeConfig(Base):
     """ Base table for application
     """
 
     short_tag = models.TextField(
         null=True,
         blank=True,
-        help_text="(Optional) Text: Short name for ensemble (e.g. 'a15m310')",
+        help_text="(Optional) Text: Short name for gaugeconfig (e.g. 'a15m310')",
     )
     stream = models.TextField(
         null=False, blank=False, help_text="Text: Stream tag for Monte Carlo"
     )
-    nconfig = models.PositiveSmallIntegerField(
-        help_text="PositiveSmallInt: Number of configurations"
+    config = models.PositiveSmallIntegerField(
+        help_text="PositiveSmallInt: Configuration number"
     )
-    action = models.ForeignKey(
-        "action.Action",
+    gaugeaction = models.ForeignKey(
+        "gaugeaction.GaugeAction",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="ForeignKey pointing to lattice action",
+        help_text="ForeignKey pointing to lattice gauge action",
     )
     nx = models.PositiveSmallIntegerField(
         null=False, help_text="PositiveSmallInt: Spatial length in lattice units"
@@ -45,7 +45,7 @@ class Ensemble(Base):
     gaugesmear = models.ForeignKey(
         "gaugesmear.GaugeSmear",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to gauge link smearing",
+        help_text="ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.",
     )
 
     class Meta:
@@ -53,39 +53,39 @@ class Ensemble(Base):
             models.UniqueConstraint(
                 fields=[
                     "stream",
-                    "nconfig",
-                    "action",
+                    "config",
+                    "gaugeaction",
                     "nx",
                     "ny",
                     "nz",
                     "nt",
                     "gaugesmear",
                 ],
-                name="unique_ensemble",
+                name="unique_gaugeconfig",
             )
         ]
 
 
-class Flavor211(Ensemble):
+class Nf211(GaugeConfig):
     """
     """
-    ml = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Input light quark mass",
+    light = models.ForeignKey(
+        "fermionaction.FermionAction",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to lattice fermion action",
     )
-    ms = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Input strange quark mass",
+    strange = models.ForeignKey(
+        "fermionaction.FermionAction",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to lattice fermion action",
     )
-    mc = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Input charm quark mass",
+    charm = models.ForeignKey(
+        "fermionaction.FermionAction",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to lattice fermion action",
     )
     mpil = models.DecimalField(
         max_digits=10,
@@ -103,7 +103,7 @@ class Flavor211(Ensemble):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["ensemble_ptr_id", "ml", "ms", "mc"],
-                name="unique_ensemble_flavor211",
+                fields=["gaugeconfig_ptr_id", "light", "strange", "charm"],
+                name="unique_gaugeconfig_nf211",
             )
         ]

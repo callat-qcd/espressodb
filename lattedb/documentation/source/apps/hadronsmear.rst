@@ -1,11 +1,11 @@
 ####################
-hadronsmear
+interpolatorsmear
 ####################
 
 .. toctree::
    :maxdepth: 4
    :glob:
 
-.. automodule:: lattedb.hadronsmear.models
+.. automodule:: lattedb.interpolatorsmear.models
    :members:
    :show-inheritance:

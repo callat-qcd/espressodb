@@ -3,7 +3,7 @@ from django.db import models
 from lattedb.base.models import Base
 
 
-class HadronSmear(Base):
+class InterpolatorSmear(Base):
     """ Base table for application
     """
 
@@ -14,14 +14,14 @@ class HadronSmear(Base):
     )
 
 
-class Unsmeared(HadronSmear):
+class Unsmeared(InterpolatorSmear):
     """
     Table for unsmeared operators.
     The table should only have one row with a foreign key.
     """
 
 
-class Gaussian(HadronSmear):
+class Gaussian(InterpolatorSmear):
     """ Gauge invariant Gaussian smearing
     """
 
@@ -37,6 +37,6 @@ class Gaussian(HadronSmear):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["radius", "step"], name="unique_hadronsmear_gaussian"
+                fields=["radius", "step"], name="unique_interpolatorsmear_gaussian"
             )
         ]

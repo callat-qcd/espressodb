@@ -36,16 +36,16 @@ class Status(Base):
 
 
 class Ensemble_Flavor211(Status):
-    ensemble = models.ForeignKey(
-        "ensemble.Flavor211",
+    gaugeconfig = models.ForeignKey(
+        "gaugeconfig.Nf211",
         on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to 2+1+1 flavor ensemble",
+        help_text="ForeignKey pointing to 2+1+1 flavor gaugeconfig",
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["trajectory", "ensemble"], name="unique_status_ensemble_flavor211"
+                fields=["trajectory", "gaugeconfig"], name="unique_status_ensemble_flavor211"
             )
         ]
 

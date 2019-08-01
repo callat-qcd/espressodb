@@ -1,26 +1,26 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
  <div itemprop="articleBody">
-  <div class="section" id="ensemble">
+  <div class="section" id="gaugeconfig">
    <h1>
-    ensemble
-    <a class="headerlink" href="#ensemble" title="Permalink to this headline">
+    gaugeconfig
+    <a class="headerlink" href="#gaugeconfig" title="Permalink to this headline">
      ¶
     </a>
    </h1>
    <div class="toctree-wrapper compound">
    </div>
-   <span class="target" id="module-lattedb.ensemble.models">
+   <span class="target" id="module-lattedb.gaugeconfig.models">
    </span>
    <dl class="class">
-    <dt id="lattedb.ensemble.models.Ensemble">
+    <dt id="lattedb.gaugeconfig.models.GaugeConfig">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.ensemble.models.
+      lattedb.gaugeconfig.models.
      </code>
      <code class="descname">
-      Ensemble
+      GaugeConfig
      </code>
      <span class="sig-paren">
       (
@@ -35,7 +35,7 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.ensemble.models.Ensemble" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig" title="Permalink to this definition">
       ¶
      </a>
     </dt>
@@ -129,7 +129,7 @@
            <em>
             TextField
            </em>
-           ) – (Optional) Text: Short name for ensemble (e.g. ‘a15m310’)
+           ) – (Optional) Text: Short name for gaugeconfig (e.g. ‘a15m310’)
           </li>
           <li>
            <strong>
@@ -227,14 +227,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.ensemble.models.Ensemble.DoesNotExist">
+      <dt id="lattedb.gaugeconfig.models.GaugeConfig.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.ensemble.models.Ensemble.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -250,14 +250,14 @@
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.ensemble.models.Ensemble.MultipleObjectsReturned">
+      <dt id="lattedb.gaugeconfig.models.GaugeConfig.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.ensemble.models.Ensemble.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -275,15 +275,15 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.ensemble.models.Flavor211">
+    <dt id="lattedb.gaugeconfig.models.Nf211">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.ensemble.models.
+      lattedb.gaugeconfig.models.
      </code>
      <code class="descname">
-      Flavor211
+      Nf211
      </code>
      <span class="sig-paren">
       (
@@ -298,17 +298,17 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.ensemble.models.Flavor211" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.gaugeconfig.models.Nf211" title="Permalink to this definition">
       ¶
      </a>
     </dt>
     <dd>
      <p>
       Bases:
-      <a class="reference internal" href="#lattedb.ensemble.models.Ensemble" title="lattedb.ensemble.models.Ensemble">
+      <a class="reference internal" href="#lattedb.gaugeconfig.models.GaugeConfig" title="lattedb.gaugeconfig.models.GaugeConfig">
        <code class="xref py py-class docutils literal notranslate">
         <span class="pre">
-         lattedb.ensemble.models.Ensemble
+         lattedb.gaugeconfig.models.GaugeConfig
         </span>
        </code>
       </a>
@@ -391,7 +391,7 @@
            <em>
             TextField
            </em>
-           ) – (Optional) Text: Short name for ensemble (e.g. ‘a15m310’)
+           ) – (Optional) Text: Short name for gaugeconfig (e.g. ‘a15m310’)
           </li>
           <li>
            <strong>
@@ -485,13 +485,13 @@
           </li>
           <li>
            <strong>
-            ensemble_ptr_id
+            gaugeconfig_ptr_id
            </strong>
            (
            <em>
             OneToOneField
            </em>
-           ) – Ensemble ptr
+           ) – GaugeConfig ptr
           </li>
           <li>
            <strong>
@@ -549,14 +549,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.ensemble.models.Flavor211.DoesNotExist">
+      <dt id="lattedb.gaugeconfig.models.Nf211.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.ensemble.models.Flavor211.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.gaugeconfig.models.Nf211.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -565,21 +565,21 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.ensemble.models.DoesNotExist
+          lattedb.gaugeconfig.models.DoesNotExist
          </span>
         </code>
        </p>
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.ensemble.models.Flavor211.MultipleObjectsReturned">
+      <dt id="lattedb.gaugeconfig.models.Nf211.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.ensemble.models.Flavor211.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.gaugeconfig.models.Nf211.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -588,7 +588,7 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.ensemble.models.MultipleObjectsReturned
+          lattedb.gaugeconfig.models.MultipleObjectsReturned
          </span>
         </code>
        </p>

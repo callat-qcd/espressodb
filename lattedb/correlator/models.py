@@ -18,7 +18,7 @@ class DWFTuning(Correlator):
         help_text="ForeignKey: Pointer to first propagator",
     )
     source = models.ForeignKey(
-        "hadron.Hadron",
+        "interpolator.Interpolator",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to source interpolating operator",
@@ -56,31 +56,28 @@ class Meson2pt(Correlator):
         help_text="ForeignKey: Pointer to second propagator",
     )
     source = models.ForeignKey(
-        "hadron.Hadron",
+        "interpolator.Interpolator",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to source interpolating operator",
     )
     sink = models.ForeignKey(
-        "hadron.Hadron",
+        "interpolator.Interpolator",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
-    )
-    momentum = models.SmallIntegerField(
-        help_text="SmallInt: Total momentum in units of 2 pi / L"
     )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator0", "propagator1", "source", "sink", "momentum"],
+                fields=["propagator0", "propagator1", "source", "sink"],
                 name="unique_correlator_meson2pt",
             )
         ]
 
     def clean(self):
-        """Sets tag of the correlator based on propagators, the ensemble and source.
+        """Sets tag of the correlator based on propagators, the gaugeconfig and source.
 
         Operators are sorted by their `mval` key.
         """
@@ -91,15 +88,15 @@ class Meson2pt(Correlator):
             self.propagator1 = p0
 
         if self.tag is None:
-            gc0 = self.propagator0.ensemble.specialization  # pylint: disable=E1101
+            gc0 = self.propagator0.gaugeconfig.specialization  # pylint: disable=E1101
             p0 = self.propagator0.specialization  # pylint: disable=E1101
-            gc1 = self.propagator1.ensemble.specialization  # pylint: disable=E1101
+            gc1 = self.propagator1.gaugeconfig.specialization  # pylint: disable=E1101
             p1 = self.propagator1.specialization  # pylint: disable=E1101
 
             if gc0 != gc1:
                 raise ValidationError(
                     "What are you smoking?"
-                    " Propagators not on the same ensemble?!"
+                    " Propagators not on the same gaugeconfig?!"
                     f"\n{gc0} != {gc1}"
                 )
 
@@ -124,7 +121,7 @@ class Meson2pt(Correlator):
 
 class Baryon4DSeq3pt(Correlator):
     source = models.ForeignKey(
-        "hadron.Hadron",
+        "interpolator.Interpolator",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="Foreign Key pointing to source operator",
@@ -138,19 +135,13 @@ class Baryon4DSeq3pt(Correlator):
         "propagator.Propagator",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="Foreign Key pointing to sequential propagator",
+        help_text="Foreign Key pointing to sequential propagator (2 spectator quarks + 1 daughter)",
     )
-    propagator0 = models.ForeignKey(
+    propagator = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="Foreign Key pointing to spectator propagator",
-    )
-    propagator1 = models.ForeignKey(
-        "propagator.Propagator",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="Foreign Key pointing to spectator propagator",
+        help_text="Foreign Key pointing to daughter quark",
     )
 
     class Meta:
@@ -160,8 +151,7 @@ class Baryon4DSeq3pt(Correlator):
                     "source",
                     "current",
                     "seqpropagator",
-                    "propagator0",
-                    "propagator1",
+                    "propagator",
                 ],
                 name="unique_correlator_baryonseq3pt",
             )
@@ -170,7 +160,7 @@ class Baryon4DSeq3pt(Correlator):
 
 class BaryonFH3pt(Correlator):
     source = models.ForeignKey(
-        "hadron.Hadron",
+        "interpolator.Interpolator",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="Foreign Key pointing to source operator",
@@ -194,13 +184,10 @@ class BaryonFH3pt(Correlator):
         help_text="Foreign Key pointing to spectator propagator",
     )
     sink = models.ForeignKey(
-        "hadron.Hadron",
+        "interpolator.Interpolator",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="Foreign Key pointing to sink operator",
-    )
-    momentum = models.SmallIntegerField(
-        help_text="SmallInt: Sink momentum in units of 2 pi / L"
     )
 
     class Meta:
@@ -212,7 +199,6 @@ class BaryonFH3pt(Correlator):
                     "propagator0",
                     "propagator1",
                     "sink",
-                    "momentum",
                 ],
                 name="unique_correlator_baryonfh3pt",
             )

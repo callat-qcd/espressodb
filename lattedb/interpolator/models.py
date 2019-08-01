@@ -3,7 +3,7 @@ from django.db import models
 from lattedb.base.models import Base
 
 
-class Hadron(Base):
+class Interpolator(Base):
     """ Base table for application
     """
 
@@ -12,8 +12,8 @@ class Hadron(Base):
         blank=True,
         help_text="(Optional) Text: Description of the interpolating operator",
     )
-    hadronsmear = models.ForeignKey(
-        "hadronsmear.HadronSmear",
+    interpolatorsmear = models.ForeignKey(
+        "interpolatorsmear.InterpolatorSmear",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey pointing to operator smearing",
@@ -51,7 +51,7 @@ class Hadron(Base):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "hadronsmear",
+                    "interpolatorsmear",
                     "parity",
                     "spin_x2",
                     "spin_z_x2",
@@ -59,12 +59,12 @@ class Hadron(Base):
                     "isospin_z_x2",
                     "strangeness",
                 ],
-                name="unique_hadron",
+                name="unique_interpolator",
             )
         ]
 
 
-class Meson(Hadron):
+class Meson(Interpolator):
     """
     """
 
@@ -72,15 +72,19 @@ class Meson(Hadron):
         null=False, blank=False, help_text="Text: Dirac structure of the operator"
     )
 
+    momentum = models.SmallIntegerField(
+        help_text="SmallInt: Momentum in units of 2 pi / L"
+    )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["hadron_ptr_id", "structure"], name="unique_hadron_meson"
+                fields=["interpolator_ptr_id", "structure", "momentum"], name="unique_hadron_meson"
             )
         ]
 
 
-class Basak(Hadron):
+class Basak(Interpolator):
     """
     """
 
@@ -97,10 +101,14 @@ class Basak(Hadron):
         help_text="Decimal(1,0): k-th embedding of O^D_h irrep.",
     )
 
+    momentum = models.SmallIntegerField(
+        help_text="SmallInt: Momentum in units of 2 pi / L"
+    )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["hadron_ptr_id", "irrep", "embedding"],
+                fields=["interpolator_ptr_id", "irrep", "embedding", "momentum"],
                 name="unique_hadron_basak",
             )
         ]
