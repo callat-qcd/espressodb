@@ -66,11 +66,7 @@
      </em>
      ,
      <em>
-      propagator0
-     </em>
-     ,
-     <em>
-      propagator1
+      propagator
      </em>
      <span class="sig-paren">
       )
@@ -198,27 +194,17 @@
            <em>
             ForeignKey
            </em>
-           ) – Foreign Key pointing to sequential propagator
+           ) – Foreign Key pointing to sequential propagator (2 spectator quarks + 1 daughter)
           </li>
           <li>
            <strong>
-            propagator0_id
+            propagator_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – Foreign Key pointing to spectator propagator
-          </li>
-          <li>
-           <strong>
-            propagator1_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – Foreign Key pointing to spectator propagator
+           ) – Foreign Key pointing to daughter quark
           </li>
          </ul>
         </td>
@@ -333,10 +319,6 @@
      ,
      <em>
       sink
-     </em>
-     ,
-     <em>
-      momentum
      </em>
      <span class="sig-paren">
       )
@@ -485,16 +467,6 @@
             ForeignKey
            </em>
            ) – Foreign Key pointing to sink operator
-          </li>
-          <li>
-           <strong>
-            momentum
-           </strong>
-           (
-           <em>
-            SmallIntegerField
-           </em>
-           ) – SmallInt: Sink momentum in units of 2 pi / L
           </li>
          </ul>
         </td>
@@ -1024,10 +996,6 @@
      <em>
       sink
      </em>
-     ,
-     <em>
-      momentum
-     </em>
      <span class="sig-paren">
       )
      </span>
@@ -1165,16 +1133,6 @@
             ForeignKey
            </em>
            ) – ForeignKey: Pointer to sink interpolating operator
-          </li>
-          <li>
-           <strong>
-            momentum
-           </strong>
-           (
-           <em>
-            SmallIntegerField
-           </em>
-           ) – SmallInt: Total momentum in units of 2 pi / L
           </li>
          </ul>
         </td>

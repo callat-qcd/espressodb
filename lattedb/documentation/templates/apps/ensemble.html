@@ -143,23 +143,23 @@
           </li>
           <li>
            <strong>
-            nconfig
+            config
            </strong>
            (
            <em>
             PositiveSmallIntegerField
            </em>
-           ) – PositiveSmallInt: Number of configurations
+           ) – PositiveSmallInt: Configuration number
           </li>
           <li>
            <strong>
-            action_id
+            gaugeaction_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to lattice action
+           ) – ForeignKey pointing to lattice gauge action
           </li>
           <li>
            <strong>
@@ -219,7 +219,7 @@
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to gauge link smearing
+           ) – ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.
           </li>
          </ul>
         </td>
@@ -405,23 +405,23 @@
           </li>
           <li>
            <strong>
-            nconfig
+            config
            </strong>
            (
            <em>
             PositiveSmallIntegerField
            </em>
-           ) – PositiveSmallInt: Number of configurations
+           ) – PositiveSmallInt: Configuration number
           </li>
           <li>
            <strong>
-            action_id
+            gaugeaction_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to lattice action
+           ) – ForeignKey pointing to lattice gauge action
           </li>
           <li>
            <strong>
@@ -481,7 +481,7 @@
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to gauge link smearing
+           ) – ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.
           </li>
           <li>
            <strong>
@@ -491,37 +491,37 @@
            <em>
             OneToOneField
            </em>
-           ) – GaugeConfig ptr
+           ) – Gaugeconfig ptr
           </li>
           <li>
            <strong>
-            ml
+            light_id
            </strong>
            (
            <em>
-            DecimalField
+            ForeignKey
            </em>
-           ) – Decimal(10,6): Input light quark mass
+           ) – ForeignKey pointing to lattice fermion action
           </li>
           <li>
            <strong>
-            ms
+            strange_id
            </strong>
            (
            <em>
-            DecimalField
+            ForeignKey
            </em>
-           ) – Decimal(10,6): Input strange quark mass
+           ) – ForeignKey pointing to lattice fermion action
           </li>
           <li>
            <strong>
-            mc
+            charm_id
            </strong>
            (
            <em>
-            DecimalField
+            ForeignKey
            </em>
-           ) – Decimal(10,6): Input charm quark mass
+           ) – ForeignKey pointing to lattice fermion action
           </li>
           <li>
            <strong>

@@ -1,11 +1,11 @@
 ####################
-action
+gaugeaction
 ####################
 
 .. toctree::
    :maxdepth: 4
    :glob:
 
-.. automodule:: lattedb.action.models
+.. automodule:: lattedb.gaugeaction.models
    :members:
    :show-inheritance:
