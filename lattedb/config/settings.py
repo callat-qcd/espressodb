@@ -170,4 +170,5 @@ GRAPH_MODELS = {
         "Base",
     ],
     "output": "models.pdf",
+    "exclude_columns": ["user", "id", "description", "last_modified", "misc", "type"],
 }
