@@ -71,16 +71,16 @@ class Base(models.Model):
         kwargs = {
             field.name: getattr(self, field.name)
             for field in self.get_open_fields()
-            if getattr(self, field.name) is not None
-            and not isinstance(field, models.ForeignKey)
+            if not isinstance(field, models.ForeignKey) and getattr(self, field.name)
         }
         base = (
             f"[{self.__class__.mro()[1].__name__}]"
             if type(self) != Base  # pylint: disable=C0123
             else ""
         )
-        info = ", ".join([f"{key}={val}" for key, val in kwargs.items()])
-        return f"{self.__class__.__name__}{base}({info})"
+        info = ", ".join([f"{key}={val}" for key, val in kwargs.items() if val])
+        info_str = f"({info})" if info else ""
+        return f"{self.__class__.__name__}{base}{info_str}"
 
     def clean(self):
         """Sets the type name to the class instance name
