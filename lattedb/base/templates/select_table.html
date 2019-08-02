@@ -4,6 +4,12 @@
 <div class="jumbotron">
     <h1>Which table do you want to populate</h1>
 </div>
-{% bootstrap_form form %}
+<form action="{{form.success}}" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    {% endbuttons %}
+</form>
 
 {% endblock %}
