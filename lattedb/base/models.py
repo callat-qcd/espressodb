@@ -65,6 +65,11 @@ class Base(models.Model):
                 fields.append(field)
         return fields
 
+    @classmethod
+    def get_label(cls):
+        base = f"[{cls.mro()[1].__name__}]" if cls != Base else ""
+        return f"{cls.__name__}{base}"
+
     def __str__(self) -> str:
         """Verbose description of instance name, parent and column values.
         """

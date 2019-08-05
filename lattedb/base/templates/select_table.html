@@ -4,12 +4,24 @@
 <div class="jumbotron">
     <h1>Which table do you want to populate</h1>
 </div>
-<form action="{{form.success}}" method="post" class="form">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-        <button type="submit" class="btn btn-primary">Submit</button>
-    {% endbuttons %}
-</form>
+<div class="container">
+<div class="row">
+    <div class="col-sm-6">
+        <ul>
+        {% for key, val in request.session.tree.items %}
+            <li>{{key}} - {{val}}</li>
+        {% endfor %}
+        </ul>
+        <h4> Pick {{request.session.name}} </h4>
+        <form action="{{form.success}}" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {% endbuttons %}
+    </form>
+</div>
+</div>
+</div>
 
 {% endblock %}
