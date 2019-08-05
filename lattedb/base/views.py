@@ -2,47 +2,31 @@
 """
 from django.http import HttpResponse
 
-from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
-
 from django.views import View
 from django.shortcuts import render
 
-from lattedb.base.forms import TableSelectForm
-from lattedb.base.forms import CHOICES
-from django.http import HttpResponseRedirect
+from lattedb.base.forms import ModelSelectForm
+from lattedb.base.forms import MODELS
 
 from lattedb.base.models import Base
 from lattedb.base.utilities.models import iter_tree
 
 
-def index(request):  # pylint: disable=W0613
+def index(request):  # pylint: disable=W0613, C0111
     return HttpResponse("Hello, world. You're at the polls index.")
 
 
-class TableSelectView(FormView):
-    template_name = "select_table.html"
-    form_class = TableSelectForm
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.table = None
-
-    def form_valid(self, form):
-        self.table = form.cleaned_data["table"]
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        print(self.table, type(self.table))
-        return reverse_lazy("base:populate")
-
-
 class PopulationView(View):
+    """View which queries the user for creating a tree for a selected table.
+    """
+
     template_name = "select_table.html"
-    form_class = TableSelectForm
+    form_class = ModelSelectForm
 
     def get(self, request):
-        """
+        """Initializes from which queries user which table he wants to populate.
+
+        This starts the parsing of the tree.
         """
         form = self.form_class()
         request.session["todo"] = []
@@ -50,18 +34,16 @@ class PopulationView(View):
         request.session["name"] = None
         return render(request, self.template_name, {"form": form})
 
-    def post(self, request, *args, **kwargs):
-        """The todo is to store the last selection and query the next.
+    def post(self, request, *args, **kwargs):  # pylint: disable=W0613
+        """Processes the selected model, pops the next task and adds its subclasses
+        to todo. Once the todo list is empty, it returns the tree.
 
-        There are two cases:
-            1. No last selection (name is None)
-            2. Given last selection (name is not None)
-
+        This view uses cookies for creating the query.
         """
         form = self.form_class(request.POST)
         if form.is_valid():
 
-            model = CHOICES[form.cleaned_data["table"]]
+            model = form.get_model()
             name = request.session.get("name") or model.get_label()
 
             request.session["tree"][name] = model.get_label()
@@ -74,7 +56,7 @@ class PopulationView(View):
             if request.session["todo"]:
                 name, model = request.session["todo"].pop(0)
                 request.session["name"] = name
-                model = CHOICES[model]
+                model = MODELS[model]
                 subset = (
                     [m.get_label() for m in model.__subclasses__()]
                     if not model is Base
