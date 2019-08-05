@@ -32,28 +32,6 @@ def get_lattedb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Mode
     return app_models
 
 
-def get_tree(
-    base: Optional[Base],
-    tree: Optional[Dict[str, Base]] = None,
-    todo: Optional[List[Tuple[str, Base]]] = None,
-) -> Dict[str, Base]:
-    """
-    """
-    tree = tree or {}
-    if base is not None:
-        todo = []
-        col = None
-        cls = base
-    else:
-        col, cls = todo.pop(0)
-        tree[col] = cls
-
-    tasks = iter_tree(col, cls)
-    todo = tasks + todo
-
-    return tree, todo
-
-
 def convert_tree(flat_tree: Dict[str, Base]) -> Dict[str, Any]:
     """
     """
@@ -68,13 +46,28 @@ def convert_tree(flat_tree: Dict[str, Base]) -> Dict[str, Any]:
     return tree
 
 
-def iter_tree(name: str, base: Base) -> List[Tuple[str, str]]:
-    """
-    """
-    tasks = []
+def iter_tree(name: str, model: Base) -> List[Tuple[str, str]]:
+    """Extracts all foreign keys of model and inserters them in list.
 
-    for field in base.get_open_fields():
+    Returns strings in flat tree format, e.g., `propagator.gaugeconfig`.
+
+    **Arguments**
+        name: str
+            The (path) name of the model.
+
+        model: Base
+            A child of the base model.
+
+    **Returns**
+        tree: List[Tuple[str, str]]
+            First element of tuple are name names of the foreign keys in format
+            `{name}.{field.name}`.
+            Second element are the actual classes.
+    """
+    tree = []
+
+    for field in model.get_open_fields():
         if isinstance(field, models.ForeignKey):
-            tasks.append((f"{name}.{field.name}", field.related_model))
+            tree.append((f"{name}.{field.name}", field.related_model))
 
-    return tasks
+    return tree
