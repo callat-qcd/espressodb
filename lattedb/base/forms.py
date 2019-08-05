@@ -23,7 +23,13 @@ class ModelSelectForm(forms.Form):
         """
         return MODELS[self.cleaned_data["model"]]
 
-    def __init__(self, *args, subset: Optional[List[str]] = None, **kwargs):
+    def __init__(
+        self,
+        *args,
+        subset: Optional[List[str]] = None,
+        name: Optional[str] = None,
+        **kwargs
+    ):
         """Initializes the form
 
         Limits choice to models which do not have `Base` as their direct ancestor.
@@ -37,3 +43,5 @@ class ModelSelectForm(forms.Form):
             self.fields["model"].choices = [
                 (key, val) for key, val in self.fields["model"].choices if key in subset
             ]
+        if name:
+            self.fields["model"].label = name

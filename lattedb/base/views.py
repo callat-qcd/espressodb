@@ -32,6 +32,7 @@ class PopulationView(View):
         request.session["todo"] = []
         request.session["tree"] = {}
         request.session["name"] = None
+        request.session["root"] = None
         return render(request, self.template_name, {"form": form})
 
     def post(self, request, *args, **kwargs):  # pylint: disable=W0613
@@ -44,11 +45,15 @@ class PopulationView(View):
         if form.is_valid():
 
             model = form.get_model()
-            name = request.session.get("name") or model.get_label()
+            name = request.session.get("name", None)
+            root = request.session.get("root", None)
 
-            request.session["tree"][name] = model.get_label()
+            if root is None:
+                request.session["root"] = model.get_label()
+            else:
+                request.session["tree"][name] = model.get_label()
 
-            tasks = iter_tree(name, model)
+            tasks = iter_tree(model, name)
 
             for nn, mm in tasks[::-1]:
                 request.session["todo"].insert(0, (nn, mm.get_label()))
@@ -62,7 +67,7 @@ class PopulationView(View):
                     if not model is Base
                     else [model.get_label()]
                 )
-                form = self.form_class(subset=subset)
+                form = self.form_class(subset=subset, name=name)
 
             else:
                 return HttpResponse(str(request.session["tree"]))
