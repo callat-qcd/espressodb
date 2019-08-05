@@ -7,6 +7,6 @@ from lattedb.base import views
 
 app_name = "Base"
 urlpatterns = [
-    path("populate", views.TableSelectView.as_view(), name="populate"),
+    path("populate", views.PopulationView.as_view(), name="populate"),
     path("", views.index, name="index"),
 ]
