@@ -67,6 +67,8 @@ class Base(models.Model):
 
     @classmethod
     def get_label(cls):
+        """Returns descriptive string about class
+        """
         base = f"[{cls.mro()[1].__name__}]" if cls != Base else ""
         return f"{cls.__name__}{base}"
 
@@ -84,8 +86,7 @@ class Base(models.Model):
             else ""
         )
         info = ", ".join([f"{key}={val}" for key, val in kwargs.items() if val])
-        info_str = f"({info})" if info else ""
-        return f"{self.__class__.__name__}{base}{info_str}"
+        return f"{self.__class__.__name__}{base}({info})"
 
     def clean(self):
         """Sets the type name to the class instance name
