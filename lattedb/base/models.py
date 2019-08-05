@@ -80,6 +80,8 @@ class Base(models.Model):
 
     @classmethod
     def get_label(cls):
+        """Returns descriptive string about class
+        """
         base = f"[{cls.mro()[1].__name__}]" if cls != Base else ""
         return f"{cls.__name__}{base}"
 
