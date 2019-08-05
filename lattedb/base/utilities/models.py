@@ -32,31 +32,17 @@ def get_lattedb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Mode
     return app_models
 
 
-def convert_tree(flat_tree: Dict[str, Base]) -> Dict[str, Any]:
-    """
-    """
-    flat_tree
-    tree = {}
-
-    subtree = tree
-    for col in cols.split(".")[:-1]:
-        subtree = subtree.setdefault(col, {})
-    subtree[cols[-1]] = cls
-
-    return tree
-
-
-def iter_tree(name: str, model: Base) -> List[Tuple[str, str]]:
+def iter_tree(model: Base, name: Optional[str] = None) -> List[Tuple[str, str]]:
     """Extracts all foreign keys of model and inserters them in list.
 
     Returns strings in flat tree format, e.g., `propagator.gaugeconfig`.
 
     **Arguments**
-        name: str
-            The (path) name of the model.
-
         model: Base
             A child of the base model.
+
+        name: Optional[str] = None
+            The (path) name of the model.
 
     **Returns**
         tree: List[Tuple[str, str]]
@@ -68,6 +54,8 @@ def iter_tree(name: str, model: Base) -> List[Tuple[str, str]]:
 
     for field in model.get_open_fields():
         if isinstance(field, models.ForeignKey):
-            tree.append((f"{name}.{field.name}", field.related_model))
+            tree.append(
+                (f"{name}.{field.name}" if name else field.name, field.related_model)
+            )
 
     return tree

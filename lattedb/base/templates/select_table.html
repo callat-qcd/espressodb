@@ -2,7 +2,13 @@
 {% load bootstrap4 %}
 {% block content %}
 <div class="jumbotron">
-    <h1>Which table do you want to populate</h1>
+    <h1>
+        {% if not request.session.root %}
+            Which table do you want to populate?
+        {% else %}
+            Populating {{request.session.root}}
+        {% endif %}
+    </h1>
 </div>
 <div class="container">
 <div class="row">
@@ -11,15 +17,16 @@
         {% for key, val in request.session.tree.items %}
             <li>{{key}} - {{val}}</li>
         {% endfor %}
+            <li>
+                <form action="{{form.success}}" method="post" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form inline=True%}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    {% endbuttons %}
+                </form>
+            </li>
         </ul>
-        <h4> Pick {{request.session.name}} </h4>
-        <form action="{{form.success}}" method="post" class="form">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">Submit</button>
-        {% endbuttons %}
-    </form>
 </div>
 </div>
 </div>
