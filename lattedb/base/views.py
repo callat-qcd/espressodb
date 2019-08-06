@@ -41,6 +41,10 @@ class PopulationView(View):
 
         This view uses cookies for creating the query.
         """
+        # todo: drop duplicate tasks
+        # todo: make it possible to use backwards
+        # todo: is it possible to have sessions just for one url? (Integrity)
+
         form = self.form_class(request.POST)
         if form.is_valid():
 
