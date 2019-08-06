@@ -38,6 +38,7 @@ INSTALLED_APPS = PROJECT_APPS + [
     "lattedb.config",
     "django_tables2",
     "bootstrap4",
+    "widget_tweaks",
     "django_extensions",
     "django.contrib.admin",
     "django.contrib.auth",
