@@ -1,11 +1,11 @@
 ####################
-gaugeconfig
+fermionaction
 ####################
 
 .. toctree::
    :maxdepth: 4
    :glob:
 
-.. automodule:: lattedb.gaugeconfig.models
+.. automodule:: lattedb.fermionaction.models
    :members:
    :show-inheritance:

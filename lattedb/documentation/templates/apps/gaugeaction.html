@@ -1,26 +1,26 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
  <div itemprop="articleBody">
-  <div class="section" id="gaugeconfig">
+  <div class="section" id="gaugeaction">
    <h1>
-    gaugeconfig
-    <a class="headerlink" href="#gaugeconfig" title="Permalink to this headline">
+    gaugeaction
+    <a class="headerlink" href="#gaugeaction" title="Permalink to this headline">
      ¶
     </a>
    </h1>
    <div class="toctree-wrapper compound">
    </div>
-   <span class="target" id="module-lattedb.gaugeconfig.models">
+   <span class="target" id="module-lattedb.gaugeaction.models">
    </span>
    <dl class="class">
-    <dt id="lattedb.gaugeconfig.models.GaugeConfig">
+    <dt id="lattedb.gaugeaction.models.GaugeAction">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugeconfig.models.
+      lattedb.gaugeaction.models.
      </code>
      <code class="descname">
-      GaugeConfig
+      GaugeAction
      </code>
      <span class="sig-paren">
       (
@@ -35,7 +35,7 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.gaugeaction.models.GaugeAction" title="Permalink to this definition">
       ¶
      </a>
     </dt>
@@ -123,103 +123,23 @@
           </li>
           <li>
            <strong>
-            short_tag
-           </strong>
-           (
-           <em>
-            TextField
-           </em>
-           ) – (Optional) Text: Short name for gaugeconfig (e.g. ‘a15m310’)
-          </li>
-          <li>
-           <strong>
-            stream
-           </strong>
-           (
-           <em>
-            TextField
-           </em>
-           ) – Text: Stream tag for Monte Carlo
-          </li>
-          <li>
-           <strong>
-            config
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Configuration number
-          </li>
-          <li>
-           <strong>
-            gaugeaction_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – ForeignKey pointing to lattice gauge action
-          </li>
-          <li>
-           <strong>
-            nx
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Spatial length in lattice units
-          </li>
-          <li>
-           <strong>
-            ny
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Spatial length in lattice units
-          </li>
-          <li>
-           <strong>
-            nz
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Spatial length in lattice units
-          </li>
-          <li>
-           <strong>
-            nt
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Temporal length in lattice units
-          </li>
-          <li>
-           <strong>
-            l_fm
+            beta
            </strong>
            (
            <em>
             DecimalField
            </em>
-           ) – (Optional) Decimal(10,6): Spatial length in fermi
+           ) – Decimal(10,6): Coupling constant
           </li>
           <li>
            <strong>
-            gaugesmear_id
+            a_fm
            </strong>
            (
            <em>
-            ForeignKey
+            DecimalField
            </em>
-           ) – ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.
+           ) – (Optional) Decimal(10,6): Lattice spacing in fermi
           </li>
          </ul>
         </td>
@@ -227,14 +147,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugeconfig.models.GaugeConfig.DoesNotExist">
+      <dt id="lattedb.gaugeaction.models.GaugeAction.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.gaugeaction.models.GaugeAction.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -250,14 +170,14 @@
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugeconfig.models.GaugeConfig.MultipleObjectsReturned">
+      <dt id="lattedb.gaugeaction.models.GaugeAction.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugeconfig.models.GaugeConfig.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.gaugeaction.models.GaugeAction.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -275,15 +195,15 @@
     </dd>
    </dl>
    <dl class="class">
-    <dt id="lattedb.gaugeconfig.models.Nf211">
+    <dt id="lattedb.gaugeaction.models.LuescherWeisz">
      <em class="property">
       class
      </em>
      <code class="descclassname">
-      lattedb.gaugeconfig.models.
+      lattedb.gaugeaction.models.
      </code>
      <code class="descname">
-      Nf211
+      LuescherWeisz
      </code>
      <span class="sig-paren">
       (
@@ -298,17 +218,17 @@
      <span class="sig-paren">
       )
      </span>
-     <a class="headerlink" href="#lattedb.gaugeconfig.models.Nf211" title="Permalink to this definition">
+     <a class="headerlink" href="#lattedb.gaugeaction.models.LuescherWeisz" title="Permalink to this definition">
       ¶
      </a>
     </dt>
     <dd>
      <p>
       Bases:
-      <a class="reference internal" href="#lattedb.gaugeconfig.models.GaugeConfig" title="lattedb.gaugeconfig.models.GaugeConfig">
+      <a class="reference internal" href="#lattedb.gaugeaction.models.GaugeAction" title="lattedb.gaugeaction.models.GaugeAction">
        <code class="xref py py-class docutils literal notranslate">
         <span class="pre">
-         lattedb.gaugeconfig.models.GaugeConfig
+         lattedb.gaugeaction.models.GaugeAction
         </span>
        </code>
       </a>
@@ -385,163 +305,43 @@
           </li>
           <li>
            <strong>
-            short_tag
-           </strong>
-           (
-           <em>
-            TextField
-           </em>
-           ) – (Optional) Text: Short name for gaugeconfig (e.g. ‘a15m310’)
-          </li>
-          <li>
-           <strong>
-            stream
-           </strong>
-           (
-           <em>
-            TextField
-           </em>
-           ) – Text: Stream tag for Monte Carlo
-          </li>
-          <li>
-           <strong>
-            config
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Configuration number
-          </li>
-          <li>
-           <strong>
-            gaugeaction_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – ForeignKey pointing to lattice gauge action
-          </li>
-          <li>
-           <strong>
-            nx
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Spatial length in lattice units
-          </li>
-          <li>
-           <strong>
-            ny
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Spatial length in lattice units
-          </li>
-          <li>
-           <strong>
-            nz
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Spatial length in lattice units
-          </li>
-          <li>
-           <strong>
-            nt
-           </strong>
-           (
-           <em>
-            PositiveSmallIntegerField
-           </em>
-           ) – PositiveSmallInt: Temporal length in lattice units
-          </li>
-          <li>
-           <strong>
-            l_fm
+            beta
            </strong>
            (
            <em>
             DecimalField
            </em>
-           ) – (Optional) Decimal(10,6): Spatial length in fermi
+           ) – Decimal(10,6): Coupling constant
           </li>
           <li>
            <strong>
-            gaugesmear_id
+            a_fm
            </strong>
            (
            <em>
-            ForeignKey
+            DecimalField
            </em>
-           ) – ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.
+           ) – (Optional) Decimal(10,6): Lattice spacing in fermi
           </li>
           <li>
            <strong>
-            gaugeconfig_ptr_id
+            gaugeaction_ptr_id
            </strong>
            (
            <em>
             OneToOneField
            </em>
-           ) – Gaugeconfig ptr
+           ) – Gaugeaction ptr
           </li>
           <li>
            <strong>
-            light_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – ForeignKey pointing to lattice fermion action
-          </li>
-          <li>
-           <strong>
-            strange_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – ForeignKey pointing to lattice fermion action
-          </li>
-          <li>
-           <strong>
-            charm_id
-           </strong>
-           (
-           <em>
-            ForeignKey
-           </em>
-           ) – ForeignKey pointing to lattice fermion action
-          </li>
-          <li>
-           <strong>
-            mpil
+            u0
            </strong>
            (
            <em>
             DecimalField
            </em>
-           ) – (Optional) Decimal(10,6): Spatial length in mpiL
-          </li>
-          <li>
-           <strong>
-            mpi
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – (Optional) Decimal(10,6): Pion mass in MeV
+           ) – Decimal(10,6): Tadpole improvement coefficient
           </li>
          </ul>
         </td>
@@ -549,14 +349,14 @@
       </tbody>
      </table>
      <dl class="exception">
-      <dt id="lattedb.gaugeconfig.models.Nf211.DoesNotExist">
+      <dt id="lattedb.gaugeaction.models.LuescherWeisz.DoesNotExist">
        <em class="property">
         exception
        </em>
        <code class="descname">
         DoesNotExist
        </code>
-       <a class="headerlink" href="#lattedb.gaugeconfig.models.Nf211.DoesNotExist" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.gaugeaction.models.LuescherWeisz.DoesNotExist" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -565,21 +365,21 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugeconfig.models.DoesNotExist
+          lattedb.gaugeaction.models.DoesNotExist
          </span>
         </code>
        </p>
       </dd>
      </dl>
      <dl class="exception">
-      <dt id="lattedb.gaugeconfig.models.Nf211.MultipleObjectsReturned">
+      <dt id="lattedb.gaugeaction.models.LuescherWeisz.MultipleObjectsReturned">
        <em class="property">
         exception
        </em>
        <code class="descname">
         MultipleObjectsReturned
        </code>
-       <a class="headerlink" href="#lattedb.gaugeconfig.models.Nf211.MultipleObjectsReturned" title="Permalink to this definition">
+       <a class="headerlink" href="#lattedb.gaugeaction.models.LuescherWeisz.MultipleObjectsReturned" title="Permalink to this definition">
         ¶
        </a>
       </dt>
@@ -588,7 +388,7 @@
         Bases:
         <code class="xref py py-class docutils literal notranslate">
          <span class="pre">
-          lattedb.gaugeconfig.models.MultipleObjectsReturned
+          lattedb.gaugeaction.models.MultipleObjectsReturned
          </span>
         </code>
        </p>

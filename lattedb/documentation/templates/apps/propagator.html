@@ -122,33 +122,23 @@
           </li>
           <li>
            <strong>
-            ensemble_id
+            gaugeconfig_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to gauge field
+           ) – ForeignKey pointing to specific gauge configuration inverted on
           </li>
           <li>
            <strong>
-            action_id
+            fermionaction_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to valence lattice action
-          </li>
-          <li>
-           <strong>
-            mval
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – Decimal(10,6): Input valence quark mass
+           ) – ForeignKey pointing to valence lattice fermion action
           </li>
           <li>
            <strong>
@@ -162,13 +152,23 @@
           </li>
           <li>
            <strong>
-            propagator_id
+            propagator0_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey that link to a coherent propagator
+           ) – ForeignKey that link to a coherent propagator (spectator 0)
+          </li>
+          <li>
+           <strong>
+            propagator1_id
+           </strong>
+           (
+           <em>
+            ForeignKey
+           </em>
+           ) – ForeignKey that link to a coherent propagator (spectator 1)
           </li>
           <li>
            <strong>
@@ -209,16 +209,6 @@
             SmallIntegerField
            </em>
            ) – SmallInt: Source-sink separation time
-          </li>
-          <li>
-           <strong>
-            momentum
-           </strong>
-           (
-           <em>
-            SmallIntegerField
-           </em>
-           ) – SmallInt: Sink momentum in units of 2 pi / L
           </li>
          </ul>
         </td>
@@ -384,33 +374,23 @@
           </li>
           <li>
            <strong>
-            ensemble_id
+            gaugeconfig_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to gauge field
+           ) – ForeignKey pointing to specific gauge configuration inverted on
           </li>
           <li>
            <strong>
-            action_id
+            fermionaction_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to valence lattice action
-          </li>
-          <li>
-           <strong>
-            mval
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – Decimal(10,6): Input valence quark mass
+           ) – ForeignKey pointing to valence lattice fermion action
           </li>
           <li>
            <strong>
@@ -430,7 +410,7 @@
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey linking source side propagator
+           ) – ForeignKey linking RHS propagator
           </li>
           <li>
            <strong>
@@ -440,17 +420,7 @@
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey linking current insertion operator
-          </li>
-          <li>
-           <strong>
-            momentum
-           </strong>
-           (
-           <em>
-            SmallIntegerField
-           </em>
-           ) – SmallInt: Current insertion momentum in units of 2 pi / L
+           ) – ForeignKey linking momentum space current insertion
           </li>
          </ul>
         </td>
@@ -616,33 +586,23 @@
           </li>
           <li>
            <strong>
-            ensemble_id
+            gaugeconfig_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to gauge field
+           ) – ForeignKey pointing to specific gauge configuration inverted on
           </li>
           <li>
            <strong>
-            action_id
+            fermionaction_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to valence lattice action
-          </li>
-          <li>
-           <strong>
-            mval
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – Decimal(10,6): Input valence quark mass
+           ) – ForeignKey pointing to valence lattice fermion action
           </li>
           <li>
            <strong>
@@ -859,33 +819,23 @@
           </li>
           <li>
            <strong>
-            ensemble_id
+            gaugeconfig_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to gauge field
+           ) – ForeignKey pointing to specific gauge configuration inverted on
           </li>
           <li>
            <strong>
-            action_id
+            fermionaction_id
            </strong>
            (
            <em>
             ForeignKey
            </em>
-           ) – ForeignKey pointing to valence lattice action
-          </li>
-          <li>
-           <strong>
-            mval
-           </strong>
-           (
-           <em>
-            DecimalField
-           </em>
-           ) – Decimal(10,6): Input valence quark mass
+           ) – ForeignKey pointing to valence lattice fermion action
           </li>
          </ul>
         </td>
