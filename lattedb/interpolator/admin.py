@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from lattedb.base.admin import BaseAdmin
 
-from lattedb.interpolator.models import Basak
+from lattedb.interpolator.models import Hadron
 
 
-admin.site.register(Basak, BaseAdmin)
+admin.site.register(Hadron, BaseAdmin)
