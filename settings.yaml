@@ -12,3 +12,4 @@ PROJECT_APPS:
     - lattedb.current
     - lattedb.correlator
     - lattedb.documentation
+    - lattedb.ensemble

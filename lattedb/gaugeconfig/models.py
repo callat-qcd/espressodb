@@ -65,10 +65,26 @@ class GaugeConfig(Base):
             )
         ]
 
+    def same_ensemble(self, config: "GaugeConfig") -> bool:
+        """Checks if all meta information for a given config are the same.
+        """
+        equal = False
+        if self.type == config.type:
+            equal = all(
+                [
+                    getattr(self, column) == getattr(config, column)
+                    for column in self.get_open_fields()
+                    if column != "config"
+                ]
+            )
+
+        return equal
+
 
 class Nf211(GaugeConfig):
     """
     """
+
     light = models.ForeignKey(
         "fermionaction.FermionAction",
         on_delete=models.CASCADE,
