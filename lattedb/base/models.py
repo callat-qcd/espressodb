@@ -71,7 +71,9 @@ class Base(models.Model):
         kwargs = {
             field.name: getattr(self, field.name)
             for field in self.get_open_fields()
-            if not isinstance(field, models.ForeignKey) and getattr(self, field.name)
+            if not isinstance(field, models.ForeignKey)
+            and not isinstance(field, models.ManyToManyField)
+            and getattr(self, field.name)
         }
         base = (
             f"[{self.__class__.mro()[1].__name__}]"
