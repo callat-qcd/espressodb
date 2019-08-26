@@ -420,18 +420,13 @@ class Base(models.Model):
                     kwargs[field.name] = field.get_db_prep_value(value, connection)
 
         try:
-            instance, not_exist = cls.objects.get_or_create(**kwargs)
+            instance, created = cls.objects.get_or_create(**kwargs)
         except IntegrityError as e:
             LOGGER.debug("Get or create call for %s failed with kwargs\n%s", cls, kwargs)
             raise e
 
         LOGGER.debug(
-            "%sCreated %s" if not_exist else "%sFetched %s from db", indent, instance
+            "%sCreated %s" if created else "%sFetched %s from db", indent, instance
         )
-
-        created = False
-        if not dry_run and not_exist:
-            instance.save()
-            created = True
 
         return instance, created
