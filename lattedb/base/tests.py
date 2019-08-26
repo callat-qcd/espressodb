@@ -21,6 +21,7 @@ class BaseTest:
 
     @classmethod
     def check(cls, instance, parameters):
+        # ToDo: check recursive columns using subtests
         for key in cls.parameters:
             if key in cls.cls.__dict__:
                 value = getattr(instance.specialization, key)
