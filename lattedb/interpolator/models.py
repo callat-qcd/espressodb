@@ -47,8 +47,8 @@ class Hadron4D(Interpolator):
         help_text="PositiveSmallIntegerField: k-th embedding of O^D_h irrep.",
     )
 
-    parity = models.PositiveSmallIntegerField(
-        null=False, help_text="PositiveSmallIntegerField: Parity of hadronic operator"
+    parity = models.SmallIntegerField(
+        null=False, help_text="SmallIntegerField: Parity of hadronic operator"
     )
     spin_x2 = models.PositiveSmallIntegerField(
         null=False, help_text="Text: Total spin times two"
@@ -96,8 +96,8 @@ class Hadron(Interpolator):
         help_text="PositiveSmallIntegerField: k-th embedding of O^D_h irrep.",
     )
 
-    parity = models.PositiveSmallIntegerField(
-        null=False, help_text="PositiveSmallIntegerField: Parity of hadronic operator"
+    parity = models.SmallIntegerField(
+        null=False, help_text="SmallIntegerField: Parity of hadronic operator"
     )
     spin_x2 = models.PositiveSmallIntegerField(
         null=False, help_text="Text: Total spin times two"
