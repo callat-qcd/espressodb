@@ -59,7 +59,11 @@ class BaseTest:
         Creates an instance and checks attributes.
         """
         parameters = self.get_parameters()
-        self.cls.get_or_create_from_parameters(parameters, tree=self.get_tree())
+        tree = self.get_tree()
+        LOGGER.debug("Working with the following tree:\n%s", tree)
+        LOGGER.debug("Working with the following parameters:\n%s", parameters)
+
+        self.cls.get_or_create_from_parameters(parameters, tree=tree)
 
         # Get created object
         instance = self.cls.objects.last()
