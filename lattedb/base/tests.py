@@ -1,6 +1,12 @@
+"""
+"""
+import logging
+
 from django.db import connection
 
 # Create your tests here.
+
+LOGGER = logging.getLogger("base")
 
 
 class BaseTest:
@@ -38,7 +44,7 @@ class BaseTest:
     def get_tree(cls):
         tree = {}
         for key, sub_test in (cls.test_tree or {}).items():
-            tree[key] = sub_test.cls.__class__.__name__
+            tree[key] = sub_test.cls.__name__
 
             sub_test_tree = sub_test.get_tree() or {}
             for sub_key, val in sub_test_tree:
