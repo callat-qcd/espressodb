@@ -3,55 +3,32 @@
 
 from django.test import TestCase
 
+from lattedb.base.tests import BaseTest
 
-from lattedb.gaugeconfig.models import GaugeConfig
 from lattedb.gaugeconfig.models import Nf211
+
+import lattedb.gaugesmear.tests as gaugesmear_tests
+import lattedb.gaugeaction.tests as gaugeaction_tests
 
 # Create your tests here.
 
 
-class HisqTestCase(TestCase):
+class GaugeConfigTestCase(TestCase, BaseTest):
 
-    creation_parameters = {
-        "short_tag": "a15m310",
-        "stream": "a",
-        "nconfig": 500,
-        "nx": 48,
-        "nt": 64,
-        "ml": 1.0,
-        "ms": 2.0,
-        "mc": 3.0,
-        "beta": 4.0,
-        "naik": 5.0,
-        "u0": 6.0,
-        "a_fm": 7.0,
-        "l_fm": 8.0,
-        "mpil": 16.0,
-        "mpi": 2.0,
+    cls = Nf211
+    parameters = {
+        **{
+            "short_tag": "a15m310",
+            "stream": "a",
+            "nconfig": 500,
+            "nx": 48,
+            "ny": 48,
+            "nz": 48,
+            "nt": 64,
+            "l_fm": 8.0,
+        }
     }
-
-    def test_get_or_create(self):
-        """
-        """
-        hisq, created = Nf211.objects.get_or_create(**self.creation_parameters)
-        self.assertTrue(created)
-
-        for key, val in self.creation_parameters.items():
-            with self.subTest(column=key):
-                self.assertEqual(val, getattr(hisq, key))
-
-    def test_get_or_create_from_parameters(self):
-        """
-        """
-        instance, instances = Nf211.get_or_create_from_parameters(
-            self.creation_parameters
-        )
-
-        self.assertEqual(len(instances), 1)
-
-        instance, created = instances[0]
-        self.assertTrue(created)
-
-        for key, val in self.creation_parameters.items():
-            with self.subTest(column=key):
-                self.assertEqual(val, getattr(instance, key))
+    test_tree = {
+        "gaugeaction": gaugeaction_tests.GaugeActionTestCase,
+        "gaugesmear": gaugesmear_tests.GaugeSmearTestCase,
+    }

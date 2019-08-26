@@ -8,8 +8,10 @@ class BaseTest:
     """
 
     cls = None
-    parameters = {}
-    tree = None
+    test_tree = None
+
+    parameters = None
+    test_tree = None
 
     @classmethod
     def check(cls, instance, parameters):
@@ -25,15 +27,34 @@ class BaseTest:
                         % (instance, key, value, parameters[key])
                     )
 
+    @classmethod
+    def get_parameters(cls):
+        pars = cls.parameters
+        for sub_test in (cls.test_tree or {}).values():
+            pars.update(sub_test.get_parameters())
+        return pars
+
+    @classmethod
+    def get_tree(cls):
+        tree = {}
+        for key, sub_test in (cls.test_tree or {}).items():
+            tree[key] = sub_test.cls.__class__.__name__
+
+            sub_test_tree = sub_test.get_tree() or {}
+            for sub_key, val in sub_test_tree:
+                tree[f"{key}.{sub_key}"] = val
+
+        return tree
+
     def test_get_or_create_from_parameters(self):
         """Tests get or create from parameters method
 
         Creates an instance and checks attributes.
         """
-
-        self.cls.get_or_create_from_parameters(self.parameters, tree=self.tree)
+        parameters = self.get_parameters()
+        self.cls.get_or_create_from_parameters(parameters, tree=self.get_tree())
 
         # Get created object
         instance = self.cls.objects.last()
         # check if parameters correct
-        self.check(instance, self.parameters)
+        self.check(instance, parameters)
