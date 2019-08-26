@@ -48,7 +48,7 @@ class BaseTest:
             tree[key] = sub_test.cls.__name__
 
             sub_test_tree = sub_test.get_tree() or {}
-            for sub_key, val in sub_test_tree:
+            for sub_key, val in sub_test_tree.items():
                 tree[f"{key}.{sub_key}"] = val
 
         return tree
