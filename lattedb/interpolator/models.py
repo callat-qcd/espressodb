@@ -19,11 +19,9 @@ class Interpolator(Base):
         help_text="ForeignKey pointing to operator smearing",
     )
 
-    strangeness = models.DecimalField(
-        max_digits=1,
-        decimal_places=0,
+    strangeness = models.PositiveSmallIntegerField(
         null=False,
-        help_text="Decimal(1,0): Strangeness of hadronic operator",
+        help_text="PositiveSmallIntegerField: Strangeness of hadronic operator",
     )
 
     class Meta:
@@ -43,19 +41,14 @@ class Hadron4D(Interpolator):
         blank=False,
         help_text="Text: Irreducible representations of O^D_h (octahedral group)",
     )
-    embedding = models.DecimalField(
-        max_digits=1,
-        decimal_places=0,
+    embedding = models.PositiveSmallIntegerField(
         null=False,
         blank=False,
-        help_text="Decimal(1,0): k-th embedding of O^D_h irrep.",
+        help_text="PositiveSmallIntegerField: k-th embedding of O^D_h irrep.",
     )
 
-    parity = models.DecimalField(
-        max_digits=1,
-        decimal_places=0,
-        null=False,
-        help_text="Decimal(1,0): Parity of hadronic operator",
+    parity = models.PositiveSmallIntegerField(
+        null=False, help_text="PositiveSmallIntegerField: Parity of hadronic operator"
     )
     spin_x2 = models.PositiveSmallIntegerField(
         null=False, help_text="Text: Total spin times two"
@@ -97,19 +90,14 @@ class Hadron(Interpolator):
         blank=False,
         help_text="Text: Irreducible representations of O^D_h (octahedral group)",
     )
-    embedding = models.DecimalField(
-        max_digits=1,
-        decimal_places=0,
+    embedding = models.PositiveSmallIntegerField(
         null=False,
         blank=False,
-        help_text="Decimal(1,0): k-th embedding of O^D_h irrep.",
+        help_text="PositiveSmallIntegerField: k-th embedding of O^D_h irrep.",
     )
 
-    parity = models.DecimalField(
-        max_digits=1,
-        decimal_places=0,
-        null=False,
-        help_text="Decimal(1,0): Parity of hadronic operator",
+    parity = models.PositiveSmallIntegerField(
+        null=False, help_text="PositiveSmallIntegerField: Parity of hadronic operator"
     )
     spin_x2 = models.PositiveSmallIntegerField(
         null=False, help_text="Text: Total spin times two"

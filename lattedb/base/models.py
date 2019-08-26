@@ -142,12 +142,12 @@ class Base(models.Model):
 
     @classmethod
     def get_sub_info(
-        cls, key: str, tree: Dict[str, Any]
+        cls, root_key: str, tree: Dict[str, Any]
     ) -> Tuple[str, Optional[Dict[str, Any]]]:
         """Extracts the class name and sub tree for a given tree and key
 
         **Arguments**
-            key: str
+            root_key: str
                 The key to look up in the dictionary
 
             tree: Dict[str, Any]
@@ -163,26 +163,15 @@ class Base(models.Model):
             KeyError:
                 If the key was not found in the dictionary
         """
-        sub_tree_info = tree.get(key, None)
-        if sub_tree_info is not None:
-            if isinstance(sub_tree_info, tuple) and len(sub_tree_info) == 2:
-                sub_class_name, sub_tree = sub_tree_info
-            elif isinstance(sub_tree_info, str):
-                sub_class_name, sub_tree = sub_tree_info, None
-            else:
-                raise TypeError(
-                    "Error in parsing dependency tree."
-                    " Sub class info must be either a tuple of type str"
-                    " and dictionary or a string."
-                    f" received {type(sub_tree_info)}"
-                )
-        else:
-            raise KeyError(
-                "Key '%s' was not specified in tree but needed for instantiating %s"
-                % (key, cls)
-            )
+        sub_tree = {}
+        for key, val in tree.items():
+            branches = key.split(".")
+            root = branches[0]
+            if root == root_key:
+                if len(branches) > 1:
+                    sub_tree[".".join(branches[1:])] = val
 
-        return sub_class_name, sub_tree
+        return sub_tree
 
     @classmethod
     def get_recursive_columns(
@@ -207,13 +196,16 @@ class Base(models.Model):
 
         columns = {}
         for field in specialization.get_open_fields():
+
             if isinstance(field, models.ForeignKey):
 
-                sub_class_name, sub_tree = specialization.get_sub_info(field.name, tree)
+                sub_class_name = tree.get(field.name, None)
                 if sub_class_name is not None:
-                    for key, val in field.related_model.get_recursive_columns(
+                    sub_tree = specialization.get_sub_info(field.name, tree)
+                    sub_cols = field.related_model.get_recursive_columns(
                         tree=sub_tree, _class_name=sub_class_name
-                    ).items():
+                    )
+                    for key, val in sub_cols.items():
                         columns.setdefault(key, []).extend(
                             [f"{specialization.__name__}.{col}" for col in val]
                         )
@@ -229,10 +221,9 @@ class Base(models.Model):
         field: models.ForeignKey,
         parameters: Dict[str, Any],
         tree: Optional[Dict[str, Any]] = None,
-        specialized_parameters: Dict[str, Any] = None,
         dry_run: bool = False,
         _recursion_level: int = 0,
-    ):
+    ) -> Tuple["Base", bool]:
         """Recursively iterates ForeignKey field and tries to construc the foreign keys
         from parameters and parse tree using `get_or_create_from_parameters`.
 
@@ -260,22 +251,7 @@ class Base(models.Model):
 
                 tree={"key1": "B"}
                 # or if B also depends on Foreign Keys
-                tree={"key1": ("B", {"key2": "C"})}
-                ```
-
-            specialized_parameters: Dict[str, Any] = None
-                The construction / query arguments for special foreign keys (in case
-                there is overlap). Follows a similar syntax as the tree.
-
-                Example:
-                ```
-                class B(Base):
-                    key2 = IntegerField()
-
-                class A(Base):
-                    key1 = ForeignKey(B)
-
-                specialized_parameters={"key1": {"key2": 2}}
+                tree={"key1": "B", "key1.key2": "C"}
                 ```
 
             dry_run: bool = False
@@ -286,37 +262,44 @@ class Base(models.Model):
         """
         tree = tree or {}
 
-        sub_class_name, sub_tree = cls.get_sub_info(field.name, tree)
+        sub_class_name = tree.get(field.name, None)
         if sub_class_name is not None:
-            instance, all_instances = field.related_model.get_or_create_from_parameters(
-                parameters,
+            sub_tree = cls.get_sub_info(field.name, tree)
+
+            # get general parameters
+            sub_pars = {
+                key: val for key, val in parameters.items() if len(key.split(".")) == 1
+            }
+            # now update keys with more specialized keys
+            sub_pars.update(cls.get_sub_info(field.name, parameters))
+
+            instance, created = field.related_model.get_or_create_from_parameters(
+                sub_pars,
                 tree=sub_tree,
-                specialized_parameters=specialized_parameters,
                 dry_run=dry_run,
                 _class_name=sub_class_name,
                 _recursion_level=_recursion_level,
             )
 
         else:
-            instance, all_instances = None, []
+            instance, created = None, False
             if not field.null:
                 raise KeyError(
                     "Tree for parsing classes did not contain"
                     f" value for non-null foreign key {field.name}"
                 )
 
-        return instance, all_instances
+        return instance, created
 
     @classmethod
     def get_or_create_from_parameters(  # pylint: disable=C0202, R0913, R0914, R0912
         calling_cls,
         parameters: Dict[str, Any],
         tree: Optional[Dict[str, Any]] = None,
-        specialized_parameters: Optional[Dict[str, Any]] = None,
         dry_run: bool = False,
         _class_name: Optional[str] = None,
         _recursion_level: int = 0,
-    ) -> Tuple["Base", List[Tuple["Base", bool]]]:
+    ) -> Tuple["Base", bool]:
         """Creates class and dependencies through top down approach from parameters.
 
         Populates columns from parameters and recursevily creates foreign keys need for
@@ -325,6 +308,7 @@ class Base(models.Model):
         tables.
         In case some tables have shared column names but want to use differnt values,
         use the `specialized_parameters` argument.
+        This routine does not populate many to many keys.
 
         **Example**
             ```
@@ -347,27 +331,30 @@ class Base(models.Model):
                 b2 = ForeignKey(BaseB)
                 c = ForeignKey(BaseC)
 
-            instance, instances = A.get_or_create_from_parameters(
-                parameters={"a": 1, "b1": 2, "b2": 3, "b3": 4, "c1": 5},
-                tree={"b1": "BA", "b2": "BB", "c": ("C", {"c2": "BA"})}
-                specialized_parameters={"b2": {"b2": 10}}
+            instance, created = A.get_or_create_from_parameters(
+                parameters={"a": 1, "b1": 2, "b2": 3, "b3": 4, "c1": 5, "b2.b2": 10},
+                tree={
+                    "b1": "BA",
+                    "b2": "BB",
+                    "c": "C",
+                    "c.c2": "BA"
+                }
             )
             ```
             will get or create the instances
             ```
-            a = A.objects.all()[-1]
-            a == instance
-            a == instances[-1]
+            a0 = A.objects.all()[-1]
+            a0 == instance
 
-            a.a == 1        # key of A from pars
-            a.b1.b1 == 2    # a.b1 is BA through tree and a.b1.b1 is two from pars
-            a.b1.b2 == 3
-            a.b2.b1 == 2    # a.b2 is BB through tree and a.b1.b1 is two from pars
-            a.b2.b2 == 10   # a.b2.b2 is overwriten by specialized_parameters
-            a.b2.b3 == 4
-            a.c.c1 == 5     # a.c is C through tree
-            a.c.c2.b1 == 2  # a.c.c2 is BA through tree
-            a.c.c2.b2 == 3
+            a0.a == 1        # key of A from pars
+            a0.b1.b1 == 2    # a.b1 is BA through tree and a.b1.b1 is two from pars
+            a0.b1.b2 == 3
+            a0.b2.b1 == 2    # a.b2 is BB through tree and a.b1.b1 is two from pars
+            a0.b2.b2 == 10   # a.b2.b2 is overwriten by specialized parameters
+            a0.b2.b3 == 4
+            a0.c.c1 == 5     # a.c is C through tree
+            a0.c.c2.b1 == 2  # a.c.c2 is BA through tree
+            a0.c.c2.b2 == 3
             ```
 
         **Arguments**
@@ -383,10 +370,6 @@ class Base(models.Model):
                 ForeignKey will take since only the base class is linked against.
                 Keys are strings corresponding to model fields, values are either
                 strings corresponding to classes
-
-            specialized_parameters: Dict[str, Any] = None
-                The construction / query arguments for special foreign keys (in case
-                there is overlap). Follows a similar syntax as the tree.
 
             dry_run: bool = False
                 Do not insert in database.
@@ -414,33 +397,20 @@ class Base(models.Model):
         LOGGER.debug("%sPreparing creation of %s", indent, cls)
 
         kwargs = {}
-        all_instances = []
         for field in cls.get_open_fields():
-            field_specialized_pars = (
-                specialized_parameters.get(field.name, None)
-                if specialized_parameters
-                else None
-            )
-            if isinstance(field, models.ForeignKey):
 
-                instance, instances = cls._get_or_create_fk(  # pylint: disable=W0212
+            if isinstance(field, models.ForeignKey):
+                instance, created = cls._get_or_create_fk(  # pylint: disable=W0212
                     field,
                     parameters,
                     tree=tree,
-                    specialized_parameters=field_specialized_pars,
                     dry_run=dry_run,
                     _recursion_level=_recursion_level + 1,
                 )
-                all_instances += instances
                 kwargs[field.name] = instance
 
             else:
-
-                value = (
-                    field_specialized_pars
-                    if field_specialized_pars is not None
-                    else parameters.get(field.name, None)
-                )
+                value = parameters.get(field.name, None)
                 if value is None and not field.null:
                     raise KeyError(
                         f"Missing value for constructing {cls}."
@@ -450,18 +420,13 @@ class Base(models.Model):
                     kwargs[field.name] = field.get_db_prep_value(value, connection)
 
         try:
-            instance, not_exist = cls.objects.get_or_create(**kwargs)
+            instance, created = cls.objects.get_or_create(**kwargs)
         except IntegrityError as e:
             LOGGER.debug("Get or create call for %s failed with kwargs\n%s", cls, kwargs)
             raise e
 
-        if not_exist:
-            LOGGER.debug("%sCreated %s", indent, instance)
-        else:
-            LOGGER.debug("%sFetched %s from db", indent, instance)
+        LOGGER.debug(
+            "%sCreated %s" if created else "%sFetched %s from db", indent, instance
+        )
 
-        if not dry_run and not_exist:
-            instance.save()
-        all_instances.append((instance, not_exist))
-
-        return instance, all_instances
+        return instance, created
