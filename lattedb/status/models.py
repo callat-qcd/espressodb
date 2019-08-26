@@ -133,10 +133,23 @@ class Correlator_Meson2pt(Status):
             )
         ]
 
-
-class Correlator_Baryon4DSeq3pt(Status):
+class Correlator_Baryon2pt(Status):
     correlator = models.ForeignKey(
-        "correlator.baryon4dseq3pt",
+        "correlator.baryon2pt",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to baryon two point correlation function",
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["trajectory", "correlator"], name="unique_status_correlator_baryon2pt"
+            )
+        ]
+
+class Correlator_BaryonSeq3pt(Status):
+    correlator = models.ForeignKey(
+        "correlator.baryonseq3pt",
         on_delete=models.CASCADE,
         help_text="Foreign Key to a sequential three point correlation function",
     )
@@ -144,7 +157,7 @@ class Correlator_Baryon4DSeq3pt(Status):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["trajectory", "correlator"], name="unique_status_correlator_baryon4dseq3pt"
+                fields=["trajectory", "correlator"], name="unique_status_correlator_baryonseq3pt"
             )
         ]
 

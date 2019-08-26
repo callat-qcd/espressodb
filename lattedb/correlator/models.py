@@ -118,8 +118,47 @@ class Meson2pt(Correlator):
             else:
                 self.tag = f"{p1.tag}{p0.tag}_on_{gc0.tag}_{dtype}"
 
+class Baryon2pt(Correlator):
+    propagator0 = models.ForeignKey(
+        "propagator.Propagator",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey: Pointer to first propagator",
+    )
+    propagator1 = models.ForeignKey(
+        "propagator.Propagator",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey: Pointer to second propagator",
+    )
+    propagator2 = models.ForeignKey(
+        "propagator.Propagator",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey: Pointer to third propagator",
+    )
+    source = models.ForeignKey(
+        "interpolator.Interpolator",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey: Pointer to source interpolating operator",
+    )
+    sink = models.ForeignKey(
+        "interpolator.Interpolator",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey: Pointer to sink interpolating operator",
+    )
 
-class Baryon4DSeq3pt(Correlator):
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["propagator0", "propagator1", "propagator2", "source", "sink"],
+                name="unique_correlator_baryon2pt",
+            )
+        ]
+
+class BaryonSeq3pt(Correlator):
     source = models.ForeignKey(
         "interpolator.Interpolator",
         on_delete=models.CASCADE,
@@ -156,7 +195,6 @@ class Baryon4DSeq3pt(Correlator):
                 name="unique_correlator_baryonseq3pt",
             )
         ]
-
 
 class BaryonFH3pt(Correlator):
     source = models.ForeignKey(
