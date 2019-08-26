@@ -38,6 +38,16 @@ You can access the interface in your browser.
 Table schemas are implemented in `lattedb.base.models`.
 See also [the Django model doc](https://docs.djangoproject.com/en/2.2/topics/db/models/).
 
+### Changing models workflow
+In order to not break the DB, use the following workflow.
+If you are not sure, ask before continuing.
+
+1. Adjust models (linter!)
+2. `lattedb makemigrations`
+3. `lattedb test` (continue only if successfull)
+4. `lattedb migrate`
+5. Commit and push all new migration files.
+
 ## Management interface
 Go to the admin page [http://127.0.0.1:8000](http://127.0.0.1:8000) (once the server is running.)
 Note that the address might change (look at the output of `lattedb runserver`).
