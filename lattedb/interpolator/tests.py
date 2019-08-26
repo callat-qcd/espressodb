@@ -15,7 +15,7 @@ class InterpolatorTestCase(TestCase, BaseTest):
     cls = Hadron
     parameters = {
         "description": "Sad",
-        "strangeness": 0.2,
+        "strangeness": 1000,  # neutron star
         "irrep": "A1g",
         "embedding": 1,
         "parity": 0,
