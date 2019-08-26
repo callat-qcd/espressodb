@@ -10,7 +10,7 @@ from lattedb.fermionaction.models import Hisq
 # Create your tests here.
 
 
-class GaugeConfigTestCase(TestCase, BaseTest):
+class FermionActionTestCase(TestCase, BaseTest):
 
     cls = Hisq
-    parameters = {"quark_mass": "0.1", "quark_tag": "up", "naik": 1.0}
+    parameters = {"quark_mass": "0.1", "quark_tag": "s", "naik": 1.0}
