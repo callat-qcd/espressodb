@@ -6,6 +6,7 @@ PROJECT_APPS:
     - lattedb.gaugeaction
     - lattedb.gaugeconfig
     - lattedb.gaugesmear
+    - lattedb.project_fhcompare
     - lattedb.propagator
     - lattedb.interpolator
     - lattedb.interpolatorsmear
