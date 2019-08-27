@@ -73,7 +73,7 @@ class MobiusDW(FermionAction):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["fermionaction_ptr_id", "l5", "m5", "alpha5", "a5", "b5", "c5"],
+                fields=["fermionaction_ptr_id", "l5", "m5", "b5", "c5"],
                 name="unique_fermionaction_mobiusdw",
             )
         ]
