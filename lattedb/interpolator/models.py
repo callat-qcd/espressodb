@@ -27,7 +27,8 @@ class Interpolator(Base):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["interpolatorsmear", "strangeness"], name="unique_interpolator"
+                fields=["interpolatorsmear", "strangeness", "type"],
+                name="unique_interpolator",
             )
         ]
 

@@ -14,14 +14,14 @@ class FermionAction(Base):
         help_text="Decimal(10,6): Input quark mass",
     )
     quark_tag = models.TextField(
-        blank=False,
-        null=False,
-        help_text="Text: Type of quark"
+        blank=False, null=False, help_text="Text: Type of quark"
     )
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["quark_mass", "quark_tag"], name="unique_fermionaction")
+            models.UniqueConstraint(
+                fields=["quark_mass", "quark_tag", "type"], name="unique_fermionaction"
+            )
         ]
 
 
@@ -39,8 +39,7 @@ class Hisq(FermionAction):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["fermionaction_ptr_id", "naik"],
-                name="unique_fermionaction_hisq",
+                fields=["fermionaction_ptr_id", "naik"], name="unique_fermionaction_hisq"
             )
         ]
 

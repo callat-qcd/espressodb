@@ -60,6 +60,7 @@ class GaugeConfig(Base):
                     "nz",
                     "nt",
                     "gaugesmear",
+                    "type",
                 ],
                 name="unique_gaugeconfig",
             )

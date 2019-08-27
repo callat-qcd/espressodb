@@ -18,19 +18,10 @@ class Propagator(Base):
         help_text="ForeignKey pointing to valence lattice fermion action",
     )
 
-    def __lt__(self, other):
-        if not isinstance(other, self.__class__):
-            raise TypeError(
-                "Can only compare propagator with other propagator."
-                f" Received {other}"
-            )
-        return self.mval < other.mval
-
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig", "fermionaction"],
-                name="unique_propagator",
+                fields=["gaugeconfig", "fermionaction", "type"], name="unique_propagator"
             )
         ]
 
@@ -103,9 +94,7 @@ class CoherentSeq(Propagator):
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
-    sinksep = models.SmallIntegerField(
-        help_text="SmallInt: Source-sink separation time"
-    )
+    sinksep = models.SmallIntegerField(help_text="SmallInt: Source-sink separation time")
 
     class Meta:
         constraints = [

@@ -22,7 +22,7 @@ class GaugeAction(Base):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["beta"], name="unique_gaugeaction")
+            models.UniqueConstraint(fields=["beta", "type"], name="unique_gaugeaction")
         ]
 
 
