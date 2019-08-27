@@ -36,12 +36,6 @@ class GaugeConfig(Base):
     nt = models.PositiveSmallIntegerField(
         null=False, help_text="PositiveSmallInt: Temporal length in lattice units"
     )
-    l_fm = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=True,
-        help_text="(Optional) Decimal(10,6): Spatial length in fermi",
-    )
     gaugesmear = models.ForeignKey(
         "gaugesmear.GaugeSmear",
         on_delete=models.CASCADE,
