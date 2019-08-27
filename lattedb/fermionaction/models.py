@@ -57,18 +57,6 @@ class MobiusDW(FermionAction):
         null=False,
         help_text="Decimal(10,6): 5th dimensional mass",
     )
-    alpha5 = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Mobius coefficient [D_mobius(M5) = alpha5 * D_Shamir(M5)]",
-    )
-    a5 = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=False,
-        help_text="Decimal(10,6): Mobius kernel parameter [D_mobius = alpha5 * a5 * D_Wilson / (2 + a5 * D_Wilson)]",
-    )
     b5 = models.DecimalField(
         max_digits=10,
         decimal_places=6,
