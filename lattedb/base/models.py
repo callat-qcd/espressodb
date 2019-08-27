@@ -421,7 +421,7 @@ class Base(models.Model):
 
         try:
             instance, created = cls.objects.get_or_create(**kwargs)
-        except IntegrityError as e:
+        except Exception as e:
             LOGGER.debug("Get or create call for %s failed with kwargs\n%s", cls, kwargs)
             raise e
 
