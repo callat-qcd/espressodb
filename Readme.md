@@ -48,6 +48,19 @@ If you are not sure, ask before continuing.
 4. `lattedb migrate`
 5. Commit and push all new migration files.
 
+### git workflow
+* New features should be added to `devel-{feature}`, and will be mereged into `master` once they work 
+* Developers should add tests for new features and make sure **all tests** don't fail before running `migrate` and `push`
+* All `migrated` changes must be pushed to master
+
+### Notes on testing
+Since the current database is centrealized `migrate` will affect all users connected to the db -- therefore it is important to ensure consistency.
+Tests are implemented in `{app}/tests.py`.
+Running `lattedb test` will first create a new test database, apply all migrations and then run test files.
+Thus tests will spot errors in the models.
+Whenever you change a model, you should add a simple test to make sure features work as expected.
+
+
 ## Management interface
 Go to the admin page [http://127.0.0.1:8000](http://127.0.0.1:8000) (once the server is running.)
 Note that the address might change (look at the output of `lattedb runserver`).
