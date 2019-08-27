@@ -155,9 +155,9 @@ DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
 GRAPH_MODELS = {
     "all_applications": True,
     "pygraphviz": True,
-    "layout": "dot",
+    "layout": "fdp",
     "group_models": True,
-    "hide_edge_labels": False,
+    "hide_edge_labels": True,
     "exclude_models": [
         "Group",
         "AbstractUser",
@@ -168,6 +168,8 @@ GRAPH_MODELS = {
         "AbstractBaseSession",
         "User",
         "Base",
+        "Status",
+        "*_*",
     ],
     "output": "models.pdf",
     "exclude_columns": ["user", "id", "description", "last_modified", "misc", "type"],
