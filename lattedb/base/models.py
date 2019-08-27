@@ -11,7 +11,6 @@ import logging
 
 from django.db import models
 from django.db import connection
-from django.db.utils import IntegrityError
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django_pandas.managers import DataFrameManager
@@ -24,7 +23,7 @@ class Base(models.Model):
     """
 
     id = models.AutoField(primary_key=True)
-    type = models.TextField(editable=False)  # autofield by inheritance
+    type = models.TextField(editable=False, null=False)  # autofield by inheritance
     last_modified = models.DateTimeField(auto_now=True)  # also update
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True
@@ -86,8 +85,16 @@ class Base(models.Model):
 
     def clean(self):
         """Sets the type name to the class instance name
+
+        (Used in form validation)
         """
         self.type = self.__class__.__name__
+
+    def save(self, *args, **kwargs):  # pylint: disable=W0221
+        """Automatically overwrites type with the class name
+        """
+        self.type = self.__class__.__name__
+        super().save(*args, **kwargs)
 
     @property
     def specialization(self):
