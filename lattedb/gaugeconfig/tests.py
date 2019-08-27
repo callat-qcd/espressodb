@@ -26,7 +26,7 @@ class GaugeConfigTestCase(TestCase, BaseTest):
         "nz": 48,
         "nt": 64,
         "l_fm": 8.0,
-        "mpil": 10.0,
+        "models.CASCADE": 10.0,
         "mpi": 100.0,
         "light.quark_mass": 0.2,
         "light.quark_tag": "up",

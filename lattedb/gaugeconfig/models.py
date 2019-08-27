@@ -103,12 +103,6 @@ class Nf211(GaugeConfig):
         related_name="+",
         help_text="ForeignKey pointing to lattice fermion action",
     )
-    mpil = models.DecimalField(
-        max_digits=10,
-        decimal_places=6,
-        null=True,
-        help_text="(Optional) Decimal(10,6): Spatial length in mpiL",
-    )
     mpi = models.DecimalField(
         max_digits=10,
         decimal_places=6,
