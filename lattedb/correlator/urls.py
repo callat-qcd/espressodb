@@ -19,4 +19,6 @@ from django.urls import path
 from lattedb.correlator.views import index
 
 app_name = "Correlators"
-urlpatterns = [path("", index, name="correlator-index")]
+urlpatterns = [
+    # path("", index, name="correlator-index")
+]
