@@ -7,6 +7,11 @@ class Propagator(Base):
     """ Base table for application
     """
 
+
+class OneToAll(Propagator):
+    """
+    """
+
     gaugeconfig = models.ForeignKey(
         "gaugeconfig.GaugeConfig",
         on_delete=models.CASCADE,
@@ -17,19 +22,6 @@ class Propagator(Base):
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to valence lattice fermion action",
     )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["gaugeconfig", "fermionaction", "type"], name="unique_propagator"
-            )
-        ]
-
-
-class OneToAll(Propagator):
-    """
-    """
-
     origin_x = models.PositiveSmallIntegerField(
         null=False,
         blank=False,
@@ -55,7 +47,8 @@ class OneToAll(Propagator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "propagator_ptr_id",  # this has sea and valence fermionaction info
+                    "gaugeconfig",
+                    "fermionaction",
                     "origin_x",
                     "origin_y",
                     "origin_z",
@@ -70,6 +63,16 @@ class CoherentSeq(Propagator):
     """
     """
 
+    gaugeconfig = models.ForeignKey(
+        "gaugeconfig.GaugeConfig",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to specific gauge configuration inverted on",
+    )
+    fermionaction = models.ForeignKey(
+        "fermionaction.FermionAction",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to valence lattice fermion action",
+    )
     propagator0 = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
@@ -100,7 +103,8 @@ class CoherentSeq(Propagator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "propagator_ptr_id",
+                    "gaugeconfig",
+                    "fermionaction",
                     "propagator0",
                     "propagator1",
                     "groupsize",
@@ -117,6 +121,16 @@ class FeynmanHellmann(Propagator):
     """
     """
 
+    gaugeconfig = models.ForeignKey(
+        "gaugeconfig.GaugeConfig",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to specific gauge configuration inverted on",
+    )
+    fermionaction = models.ForeignKey(
+        "fermionaction.FermionAction",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to valence lattice fermion action",
+    )
     propagator = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
@@ -133,7 +147,7 @@ class FeynmanHellmann(Propagator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator_ptr_id", "propagator", "current"],
+                fields=["gaugeconfig", "fermionaction", "propagator", "current"],
                 name="unique_propagator_feynmanhellmann",
             )
         ]
