@@ -7,6 +7,26 @@ class GaugeConfig(Base):
     """ Base table for application
     """
 
+    def same_ensemble(self, config: "GaugeConfig") -> bool:
+        """Checks if all meta information for a given config are the same.
+        """
+        equal = False
+        if self.type == config.type:
+            equal = all(
+                [
+                    getattr(self, column) == getattr(config, column)
+                    for column in self.get_open_fields()
+                    if column != "config"
+                ]
+            )
+
+        return equal
+
+
+class Nf211(GaugeConfig):
+    """
+    """
+
     short_tag = models.TextField(
         null=True,
         blank=True,
@@ -41,45 +61,6 @@ class GaugeConfig(Base):
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.",
     )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=[
-                    "stream",
-                    "config",
-                    "gaugeaction",
-                    "nx",
-                    "ny",
-                    "nz",
-                    "nt",
-                    "gaugesmear",
-                    "type",
-                ],
-                name="unique_gaugeconfig",
-            )
-        ]
-
-    def same_ensemble(self, config: "GaugeConfig") -> bool:
-        """Checks if all meta information for a given config are the same.
-        """
-        equal = False
-        if self.type == config.type:
-            equal = all(
-                [
-                    getattr(self, column) == getattr(config, column)
-                    for column in self.get_open_fields()
-                    if column != "config"
-                ]
-            )
-
-        return equal
-
-
-class Nf211(GaugeConfig):
-    """
-    """
-
     light = models.ForeignKey(
         "fermionaction.FermionAction",
         on_delete=models.CASCADE,
@@ -108,7 +89,19 @@ class Nf211(GaugeConfig):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig_ptr_id", "light", "strange", "charm"],
+                fields=[
+                    "stream",
+                    "config",
+                    "gaugeaction",
+                    "nx",
+                    "ny",
+                    "nz",
+                    "nt",
+                    "gaugesmear",
+                    "light",
+                    "strange",
+                    "charm",
+                ],
                 name="unique_gaugeconfig_nf211",
             )
         ]
