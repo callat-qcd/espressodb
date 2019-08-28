@@ -7,6 +7,11 @@ class FermionAction(Base):
     """ Base table for application
     """
 
+
+class Hisq(FermionAction):
+    """
+    """
+
     quark_mass = models.DecimalField(
         max_digits=10,
         decimal_places=6,
@@ -16,18 +21,6 @@ class FermionAction(Base):
     quark_tag = models.TextField(
         blank=False, null=False, help_text="Text: Type of quark"
     )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["quark_mass", "quark_tag", "type"], name="unique_fermionaction"
-            )
-        ]
-
-
-class Hisq(FermionAction):
-    """
-    """
 
     naik = models.DecimalField(
         max_digits=10,
@@ -39,7 +32,8 @@ class Hisq(FermionAction):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["fermionaction_ptr_id", "naik"], name="unique_fermionaction_hisq"
+                fields=["quark_mass", "quark_tag", "naik"],
+                name="unique_fermionaction_hisq",
             )
         ]
 
@@ -47,6 +41,16 @@ class Hisq(FermionAction):
 class MobiusDW(FermionAction):
     """
     """
+
+    quark_mass = models.DecimalField(
+        max_digits=10,
+        decimal_places=6,
+        null=False,
+        help_text="Decimal(10,6): Input quark mass",
+    )
+    quark_tag = models.TextField(
+        blank=False, null=False, help_text="Text: Type of quark"
+    )
 
     l5 = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: Length of 5th dimension"
@@ -73,7 +77,7 @@ class MobiusDW(FermionAction):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["fermionaction_ptr_id", "l5", "m5", "b5", "c5"],
+                fields=["quark_mass", "quark_tag", "l5", "m5", "b5", "c5"],
                 name="unique_fermionaction_mobiusdw",
             )
         ]
