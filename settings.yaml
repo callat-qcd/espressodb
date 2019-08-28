@@ -14,3 +14,5 @@ PROJECT_APPS:
     - lattedb.correlator
     - lattedb.documentation
     - lattedb.ensemble
+ALLOWED_HOSTS:
+    - ithems.lbl.gov

@@ -26,9 +26,7 @@ with open(SETTINGS_FILE, "r") as fin:
     _SETTINGS = yaml.safe_load(fin.read())
     SECRET_KEY = _SETTINGS["SECRET_KEY"]
     PROJECT_APPS = _SETTINGS["PROJECT_APPS"]
-
-
-ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = _SETTINGS.get("ALLOWED_HOSTS", [])
 
 READ_CONFIG = True
 
