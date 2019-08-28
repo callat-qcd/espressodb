@@ -7,6 +7,11 @@ class Interpolator(Base):
     """ Base table for application
     """
 
+
+class Hadron4D(Interpolator):
+    """
+    """
+
     description = models.TextField(
         null=True,
         blank=True,
@@ -18,25 +23,10 @@ class Interpolator(Base):
         related_name="+",
         help_text="ForeignKey pointing to operator smearing",
     )
-
     strangeness = models.PositiveSmallIntegerField(
         null=False,
         help_text="PositiveSmallIntegerField: Strangeness of hadronic operator",
     )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["interpolatorsmear", "strangeness", "type"],
-                name="unique_interpolator",
-            )
-        ]
-
-
-class Hadron4D(Interpolator):
-    """
-    """
-
     irrep = models.TextField(
         null=False,
         blank=False,
@@ -71,7 +61,8 @@ class Hadron4D(Interpolator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "interpolator_ptr_id",
+                    "interpolatorsmear",
+                    "strangeness",
                     "irrep",
                     "embedding",
                     "parity",
@@ -86,6 +77,22 @@ class Hadron4D(Interpolator):
 
 
 class Hadron(Interpolator):
+
+    description = models.TextField(
+        null=True,
+        blank=True,
+        help_text="(Optional) Text: Description of the interpolating operator",
+    )
+    interpolatorsmear = models.ForeignKey(
+        "interpolatorsmear.InterpolatorSmear",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to operator smearing",
+    )
+    strangeness = models.PositiveSmallIntegerField(
+        null=False,
+        help_text="PositiveSmallIntegerField: Strangeness of hadronic operator",
+    )
     irrep = models.TextField(
         null=False,
         blank=False,
@@ -124,7 +131,8 @@ class Hadron(Interpolator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "interpolator_ptr_id",
+                    "interpolatorsmear",
+                    "strangeness",
                     "irrep",
                     "embedding",
                     "parity",
