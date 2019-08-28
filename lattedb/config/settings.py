@@ -135,6 +135,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "correlator", "static"),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
