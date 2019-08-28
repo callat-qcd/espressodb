@@ -13,6 +13,8 @@ from django.db import models
 from django.db import connection
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
+from django.contrib.auth.models import User
+
 from django_pandas.managers import DataFrameManager
 
 LOGGER = logging.getLogger("base")
@@ -91,9 +93,16 @@ class Base(models.Model):
         self.type = self.__class__.__name__
 
     def save(self, *args, **kwargs):  # pylint: disable=W0221
-        """Automatically overwrites type with the class name
+        """Overwrites type with the class name and user with login info if not specified.
         """
         self.type = self.__class__.__name__
+        if not self.user:
+            username = settings.CONFIG.get("USER", None)
+            if username:
+                self.user, _ = User.objects.get_or_create(username=username)
+            else:
+                self.user, _ = User.objects.get_or_create(username="ananymous")
+
         super().save(*args, **kwargs)
 
     @property
