@@ -397,7 +397,7 @@ class Base(models.Model):
         if _recursion_level == 0:
             for key, tables in cls.get_recursive_columns(tree).items():
                 if len(tables) > 1:
-                    LOGGER.info(
+                    LOGGER.debug(
                         "Column %s is used by the following tables %s", key, tables
                     )
 
