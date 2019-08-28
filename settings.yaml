@@ -15,4 +15,5 @@ PROJECT_APPS:
     - lattedb.documentation
     - lattedb.ensemble
 ALLOWED_HOSTS:
+    - 127.0.0.1
     - ithems.lbl.gov
