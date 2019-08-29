@@ -118,4 +118,13 @@ class PopulationResultView(View):
 
         This starts the parsing of the tree.
         """
-        return render(request, self.template_name, {})
+        for key in ["todo", "column"]:
+            if key in request.session:
+                request.session.pop(key)
+
+        context = (
+            {"root": request.session.pop("root"), "tree": request.session.pop("tree")}
+            if "root" in request.session and "tree" in request.session
+            else {}
+        )
+        return render(request, self.template_name, context)
