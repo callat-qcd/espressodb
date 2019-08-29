@@ -52,6 +52,18 @@ class Base(models.Model):
         super().__init__(*args, **kwargs)
         self._specialization = None
 
+    def check_consistency(self):
+        """Method is called before save.
+
+        Raise errors here if the model must fulfill checks.
+        """
+
+    def save(self, *args, **kwargs):  # pylint: disable=W0221
+        """Overwrites custom save to call check_consistency first.
+        """
+        self.check_consistency()
+        super().save(*args, **kwargs)
+
     @classmethod
     def get_open_fields(cls) -> List["Field"]:
         """Returns keys which are editable and non ForeignKeys
