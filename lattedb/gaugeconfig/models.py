@@ -105,3 +105,16 @@ class Nf211(GaugeConfig):
                 name="unique_gaugeconfig_nf211",
             )
         ]
+
+    @property
+    def long_tag(self) -> str:
+        """Returns descriptive long tag representing configuration
+        """
+        return (
+            f"n{self.nx}{self.nt}"  # pylint: disable=E1101
+            f"f211"
+            f"b{int(self.gaugeaction.specialization.beta * 100)}"
+            f"m{int(self.light.specialization.quark_mass*1000):03d}"
+            f"m{int(self.strange.specialization.quark_mass*1000):03d}"
+            f"m{int(self.charm.specialization.quark_mass*1000):03d}"
+        )
