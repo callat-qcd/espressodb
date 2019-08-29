@@ -3,9 +3,13 @@
 {% load widget_tweaks %}
 {% load base_extras %}
 
+{% block head-extra %}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+{% endblock %}
+
 {% block content %}
 
-{% if tree %}
+{% if root %}
 <div class="jumbotron">
     <h1>
         {{root}} population script
@@ -31,7 +35,7 @@
 </div>
 <div class="container">
     <h2>Here is a python script which populates the table</h2>
-    {% render_tree tree %}
+    {% render_tree tree root %}
 </div>
 {% else %}
 <div class="container">
