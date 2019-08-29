@@ -63,12 +63,12 @@ class PopulationView(View):
                 request.session["todo"].insert(0, (nn, mm.get_label()))
 
             if request.session["todo"]:
-                name, model = request.session["todo"].pop(0)
-                request.session["name"] = name
-                model = MODELS[model]
+                name, model_name = request.session["todo"].pop(0)
+                request.session["name"] = model_name
+                model = MODELS[model_name]
                 subset = (
                     [m.get_label() for m in model.__subclasses__()]
-                    if not model is Base
+                    if not model is Base and model.__subclasses__()
                     else [model.get_label()]
                 )
                 form = self.form_class(subset=subset, name=name)
