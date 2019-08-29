@@ -26,14 +26,14 @@ class Ensemble(Base):
         """Returns the tag of the first configuration.
         """
         first = self.configurations.first()  # pylint: disable=E1101
-        return first.short_tag if first else None
+        return first.specialization.short_tag if first else None
 
     @property
     def long_tag(self) -> Optional[str]:
         """Returns descriptive long tag of first configuration
         """
         first = self.configurations.first()  # pylint: disable=E1101
-        return first.long_tag if first else None
+        return first.specialization.long_tag if first else None
 
     def check_consistency(self):
         """Checks if all configurations have the same meta info.
