@@ -59,7 +59,7 @@ class Baryon2ptAdmin(admin.ModelAdmin):
             obj.propagator0.specialization.origin_z,
             obj.propagator0.specialization.origin_t,
         )
-    origin.short_description = "origin (x, y, z, t)"
+    origin.short_description = u"origin (x, y, z, t)"
 
     @staticmethod
     def parity(obj):
