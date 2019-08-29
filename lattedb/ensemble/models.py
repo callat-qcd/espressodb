@@ -28,6 +28,7 @@ class Ensemble(Base):
         first = self.configurations.first()  # pylint: disable=E1101
         return first.short_tag if first else None
 
+    @property
     def long_tag(self) -> Optional[str]:
         """Returns descriptive long tag of first configuration
         """
