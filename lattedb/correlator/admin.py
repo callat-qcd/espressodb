@@ -2,9 +2,7 @@
 """
 from django.contrib import admin
 from lattedb.base.admin import BaseAdmin
-from lattedb.correlator.models import Meson2pt, Baryon2pt
-
-admin.site.register(Meson2pt, BaseAdmin)
+from lattedb.correlator.models import Baryon2pt
 
 
 class EnsembleListFilter(admin.SimpleListFilter):
@@ -28,13 +26,18 @@ class EnsembleListFilter(admin.SimpleListFilter):
 
 
 class Baryon2ptAdmin(admin.ModelAdmin):
+    """Admin which summarizes information for Baryon2pt
+
+    Adding and changing permissions in the admin default to False because
+    it is unfasible to selece e.g. propagators in very large tables.
+    """
+
     list_display = (
         "id",
         "tag",
         "config",
         "ensemble",
         "origin",
-        "origin_t",
         "parity",
         "spin_x2",
         "spin_z_x2",
@@ -42,6 +45,7 @@ class Baryon2ptAdmin(admin.ModelAdmin):
         "isospin_z_x2",
     )
     list_filter = ("tag", EnsembleListFilter)
+    list_display_links = None
 
     @staticmethod
     def config(obj):
@@ -49,15 +53,12 @@ class Baryon2ptAdmin(admin.ModelAdmin):
 
     @staticmethod
     def origin(obj):
-        return "(%3d, %3d, %3d)" % (
+        return "(%d, %d, %d, %d)" % (
             obj.propagator0.specialization.origin_x,
             obj.propagator0.specialization.origin_y,
             obj.propagator0.specialization.origin_z,
+            obj.propagator0.specialization.origin_t,
         )
-
-    @staticmethod
-    def origin_t(obj):
-        return obj.propagator0.specialization.origin_t
 
     @staticmethod
     def parity(obj):
@@ -82,6 +83,14 @@ class Baryon2ptAdmin(admin.ModelAdmin):
     @staticmethod
     def ensemble(obj):
         return obj.propagator0.specialization.gaugeconfig.specialization.short_tag
+
+    @staticmethod
+    def has_add_permission(request):
+        return False
+
+    @staticmethod
+    def has_change_permission(request, obj=None):
+        return False
 
 
 admin.site.register(Baryon2pt, Baryon2ptAdmin)
