@@ -35,7 +35,7 @@ class Baryon2ptAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "ensemble",
-        "config"
+        "config",
         "tag",
         "origin",
         "parity",
