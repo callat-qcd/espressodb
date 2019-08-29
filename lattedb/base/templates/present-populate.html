@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
-{% block content %}
 {% load widget_tweaks %}
+{% load base_extras %}
 
+{% block content %}
+
+{% if tree %}
 <div class="jumbotron">
     <h1>
         {{root}} population script
     </h1>
 </div>
 <div class="container">
-    {% if tree %}
     <table class="table table-striped">
         <thead>
             <tr>
@@ -25,8 +27,16 @@
             {% endfor %}
         </tbody>
     </table>
-    {% endif %}
 
 </div>
+<div class="container">
+    <h2>Here is a python script which populates the table</h2>
+    {% render_tree tree %}
+</div>
+{% else %}
+<div class="container">
+    <h2>Something went wrong &mdash; please contact the admins</h2>
+</div>
+{% endif %}
 
 {% endblock %}

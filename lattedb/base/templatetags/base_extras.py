@@ -55,3 +55,9 @@ def render_link_list(exclude=("", "base", "admin", "documentation")):
     context = {"urls": urls, "documentation": documentation}
 
     return context
+
+
+@register.inclusion_tag("tree-to-python.html")
+def render_tree(tree):
+    context = {"tree": tree}
+    return context
