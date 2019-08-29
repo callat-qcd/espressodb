@@ -69,21 +69,22 @@ class Base(models.Model):
     def __str__(self) -> str:
         """Verbose description of instance name, parent and column values.
         """
+        specialization = self.specialization
         kwargs = {
-            field.name: getattr(self, field.name)
-            for field in self.get_open_fields()
+            field.name: getattr(specialization, field.name)
+            for field in specialization.get_open_fields()
             if not isinstance(field, models.ForeignKey)
             and not isinstance(field, models.ManyToManyField)
-            and getattr(self, field.name)
+            and getattr(specialization, field.name)
         }
         base = (
-            f"[{self.__class__.mro()[1].__name__}]"
-            if type(self) != Base  # pylint: disable=C0123
+            f"[{specialization.__class__.mro()[1].__name__}]"
+            if type(specialization) != Base  # pylint: disable=C0123
             else ""
         )
         info = ", ".join([f"{key}={val}" for key, val in kwargs.items() if val])
         info_str = f"({info})" if info else ""
-        return f"{self.__class__.__name__}{base}{info_str}"
+        return f"{specialization.__class__.__name__}{base}{info_str}"
 
     def clean(self):
         """Sets the type name to the class instance name
