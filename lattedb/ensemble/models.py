@@ -13,6 +13,13 @@ class Ensemble(Base):
     """
 
     configurations = models.ManyToManyField(GaugeConfig)
+    label = models.CharField(
+        max_length=40,
+        null=False,
+        blank=False,
+        unique=True,
+        help_text="(Optional) Char(20): label to identify ensemble for easy searches",
+    )
 
     @property
     def short_tag(self) -> Optional[str]:
@@ -21,10 +28,15 @@ class Ensemble(Base):
         first = self.configurations.first()  # pylint: disable=E1101
         return first.short_tag if first else None
 
-    def clean(self):
+    def long_tag(self) -> Optional[str]:
+        """Returns descriptive long tag of first configuration
+        """
+        first = self.configurations.first()  # pylint: disable=E1101
+        return first.long_tag if first else None
+
+    def check_consistency(self):
         """Checks if all configurations have the same meta info.
         """
-        super().clean()
         first = self.configurations.first()  # pylint: disable=E1101
         if first:
             for config in self.configurations.all()[1:]:  # pylint: disable=E1101
