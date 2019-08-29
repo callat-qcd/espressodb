@@ -34,9 +34,9 @@ class Baryon2ptAdmin(admin.ModelAdmin):
 
     list_display = (
         "id",
-        "tag",
-        "config",
         "ensemble",
+        "config"
+        "tag",
         "origin",
         "parity",
         "spin_x2",
@@ -59,6 +59,7 @@ class Baryon2ptAdmin(admin.ModelAdmin):
             obj.propagator0.specialization.origin_z,
             obj.propagator0.specialization.origin_t,
         )
+    origin.short_description = "origin (x, y, z, t)"
 
     @staticmethod
     def parity(obj):
