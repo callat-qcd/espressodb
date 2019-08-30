@@ -18,6 +18,7 @@ import os
 
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 
 from lattedb.config.settings import PROJECT_APPS, ROOT_DIR
 from lattedb.config.views import IndexView
@@ -37,5 +38,9 @@ for app in PROJECT_APPS:
 
 urlpatterns += [
     path("admin/", admin.site.urls),
+    path(
+        "login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"
+    ),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("", IndexView.as_view(), name="index"),
 ]

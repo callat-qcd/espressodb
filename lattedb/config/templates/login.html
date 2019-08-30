@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="container">
+
+    {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <div class="row mt-4 mx-4">
+        <div class="col-xs-8 col-md-6 col-lg-4">
+    <div class="card">
+
+         <div class="card-body">
+             <h5 class="card-title">Login</h5>
+            <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            {% endbuttons %}
+            <input type="hidden" name="next" value="{{ next }}">
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

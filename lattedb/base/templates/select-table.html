@@ -8,7 +8,7 @@
         {% if not request.session.root %}
             Which table do you want to populate?
         {% else %}
-            Populating {{request.session.root}}
+            Populating <code>{{request.session.root}}</code>
         {% endif %}
     </h1>
 </div>
@@ -17,8 +17,8 @@
     <table class="table table-striped">
         <thead>
             <tr>
-              <th>column</th>
-              <th>table</th>
+              <th>Dependency</th>
+              <th>Type</th>
             </tr>
         </thead>
         <tbody>

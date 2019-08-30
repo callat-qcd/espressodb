@@ -1,4 +1,3 @@
-<ul class="navbar-nav">
 {% for app_name, links in urls.items %}
     <li class="nav-item dropdown">
      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
@@ -14,7 +13,7 @@
 {% if documentation %}
 <li class="nav-item dropdown">
  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-   Documentation
+   <i class="fas fa-book mx-1"></i>Documentation
  </a>
  <div class="dropdown-menu">
  {% for link_name, reverse_link in documentation %}
@@ -23,14 +22,3 @@
  </div>
 </li>
 {% endif %}
-<li class="nav-item">
-</li>
-    <a class="nav-link" href="{% url 'base:populate' %}">
-      Populate
-    </a>
-<li class="nav-item">
-   <a class="nav-link" href="{% url 'admin:index' %}">
-     Admin
-   </a>
-</li>
-</ul>
