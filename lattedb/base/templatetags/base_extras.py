@@ -9,6 +9,8 @@ from django_extensions.management.commands.show_urls import Command as URLFinder
 from lattedb.config.urls import urlpatterns
 from lattedb.config.settings import PROJECT_APPS, BASE_DIR
 
+from lattedb.base.forms import MODELS
+
 register = template.Library()  # pylint: disable=C0103
 
 
@@ -54,4 +56,42 @@ def render_link_list(exclude=("", "base", "admin", "documentation")):
 
     context = {"urls": urls, "documentation": documentation}
 
+    return context
+
+
+@register.inclusion_tag("tree-to-python.html")
+def render_tree(tree, root):
+    content = ""
+    models = {}
+
+    labels = set(tree.values())
+    labels.add(root)
+
+    for label in labels:
+        model = MODELS[label]
+        module = model.__module__
+        cls = model.__name__
+        app = model._meta.app_label
+        name = cls + app.capitalize()
+        content += f"from {module} import {cls} as {name}\n"
+        models[label] = (name, model)
+
+    content += "\n"
+
+    for name, label in list(tree.items())[::-1]:
+        cls, model = models[label]
+        fields = model.get_open_fields()
+        args = "\n\t".join(
+            [f"{field.name}=..., # {field.help_text}" for field in fields]
+        )
+        name = name.replace(".", "_")
+        content += f"{name} = {cls}.get_or_create(\n\t{args}\n)\n\n"
+
+    cls, model = models[root]
+    fields = model.get_open_fields()
+    args = "\n\t".join([f"{field.name}=..., # {field.help_text}" for field in fields])
+    name = name.replace(".", "_")
+    content += f"{cls}.get_or_create(\n\t{args}\n)"
+
+    context = {"content": content}
     return context

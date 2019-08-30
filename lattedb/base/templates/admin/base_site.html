@@ -7,5 +7,5 @@
 {% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><img src="{% static "LatteDB_logo.png" %}" alt="LatteDB" style="height: 35px">&nbsp;&nbsp;Admin</h1>
+<h1 id="site-name"><a href="{% url 'index' %}"><img src="{% static "LatteDB_logo.png" %}" alt="LatteDB" style="height: 35px"></a>&nbsp;&nbsp;Admin</h1>
 {% endblock %}
