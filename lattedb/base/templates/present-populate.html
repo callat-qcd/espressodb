@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load bootstrap4 %}
 {% load widget_tweaks %}
 {% load base_extras %}
 
 {% block head-extra %}
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/prettify.css'%}">
+<script type="text/javascript" src="{% static 'js/prettify.js'%}"></script>
 {% endblock %}
 
 {% block content %}
@@ -12,15 +14,16 @@
 {% if root %}
 <div class="jumbotron">
     <h1>
-        {{root}} population script
+        <code>{{root}}</code> population script
     </h1>
 </div>
+{% if tree %}
 <div class="container">
     <table class="table table-striped">
         <thead>
             <tr>
-              <th>column</th>
-              <th>table</th>
+                <th>Dependency</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody>
@@ -31,12 +34,19 @@
             {% endfor %}
         </tbody>
     </table>
-
 </div>
+{% endif %}
 <div class="container">
     <h2>Here is a python script which populates the table</h2>
     {% render_tree tree root %}
 </div>
+
+<script type="text/javascript">
+    $(window).on('load', function() {
+        PR.prettyPrint();
+    });
+</script>
+
 {% else %}
 <div class="container">
     <h2>Something went wrong &mdash; please contact the admins</h2>
