@@ -52,10 +52,7 @@ class PopulationView(View):
         if form.is_valid():
 
             model = self.get_choice(form, request.session)
-            print(model)
-
             column_label, model_subset = self.get_next(model, request.session)
-            print(column_label)
 
             if column_label:
                 form = self.form_class(subset=model_subset, name=column_label)
