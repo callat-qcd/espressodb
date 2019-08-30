@@ -152,8 +152,8 @@ LOGGING = {
     },
 }
 
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "index"
 
 
 DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
