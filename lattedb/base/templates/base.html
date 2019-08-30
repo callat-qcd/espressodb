@@ -14,6 +14,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'icons/favicon.png' %}">
         {% bootstrap_css %}
         {% bootstrap_javascript jquery='full' %}
+        <link href="{% static 'css/fa-all.min.css' %}" rel="stylesheet">
         {% block head-extra %}
         {% endblock%}
     </head>
@@ -44,14 +45,14 @@
                 <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                      <span class="navbar-text"><b>{{user}}</b></span>
+                      <span class="navbar-text"><i class="fas fa-user mr-2"></i><b>{{user}}</b></span>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="{% url 'logout'%}">Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'login'%}">Login</a>
+                      <a class="nav-link" href="{% url 'login'%}"><i class="fas fa-user mr-2"></i>Login</a>
                     </li>
                 {% endif %}
                 </ul>
