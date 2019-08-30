@@ -120,7 +120,7 @@ class PopulationResultView(View):
                 request.session.pop(key)
 
         context = (
-            {"root": request.session.pop("root"), "tree": request.session.pop("tree")}
+            {"root": request.session.get("root"), "tree": request.session.get("tree")}
             if "root" in request.session and "tree" in request.session
             else {}
         )
