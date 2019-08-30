@@ -52,7 +52,9 @@ class PopulationView(View):
         if form.is_valid():
 
             model = self.get_choice(form, request.session)
-            column_label, model_subset = self.get_next(model, request.session)
+            column_label, model_subset = self.get_next(
+                model, request.session, form.get_parse_tree()
+            )
 
             if column_label:
                 form = self.form_class(subset=model_subset, name=column_label)
@@ -73,7 +75,9 @@ class PopulationView(View):
 
         return model
 
-    def get_next(self, model: Base, session: Dict[str, Any]) -> Tuple[Base, List[Base]]:
+    def get_next(
+        self, model: Base, session: Dict[str, Any], parse_tree: bool = True
+    ) -> Tuple[Base, List[Base]]:
         """
         """
         # Add current model to tree
@@ -82,8 +86,9 @@ class PopulationView(View):
             session["tree"][column] = model.get_label()
 
         # Add dpendencies of sub model to tree
-        for sub_column, sub_model in iter_tree(model, column):
-            session["todo"].insert(0, (sub_column, sub_model.get_label()))
+        if parse_tree:
+            for sub_column, sub_model in iter_tree(model, column):
+                session["todo"].insert(0, (sub_column, sub_model.get_label()))
 
         if session["todo"]:
 
@@ -98,7 +103,7 @@ class PopulationView(View):
             # Make choice automatically if only one choice
             if len(next_model_choices) == 1:
                 next_column, next_model_choices = self.get_next(
-                    MODELS[next_model_choices[0]], session
+                    MODELS[next_model_choices[0]], session, parse_tree=parse_tree
                 )
 
         else:

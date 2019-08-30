@@ -17,11 +17,21 @@ class ModelSelectForm(forms.Form):
     model = forms.ChoiceField(
         choices=[(label, label) for label in MODELS if "Base" not in label]
     )
+    parse_tree = forms.BooleanField(
+        initial=True,
+        required=False,
+        help_text="Identifies foreign keys for the model and queries their type.",
+    )
 
     def get_model(self):
         """Returns the model for given selection.
         """
         return MODELS[self.cleaned_data["model"]]
+
+    def get_parse_tree(self):
+        """Returns selection for parse tree
+        """
+        return self.cleaned_data["parse_tree"]
 
     def __init__(
         self,
