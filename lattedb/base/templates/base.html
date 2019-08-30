@@ -31,13 +31,13 @@
                     {% render_link_list %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'base:populate' %}">
-                          Populate
+                          <i class="fas fa-plus mx-1"></i>Populate
                         </a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                        <a class="nav-link" href="{% url 'admin:index' %}">
-                         Admin
+                         <i class="fas fa-user-cog mx-1"></i>Admin
                        </a>
                     </li>
                     {% endif %}
@@ -45,14 +45,14 @@
                 <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                      <span class="navbar-text"><i class="fas fa-user mr-2"></i><b>{{user}}</b></span>
+                      <span class="navbar-text"><b>{{user}}</b></span>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+                      <a class="nav-link" href="{% url 'logout'%}"><i class="fas fa-sign-out-alt mx-1"></i>Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                      <a class="nav-link" href="{% url 'login'%}"><i class="fas fa-user mr-2"></i>Login</a>
+                      <a class="nav-link" href="{% url 'login'%}"><i class="fas fa-sign-in-alt mx-1"></i>Login</a>
                     </li>
                 {% endif %}
                 </ul>
