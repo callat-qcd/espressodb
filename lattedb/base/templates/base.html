@@ -20,13 +20,41 @@
     <body>
         <header>
             <nav class="navbar navbar-expand-sm navbar-light bg-light">
-              <!-- Brand -->
-              <a class="navbar-brand" href="{% url 'index' %}">
+                <!-- Brand -->
+                <a class="navbar-brand" href="{% url 'index' %}">
                   <img src="{% static "LatteDB_logo.png" %}" alt="LatteDB" style="height: 35px" class="align-top">
-             </a>
+                </a>
 
-              <!-- Links -->
-              {% render_link_list %}
+                <!-- Links -->
+                <ul class="navbar-nav">
+                    {% render_link_list %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'base:populate' %}">
+                          Populate
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                       <a class="nav-link" href="{% url 'admin:index' %}">
+                         Admin
+                       </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <span class="navbar-text"><b>{{user}}</b></span>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout'%}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login'%}">Login</a>
+                    </li>
+                {% endif %}
+                </ul>
             </nav>
         </header>
         <main role="main">
