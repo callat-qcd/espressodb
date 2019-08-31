@@ -84,4 +84,13 @@
     </div>
 </div>
 
+{% if request.session.root %}
+<script type="text/javascript">
+    $(window).on('load', function() {
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+</script>
+{% endif %}
+
+
 {% endblock %}
