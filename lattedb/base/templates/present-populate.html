@@ -16,28 +16,37 @@
     <h1>
         <code>{{root}}</code> population script
     </h1>
+    <h5>You can copy and fill the below script to insert data into the database.</h5>
+    <p>
+        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#help" aria-expanded="false" aria-controls="help">
+            <i class="far fa-question-circle mr-1"></i>Help
+        </button>
+    </p>
+    <div class="collapse" id="help">
+        <div class="card border-info mb-3">
+            <div class="card-header">Info</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    The <code>get_or_create</code> method asks the database if this entry already exists.
+                    If not the entry is written to the databse.
+                    Alternatives are, e.g., object instanciation (no write to the database), <code>create</code> or <code>get</code>.
+                    See also <a href="https://docs.djangoproject.com/en/dev/ref/models/querysets/#methods-that-do-not-return-querysets" target="_blank">the Django docs</a>.
+                </li>
+                <li class="list-group-item">
+                    Optional fields can be left out.
+                </li>
+                <li class="list-group-item">
+                    <code>ForeignKey</code>s are python objects.
+                    For convienince this script creates objects in the right order and you just have to include them at the approriate place (indicated by their name).
+                </li>
+                <li class="list-group-item">
+                    Instead of querying the object by their columns, you can also query existing <code>id</code>s (see <a href="https://docs.djangoproject.com/en/dev/ref/models/querysets/#get" target="_blank">the Django docs</a>).
+            </ul>
+        </div>
+    </div>
 </div>
-{% if tree %}
+
 <div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Dependency</th>
-                <th>Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for key, val in tree.items %}
-            <tr>
-                <td>{{key}}</td><td>{{val}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endif %}
-<div class="container">
-    <h2>Here is a python script which populates the table</h2>
     {% render_tree tree root %}
 </div>
 
