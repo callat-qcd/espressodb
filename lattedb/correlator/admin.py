@@ -52,16 +52,6 @@ class Baryon2ptAdmin(admin.ModelAdmin):
         return obj.propagator0.specialization.gaugeconfig.specialization.config
 
     @staticmethod
-    def origin(obj):
-        return "(%d, %d, %d, %d)" % (
-            obj.propagator0.specialization.origin_x,
-            obj.propagator0.specialization.origin_y,
-            obj.propagator0.specialization.origin_z,
-            obj.propagator0.specialization.origin_t,
-        )
-    origin.short_description = u"origin (x, y, z, t)"
-
-    @staticmethod
     def parity(obj):
         return obj.sink.specialization.parity
 

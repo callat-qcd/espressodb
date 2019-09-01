@@ -158,6 +158,15 @@ class Baryon2pt(Correlator):
             )
         ]
 
+    def origin(self):
+        return "(%d, %d, %d, %d)" % (
+            self.propagator0.specialization.origin_x,
+            self.propagator0.specialization.origin_y,
+            self.propagator0.specialization.origin_z,
+            self.propagator0.specialization.origin_t,
+        )
+    origin.short_description = 'origin (x, y, z, t)'
+
 class BaryonSeq3pt(Correlator):
     source = models.ForeignKey(
         "interpolator.Interpolator",
