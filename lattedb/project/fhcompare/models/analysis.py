@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.postgres.fields import JSONField
 
-from lattedb.projects.models import Project
+from lattedb.project.models import Project
 
 
 class Fhcompare(Project):

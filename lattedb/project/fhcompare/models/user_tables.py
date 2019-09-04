@@ -1,5 +1,5 @@
 from django.db import models
-from lattedb.projects.fhcompare.models.analysis import Fhcompare
+from lattedb.project.fhcompare.models.analysis import Fhcompare
 
 
 class Jason0(Fhcompare):

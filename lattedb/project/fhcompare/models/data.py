@@ -1,6 +1,6 @@
 from django.db import models
 
-from lattedb.projects.models import Data
+from lattedb.project.models import Data
 
 from lattedb.correlator.models import Baryon2pt
 
