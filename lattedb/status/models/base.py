@@ -2,7 +2,6 @@ from django.db import models
 
 from lattedb.base.models import Base
 
-
 STATUS_CHOICES = (
     (0, ("Unknown")),
     (1, ("Does not exist")),
@@ -15,13 +14,6 @@ class FileStatus(Base):
     """ Base table for application
     """
 
-    object = models.ForeignKey(
-        Base,
-        on_delete=models.CASCADE,
-        null=False,
-        help_text="ForeignKey: Object to represent",
-        unique=True,
-    )
     home = models.TextField(
         null=True,
         blank=True,
@@ -45,6 +37,3 @@ class FileStatus(Base):
 
     class Meta:
         abstract = True
-        constraints = [
-            models.UniqueConstraint(fields=["object", "home"], name="unique_file_status")
-        ]
