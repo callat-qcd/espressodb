@@ -1,10 +1,11 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.postgres.fields import JSONField
-from lattedb.base.models import Base
+
+from lattedb.projects.models import Project
 
 
-class Project_Fhcompare(Base):
+class Fhcompare(Project):
     """ Base table for application
     """
 
@@ -24,3 +25,6 @@ class Project_Fhcompare(Base):
     result = JSONField(
         null=False, blank=False, help_text="JSON: {'your_results': 'all dumped here'}"
     )
+
+    class Meta:
+        db_table = "project_fhcompare"

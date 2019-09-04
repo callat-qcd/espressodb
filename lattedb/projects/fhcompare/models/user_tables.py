@@ -1,8 +1,8 @@
 from django.db import models
-from lattedb.project_fhcompare.models.project import Project_Fhcompare
+from lattedb.projects.fhcompare.models.analysis import Fhcompare
 
 
-class Jason0(Project_Fhcompare):
+class Jason0(Fhcompare):
     """ Everyone should have their own table.
     Unique constraints are set on user-defined tables.
     """

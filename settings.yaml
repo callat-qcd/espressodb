@@ -6,7 +6,6 @@ PROJECT_APPS:
     - lattedb.gaugeaction
     - lattedb.gaugeconfig
     - lattedb.gaugesmear
-    - lattedb.project_fhcompare
     - lattedb.propagator
     - lattedb.interpolator
     - lattedb.interpolatorsmear
@@ -14,6 +13,7 @@ PROJECT_APPS:
     - lattedb.correlator
     - lattedb.documentation
     - lattedb.ensemble
+    - lattedb.projects.fhcompare
 ALLOWED_HOSTS:
     - 127.0.0.1
     - ithems.lbl.gov

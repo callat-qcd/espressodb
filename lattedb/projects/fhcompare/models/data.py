@@ -1,10 +1,11 @@
 from django.db import models
 
-from lattedb.base.models import Base
+from lattedb.projects.models import Data
+
 from lattedb.correlator.models import Baryon2pt
 
 
-class Data_SourceAvg2pt(Base):
+class SourceAvg2pt(Data):
     """ Base table for origin averaged data. This data is what is in hdf5.
     """
 
