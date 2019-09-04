@@ -1,7 +1,7 @@
-from django.db import models
+from lattedb.base.models import Base
 
 
-class Data(models.Model):
+class Data(Base):
     """Abstract base table for data
     """
 
@@ -9,7 +9,7 @@ class Data(models.Model):
         abstract = True
 
 
-class Project(models.Model):
+class Project(Base):
     """Abstract base table for projects
     """
 
