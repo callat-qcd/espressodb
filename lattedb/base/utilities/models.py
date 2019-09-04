@@ -2,36 +2,34 @@
 """
 from typing import Optional
 from typing import Tuple
-from typing import Dict
 from typing import List
-from typing import Any
 
 from django.db import models
 from django.apps import apps
 
 from lattedb.config.settings import PROJECT_APPS
 
-from lattedb.base.utilities.blackmagicsorcery import metamorph
 from lattedb.base.utilities.blackmagicsorcery import concludo_expressum
 from lattedb.base.models import Base
 
 
 def get_lattedb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Model:
-    """Returns all project models which are not in the exclude list
+    """Returns all installed project models which are not in the exclude list
     """
     exclude_apps = list(exclude_apps) if exclude_apps is not None else []
     exclude_apps += ["lattedb.base", "lattedb.documentation"]
 
     app_models = []
-    installed_apps = apps.app_configs.keys()
+    installed_apps = {app.name: app for app in apps.app_configs.values()}
 
-    for app in PROJECT_APPS:
-        if any([concludo_expressum(exclude, app) for exclude in exclude_apps]):
+    for app_path in PROJECT_APPS:
+        if (
+            any([concludo_expressum(exclude, app_path) for exclude in exclude_apps])
+            or not app_path in installed_apps
+        ):
             continue
 
-        app_name = metamorph("lattedb.", "", app)
-        if app_name in installed_apps:
-            app_models += apps.get_app_config(app_name).get_models()
+        app_models += installed_apps[app_path].get_models()
 
     return app_models
 
