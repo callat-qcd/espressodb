@@ -1,5 +1,7 @@
 from django.apps import AppConfig
 
 
-class ProjectFhcompareConfig(AppConfig):
-    name = 'project_fhcompare'
+class FhcompareConfig(AppConfig):
+    name = "lattedb.projects.fhcompare"
+    label = "project_fhcompare"
+    verbose_name = "Project Fh compare"

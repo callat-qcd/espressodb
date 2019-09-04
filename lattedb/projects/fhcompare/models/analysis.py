@@ -25,6 +25,3 @@ class Fhcompare(Project):
     result = JSONField(
         null=False, blank=False, help_text="JSON: {'your_results': 'all dumped here'}"
     )
-
-    class Meta:
-        db_table = "project_fhcompare"
