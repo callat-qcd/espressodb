@@ -1,13 +1,16 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 
 # Create your views here.
 
 from django.views.generic.base import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProgressView(TemplateView):
+class ProgressView(LoginRequiredMixin, TemplateView):
 
     template_name = "progress.html"
+    login_url = reverse_lazy("login")
 
     def get_context_data(self, **kwargs):
         context = {}
