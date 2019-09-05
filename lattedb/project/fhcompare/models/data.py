@@ -9,7 +9,7 @@ class SourceAvg2pt(Data):
     """ Base table for origin averaged data. This data is what is in hdf5.
     """
 
-    correlators = models.ManyToManyField(Baryon2pt)
+    baryon2pts = models.ManyToManyField(Baryon2pt)
 
     # @property
     # def long_tag(self) -> Optional[str]:
