@@ -44,3 +44,5 @@ class SourceAvg2pt(Data):
     #            raise ValidationError(
     #                f"{config} if different from first config {first}"
     #            )
+    class Meta:
+        app_label="project_fhcompare"
