@@ -128,8 +128,15 @@ class Base(models.Model):
         """
         self.type = self.__class__.__name__
 
-    def save(self, *args, **kwargs):  # pylint: disable=W0221
+    def save(
+        self, *args, save_instance_only: bool = False, **kwargs
+    ):  # pylint: disable=W0221
         """Overwrites type with the class name and user with login info if not specified.
+
+        **Arguments**
+            save_instance_only: bool = False
+                If true, only saves columns of the instance and not associated
+                specialized columns.
         """
         self.type = self.__class__.__name__
         if not self.user:
@@ -141,7 +148,7 @@ class Base(models.Model):
 
         self.check_consistency()
 
-        if self != self.specialization:
+        if self != self.specialization and not save_instance_only:
             self.specialization.save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
