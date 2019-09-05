@@ -2,6 +2,7 @@ from typing import Dict
 from typing import Any
 
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 from lattedb.project.models import Data
 

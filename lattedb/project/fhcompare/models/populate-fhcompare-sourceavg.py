@@ -23,7 +23,7 @@ for ens in ensemble_label:
         .values_list("propagator0__onetoall__gaugeconfig__nf211__config", flat=True)
     )
 
-    for conf in configs:
+    for conf in configs[:2]:
         for sz in spin_z_x2:
             for par in parity:
                 print(ens, conf, sz, par)
