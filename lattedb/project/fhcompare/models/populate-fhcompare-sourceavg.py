@@ -44,7 +44,10 @@ for ens in ensemble_label:
                 if data.exists():
                     print("row exists... skipping")
                 else:
-                    data = SourceAvg2pt.objects.create()
+                    print("hi")
+                    #data = SourceAvg2pt(real = [1, 1], imag = [1, 1]).save()
+                    data = SourceAvg2pt.objects.create(real = [1, 1], imag = [1, 1])
                     data.baryon2pts.add(*corr_spin_parity)
+
                     data.save()
                     print("row inserted")

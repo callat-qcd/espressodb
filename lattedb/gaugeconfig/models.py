@@ -14,9 +14,9 @@ class GaugeConfig(Base):
         if self.type == config.type:
             equal = all(
                 [
-                    getattr(self, column) == getattr(config, column)
+                    getattr(self, column.name) == getattr(config, column.name)
                     for column in self.get_open_fields()
-                    if column != "config"
+                    if column.name != "config"
                 ]
             )
 

@@ -15,6 +15,16 @@ class SourceAvg2pt(Data):
 
     baryon2pts = models.ManyToManyField(Baryon2pt)
 
+    real = ArrayField(
+        models.FloatField(), default=list, help_text="Float: Real part of correlator"
+    )
+
+    imag = ArrayField(
+        models.FloatField(),
+        default=list,
+        help_text="Float: Imaginary part of correlator",
+    )
+
     # @property
     # def long_tag(self) -> Optional[str]:
     #    """Returns descriptive long tag of first configuration
@@ -22,9 +32,11 @@ class SourceAvg2pt(Data):
     #    first = self.configurations.first()  # pylint: disable=E1101
     #    return first.specialization.long_tag if first else None
 
-    # def check_consistency(self, data: Dict[str, Any]):
-    # """Checks if all correlators in same set have the same meta info. except spin, parity
-    # """
+    def check_consistency(self, data: Dict[str, Any]):
+        """Checks if all correlators in same set have the same meta info. except spin, parity
+        """
+        print(data["baryon2pts"].all())
+
     # corrtype = np.unique([corr.type for corr in self.correlators.all()])
     # if len(corrtype) != 1:
     #    raise ValidationError(
