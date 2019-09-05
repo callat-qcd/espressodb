@@ -80,12 +80,6 @@ class Base(models.Model):
         Raise errors here if the model must fulfill checks.
         """
 
-    def save(self, *args, **kwargs):  # pylint: disable=W0221
-        """Overwrites custom save to call check_consistency first.
-        """
-        self.check_consistency()
-        super().save(*args, **kwargs)
-
     @classmethod
     def get_open_fields(cls) -> List["Field"]:
         """Returns keys which are editable and non ForeignKeys
@@ -145,7 +139,14 @@ class Base(models.Model):
             else:
                 self.user, _ = User.objects.get_or_create(username="ananymous")
 
-        super().save(*args, **kwargs)
+        self.check_consistency()
+
+        if self != self.specialization:
+            self.specialization.save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+
+        return self
 
     @property
     def specialization(self):
