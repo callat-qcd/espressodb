@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load status_extras %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1>Progress view</h1>
+</div>
+<div class="container">
+
+    {% for object, progress in summary.items %}
+    <div class="card my-3" style="border-left: 5px solid {% if progress.3 == 100 %}#5CB85C{% else %}#d9534f{% endif %};">
+        <div class="card-body">
+        <h5 class="card-title">{{object}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Progress</h6>
+        {% render_progress_bar progress.0 progress.1 progress.2 progress.3  %}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

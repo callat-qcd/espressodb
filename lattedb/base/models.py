@@ -47,22 +47,38 @@ class Base(models.Model):
         abstract = True
 
     def __init__(self, *args, **kwargs):
-        """Default init but adds specialization attribute
+        """Default init but adds specialization attributes (which do not clash) to self
+
+        The specialization is a child instance of this class which has an id in the
+        respective child table.
+
+        The specialization attributes are attributes present in the child but not in the
+        current instance.
         """
+
         super().__init__(*args, **kwargs)
         self._specialization = None
+
+        self._specialized_keys = []
+        if self.specialization != self:
+            for field in self.specialization.get_open_fields():
+                if field.name not in dir(self):
+                    self._specialized_keys.append(field.name)
+                    setattr(self, field.name, getattr(self.specialization, field.name))
+
+    def __setattr__(self, key, value):
+        """Tries to set the attribute in specialization if it is a specialized attribute
+        and else sets it in parent class.
+        """
+        if hasattr(self, "_specialized_keys") and key in self._specialized_keys:
+            setattr(self.specialization, key, value)
+        super().__setattr__(key, value)
 
     def check_consistency(self):
         """Method is called before save.
 
         Raise errors here if the model must fulfill checks.
         """
-
-    def save(self, *args, **kwargs):  # pylint: disable=W0221
-        """Overwrites custom save to call check_consistency first.
-        """
-        self.check_consistency()
-        super().save(*args, **kwargs)
 
     @classmethod
     def get_open_fields(cls) -> List["Field"]:
@@ -112,8 +128,15 @@ class Base(models.Model):
         """
         self.type = self.__class__.__name__
 
-    def save(self, *args, **kwargs):  # pylint: disable=W0221
+    def save(
+        self, *args, save_instance_only: bool = False, **kwargs
+    ):  # pylint: disable=W0221
         """Overwrites type with the class name and user with login info if not specified.
+
+        **Arguments**
+            save_instance_only: bool = False
+                If true, only saves columns of the instance and not associated
+                specialized columns.
         """
         self.type = self.__class__.__name__
         if not self.user:
@@ -123,7 +146,14 @@ class Base(models.Model):
             else:
                 self.user, _ = User.objects.get_or_create(username="ananymous")
 
-        super().save(*args, **kwargs)
+        self.check_consistency()
+
+        if self != self.specialization and not save_instance_only:
+            self.specialization.save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+
+        return self
 
     @property
     def specialization(self):

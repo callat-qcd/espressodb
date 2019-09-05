@@ -6,47 +6,91 @@
 <div class="jumbotron">
     <h1>
         {% if not request.session.root %}
-            Which table do you want to populate?
+        Which table do you want to populate?
         {% else %}
-            Populating <code>{{request.session.root}}</code>
+        Populating <code>{{request.session.root}}</code>
         {% endif %}
     </h1>
+    <p>
+        This page helps you to generate a python population script for a given database table.
+    </p>
+    <p>
+        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#help" aria-expanded="false" aria-controls="help">
+            <i class="far fa-question-circle mr-1"></i>Help
+        </button>
+    </p>
+    <div class="collapse" id="help">
+        <div class="card border-info mb-3">
+            <div class="card-header">Info</div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    This page will recursively query you which object you want to create.
+                </li>
+                <li class="list-group-item">
+                    If you already know how to create a certain object, (e.g. by a database query) you can tell the webpage to ignore dependencies.
+                </li>
+                <li class="list-group-item">
+                    It is not supported to go backwards &mdash; you have to start over if you want to change entries.
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 <div class="container">
     {% if request.session.tree %}
     <table class="table table-striped">
         <thead>
             <tr>
-              <th>Dependency</th>
-              <th>Type</th>
+                <th>Dependency</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody>
             {% for key, val in request.session.tree.items %}
             <tr>
-                <td>{{key}}</td><td>{{val}}</td>
+                <td>{{key}}</td>
+                <td>{{val}}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
     {% endif %}
-
-
-    <form action="{{form.success}}" method="post" class="form">
-    {% csrf_token %}
-    {{ field.errors }}
-    <div class="input-group">
-        {% for field in form %}
-        <div class="input-group-prepend">
-            <label class="input-group-text" for="id_model">{{ field.label_tag }}</label>
+    <div class="card">
+        <div class="card-body">
+            <form action="{{form.success}}" method="post" class="form">
+                {% csrf_token %}
+                {{ form.errors }}
+                <div class="form-row align-items-center">
+                    <div class="col-auto my-1">
+                        <label class="col-form-label" for="id_model">{{ form.model.label_tag }}</label>
+                    </div>
+                    <div class="col-auto my-1">
+                        {{ form.model | add_class:"custom-select"}}
+                    </div>
+                    <div class="col-auto my-1">
+                        <div class="form-check">
+                            {{ form.parse_tree | add_class:"form-check-input"}}
+                            <label class="form-check-label" for="id_parse_tree">
+                                Find dependencies
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-auto my-1">
+                        <button class="btn btn-outline-secondary" type="submit" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
         </div>
-        {{ field | add_class:"custom-select"}}
-        <div class="input-group-append" id="button-addon4">
-          <button class="btn btn-outline-secondary" type="submit" type="submit">Submit</button>
-        </div>
-        {% endfor %}
     </div>
-    </form>
 </div>
+
+{% if request.session.root %}
+<script type="text/javascript">
+    $(window).on('load', function() {
+        window.scrollTo(0, document.body.scrollHeight);
+    });
+</script>
+{% endif %}
+
 
 {% endblock %}
