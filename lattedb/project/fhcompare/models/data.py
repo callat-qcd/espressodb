@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 from lattedb.project.models import Data
 
@@ -11,25 +12,28 @@ class SourceAvg2pt(Data):
 
     baryon2pts = models.ManyToManyField(Baryon2pt)
 
-    # @property
-    # def long_tag(self) -> Optional[str]:
-    #    """Returns descriptive long tag of first configuration
-    #    """
-    #    first = self.configurations.first()  # pylint: disable=E1101
-    #    return first.specialization.long_tag if first else None
+    real = ArrayField(
+        models.FloatField(), default=list, help_text="Float: Real part of correlator"
+    )
 
-    # def check_consistency(self):
-    # """Checks if all correlators in same set have the same meta info. except spin, parity
-    # """
-    # corrtype = np.unique([corr.type for corr in self.correlators.all()])
-    # if len(corrtype) != 1:
-    #    raise ValidationError(
-    #        f"{corrtype} should only have one unique entry"
-    #    )
-    # if corrtype[0] != "Baryon2pt":
-    #    raise ValidationError(
-    #        f"SourceAvg2pt should only have Baryon2pt for this project."
-    #    )
+    imag = ArrayField(
+        models.FloatField(), default=list,  help_text="Float: Imaginary part of correlator"
+    )
+
+    def check_consistency(self):
+        """Checks if all correlators in same set have the same meta info. except spin, parity
+        """
+        # print(type(first))
+        # pass
+        # type = np.unique([corr.type for corr in self.correlators.all()])
+        # if len(corrtype) != 1:
+        #   raise ValidationError(
+        #       f"{corrtype} should only have one unique entry"
+        #   )
+        # if corrtype[0] != "Baryon2pt":
+        #   raise ValidationError(
+        #       f"SourceAvg2pt should only have Baryon2pt for this project."
+        #   )
 
     # for corr in self.correlators.all():
     #    check_i = {"type": [], "gaugeconfig_ptr_id": [],
@@ -45,4 +49,4 @@ class SourceAvg2pt(Data):
     #                f"{config} if different from first config {first}"
     #            )
     class Meta:
-        app_label="project_fhcompare"
+        app_label = "project_fhcompare"
