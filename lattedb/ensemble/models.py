@@ -1,3 +1,5 @@
+from typing import Dict
+from typing import Any
 from typing import Optional
 
 from django.db import models
@@ -35,12 +37,12 @@ class Ensemble(Base):
         first = self.configurations.first()  # pylint: disable=E1101
         return first.specialization.long_tag if first else None
 
-    def check_consistency(self):
+    def check_consistency(self, data: Dict[str, Any]):
         """Checks if all configurations have the same meta info.
         """
-        first = self.configurations.first()  # pylint: disable=E1101
+        first = data["configurations"].first()  # pylint: disable=E1101
         if first:
-            for config in self.configurations.all()[1:]:  # pylint: disable=E1101
+            for config in data["configurations"].all()[1:]:  # pylint: disable=E1101
                 if not first.same_ensemble(config):
                     raise ValidationError(
                         f"{config} if different from first config {first}"

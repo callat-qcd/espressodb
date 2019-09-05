@@ -1,3 +1,6 @@
+from typing import Dict
+from typing import Any
+
 from django.db import models
 
 from lattedb.project.models import Data
@@ -18,7 +21,7 @@ class SourceAvg2pt(Data):
     #    first = self.configurations.first()  # pylint: disable=E1101
     #    return first.specialization.long_tag if first else None
 
-    # def check_consistency(self):
+    # def check_consistency(self, data: Dict[str, Any]):
     # """Checks if all correlators in same set have the same meta info. except spin, parity
     # """
     # corrtype = np.unique([corr.type for corr in self.correlators.all()])
@@ -45,4 +48,4 @@ class SourceAvg2pt(Data):
     #                f"{config} if different from first config {first}"
     #            )
     class Meta:
-        app_label="project_fhcompare"
+        app_label = "project_fhcompare"

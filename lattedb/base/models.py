@@ -74,10 +74,14 @@ class Base(models.Model):
             setattr(self.specialization, key, value)
         super().__setattr__(key, value)
 
-    def check_consistency(self):
+    def check_consistency(self, data: Dict[str, Any]):
         """Method is called before save.
 
         Raise errors here if the model must fulfill checks.
+
+        **Arguments**
+            data: Dict[str, Any]
+                Dictionary containing the open column data of the class.
         """
 
     @classmethod
@@ -146,7 +150,18 @@ class Base(models.Model):
             else:
                 self.user, _ = User.objects.get_or_create(username="ananymous")
 
-        self.check_consistency()
+        data = {}
+        for field in self.get_open_fields():
+            if not isinstance(field, models.ManyToManyField):
+                data[field.name] = getattr(self, field.name)
+            else:
+                data[field.name] = (
+                    getattr(self, field.name)
+                    if self.pk is not None
+                    else field.model.objects.none()
+                )
+
+        self.check_consistency(data)
 
         if self != self.specialization and not save_instance_only:
             self.specialization.save(*args, **kwargs)
