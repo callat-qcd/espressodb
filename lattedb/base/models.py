@@ -47,10 +47,32 @@ class Base(models.Model):
         abstract = True
 
     def __init__(self, *args, **kwargs):
-        """Default init but adds specialization attribute
+        """Default init but adds specialization attributes (which do not clash) to self
+
+        The specialization is a child instance of this class which has an id in the
+        respective child table.
+
+        The specialization attributes are attributes present in the child but not in the
+        current instance.
         """
+
         super().__init__(*args, **kwargs)
         self._specialization = None
+
+        self._specialized_keys = []
+        if self.specialization != self:
+            for field in self.specialization.get_open_fields():
+                if field.name not in dir(self):
+                    self._specialized_keys.append(field.name)
+                    setattr(self, field.name, getattr(self.specialization, field.name))
+
+    def __setattr__(self, key, value):
+        """Tries to set the attribute in specialization if it is a specialized attribute
+        and else sets it in parent class.
+        """
+        if hasattr(self, "_specialized_keys") and key in self._specialized_keys:
+            setattr(self.specialization, key, value)
+        super().__setattr__(key, value)
 
     def check_consistency(self):
         """Method is called before save.
