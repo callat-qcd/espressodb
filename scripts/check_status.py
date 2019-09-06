@@ -84,7 +84,7 @@ def get_hdf5path(baryon2pt: Baryon2pt) -> str:
             f"a{prop.fermionaction.specialization.alpha5:1.1f}"
         ).replace(".", "p"),
         "spectrum",
-        f"ml{config.fermionaction.quark_mass}".replace(".", "p").rstrip("0"),
+        f"ml{prop.fermionaction.quark_mass}".replace(".", "p").rstrip("0"),
         f"{baryon2pt.tag}" + ("" if src.parity else "_np"),
         "spin_" + ("up" if src.spin_x2 else "dn"),
         f"x{prop.origin_x}y{prop.origin_y}z{prop.origin_z}t{prop.origin_t}",
