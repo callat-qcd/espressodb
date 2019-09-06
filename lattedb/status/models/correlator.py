@@ -1,12 +1,12 @@
 from django.db import models
 
 from lattedb.status.models.base import FileStatus
-from lattedb.correlator.models import Baryon2pt as Baryon2ptCorrelator
+from lattedb.correlator.models import Baryon2pt as _Baryon2pt
 
 
 class Baryon2pt(FileStatus):
     barryon2pt = models.ForeignKey(
-        Baryon2ptCorrelator,
+        _Baryon2pt,
         on_delete=models.CASCADE,
         null=False,
         help_text="ForeignKey: Baryon two point correlation function",
