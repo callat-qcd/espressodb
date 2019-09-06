@@ -7,10 +7,13 @@ from h5py import File
 
 from django.db import transaction
 
+from tqdm import tqdm
+
 from lattedb.correlator.models import Baryon2pt
 from lattedb.status.models.correlator import Baryon2pt as Baryon2ptStatus
 
 LOGGER = logging.getLogger("base")
+LOGGER.setLevel(logging.INFO)
 
 HOME = "summit"
 ROOT_PATH = {
@@ -125,8 +128,8 @@ def main():
 
     prepopulate_status()
 
-    for status in Baryon2ptStatus.objects.all():
-        LOGGER.info("Looking for status of %s", status.baryon2pt)
+    for status in tqdm(Baryon2ptStatus.objects.all()):
+        LOGGER.debug("Looking for status of %s", status.baryon2pt)
         descriptor = f"{status.baryon2pt.short_tag}_{status.baryon2pt.stream}"
         root_path = ROOT_PATH.get(descriptor, None)
 
@@ -134,7 +137,7 @@ def main():
             check_status(status, root_path)
 
         else:
-            LOGGER.info("No path specified for ensemble %s.", descriptor)
+            LOGGER.debug("No path specified for ensemble %s.", descriptor)
             mark_unknown(status)
 
 
