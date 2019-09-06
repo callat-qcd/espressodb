@@ -26,6 +26,8 @@ class FileStatus(Base):
         null=True, blank=True, help_text="(Optional) Text: Folder path in hdf5 file"
     )
     status = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
         help_text="PositiveSmallInt: Encode categorical status labels",
         choices=STATUS_CHOICES,
     )
