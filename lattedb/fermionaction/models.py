@@ -81,3 +81,9 @@ class MobiusDW(FermionAction):
                 name="unique_fermionaction_mobiusdw",
             )
         ]
+
+    @property
+    def alpha5(self) -> float:
+        """c5 + b5
+        """
+        return self.c5 + self.b5
