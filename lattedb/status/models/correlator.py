@@ -5,7 +5,7 @@ from lattedb.correlator.models import Baryon2pt as _Baryon2pt
 
 
 class Baryon2pt(FileStatus):
-    barryon2pt = models.ForeignKey(
+    baryon2pt = models.ForeignKey(
         _Baryon2pt,
         on_delete=models.CASCADE,
         null=False,

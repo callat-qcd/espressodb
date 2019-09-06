@@ -15,10 +15,10 @@ class Baryon2ptStatusAdmin(admin.ModelAdmin):
 
     list_display = (
         "id",
-        "barryon2pt",
+        "baryon2pt",
         "home",
-        "directory",
-        "hdf5path",
+        "file_path",
+        "dset_path",
         "timestamp",
         "status",
         "source_group",
