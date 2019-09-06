@@ -31,30 +31,30 @@ def check_status(status: Baryon2ptStatus, root_path: str):
         root_path: str
             The root path on the host where to expect the correlator.
     """
-    baryon2pt = status.barryon2pt
+    baryon2pt = status.baryon2pt
     LOGGER.debug("Checking status of %s", baryon2pt)
 
-    directory = status.directory or os.path.join(
+    file_path = status.file_path or os.path.join(
         root_path, f"{baryon2pt.short_tag}_{baryon2pt.n_config}.h5"
     )
-    hdf5path = status.hdf5path or get_hdf5path(baryon2pt)
-    LOGGER.debug("Looking up file %s and dset path %s", directory, hdf5path)
+    dset_path = status.dset_path or get_dset_path(baryon2pt)
+    LOGGER.debug("Looking up file %s and dset path %s", file_path, dset_path)
 
-    if os.path.exists(directory) and data_exist(directory, hdf5path):
+    if os.path.exists(file_path) and data_exist(file_path, dset_path):
         LOGGER.debug("Data was found. Updating status")
         status.status = 2  # data exists
-        status.directory = directory
-        status.hdf5path = hdf5path
+        status.file_path = file_path
+        status.dset_path = dset_path
     else:
         LOGGER.debug("Data was not found. Updating status")
         status.status = 0  # data unknown
-        status.directory = None
-        status.hdf5path = None
+        status.file_path = None
+        status.dset_path = None
 
     status.save()
 
 
-def get_hdf5path(baryon2pt: Baryon2pt) -> str:
+def get_dset_path(baryon2pt: Baryon2pt) -> str:
     """Parses the hdf5 path for a baryon2pt correlator
     """
     prop = baryon2pt.propagator0
@@ -82,29 +82,29 @@ def get_hdf5path(baryon2pt: Baryon2pt) -> str:
     )
 
 
-def data_exist(file_path: str, hdf5path: str) -> bool:
-    """Checks if `hdf5path` is contained in `file_path`.
+def data_exist(file_path: str, dset_path: str) -> bool:
+    """Checks if `dset_path` is contained in `file_path`.
 
     **Arguments**
         file_path: str
             Path to HDF5 file
 
-        hdf5path: str
+        dset_path: str
             Path to data set in HDF5 file.
     """
     with File(file_path, "r") as h5f:
-        return hdf5path in h5f
+        return dset_path in h5f
 
 
 def prepopulate_status():
     """Creates status unknown for all Baryon2pt correlators (for faster updates)
     """
     no_status_2pts = Baryon2pt.objects.exclude(
-        id__in=Baryon2ptStatus.objects.values_list("barryon2pt__id")
+        id__in=Baryon2ptStatus.objects.values_list("baryon2pt__id")
     )
     Baryon2ptStatus.objects.bulk_create(
         [
-            Baryon2ptStatus(barryon2pt=baryon2pt, home=HOME, status=0)
+            Baryon2ptStatus(baryon2pt=baryon2pt, home=HOME, status=0)
             for baryon2pt in no_status_2pts
         ]
     )
@@ -126,8 +126,8 @@ def main():
     prepopulate_status()
 
     for status in Baryon2ptStatus.objects.all():
-        LOGGER.info("Looking for status of %s", status.barryon2pt)
-        descriptor = f"{status.barryon2pt.short_tag}_{status.barryon2pt.stream}"
+        LOGGER.info("Looking for status of %s", status.baryon2pt)
+        descriptor = f"{status.baryon2pt.short_tag}_{status.baryon2pt.stream}"
         root_path = ROOT_PATH.get(descriptor, None)
 
         if root_path is not None:
