@@ -8,7 +8,6 @@ from h5py import File
 from django.db import transaction
 
 from lattedb.correlator.models import Baryon2pt
-from lattedb.ensemble.models import Ensemble
 from lattedb.status.models.correlator import Baryon2pt as Baryon2ptStatus
 
 LOGGER = logging.getLogger("base")
@@ -20,7 +19,7 @@ ROOT_PATH = {
 
 
 @transaction.atomic
-def check_status(baryon2pt: Baryon2pt, root_path: str):
+def check_status(status: Baryon2ptStatus, root_path: str):
     """Checks status of baryon2pt correlator.
 
     The logic works as follows:
@@ -32,16 +31,8 @@ def check_status(baryon2pt: Baryon2pt, root_path: str):
         root_path: str
             The root path on the host where to expect the correlator.
     """
+    baryon2pt = status.baryon2pt
     LOGGER.debug("Checking status of %s", baryon2pt)
-
-    status, created = Baryon2ptStatus.objects.get_or_create(
-        barryon2pt=baryon2pt, home=HOME
-    )
-    LOGGER.debug(
-        "Status entry found. Checking correctness."
-        if created
-        else "No status entry found. Creating new status."
-    )
 
     directory = status.directory or os.path.join(
         root_path, f"{baryon2pt.short_tag}_{baryon2pt.n_config}.h5"
@@ -105,12 +96,25 @@ def data_exist(file_path: str, hdf5path: str) -> bool:
         return hdf5path in h5f
 
 
-@transaction.atomic
-def mark_unknown(baryon2pt: Baryon2pt):
-    """Sets status of object to unknown
+def prepopulate_status():
+    """Creates status unknown for all Baryon2pt correlators (for faster updates)
     """
-    status, _ = Baryon2ptStatus.objects.get_or_create(barryon2pt=baryon2pt, home=HOME)
-    status.status = 0  # data unknown
+    no_status_2pts = Baryon2pt.objects.exclude(
+        id__in=Baryon2ptStatus.objects.values_list("barryon2pt__id")
+    )
+    Baryon2ptStatus.objects.bulk_create(
+        [
+            Baryon2ptStatus(barryon2pt=baryon2pt, home=HOME, status=0)
+            for baryon2pt in no_status_2pts
+        ]
+    )
+
+
+@transaction.atomic
+def mark_unknown(status: Baryon2ptStatus):
+    """Marks status of correlator unknown
+    """
+    status.status = 0
     status.save()
 
 
@@ -119,26 +123,19 @@ def main():
     """
     LOGGER.info("Start scaning for existing baryon 2pt correlators by ensemble")
 
-    for ensemble in Ensemble.objects.all():
+    prepopulate_status()
 
-        LOGGER.info("Ensemble -> %s", ensemble)
-        descriptor = f"{ensemble.short_tag}_{ensemble.stream}"
+    for status in Baryon2ptStatus.objects.all():
+        LOGGER.info("Looking for status of %s", status.barryon2pt)
+        descriptor = f"{status.baryon2pt.short_tag}_{status.baryon2pt.stream}"
         root_path = ROOT_PATH.get(descriptor, None)
 
         if root_path is not None:
-
-            correlators = Baryon2pt.get_from_ensemble(ensemble)
-            LOGGER.info("Found meta information for %d correlators", correlators.count())
-
-            for correlator in correlators:
-                check_status(correlator, root_path)
+            check_status(status, root_path)
 
         else:
             LOGGER.info("No path specified for ensemble %s.", descriptor)
-            correlators = Baryon2pt.get_from_ensemble(ensemble)
-
-            for correlator in correlators:
-                mark_unknown(correlator)
+            mark_unknown(status)
 
 
 if __name__ == "__main__":
