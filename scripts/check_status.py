@@ -42,7 +42,7 @@ def check_status(baryon2pt: Baryon2pt, root_path: str):
     )
 
     directory = status.directory or os.path.join(
-        root_path, f"{baryon2pt.short_tag}_{baryon2pt.n_config}"
+        root_path, f"{baryon2pt.short_tag}_{baryon2pt.n_config}.h5"
     )
     hdf5path = status.hdf5path or get_hdf5path(baryon2pt)
     LOGGER.debug("Looking up file %s and dset path %s", directory, hdf5path)
@@ -61,7 +61,7 @@ def check_status(baryon2pt: Baryon2pt, root_path: str):
     # status.save()
 
 
-def get_hdf5path(baryon2pt: Baryon2pt, alpha5: float = 1.5) -> str:
+def get_hdf5path(baryon2pt: Baryon2pt) -> str:
     """Parses the hdf5 path for a baryon2pt correlator
     """
     prop = baryon2pt.propagator0
@@ -79,7 +79,7 @@ def get_hdf5path(baryon2pt: Baryon2pt, alpha5: float = 1.5) -> str:
             "_"
             f"L5{int(prop.fermionaction.l5)}"
             "_"
-            f"a{alpha5:1.1f}"
+            f"a{prop.fermionaction.specialization.alpha5:1.1f}"
         ).replace(".", "p"),
         "spectrum",
         f"ml{config.light.quark_mass}".replace(".", "p"),
