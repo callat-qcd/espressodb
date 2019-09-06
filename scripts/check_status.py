@@ -31,10 +31,9 @@ def check_status(baryon2pt: Baryon2pt, root_path: str):
     """
     LOGGER.debug("Checking status of %s", baryon2pt)
 
-    # status, created = Baryon2ptStatus.objects.get_or_create(
-    #     baryon2pt=baryon2pt, home=HOME
-    # )
-    status, created = Baryon2ptStatus(barryon2pt=baryon2pt, home=HOME), False
+    status, created = Baryon2ptStatus.objects.get_or_create(
+        barryon2pt=baryon2pt, home=HOME
+    )
     LOGGER.debug(
         "Status entry found. Checking correctness."
         if created
@@ -58,7 +57,7 @@ def check_status(baryon2pt: Baryon2pt, root_path: str):
         status.directory = None
         status.hdf5path = None
 
-    # status.save()
+    status.save()
 
 
 def get_hdf5path(baryon2pt: Baryon2pt) -> str:
