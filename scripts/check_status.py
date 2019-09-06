@@ -5,6 +5,8 @@ import logging
 
 from h5py import File
 
+from django.db import transaction
+
 from lattedb.correlator.models import Baryon2pt
 from lattedb.ensemble.models import Ensemble
 from lattedb.status.models.correlator import Baryon2pt as Baryon2ptStatus
@@ -17,6 +19,7 @@ ROOT_PATH = {
 }
 
 
+@transaction.atomic
 def check_status(baryon2pt: Baryon2pt, root_path: str):
     """Checks status of baryon2pt correlator.
 
@@ -102,6 +105,15 @@ def data_exist(file_path: str, hdf5path: str) -> bool:
         return hdf5path in h5f
 
 
+@transaction.atomic
+def mark_unknown(baryon2pt: Baryon2pt):
+    """Sets status of object to unknown
+    """
+    status, _ = Baryon2ptStatus.objects.get_or_create(barryon2pt=baryon2pt, home=HOME)
+    status.status = 0  # data unknown
+    status.save()
+
+
 def main():
     """Looks up Baryon2pt correlators from the meta information and checks their status.
     """
@@ -123,6 +135,10 @@ def main():
 
         else:
             LOGGER.info("No path specified for ensemble %s.", descriptor)
+            correlators = Baryon2pt.get_from_ensemble(ensemble)
+
+            for correlator in correlators:
+                mark_unknown(correlator)
 
 
 if __name__ == "__main__":
