@@ -200,6 +200,18 @@ class Baryon2pt(Correlator):
         }
         return cls.objects.filter(**table_filter)
 
+    @property
+    def n_config(self) -> int:
+        """The number of the gaugeconfig.
+        """
+        return self.propagator0.gaugeconfig.config
+
+    @property
+    def short_tag(self) -> str:
+        """The short tag of the gaugeconfig.
+        """
+        return self.propagator0.gaugeconfig.short_tag
+
 
 class BaryonSeq3pt(Correlator):
     source = models.ForeignKey(
