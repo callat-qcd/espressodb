@@ -31,7 +31,7 @@ def check_status(status: Baryon2ptStatus, root_path: str):
         root_path: str
             The root path on the host where to expect the correlator.
     """
-    baryon2pt = status.baryon2pt
+    baryon2pt = status.barryon2pt
     LOGGER.debug("Checking status of %s", baryon2pt)
 
     directory = status.directory or os.path.join(
@@ -127,7 +127,7 @@ def main():
 
     for status in Baryon2ptStatus.objects.all():
         LOGGER.info("Looking for status of %s", status.barryon2pt)
-        descriptor = f"{status.baryon2pt.short_tag}_{status.baryon2pt.stream}"
+        descriptor = f"{status.barryon2pt.short_tag}_{status.barryon2pt.stream}"
         root_path = ROOT_PATH.get(descriptor, None)
 
         if root_path is not None:
