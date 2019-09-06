@@ -212,6 +212,12 @@ class Baryon2pt(Correlator):
         """
         return self.propagator0.gaugeconfig.short_tag
 
+    @property
+    def stream(self) -> str:
+        """The stream of the gaugeconfig.
+        """
+        return self.propagator0.gaugeconfig.stream
+
 
 class BaryonSeq3pt(Correlator):
     source = models.ForeignKey(
