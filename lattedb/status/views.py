@@ -6,33 +6,38 @@ from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from lattedb.status.models.correlator import Baryon2pt as Baryon2ptStatus
+from lattedb.ensemble.models import Ensemble
 
-class ProgressView(LoginRequiredMixin, TemplateView):
+
+class Baryon2ptProgressView(LoginRequiredMixin, TemplateView):
 
     template_name = "progress.html"
     login_url = reverse_lazy("login")
 
     def get_context_data(self, **kwargs):
-        context = {}
-
-        queued = 500
-        running = 200
-        collecting = 50
-        done = 100
-
-        total = queued + running + collecting + done
-
         context = {
-            "summary": {
-                "Baryon2pt": [
-                    int(queued / total * 100),
-                    int(running / total * 100),
-                    int(collecting / total * 100),
-                ],
-                "OneToAll": [0, 0, 0],
-            }
+            "table": "Baryon2pt Status",
+            "summary": {},
+            "total": {},
+            "class": "Baryon2pt Status",
+            "subcategory": "Ensemble",
         }
-        for key in context["summary"]:
-            context["summary"][key].append(100 - sum(context["summary"][key]))
+
+        for ensemble in Ensemble.objects.all():
+            sub_statuses = Baryon2ptStatus.get_from_ensemble(ensemble)
+
+            total = sub_statuses.count()
+            context["summary"][
+                ensemble.short_tag + " &nbsp;&nbsp; " + ensemble.long_tag
+            ] = {
+                "danger": sub_statuses.filter(status=1).count(),
+                "warning": sub_statuses.filter(status=0).count(),
+                "info": sub_statuses.filter(status=3).count(),
+                "success": sub_statuses.filter(status=2).count(),
+                "total": sub_statuses.count(),
+            }
+
+        print(context)
 
         return context
