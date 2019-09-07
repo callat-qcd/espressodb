@@ -3,16 +3,24 @@
 
 {% block content %}
 <div class="jumbotron">
-    <h1>Progress view</h1>
+    <h1><code>{{ class }}</code> progress view</h1>
 </div>
 <div class="container">
 
+    <h1>Listed by <code>{{ subcategory }}</code></h1>
     {% for object, progress in summary.items %}
-    <div class="card my-3" style="border-left: 5px solid {% if progress.3 == 100 %}#5CB85C{% else %}#d9534f{% endif %};">
+    <div class="card my-3" style="border-left: 5px solid {% if progress.success == progress.total %}#5CB85C{% else %}#d9534f{% endif %};">
         <div class="card-body">
-        <h5 class="card-title">{{object}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Progress</h6>
-        {% render_progress_bar progress.0 progress.1 progress.2 progress.3  %}
+        <h4 class="card-title">{{object | safe}}</h4>
+        <h5 class="card-subtitle mb-2 text-muted">Progress (total={{progress.total}})</h5>
+        <ul class="pagination">
+            {% for key, val in progress.items %}
+                {% if key != "total" %}
+                <li class="page-item"><a class="page-link text-{{key}}">{{val}}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        {% render_progress_bar progress.danger progress.warning progress.info progress.success progress.total  %}
         </div>
     </div>
     {% endfor %}

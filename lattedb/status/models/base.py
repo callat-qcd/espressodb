@@ -19,13 +19,15 @@ class FileStatus(Base):
         blank=True,
         help_text="(Optional) Text: Computing facility where the object resides at",
     )
-    directory = models.TextField(
-        null=True, blank=True, help_text="(Optional) Text: Directory path to result"
+    file_path = models.TextField(
+        null=True, blank=True, help_text="(Optional) Text: Path to hdf5 file"
     )
-    hdf5path = models.TextField(
-        null=True, blank=True, help_text="(Optional) Text: Folder path in hdf5 file"
+    dset_path = models.TextField(
+        null=True, blank=True, help_text="(Optional) Text: Path to dset in hdf5 file"
     )
     status = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
         help_text="PositiveSmallInt: Encode categorical status labels",
         choices=STATUS_CHOICES,
     )

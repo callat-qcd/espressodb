@@ -118,6 +118,7 @@ class Meson2pt(Correlator):
             else:
                 self.tag = f"{p1.tag}{p0.tag}_on_{gc0.tag}_{dtype}"
 
+
 class Baryon2pt(Correlator):
     propagator0 = models.ForeignKey(
         "propagator.Propagator",
@@ -165,7 +166,58 @@ class Baryon2pt(Correlator):
             self.propagator0.specialization.origin_z,
             self.propagator0.specialization.origin_t,
         )
-    origin.short_description = 'origin (x, y, z, t)'
+
+    origin.short_description = "origin (x, y, z, t)"
+
+    @classmethod
+    def get_from_ensemble(
+        cls,
+        ensemble: "Ensemble",
+        propagator: str = "propagator0",
+        propagator_type: str = "OneToAll",
+    ) -> "QuerySet(Baryon2pt)":
+        """Returns all correlators which are associated with the ensemble.
+
+        The association is given through the propagator relation.
+
+        **Arguments**
+            ensemble: Ensemble
+                The ensemble of gaugeconfigs
+
+            propagator: str = "propagator0"
+                The propagator of the correlator associated with the gagugeconfig.
+                For this correlator, can be one out of
+                `[propagator0, propagator1, propagator2]`, but all should be on the same
+                gaugeconfig anyway.
+
+            propagator_type: str = "OneToAll"
+                The type of the propagator e.g. "OneToAll".
+        """
+        table_filter = {
+            f"{propagator}"
+            f"__{propagator_type.lower()}"
+            f"__gaugeconfig__in": ensemble.configurations.all()
+        }
+        return cls.objects.filter(**table_filter)
+
+    @property
+    def n_config(self) -> int:
+        """The number of the gaugeconfig.
+        """
+        return self.propagator0.gaugeconfig.config
+
+    @property
+    def short_tag(self) -> str:
+        """The short tag of the gaugeconfig.
+        """
+        return self.propagator0.gaugeconfig.short_tag
+
+    @property
+    def stream(self) -> str:
+        """The stream of the gaugeconfig.
+        """
+        return self.propagator0.gaugeconfig.stream
+
 
 class BaryonSeq3pt(Correlator):
     source = models.ForeignKey(
@@ -195,15 +247,11 @@ class BaryonSeq3pt(Correlator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=[
-                    "source",
-                    "current",
-                    "seqpropagator",
-                    "propagator",
-                ],
+                fields=["source", "current", "seqpropagator", "propagator"],
                 name="unique_correlator_baryonseq3pt",
             )
         ]
+
 
 class BaryonFH3pt(Correlator):
     source = models.ForeignKey(
@@ -240,13 +288,7 @@ class BaryonFH3pt(Correlator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=[
-                    "source",
-                    "fhpropagator",
-                    "propagator0",
-                    "propagator1",
-                    "sink",
-                ],
+                fields=["source", "fhpropagator", "propagator0", "propagator1", "sink"],
                 name="unique_correlator_baryonfh3pt",
             )
         ]
