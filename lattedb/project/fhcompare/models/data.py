@@ -35,7 +35,6 @@ class SourceAvg2pt(Data):
     def check_consistency(self, data: Dict[str, Any]):
         """Checks if all correlators in same set have the same meta info. except spin, parity
         """
-        print(data["baryon2pts"].all())
 
     # corrtype = np.unique([corr.type for corr in self.correlators.all()])
     # if len(corrtype) != 1:

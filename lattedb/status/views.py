@@ -27,7 +27,6 @@ class Baryon2ptProgressView(LoginRequiredMixin, TemplateView):
         for ensemble in Ensemble.objects.all():
             sub_statuses = Baryon2ptStatus.get_from_ensemble(ensemble)
 
-            total = sub_statuses.count()
             context["summary"][
                 ensemble.short_tag + " &nbsp;&nbsp; " + ensemble.long_tag
             ] = {
@@ -37,7 +36,5 @@ class Baryon2ptProgressView(LoginRequiredMixin, TemplateView):
                 "success": sub_statuses.filter(status=2).count(),
                 "total": sub_statuses.count(),
             }
-
-        print(context)
 
         return context
