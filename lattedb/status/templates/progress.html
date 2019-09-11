@@ -14,11 +14,10 @@
         <h4 class="card-title">{{object | safe}}</h4>
         <h5 class="card-subtitle mb-2 text-muted">Progress (total={{progress.total}})</h5>
         <ul class="pagination">
-            {% for key, val in progress.items %}
-                {% if key != "total" %}
-                <li class="page-item"><a class="page-link text-{{key}}">{{val}}</a></li>
-                {% endif %}
-            {% endfor %}
+            <li class="page-item"><a class="page-link text-danger">Does not exist: {{progress.danger}}</a></li>
+            <li class="page-item"><a class="page-link text-warning">Unknown: {{progress.warning}}</a></li>
+            <li class="page-item"><a class="page-link text-info">On tape: {{progress.info}}</a></li>
+            <li class="page-item"><a class="page-link text-success">On filesystem: {{progress.success}}</a></li>
         </ul>
         {% render_progress_bar progress.danger progress.warning progress.info progress.success progress.total  %}
         </div>
