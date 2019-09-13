@@ -7,8 +7,8 @@ PROJECT_APPS:
     - lattedb.gaugeconfig
     - lattedb.gaugesmear
     - lattedb.propagator
-    - lattedb.interpolator
-    - lattedb.interpolatorsmear
+    - lattedb.wavefunction
+    - lattedb.quarksmear
     - lattedb.current
     - lattedb.correlator
     - lattedb.documentation

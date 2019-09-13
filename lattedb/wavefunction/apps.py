@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class InterpolatingoperatorConfig(AppConfig):
+class WaveFunctionConfig(AppConfig):
     name = "wavefunction"
