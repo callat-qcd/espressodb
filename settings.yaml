@@ -16,5 +16,4 @@ PROJECT_APPS:
     - lattedb.project.fhcompare
 ALLOWED_HOSTS:
     - 127.0.0.1
-    - ithems.lbl.gov
-DEBUG: False
+DEBUG: True
