@@ -29,7 +29,7 @@ class Hisq(FermionAction):
         help_text="Decimal(10,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
     )
     linksmear = models.ForeignKey(
-        "gaugesmear.GaugeSmear",
+        "linksmear.LinkSmear",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.",
     )
@@ -37,7 +37,7 @@ class Hisq(FermionAction):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["quark_mass", "quark_tag", "naik"],
+                fields=["quark_mass", "quark_tag", "naik", "linksmear"],
                 name="unique_fermionaction_hisq",
             )
         ]
@@ -79,7 +79,7 @@ class MobiusDW(FermionAction):
         help_text="Decimal(10,6): Mobius kernal perameter",
     )
     linksmear = models.ForeignKey(
-        "gaugesmear.GaugeSmear",
+        "linksmear.LinkSmear",
         on_delete=models.CASCADE,
         help_text="ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.",
     )
@@ -87,7 +87,7 @@ class MobiusDW(FermionAction):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["quark_mass", "quark_tag", "l5", "m5", "b5", "c5"],
+                fields=["quark_mass", "quark_tag", "l5", "m5", "b5", "c5", "linksmear"],
                 name="unique_fermionaction_mobiusdw",
             )
         ]
