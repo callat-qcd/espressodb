@@ -92,7 +92,6 @@ class Nf211(GaugeConfig):
                     "ny",
                     "nz",
                     "nt",
-                    "gaugesmear",
                     "light",
                     "strange",
                     "charm",
