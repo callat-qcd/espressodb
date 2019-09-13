@@ -5,7 +5,7 @@ from django.test import TestCase
 
 from lattedb.base.tests import BaseTest
 
-from lattedb.quarkmear.models import GaugeCovariantGaussian
+from lattedb.quarksmear.models import GaugeCovariantGaussian
 
 
 class QuarkSmearTestCase(TestCase, BaseTest):
