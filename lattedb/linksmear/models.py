@@ -29,6 +29,6 @@ class WilsonFlow(LinkSmear):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["flowtime", "flowstep"], name="unique_gaugesmear_wilsonflow"
+                fields=["flowtime", "flowstep"], name="unique_linksmear_wilsonflow"
             )
         ]
