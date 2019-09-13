@@ -19,14 +19,12 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 
 SETTINGS_FILE = os.path.join(ROOT_DIR, "settings.yaml")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 with open(SETTINGS_FILE, "r") as fin:
     _SETTINGS = yaml.safe_load(fin.read())
     SECRET_KEY = _SETTINGS["SECRET_KEY"]
     PROJECT_APPS = _SETTINGS["PROJECT_APPS"]
     ALLOWED_HOSTS = _SETTINGS.get("ALLOWED_HOSTS", [])
+    DEBUG = _SETTINGS.get("DEBUG", False)
 
 READ_CONFIG = True
 
