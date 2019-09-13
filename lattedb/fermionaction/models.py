@@ -28,6 +28,11 @@ class Hisq(FermionAction):
         null=False,
         help_text="Decimal(10,6): Coefficient of Naik term. If Naik term is not included, explicitly set to 0",
     )
+    linksmear = models.ForeignKey(
+        "gaugesmear.GaugeSmear",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.",
+    )
 
     class Meta:
         constraints = [
@@ -72,6 +77,11 @@ class MobiusDW(FermionAction):
         decimal_places=6,
         null=False,
         help_text="Decimal(10,6): Mobius kernal perameter",
+    )
+    linksmear = models.ForeignKey(
+        "gaugesmear.GaugeSmear",
+        on_delete=models.CASCADE,
+        help_text="ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.",
     )
 
     class Meta:
