@@ -18,7 +18,7 @@ class Baryon2pt(FileStatus):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["barryon2pt", "home"], name="unique_baryon2pt_file_status"
+                fields=["baryon2pt", "home"], name="unique_baryon2pt_file_status"
             )
         ]
 
