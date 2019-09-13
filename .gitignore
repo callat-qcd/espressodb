@@ -7,3 +7,5 @@ lattedb.egg-info/
 models.pdf
 notes.md
 logo.png
+lattedb/documentation
+00_*.py
