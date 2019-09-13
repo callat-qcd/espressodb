@@ -287,9 +287,9 @@ tree = {
     "propagator2.gaugeconfig.gaugeaction": "LuescherWeisz",
     "propagator2.gaugeconfig.gaugesmear": "WilsonFlow",
     "sink": "Hadron",
-    "sink.interpolatorsmear": "Gaussian",
+    "sink.wavefunctionsmear": "Gaussian",
     "source": "Hadron4D",
-    "source.interpolatorsmear": "Gaussian",
+    "source.wavefunctionsmear": "Gaussian",
 }
 
 
