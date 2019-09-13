@@ -3,17 +3,17 @@ from django.db import models
 from lattedb.base.models import Base
 
 
-class GaugeSmear(Base):
+class LinkSmear(Base):
     """ Base table for application"
     """
 
 
-class Unsmeared(GaugeSmear):
+class Unsmeared(LinkSmear):
     """
     """
 
 
-class WilsonFlow(GaugeSmear):
+class WilsonFlow(LinkSmear):
     """
     """
 

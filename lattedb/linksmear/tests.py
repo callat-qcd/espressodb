@@ -6,12 +6,12 @@ from django.test import TestCase
 
 from lattedb.base.tests import BaseTest
 
-from lattedb.gaugesmear.models import WilsonFlow
+from lattedb.linksmear.models import WilsonFlow
 
 LOGGER = logging.getLogger("base")
 
 
-class GaugeSmearTestCase(TestCase, BaseTest):
+class LinkSmearTestCase(TestCase, BaseTest):
     """Tests for WilsonFlow gaguge smear table
     """
 
