@@ -7,8 +7,6 @@ from lattedb.base.tests import BaseTest
 
 from lattedb.wavefunction.models import Hadron
 
-import lattedb.wavesmear.tests as wavesmear_tests
-
 
 class HadronTestCase(TestCase, BaseTest):
 
@@ -25,4 +23,3 @@ class HadronTestCase(TestCase, BaseTest):
         "isospin_z_x2": 10000,
         "momentum": 0,
     }
-    test_tree = {"wavefunctionsmear": wavesmear_tests.WaveFunctionSmearTestCase}
