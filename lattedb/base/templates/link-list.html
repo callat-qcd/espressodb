@@ -16,8 +16,8 @@
    <i class="fas fa-book mx-1"></i>Documentation
  </a>
  <div class="dropdown-menu">
- {% for link_name, reverse_link in documentation %}
-   <a class="dropdown-item" href="{% url 'documentation:details' reverse_link %}">{{link_name}}</a>
+ {% for app_slug, app_name in documentation %}
+   <a class="dropdown-item" href="{% url 'documentation:details' app_slug %}">{{app_name}}</a>
  {% endfor%}
  </div>
 </li>
