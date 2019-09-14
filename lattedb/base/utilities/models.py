@@ -3,13 +3,14 @@
 from typing import Optional
 from typing import Tuple
 from typing import List
+from typing import Dict
 
 from django.db import models
 from django.apps import apps
 from django.apps.config import AppConfig
+from django.template.defaultfilters import slugify
 
 from lattedb.config.settings import PROJECT_APPS
-
 from lattedb.base.utilities.blackmagicsorcery import concludo_expressum
 from lattedb.base.models import Base
 
@@ -39,18 +40,28 @@ def get_project_apps(exclude_apps: Optional[Tuple[str]] = None) -> List[AppConfi
     return available_apps
 
 
+def get_app_name(app: AppConfig) -> str:
+    """Returns a readable name for the app
+    """
+    return " ".join([s.capitalize() for s in app.name.split(".")[1:]])
+
+
+def get_apps_slug_map() -> Dict[str, str]:
+    """Creates a map for all project app names. Keys are slugs, values are names.
+    """
+    slug_map = {}
+    for app in get_project_apps():
+        name = get_app_name(app)
+        slug_map[slugify(name)] = app
+    return slug_map
+
+
 def get_lattedb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Model:
     """Returns all installed project models which are not in the exclude list
     """
     return [
         model for app in get_project_apps(exclude_apps) for model in app.get_models()
     ]
-
-
-def get_app_name(app: AppConfig) -> str:
-    """Returns a readable name for the app
-    """
-    return " ".join([s.capitalize() for s in app.name.split(".")[1:]])
 
 
 def iter_tree(model: Base, name: Optional[str] = None) -> List[Tuple[str, str]]:
