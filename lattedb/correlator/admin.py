@@ -49,31 +49,31 @@ class Baryon2ptAdmin(admin.ModelAdmin):
 
     @staticmethod
     def config(obj):
-        return obj.propagator0.specialization.gaugeconfig.specialization.config
+        return obj.propagator0.gaugeconfig.config
 
     @staticmethod
     def parity(obj):
-        return obj.sink.specialization.parity
+        return obj.sinkwave.parity
 
     @staticmethod
     def spin_x2(obj):
-        return obj.sink.specialization.spin_x2
+        return obj.sinkwave.spin_x2
 
     @staticmethod
     def spin_z_x2(obj):
-        return obj.sink.specialization.spin_z_x2
+        return obj.sinkwave.spin_z_x2
 
     @staticmethod
     def isospin_x2(obj):
-        return obj.sink.specialization.isospin_x2
+        return obj.sinkwave.isospin_x2
 
     @staticmethod
     def isospin_z_x2(obj):
-        return obj.sink.specialization.isospin_z_x2
+        return obj.sinkwave.isospin_z_x2
 
     @staticmethod
     def ensemble(obj):
-        return obj.propagator0.specialization.gaugeconfig.specialization.short_tag
+        return obj.propagator0.gaugeconfig.short_tag
 
     @staticmethod
     def has_add_permission(request):
