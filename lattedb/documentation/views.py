@@ -18,6 +18,6 @@ class DocView(TemplateView):
         app_name = app.name if app is not None else ""
 
         context["app_name"] = app_name
-        context["models"] = [model for model in app.get_models()]
+        context["models"] = [model.get_label() for model in app.get_models()]
 
         return context

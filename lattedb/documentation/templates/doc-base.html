@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load static %}
-
+{% load documentation_extras %}
 
 
 {% block content %}
@@ -16,7 +16,7 @@
     <ul>
     {% for model in models %}
         <li>
-            {{model}}
+            {% render_documentation app_slug model %}
         </li>
     {% endfor %}
     <ul>
