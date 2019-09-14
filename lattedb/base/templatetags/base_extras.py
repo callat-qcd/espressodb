@@ -1,14 +1,14 @@
 """Additional in template functions for the lattedb module
 """
-import os
 from django import template
-from django.urls import reverse
+from django.template.defaultfilters import slugify
 
 from django_extensions.management.commands.show_urls import Command as URLFinder
 
 from lattedb.config.urls import urlpatterns
-from lattedb.config.settings import PROJECT_APPS, BASE_DIR
+from lattedb.config.settings import PROJECT_APPS
 
+from lattedb.base.utilities.models import get_project_apps, get_app_name
 from lattedb.base.forms import MODELS
 
 register = template.Library()  # pylint: disable=C0103
@@ -42,17 +42,10 @@ def render_link_list(exclude=("", "base", "admin", "documentation")):
 
     if "lattedb.documentation" in PROJECT_APPS:
         documentation = []
-        for app_name in PROJECT_APPS:
-            app_name = app_name.split(".")[-1]
-            if app_name in exclude:
-                continue
-
-            if os.path.exists(
-                os.path.join(
-                    BASE_DIR, "documentation", "templates", "apps", app_name + ".html"
-                )
-            ):
-                documentation.append((app_name.capitalize(), app_name))
+        for app in get_project_apps():
+            app_name = get_app_name(app)
+            app_slug = slugify(app_name)
+            documentation.append((app_name, app_slug))
 
     context = {"urls": urls, "documentation": documentation}
 

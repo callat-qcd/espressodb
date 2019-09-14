@@ -47,6 +47,12 @@ def get_lattedb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Mode
     ]
 
 
+def get_app_name(app: AppConfig) -> str:
+    """Returns a readable name for the app
+    """
+    return " ".join([s.capitalize() for s in app.name.split(".")[1:]])
+
+
 def iter_tree(model: Base, name: Optional[str] = None) -> List[Tuple[str, str]]:
     """Extracts all foreign keys of model and inserters them in list.
 
