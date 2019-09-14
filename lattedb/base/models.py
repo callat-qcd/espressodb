@@ -14,6 +14,7 @@ from django.db import connection
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 from django_pandas.managers import DataFrameManager
 
@@ -40,6 +41,11 @@ class Base(models.Model):
     misc = JSONField(
         null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
     )
+
+    @classmethod
+    def get_slug(cls) -> str:
+        """Returns import path as slug name"""
+        return slugify(cls.__name__)
 
     objects = DataFrameManager()
 
