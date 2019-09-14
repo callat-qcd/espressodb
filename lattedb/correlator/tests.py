@@ -18,6 +18,6 @@ class Meson2ptTestCase(TestCase, BaseTest):
     test_tree = {
         "propagator0": propagator_tests.PropagatorTestCase,
         "propagator1": propagator_tests.PropagatorTestCase,
-        "sink": wavefunction_tests.HadronTestCase,
-        "source": wavefunction_tests.HadronTestCase,
+        "sourcewave": wavefunction_tests.HadronTestCase,
+        "sinkwave": wavefunction_tests.HadronTestCase,
     }

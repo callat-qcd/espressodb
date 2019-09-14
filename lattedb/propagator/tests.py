@@ -9,6 +9,8 @@ from lattedb.propagator.models import OneToAll
 
 import lattedb.gaugeconfig.tests as gaugeconfig_tests
 import lattedb.fermionaction.tests as fermionaction_tests
+import lattedb.quarksmear.tests as quarksmear_tests
+import lattedb.wavefunction.tests as wavefunction_tests
 
 
 class PropagatorTestCase(TestCase, BaseTest):
@@ -18,4 +20,6 @@ class PropagatorTestCase(TestCase, BaseTest):
     test_tree = {
         "fermionaction": fermionaction_tests.FermionActionTestCase,
         "gaugeconfig": gaugeconfig_tests.GaugeConfigTestCase,
+        "sourcesmear": quarksmear_tests.QuarkSmearTestCase,
+        "sinksmear": quarksmear_tests.QuarkSmearTestCase,
     }
