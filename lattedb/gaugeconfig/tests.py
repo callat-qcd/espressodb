@@ -7,7 +7,6 @@ from lattedb.base.tests import BaseTest
 
 from lattedb.gaugeconfig.models import Nf211
 
-import lattedb.gaugesmear.tests as gaugesmear_tests
 import lattedb.gaugeaction.tests as gaugeaction_tests
 import lattedb.fermionaction.tests as fermionaction_tests
 
@@ -37,7 +36,6 @@ class GaugeConfigTestCase(TestCase, BaseTest):
     }
     test_tree = {
         "gaugeaction": gaugeaction_tests.GaugeActionTestCase,
-        "gaugesmear": gaugesmear_tests.GaugeSmearTestCase,
         "light": fermionaction_tests.FermionActionTestCase,
         "strange": fermionaction_tests.FermionActionTestCase,
         "charm": fermionaction_tests.FermionActionTestCase,

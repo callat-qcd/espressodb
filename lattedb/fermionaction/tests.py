@@ -7,6 +7,8 @@ from lattedb.base.tests import BaseTest
 
 from lattedb.fermionaction.models import Hisq
 
+from lattedb.linksmear.tests import LinkSmearTestCase
+
 # Create your tests here.
 
 
@@ -14,3 +16,4 @@ class FermionActionTestCase(TestCase, BaseTest):
 
     cls = Hisq
     parameters = {"quark_mass": "0.1", "quark_tag": "s", "naik": 1.0}
+    test_tree = {"linksmear": LinkSmearTestCase}

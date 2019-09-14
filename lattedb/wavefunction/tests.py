@@ -5,12 +5,10 @@ from django.test import TestCase
 
 from lattedb.base.tests import BaseTest
 
-from lattedb.interpolator.models import Hadron
-
-import lattedb.interpolatorsmear.tests as interpolatorsmear_tests
+from lattedb.wavefunction.models import Hadron
 
 
-class InterpolatorTestCase(TestCase, BaseTest):
+class HadronTestCase(TestCase, BaseTest):
 
     cls = Hadron
     parameters = {
@@ -25,4 +23,3 @@ class InterpolatorTestCase(TestCase, BaseTest):
         "isospin_z_x2": 10000,
         "momentum": 0,
     }
-    test_tree = {"interpolatorsmear": interpolatorsmear_tests.InterpolatorSmearTestCase}

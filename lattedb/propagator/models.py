@@ -42,6 +42,18 @@ class OneToAll(Propagator):
         blank=False,
         help_text="PositiveSmallInt: t-coordinate origin location of the propagator",
     )
+    sourcesmear = models.ForeignKey(
+        "quarksmear.QuarkSmear",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to source quark smearing",
+    )
+    sinksmear = models.ForeignKey(
+        "quarksmear.QuarkSmear",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to sink quark smearing",
+    )
 
     class Meta:
         constraints = [
@@ -53,6 +65,8 @@ class OneToAll(Propagator):
                     "origin_y",
                     "origin_z",
                     "origin_t",
+                    "sourcesmear",
+                    "sinksmear",
                 ],
                 name="unique_propagator_onetoall",
             )
@@ -91,13 +105,25 @@ class CoherentSeq(Propagator):
     groupindex = models.PositiveSmallIntegerField(
         help_text="PositiveSmallInt: A group index indicating which coherent sink group the propagator belongs to"
     )
-    sink = models.ForeignKey(
-        "interpolator.Interpolator",
+    sinkwave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
     )
     sinksep = models.SmallIntegerField(help_text="SmallInt: Source-sink separation time")
+    sourcesmear = models.ForeignKey(
+        "quarksmear.QuarkSmear",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to source quark smearing",
+    )
+    sinksmear = models.ForeignKey(
+        "quarksmear.QuarkSmear",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to sink quark smearing",
+    )
 
     class Meta:
         constraints = [
@@ -109,7 +135,9 @@ class CoherentSeq(Propagator):
                     "propagator1",
                     "groupsize",
                     "groupindex",
-                    "sink",
+                    "sourcesmear",
+                    "sinksmear",
+                    "sinkwave",
                     "sinksep",
                 ],
                 name="unique_propagator_coherentseq",
@@ -143,11 +171,30 @@ class FeynmanHellmann(Propagator):
         related_name="+",
         help_text="ForeignKey linking momentum space current insertion",
     )
+    sourcesmear = models.ForeignKey(
+        "quarksmear.QuarkSmear",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to source quark smearing",
+    )
+    sinksmear = models.ForeignKey(
+        "quarksmear.QuarkSmear",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="ForeignKey pointing to sink quark smearing",
+    )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["gaugeconfig", "fermionaction", "propagator", "current"],
+                fields=[
+                    "gaugeconfig",
+                    "fermionaction",
+                    "propagator",
+                    "current",
+                    "sourcesmear",
+                    "sinksmear",
+                ],
                 name="unique_propagator_feynmanhellmann",
             )
         ]

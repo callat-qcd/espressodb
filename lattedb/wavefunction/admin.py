@@ -4,7 +4,7 @@ from django.contrib import admin
 
 from lattedb.base.admin import BaseAdmin
 
-from lattedb.interpolator.models import Hadron
+from lattedb.wavefunction.models import Hadron
 
 
 admin.site.register(Hadron, BaseAdmin)

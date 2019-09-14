@@ -3,12 +3,12 @@ from django.db import models
 from lattedb.base.models import Base
 
 
-class Interpolator(Base):
+class SCSWaveFunction(Base):
     """ Base table for application
     """
 
 
-class Hadron4D(Interpolator):
+class Hadron4D(SCSWaveFunction):
     """
     """
 
@@ -16,12 +16,6 @@ class Hadron4D(Interpolator):
         null=True,
         blank=True,
         help_text="(Optional) Text: Description of the interpolating operator",
-    )
-    interpolatorsmear = models.ForeignKey(
-        "interpolatorsmear.InterpolatorSmear",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="ForeignKey pointing to operator smearing",
     )
     strangeness = models.PositiveSmallIntegerField(
         null=False,
@@ -61,7 +55,6 @@ class Hadron4D(Interpolator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "interpolatorsmear",
                     "strangeness",
                     "irrep",
                     "embedding",
@@ -76,18 +69,12 @@ class Hadron4D(Interpolator):
         ]
 
 
-class Hadron(Interpolator):
+class Hadron(SCSWaveFunction):
 
     description = models.TextField(
         null=True,
         blank=True,
         help_text="(Optional) Text: Description of the interpolating operator",
-    )
-    interpolatorsmear = models.ForeignKey(
-        "interpolatorsmear.InterpolatorSmear",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="ForeignKey pointing to operator smearing",
     )
     strangeness = models.PositiveSmallIntegerField(
         null=False,
@@ -131,7 +118,6 @@ class Hadron(Interpolator):
         constraints = [
             models.UniqueConstraint(
                 fields=[
-                    "interpolatorsmear",
                     "strangeness",
                     "irrep",
                     "embedding",

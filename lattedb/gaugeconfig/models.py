@@ -56,11 +56,6 @@ class Nf211(GaugeConfig):
     nt = models.PositiveSmallIntegerField(
         null=False, help_text="PositiveSmallInt: Temporal length in lattice units"
     )
-    gaugesmear = models.ForeignKey(
-        "gaugesmear.GaugeSmear",
-        on_delete=models.CASCADE,
-        help_text="ForeignKey pointing to additional gauge link smearing outside of Monte Carlo.",
-    )
     light = models.ForeignKey(
         "fermionaction.FermionAction",
         on_delete=models.CASCADE,
@@ -97,7 +92,6 @@ class Nf211(GaugeConfig):
                     "ny",
                     "nz",
                     "nt",
-                    "gaugesmear",
                     "light",
                     "strange",
                     "charm",
@@ -113,8 +107,8 @@ class Nf211(GaugeConfig):
         return (
             f"l{self.nx}{self.nt}"  # pylint: disable=E1101
             f"f211"
-            f"b{int(self.gaugeaction.specialization.beta * 100)}"
-            f"m{int(self.light.specialization.quark_mass*1000):03d}"
-            f"m{int(self.strange.specialization.quark_mass*1000):03d}"
-            f"m{int(self.charm.specialization.quark_mass*1000):03d}"
+            f"b{int(self.gaugeaction.beta * 100)}"
+            f"m{int(self.light.quark_mass*1000):03d}"
+            f"m{int(self.strange.quark_mass*1000):03d}"
+            f"m{int(self.charm.quark_mass*1000):03d}"
         )

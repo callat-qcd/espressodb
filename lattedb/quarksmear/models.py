@@ -3,25 +3,25 @@ from django.db import models
 from lattedb.base.models import Base
 
 
-class InterpolatorSmear(Base):
+class QuarkSmear(Base):
     """ Base table for application
     """
 
     description = models.TextField(
         null=True,
         blank=True,
-        help_text="(Optional) Text: Description of the interpolating operator",
+        help_text="(Optional) Text: Description of the quark smearing operator",
     )
 
 
-class Unsmeared(InterpolatorSmear):
+class Point(QuarkSmear):
     """
     Table for unsmeared operators.
     The table should only have one row with a foreign key.
     """
 
 
-class Gaussian(InterpolatorSmear):
+class GaugeCovariantGaussian(QuarkSmear):
     """ Gauge invariant Gaussian smearing
     """
 
@@ -37,6 +37,7 @@ class Gaussian(InterpolatorSmear):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["radius", "step"], name="unique_interpolatorsmear_gaussian"
+                fields=["radius", "step"],
+                name="unique_qaurksmear_gaugecovariantgaussian",
             )
         ]

@@ -27,14 +27,15 @@ class Baryon2ptProgressView(LoginRequiredMixin, TemplateView):
         for ensemble in Ensemble.objects.all():
             sub_statuses = Baryon2ptStatus.get_from_ensemble(ensemble)
 
-            context["summary"][
-                ensemble.short_tag + " &nbsp;&nbsp; " + ensemble.long_tag
-            ] = {
-                "danger": sub_statuses.filter(status=1).count(),
-                "warning": sub_statuses.filter(status=0).count(),
-                "info": sub_statuses.filter(status=3).count(),
-                "success": sub_statuses.filter(status=2).count(),
-                "total": sub_statuses.count(),
-            }
+            if sub_statuses:
+                context["summary"][
+                    ensemble.short_tag + " &nbsp;&nbsp; " + ensemble.long_tag
+                ] = {
+                    "danger": sub_statuses.filter(status=1).count(),
+                    "warning": sub_statuses.filter(status=0).count(),
+                    "info": sub_statuses.filter(status=3).count(),
+                    "success": sub_statuses.filter(status=2).count(),
+                    "total": sub_statuses.count(),
+                }
 
         return context

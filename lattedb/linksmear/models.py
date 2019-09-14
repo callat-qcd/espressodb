@@ -3,17 +3,17 @@ from django.db import models
 from lattedb.base.models import Base
 
 
-class GaugeSmear(Base):
+class LinkSmear(Base):
     """ Base table for application"
     """
 
 
-class Unsmeared(GaugeSmear):
+class Unsmeared(LinkSmear):
     """
     """
 
 
-class WilsonFlow(GaugeSmear):
+class WilsonFlow(LinkSmear):
     """
     """
 
@@ -29,6 +29,6 @@ class WilsonFlow(GaugeSmear):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["flowtime", "flowstep"], name="unique_gaugesmear_wilsonflow"
+                fields=["flowtime", "flowstep"], name="unique_linksmear_wilsonflow"
             )
         ]

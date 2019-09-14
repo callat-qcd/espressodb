@@ -67,9 +67,9 @@ def get_dset_path(baryon2pt: Baryon2pt) -> str:
         (
             f"gf{config.gaugesmear.flowtime:1.1f}"
             "_"
-            f"w{src.interpolatorsmear.radius:1.1f}"
+            f"w{src.wavefunctionsmear.radius:1.1f}"
             "_"
-            f"n{src.interpolatorsmear.step}"
+            f"n{src.wavefunctionsmear.step}"
             "_"
             f"M5{prop.fermionaction.m5:1.1f}"
             "_"

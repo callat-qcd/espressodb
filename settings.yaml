@@ -5,10 +5,10 @@ PROJECT_APPS:
     - lattedb.fermionaction
     - lattedb.gaugeaction
     - lattedb.gaugeconfig
-    - lattedb.gaugesmear
+    - lattedb.linksmear
     - lattedb.propagator
-    - lattedb.interpolator
-    - lattedb.interpolatorsmear
+    - lattedb.wavefunction
+    - lattedb.quarksmear
     - lattedb.current
     - lattedb.correlator
     - lattedb.documentation

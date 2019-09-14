@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-
-# # Example usage of lattedb
-
-# In[ ]:
+"""Scripts which populates the Baryon2pt functions with inital data
+"""
 
 
 from typing import Dict, Any
@@ -19,21 +17,13 @@ import logging
 from lattedb.correlator.models import Baryon2pt
 
 
-# In[ ]:
-
-
 LOGGER = logging.getLogger("base")
 LOGGER.setLevel(logging.INFO)
 
 
-# In[ ]:
+FDIR = os.path.dirname(os.path.realpath(__file__))
+DATA = os.path.abspath(os.path.join(FDIR, os.pardir, "notebooks", "data"))
 
-
-# In[ ]:
-
-
-CWD = os.getcwd()
-DATA = os.path.join(CWD, "data")
 files = os.listdir(DATA)
 
 text = ""
@@ -41,12 +31,8 @@ text = ""
 for file in files:
     with open(os.path.join(DATA, file), "r") as inp:
         text += inp.read()
-        
+
 data = [key for key in text.split("\n") if key.endswith(".lime")]
-len(data)
-
-
-# In[ ]:
 
 
 def parse_ensemble(short_tag: str) -> Dict[str, Any]:
@@ -103,12 +89,6 @@ def parse_ensemble(short_tag: str) -> Dict[str, Any]:
     return info
 
 
-parse_ensemble("a09m310")
-
-
-# In[ ]:
-
-
 def parse_propagator(key) -> Dict[str, Any]:
     pattern = (
         "(?P<config>[0-9]+)"
@@ -138,42 +118,27 @@ def parse_propagator(key) -> Dict[str, Any]:
         "t(?P<origin_t>[0-9]+)"
     )
     match = re.match(pattern, key)
-    
+
     info = match.groupdict() if match else {}
-    
+
     info["a_fm"] = info["short_tag"].replace("a", "0.").split("m")[0]
     info["mpi"] = info["short_tag"].replace("a", "0.").split("m")[1].replace("L", "")
-    
-    ## https://c51.lbl.gov/wiki/mdwf_hisq existing ensembles
-    c5 = {
-        "a09m310": "0.25",
-        "a12m310": "0.25", 
-        "a15m310L": "0.5",    
-    }
 
-    b5 = {
-        "a09m310": "1.25",
-        "a12m310": "1.25", 
-        "a15m310L": "1.5",    
-    }
+    ## https://c51.lbl.gov/wiki/mdwf_hisq existing ensembles
+    c5 = {"a09m310": "0.25", "a12m310": "0.25", "a15m310L": "0.5"}
+
+    b5 = {"a09m310": "1.25", "a12m310": "1.25", "a15m310L": "1.5"}
 
     info["c5"] = c5[info["short_tag"]]
     info["b5"] = c5[info["short_tag"]]
-    
+
     info.update(parse_ensemble(info["short_tag"]))
-    
+
     return info
 
 
 key = "300/prop_a09m310_e_300_gf1.0_w3.5_n45_M51.1_L56_a1.5_mq0.00951_x3y3z19t62.lime"
 
-parse_propagator(key)
-
-
-# In[ ]:
-
-
-# variable needs to be filled dynamically
 
 variable = None
 
@@ -223,9 +188,6 @@ global_pars = {
 }
 
 
-# In[ ]:
-
-
 special_pars = {
     ## Specializations ##
     # Valence
@@ -258,42 +220,52 @@ special_pars = {
 }
 
 
-# In[ ]:
-
-
 tree = {
     "propagator0": "OneToAll",
     "propagator0.fermionaction": "MobiusDW",
+    "propagator0.fermionaction.linksmear": "WilsonFlow",
     "propagator0.gaugeconfig": "Nf211",
     "propagator0.gaugeconfig.light": "Hisq",
+    "propagator0.gaugeconfig.light.linksmear": "WilsonFlow",
     "propagator0.gaugeconfig.strange": "Hisq",
+    "propagator0.gaugeconfig.strange.linksmear": "WilsonFlow",
     "propagator0.gaugeconfig.charm": "Hisq",
+    "propagator0.gaugeconfig.charm.linksmear": "WilsonFlow",
     "propagator0.gaugeconfig.gaugeaction": "LuescherWeisz",
-    "propagator0.gaugeconfig.gaugesmear": "WilsonFlow",
+    "propagator0.sourcesmear": "GaugeCovariantGaussian",
+    "propagator0.sinksmear": "Point",
+    # p1
     "propagator1": "OneToAll",
     "propagator1.fermionaction": "MobiusDW",
+    "propagator1.fermionaction.linksmear": "WilsonFlow",
     "propagator1.gaugeconfig": "Nf211",
     "propagator1.gaugeconfig.light": "Hisq",
+    "propagator1.gaugeconfig.light.linksmear": "WilsonFlow",
     "propagator1.gaugeconfig.strange": "Hisq",
+    "propagator1.gaugeconfig.strange.linksmear": "WilsonFlow",
     "propagator1.gaugeconfig.charm": "Hisq",
+    "propagator1.gaugeconfig.charm.linksmear": "WilsonFlow",
     "propagator1.gaugeconfig.gaugeaction": "LuescherWeisz",
-    "propagator1.gaugeconfig.gaugesmear": "WilsonFlow",
+    "propagator1.sourcesmear": "GaugeCovariantGaussian",
+    "propagator1.sinksmear": "Point",
+    # p2
     "propagator2": "OneToAll",
     "propagator2.fermionaction": "MobiusDW",
+    "propagator2.fermionaction.linksmear": "WilsonFlow",
     "propagator2.gaugeconfig": "Nf211",
     "propagator2.gaugeconfig.light": "Hisq",
+    "propagator2.gaugeconfig.light.linksmear": "WilsonFlow",
     "propagator2.gaugeconfig.strange": "Hisq",
+    "propagator2.gaugeconfig.strange.linksmear": "WilsonFlow",
     "propagator2.gaugeconfig.charm": "Hisq",
+    "propagator2.gaugeconfig.charm.linksmear": "WilsonFlow",
     "propagator2.gaugeconfig.gaugeaction": "LuescherWeisz",
-    "propagator2.gaugeconfig.gaugesmear": "WilsonFlow",
-    "sink": "Hadron",
-    "sink.interpolatorsmear": "Gaussian",
-    "source": "Hadron4D",
-    "source.interpolatorsmear": "Gaussian",
+    "propagator2.sourcesmear": "GaugeCovariantGaussian",
+    "propagator2.sinksmear": "Point",
+    # Wave
+    "sourcewave": "Hadron",
+    "sinkwave": "Hadron",
 }
-
-
-# In[ ]:
 
 
 def get_pars(
@@ -328,23 +300,19 @@ def get_pars(
     return parameters
 
 
-get_pars(key, spin_z_x2=-1)
-
-
-# In[ ]:
-
 for key, parity, spin_z_x2 in tqdm(list(product(data, [-1, 1], [-1, 1]))):
     isospin_z_x2 = 1
     parameters = get_pars(key, parity, isospin_z_x2, spin_z_x2)
+
     ### for devel db only
     # pushes only partial dataset
-    if int(parameters['config']) < 401:
+    if int(parameters["config"]) < 401:
         pass
     else:
         continue
-    ###
-    b, created = Baryon2pt.get_or_create_from_parameters(parameters=parameters, tree=tree)
+
+    b, created = Baryon2pt.get_or_create_from_parameters(
+        parameters=parameters, tree=tree
+    )
     b.tag = "proton"
     b.save()
-    
-

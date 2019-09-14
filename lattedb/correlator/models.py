@@ -17,11 +17,11 @@ class DWFTuning(Correlator):
         related_name="+",
         help_text="ForeignKey: Pointer to first propagator",
     )
-    source = models.ForeignKey(
-        "interpolator.Interpolator",
+    wave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
         on_delete=models.CASCADE,
         related_name="+",
-        help_text="ForeignKey: Pointer to source interpolating operator",
+        help_text="ForeignKey: Pointer to source spin color space wave function",
     )
     sink5 = models.BooleanField(
         null=False, help_text="Boolean: Is the sink on the domain wall?"
@@ -30,7 +30,7 @@ class DWFTuning(Correlator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator", "source", "sink5"],
+                fields=["propagator", "wave", "sink5"],
                 name="unique_correlator_dwftuning",
             )
         ]
@@ -55,14 +55,14 @@ class Meson2pt(Correlator):
         related_name="+",
         help_text="ForeignKey: Pointer to second propagator",
     )
-    source = models.ForeignKey(
-        "interpolator.Interpolator",
+    sourcewave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to source interpolating operator",
     )
-    sink = models.ForeignKey(
-        "interpolator.Interpolator",
+    sinkwave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
@@ -71,7 +71,7 @@ class Meson2pt(Correlator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator0", "propagator1", "source", "sink"],
+                fields=["propagator0", "propagator1", "sourcewave", "sinkwave"],
                 name="unique_correlator_meson2pt",
             )
         ]
@@ -138,14 +138,14 @@ class Baryon2pt(Correlator):
         related_name="+",
         help_text="ForeignKey: Pointer to third propagator",
     )
-    source = models.ForeignKey(
-        "interpolator.Interpolator",
+    sourcewave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to source interpolating operator",
     )
-    sink = models.ForeignKey(
-        "interpolator.Interpolator",
+    sinkwave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="ForeignKey: Pointer to sink interpolating operator",
@@ -154,17 +154,23 @@ class Baryon2pt(Correlator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["propagator0", "propagator1", "propagator2", "source", "sink"],
+                fields=[
+                    "propagator0",
+                    "propagator1",
+                    "propagator2",
+                    "sourcewave",
+                    "sinkwave",
+                ],
                 name="unique_correlator_baryon2pt",
             )
         ]
 
     def origin(self):
         return "(%d, %d, %d, %d)" % (
-            self.propagator0.specialization.origin_x,
-            self.propagator0.specialization.origin_y,
-            self.propagator0.specialization.origin_z,
-            self.propagator0.specialization.origin_t,
+            self.propagator0.origin_x,
+            self.propagator0.origin_y,
+            self.propagator0.origin_z,
+            self.propagator0.origin_t,
         )
 
     origin.short_description = "origin (x, y, z, t)"
@@ -220,8 +226,8 @@ class Baryon2pt(Correlator):
 
 
 class BaryonSeq3pt(Correlator):
-    source = models.ForeignKey(
-        "interpolator.Interpolator",
+    sourcewave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="Foreign Key pointing to source operator",
@@ -247,19 +253,26 @@ class BaryonSeq3pt(Correlator):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["source", "current", "seqpropagator", "propagator"],
+                fields=["sourcewave", "current", "seqpropagator", "propagator"],
                 name="unique_correlator_baryonseq3pt",
             )
         ]
 
 
 class BaryonFH3pt(Correlator):
-    source = models.ForeignKey(
-        "interpolator.Interpolator",
+    sourcewave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
         on_delete=models.CASCADE,
         related_name="+",
         help_text="Foreign Key pointing to source operator",
     )
+    sinkwave = models.ForeignKey(
+        "wavefunction.SCSWaveFunction",
+        on_delete=models.CASCADE,
+        related_name="+",
+        help_text="Foreign Key pointing to sink operator",
+    )
+
     fhpropagator = models.ForeignKey(
         "propagator.Propagator",
         on_delete=models.CASCADE,
@@ -278,17 +291,17 @@ class BaryonFH3pt(Correlator):
         related_name="+",
         help_text="Foreign Key pointing to spectator propagator",
     )
-    sink = models.ForeignKey(
-        "interpolator.Interpolator",
-        on_delete=models.CASCADE,
-        related_name="+",
-        help_text="Foreign Key pointing to sink operator",
-    )
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["source", "fhpropagator", "propagator0", "propagator1", "sink"],
+                fields=[
+                    "sourcewave",
+                    "fhpropagator",
+                    "propagator0",
+                    "propagator1",
+                    "sinkwave",
+                ],
                 name="unique_correlator_baryonfh3pt",
             )
         ]

@@ -5,10 +5,10 @@ from django.test import TestCase
 
 from lattedb.base.tests import BaseTest
 
-from lattedb.interpolatorsmear.models import Gaussian
+from lattedb.quarksmear.models import GaugeCovariantGaussian
 
 
-class InterpolatorSmearTestCase(TestCase, BaseTest):
+class QuarkSmearTestCase(TestCase, BaseTest):
 
-    cls = Gaussian
+    cls = GaugeCovariantGaussian
     parameters = {"description": "Funny", "radius": 1.0, "step": 2}
