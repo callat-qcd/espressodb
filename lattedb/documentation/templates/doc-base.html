@@ -13,13 +13,9 @@
 </div>
 <div class="container">
     {% if models %}
-    <ul>
     {% for model in models %}
-        <li>
-            {% render_documentation app_slug model %}
-        </li>
+        {% render_documentation app_slug model %}
     {% endfor %}
-    <ul>
     {% else %}
         <h2>No models found</h2>
     {% endif %}

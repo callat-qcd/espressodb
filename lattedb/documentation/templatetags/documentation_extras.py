@@ -36,7 +36,7 @@ def render_documentation(app_slug: str, model_slug: str):
     context = {
         "name": model.__name__,
         "module": model.__module__,
-        "doc": model.__module__,
+        "doc": model.__doc__,
         "base": model.__base__,
         "columns": fields,
         "app_slug": app_slug,
