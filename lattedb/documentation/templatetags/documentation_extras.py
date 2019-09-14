@@ -19,9 +19,7 @@ def render_documentation(app_slug: str, model_slug: str):
     """
     context = {"app_slug": app_slug, "model_slug": model_slug}
 
-    print(app_slug, model_slug)
     app = SLUG_MAP.get(app_slug, None)
-    print(app)
     model_choices = (
         [model for model in app.get_models() if model.get_slug() == model_slug]
         if app is not None
@@ -47,7 +45,6 @@ def render_documentation(app_slug: str, model_slug: str):
                     ),
                     "model_slug": field.related_model.get_slug(),
                 }
-                print(relation)
 
             fields[field.name] = {
                 "name": field.name,
