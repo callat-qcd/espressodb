@@ -6,4 +6,3 @@ django-pandas
 django-extensions
 django-widget-tweaks
 bokeh
-sphinx

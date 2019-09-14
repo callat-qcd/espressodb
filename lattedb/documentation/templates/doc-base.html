@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load static %}
+{% load documentation_extras %}
 
-{% block head-extra %}
-<link rel="stylesheet" type="text/css" href="{% static 'doc-theme.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'pygments.css' %}"/>
-{% endblock%}
 
 {% block content %}
-<div class="container mt-4">
-<div class="rst-content">
-{% include doc_file %}
-</div>
-</div>
 
-<script type="text/javascript" src="{% static 'doc-theme.js' %}"></script>
-<script type="text/javascript">
-    jQuery(function () {
-        SphinxRtdTheme.Navigation.enable(true);
-    });
-</script>
+{% if app_name %}
+<div class="jumbotron">
+    <h1>Documentation of <code>{{app_name}}</code></h1>
+    <h5>See table properties</h2>
+</div>
+<div class="container">
+    {% if models %}
+    {% for model in models %}
+        {% render_documentation app_slug model %}
+    {% endfor %}
+    {% else %}
+        <h2>No models found</h2>
+    {% endif %}
+</div>
+{% else %}
+    <h1>Was not able to locate app</h1>
+{% endif %}
 {% endblock %}

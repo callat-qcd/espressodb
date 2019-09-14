@@ -3,24 +3,30 @@
 from typing import Optional
 from typing import Tuple
 from typing import List
+from typing import Dict
 
 from django.db import models
 from django.apps import apps
+from django.apps.config import AppConfig
+from django.template.defaultfilters import slugify
 
 from lattedb.config.settings import PROJECT_APPS
-
 from lattedb.base.utilities.blackmagicsorcery import concludo_expressum
 from lattedb.base.models import Base
 
 
-def get_lattedb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Model:
-    """Returns all installed project models which are not in the exclude list
+def get_project_apps(exclude_apps: Optional[Tuple[str]] = None) -> List[AppConfig]:
+    """Finds all apps which are part of the project.
+
+    Iterates over apps specified in the settings.yaml file and returns django app configs
+    if installed.
     """
     exclude_apps = list(exclude_apps) if exclude_apps is not None else []
     exclude_apps += ["lattedb.base", "lattedb.documentation"]
 
-    app_models = []
     installed_apps = {app.name: app for app in apps.app_configs.values()}
+
+    available_apps = []
 
     for app_path in PROJECT_APPS:
         if (
@@ -29,9 +35,33 @@ def get_lattedb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Mode
         ):
             continue
 
-        app_models += installed_apps[app_path].get_models()
+        available_apps.append(installed_apps[app_path])
 
-    return app_models
+    return available_apps
+
+
+def get_app_name(app: AppConfig) -> str:
+    """Returns a readable name for the app
+    """
+    return " ".join([s.capitalize() for s in app.name.split(".")[1:]])
+
+
+def get_apps_slug_map() -> Dict[str, str]:
+    """Creates a map for all project app names. Keys are slugs, values are names.
+    """
+    slug_map = {}
+    for app in get_project_apps():
+        name = get_app_name(app)
+        slug_map[slugify(name)] = app
+    return slug_map
+
+
+def get_lattedb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Model:
+    """Returns all installed project models which are not in the exclude list
+    """
+    return [
+        model for app in get_project_apps(exclude_apps) for model in app.get_models()
+    ]
 
 
 def iter_tree(model: Base, name: Optional[str] = None) -> List[Tuple[str, str]]:
