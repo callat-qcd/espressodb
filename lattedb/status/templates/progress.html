@@ -7,6 +7,7 @@
 </div>
 <div class="container">
 
+    {% if summary %}
     <h1>Listed by <code>{{ subcategory }}</code></h1>
     {% for object, progress in summary.items %}
     <div class="card my-3" style="border-left: 5px solid {% if progress.success == progress.total %}#5CB85C{% else %}#d9534f{% endif %};">
@@ -23,6 +24,9 @@
         </div>
     </div>
     {% endfor %}
+    {% else %}
+    <h1>No data!</h1>
+    {% endif %}
 
 </div>
 {% endblock %}

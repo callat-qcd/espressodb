@@ -107,8 +107,8 @@ class Nf211(GaugeConfig):
         return (
             f"l{self.nx}{self.nt}"  # pylint: disable=E1101
             f"f211"
-            f"b{int(self.gaugeaction.specialization.beta * 100)}"
-            f"m{int(self.light.specialization.quark_mass*1000):03d}"
-            f"m{int(self.strange.specialization.quark_mass*1000):03d}"
-            f"m{int(self.charm.specialization.quark_mass*1000):03d}"
+            f"b{int(self.gaugeaction.beta * 100)}"
+            f"m{int(self.light.quark_mass*1000):03d}"
+            f"m{int(self.strange.quark_mass*1000):03d}"
+            f"m{int(self.charm.quark_mass*1000):03d}"
         )

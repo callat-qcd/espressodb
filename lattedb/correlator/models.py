@@ -167,10 +167,10 @@ class Baryon2pt(Correlator):
 
     def origin(self):
         return "(%d, %d, %d, %d)" % (
-            self.propagator0.specialization.origin_x,
-            self.propagator0.specialization.origin_y,
-            self.propagator0.specialization.origin_z,
-            self.propagator0.specialization.origin_t,
+            self.propagator0.origin_x,
+            self.propagator0.origin_y,
+            self.propagator0.origin_z,
+            self.propagator0.origin_t,
         )
 
     origin.short_description = "origin (x, y, z, t)"

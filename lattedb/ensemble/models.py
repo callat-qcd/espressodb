@@ -28,14 +28,14 @@ class Ensemble(Base):
         """Returns the tag of the first configuration.
         """
         first = self.configurations.first()  # pylint: disable=E1101
-        return first.specialization.short_tag if first else None
+        return first.short_tag if first else None
 
     @property
     def stream(self) -> Optional[str]:
         """Returns the tag of the first configuration.
         """
         first = self.configurations.first()  # pylint: disable=E1101
-        return first.specialization.stream if first else None
+        return first.stream if first else None
 
     @property
     def long_tag(self) -> Optional[str]:
