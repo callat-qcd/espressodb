@@ -18,5 +18,5 @@ from django.urls import path
 
 from lattedb.documentation.views import DocView
 
-app_name = "Documentation"
+app_name = "documentation"
 urlpatterns = [path(r"<slug:app_slug>/", DocView.as_view(), name="details")]
