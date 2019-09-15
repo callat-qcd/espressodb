@@ -15,6 +15,7 @@
         {% bootstrap_css %}
         {% bootstrap_javascript jquery='full' %}
         <link href="{% static 'css/fa-all.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
         {% block head-extra %}
         {% endblock%}
     </head>
@@ -66,9 +67,16 @@
         </main>
     </body>
     <footer>
-        <div class="container mt-4">
-          {% block footer %}
-          {% endblock %}
+        {% block footer %}
+        <div class="container-fluid">
+        <ol class="breadcrumb bg-light my-1 py-0 text-muted">
+            <li class="breadcrumb-item">LatteDB</a></li>
+            <li class="breadcrumb-item">Version: {% render_version %}</li>
+            {% if user.is_authenticated %}
+            <li class="breadcrumb-item">Database: {% render_db_info %}</li>
+            {% endif %}
+        </ol>
         </div>
+        {% endblock %}
     </footer>
 </html>

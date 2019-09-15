@@ -7,7 +7,10 @@ from django_extensions.management.commands.show_urls import Command as URLFinder
 from lattedb.config.urls import urlpatterns
 from lattedb.config.settings import PROJECT_APPS
 
-from lattedb.base.utilities.models import get_apps_slug_map, get_app_name
+from lattedb.base.utilities.models import get_apps_slug_map
+from lattedb.base.utilities.models import get_app_name
+from lattedb.base.utilities.version import get_repo_version
+from lattedb.base.utilities.version import get_db_info
 from lattedb.base.forms import MODELS
 
 register = template.Library()  # pylint: disable=C0103
@@ -85,3 +88,20 @@ def render_tree(tree, root):
 
     context = {"content": content}
     return context
+
+
+@register.simple_tag
+def render_version() -> str:
+    """Returns descriptive version string
+    """
+    branch, version = get_repo_version()
+    branch = f" ({branch})" if branch else ""
+    return version + branch if version else ""
+
+
+@register.simple_tag
+def render_db_info() -> str:
+    """Returns descriptive db string
+    """
+    name, user = get_db_info()
+    return f"{user}@{name}"
