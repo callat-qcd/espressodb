@@ -10,7 +10,7 @@ from django.apps import apps
 
 from django.template.defaultfilters import slugify
 
-from espressodb.base.utilities.settings import PROJECT_APPS
+from espressodb.management.utilities.settings import PROJECT_APPS
 from espressodb.base.utilities.blackmagicsorcery import concludo_expressum
 
 

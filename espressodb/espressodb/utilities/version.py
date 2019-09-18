@@ -5,7 +5,10 @@ from typing import Tuple
 import subprocess
 import os
 
-from espressodb.config.settings import DATABASES
+try:
+    from django.conf.settings import DATABASES
+except ImportError:
+    DATABASES = {}
 
 _FILE_PATH = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
 BASE_DIR = os.path.abspath(

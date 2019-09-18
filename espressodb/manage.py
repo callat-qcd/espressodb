@@ -9,7 +9,6 @@ from django.conf import settings
 def main():
     """Launches the web app.
     """
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "espressodb.config.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -19,14 +18,7 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
 
-    settings.configure(
-        DEBUG=True,
-        INSTALLED_APPS=[
-            "espressodb.base",
-            "django.contrib.contenttypes",
-            "django.contrib.auth",
-        ],
-    )
+    settings.configure(DEBUG=True, INSTALLED_APPS=["espressodb.espressodb"])
     execute_from_command_line(sys.argv)
 
 
