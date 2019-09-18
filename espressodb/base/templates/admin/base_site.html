@@ -1,0 +1,11 @@
+{% extends "admin/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block extrastyle %}
+<link href="{% static 'admin/extra.css'%}" rel="stylesheet" type="text/css" media="screen,projection" />
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'index' %}"><img src="{% static "espressodb_logo.png" %}" alt="espressodb" style="height: 35px"></a>&nbsp;&nbsp;Admin</h1>
+{% endblock %}

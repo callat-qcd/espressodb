@@ -1,9 +1,3 @@
-db-config*.yaml
 __pycache__/
-.lattedb
-lattedb.egg-info/
-.idea/
-.ipynb_checkpoints
-models.pdf
-notes.md
-logo.png
+.espressodb
+espressodb.egg-info/
