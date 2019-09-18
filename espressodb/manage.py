@@ -3,6 +3,8 @@
 import os
 import sys
 
+from django.conf import settings
+
 
 def main():
     """Launches the web app.
@@ -16,6 +18,15 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+
+    settings.configure(
+        DEBUG=True,
+        INSTALLED_APPS=[
+            "espressodb.base",
+            "django.contrib.contenttypes",
+            "django.contrib.auth",
+        ],
+    )
     execute_from_command_line(sys.argv)
 
 

@@ -1,7 +1,12 @@
 # pylint: disable=C0413
-"""Easy access to models
+"""Prepares the usage of the espressodb app
 """
+import os
+from django import setup as _setup
 
-from espressodb.interface.init import init
 
-init()
+def init():
+    """Initializes the django environment for lattedb
+    """
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "espressodb.config.settings")
+    _setup()

@@ -1,8 +1,6 @@
-PyYAML
 Django
-django-tables2
 django-bootstrap4
 django-pandas
 django-extensions
 django-widget-tweaks
-bokeh
+PyYAML

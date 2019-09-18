@@ -5,9 +5,8 @@ from typing import Dict
 from typing import Any
 from typing import Tuple
 
-from django.http import HttpResponse
-
 from django.views import View
+from django.views.generic.base import TemplateView
 from django.shortcuts import render, redirect
 
 from espressodb.base.forms import ModelSelectForm
@@ -17,8 +16,9 @@ from espressodb.base.models import Base
 from espressodb.base.utilities.models import iter_tree
 
 
-def index(request):  # pylint: disable=W0613, C0111
-    return HttpResponse("Hello, world. You're at the polls index.")
+class IndexView(TemplateView):
+
+    template_name = "index.html"
 
 
 class PopulationView(View):
