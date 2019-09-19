@@ -33,7 +33,6 @@ class Command(StartProjectCommand):
         )
         directory = options.get("directory") or os.getcwd()
         name = options.get("name")
-        print(options)
 
         super().handle(**options)
 
