@@ -16,6 +16,10 @@ with open(path.join(CWD, "README.md"), encoding="utf-8") as inp:
 with open(path.join(CWD, "requirements.txt"), encoding="utf-8") as inp:
     REQUIREMENTS = [el.strip() for el in inp.read().split(",")]
 
+with open(path.join(CWD, "requirements-dev.txt"), encoding="utf-8") as inp:
+    REQUIREMENTS_DEV = [el.strip() for el in inp.read().split(",")]
+
+
 setup(
     name="espressodb",
     version=__version__,
@@ -29,4 +33,5 @@ setup(
     packages=find_packages(exclude=["docs", "tests"]),
     install_requires=REQUIREMENTS,
     entry_points={"console_scripts": ["espressodb=espressodb.manage:main"]},
+    extras_require={"dev": REQUIREMENTS_DEV},
 )
