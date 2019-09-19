@@ -16,7 +16,9 @@ register = template.Library()  # pylint: disable=C0103
 
 
 @register.inclusion_tag("link-list.html")
-def render_link_list(exclude=("", "base", "admin", "documentation")):
+def render_link_list(
+    exclude=("", "populate", "populate-result", "admin", "documentation")
+):
     """Renders all links as a nested list
     """
     u = URLFinder()
