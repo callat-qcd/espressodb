@@ -40,7 +40,11 @@ DEBUG = _SETTINGS.get("DEBUG", False)
 INSTALLED_APPS = (
     PROJECT_APPS
     + ["espressodb.base", "espressodb.documentation", "espressodb.management"]
-    + ["bootstrap4", "widget_tweaks", "django_extensions"]
+    + [
+        "bootstrap4",
+        "widget_tweaks",
+        # "django_extensions",
+    ]
     + [
         "django.contrib.admin",
         "django.contrib.auth",
