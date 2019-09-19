@@ -18,7 +18,22 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
 
-    settings.configure(DEBUG=True, INSTALLED_APPS=["espressodb.management"])
+    settings.configure(
+        DEBUG=True,
+        INSTALLED_APPS=["espressodb.management"],
+        LOGGING={
+            "version": 1,
+            "disable_existing_loggers": False,
+            "handlers": {"console": {"level": "INFO", "class": "logging.StreamHandler"}},
+            "loggers": {
+                "espressodb": {
+                    "handlers": ["console"],
+                    "level": "DEBUG",
+                    "propagate": True,
+                }
+            },
+        },
+    )
     execute_from_command_line(sys.argv)
 
 

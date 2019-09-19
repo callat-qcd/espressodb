@@ -34,9 +34,18 @@ class Command(StartProjectCommand):
         directory = options.get("directory") or os.getcwd()
         name = options.get("name")
 
+        LOGGER.info("Setting up new project `%s` in `%s`", name, directory)
         super().handle(**options)
 
-        settings_file = os.path.join(directory, name, "settings.yaml")
+        settings_dir = os.path.join(directory, name)
+        LOGGER.info(
+            "-> Creating `db-config.yaml` in the project root dir `%s`", settings_dir
+        )
+        LOGGER.info("   Adjust this file to establish a connection to the database")
+        LOGGER.info(
+            "-> Creating `settings.yaml`. Adjust this file to include later apps"
+        )
+        settings_file = os.path.join(settings_dir, "settings.yaml")
         with open(settings_file, "r") as fin:
             settings = yaml.safe_load(fin.read())
 
@@ -44,3 +53,19 @@ class Command(StartProjectCommand):
 
         with open(settings_file, "w") as fout:
             fout.write(yaml.dump(settings))
+
+        LOGGER.info("-> Done!")
+        LOGGER.info("-> You can now:")
+        LOGGER.info("     1a. Migrate models by running `python manange.py migrate`")
+        LOGGER.info(
+            "     1b. and launch a web app by running `python manange.py runserver`"
+        )
+        LOGGER.info(
+            "     2. Add new models using `python manange.py startapp {APP_NAME}`"
+        )
+        LOGGER.info(
+            "     3. Run `python -m pip install [--user] [-e] .`"
+            " in the project root directory to add your package to your python path."
+            "\n        See alse `%s`.",
+            os.path.join(settings_dir, "setup.py"),
+        )
