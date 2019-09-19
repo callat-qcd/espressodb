@@ -4,13 +4,12 @@ from django import template
 
 from django_extensions.management.commands.show_urls import Command as URLFinder
 
-from espressodb.config.urls import urlpatterns
-from espressodb.config.settings import PROJECT_APPS
-
-from espressodb.base.utilities.models import get_apps_slug_map
-from espressodb.base.utilities.models import get_app_name
-from espressodb.base.utilities.version import get_repo_version
-from espressodb.base.utilities.version import get_db_info
+from espressodb.management.utilities.settings import PROJECT_APPS
+from espressodb.management.utilities.version import get_repo_version
+from espressodb.management.utilities.version import get_db_info
+from espressodb.base.utilities.apps import get_apps_slug_map
+from espressodb.base.utilities.apps import get_app_name
+from espressodb.base.urls import urlpatterns
 from espressodb.base.forms import MODELS
 
 register = template.Library()  # pylint: disable=C0103
@@ -42,8 +41,8 @@ def render_link_list(exclude=("", "base", "admin", "documentation")):
         else:
             urls[app_name] = [(link_name, reverse_name)]
 
+    documentation = []
     if "espressodb.documentation" in PROJECT_APPS:
-        documentation = []
         for app_slug, app in get_apps_slug_map().items():
             documentation.append((app_slug, get_app_name(app)))
 

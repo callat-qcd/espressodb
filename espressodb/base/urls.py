@@ -13,8 +13,6 @@ from espressodb.base import views
 
 urlpatterns = []
 
-app_name = "Base"
-
 for app in PROJECT_APPS:
     url_file = os.path.join(ROOT_DIR, app.replace(".", "/"), "urls.py")
     if os.path.exists(url_file):

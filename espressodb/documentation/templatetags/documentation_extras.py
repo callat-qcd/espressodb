@@ -4,7 +4,7 @@ from django import template
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
-from espressodb.base.utilities.models import get_apps_slug_map, get_app_name
+from espressodb.base.utilities.apps import get_apps_slug_map, get_app_name
 
 register = template.Library()  # pylint: disable=C0103
 
