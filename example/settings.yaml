@@ -1,6 +1,0 @@
-SECRET_KEY: t6J%swEoWUAPmTR3JCL6u7jnsFyjEsggQvmHp;zeoQf2kFoT;4DFvYh;a}Q*RT;D
-PROJECT_APPS:
-    - hubbard
-ALLOWED_HOSTS:
-    - 127.0.0.1
-DEBUG: True

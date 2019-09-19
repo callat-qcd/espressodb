@@ -75,5 +75,5 @@ def get_db_config(root_dir: str) -> Dict[str, str]:
 
 
 ESPRESSO_DB_ROOT = os.path.abspath(
-    os.path.join(os.path.realpath(__file__), os.pardir, os.pardir, os.pardir)
+    os.path.join(os.path.realpath(__file__), os.pardir, os.pardir, os.pardir, os.pardir)
 )

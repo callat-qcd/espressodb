@@ -3,6 +3,8 @@
 import os
 import logging
 
+raise NotImplementedError("Need to update module")
+
 from django.core.management.commands.startapp import Command as StartAppCommand
 from espressodb.config.settings import BASE_DIR
 

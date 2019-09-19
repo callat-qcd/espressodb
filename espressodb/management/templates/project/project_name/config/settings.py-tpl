@@ -16,9 +16,9 @@ This file has been adjusted to espressodb settings.
 import os
 
 
-from espressodb.base.utilities.files import get_project_settings
-from espressodb.base.utilities.files import get_db_config
-from espressodb.base.utilities.files import ESPRESSO_DB_ROOT
+from espressodb.management.utilities.files import get_project_settings
+from espressodb.management.utilities.files import get_db_config
+from espressodb.management.utilities.files import ESPRESSO_DB_ROOT
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,7 +39,7 @@ DEBUG = _SETTINGS.get("DEBUG", False)
 
 INSTALLED_APPS = (
     PROJECT_APPS
-    + ["espressodb.base", "espressodb.documentation"]
+    + ["espressodb.base", "espressodb.documentation", "espressodb.management"]
     + ["bootstrap4", "widget_tweaks", "django_extensions"]
     + [
         "django.contrib.admin",
@@ -61,7 +61,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "{{ project_name }}.urls"
+ROOT_URLCONF = "{{ project_name }}.config.urls"
 
 TEMPLATES = [
     {
@@ -87,7 +87,7 @@ for app in PROJECT_APPS:
     if os.path.exists(_template_dir):
         TEMPLATES[0]["DIRS"].append(_template_dir)
 
-WSGI_APPLICATION = "{{ project_name }}.wsgi.application"
+WSGI_APPLICATION = "{{ project_name }}.config.wsgi.application"
 
 
 # Database
@@ -158,3 +158,5 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 3600
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+
+print(INSTALLED_APPS)

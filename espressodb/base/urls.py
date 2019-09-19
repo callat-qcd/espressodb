@@ -7,12 +7,8 @@ from django.urls import path, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
-from espressodb.base.utilities.settings import PROJECT_APPS
-from espressodb.base.utilities.settings import ROOT_DIR
-from espressodb.base.views import IndexView
-from espressodb.base.views import PopulationView
-from espressodb.base.views import PopulationResultView
-
+from espressodb.management.utilities.settings import PROJECT_APPS
+from espressodb.management.utilities.settings import ROOT_DIR
 from espressodb.base import views
 
 urlpatterns = []
@@ -36,7 +32,7 @@ urlpatterns += [
         "login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"
     ),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-    path("", IndexView.as_view(), name="index"),
+    path("", views.IndexView.as_view(), name="index"),
     path("populate", views.PopulationView.as_view(), name="populate"),
     path(
         "populate-result", views.PopulationResultView.as_view(), name="populate-result"
