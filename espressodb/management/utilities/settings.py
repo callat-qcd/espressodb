@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 
-PROJECT_APPS = settings.get("PROJECT_APPS", None)
+PROJECT_APPS = settings.PROJECT_APPS
 
 if PROJECT_APPS is None:
     raise ImproperlyConfigured(
@@ -14,7 +14,7 @@ if PROJECT_APPS is None:
     )
 
 
-ROOT_DIR = settings.get("ROOT_DIR", None)
+ROOT_DIR = settings.ROOT_DIR
 
 if ROOT_DIR is None:
     raise ImproperlyConfigured(
