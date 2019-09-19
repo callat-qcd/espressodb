@@ -6,15 +6,12 @@
 Welcome to EspressoDB's documentation!
 ======================================
 
+Welcome to the documentation of `EspressoDB` -- an open source Python package for managing scientific data using Django_.
+
+.. _Django: https://www.djangoproject.com
+
 .. toctree::
-   :maxdepth: 2
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   README
+   api/index
