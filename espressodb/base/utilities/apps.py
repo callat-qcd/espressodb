@@ -11,7 +11,7 @@ from django.apps import apps
 from django.template.defaultfilters import slugify
 
 from espressodb.management.utilities.settings import PROJECT_APPS
-from espressodb.base.utilities.blackmagicsorcery import concludo_expressum
+from espressodb.base.utilities.blackmagicsorcery import search
 
 
 def get_project_apps(exclude_apps: Optional[Tuple[str]] = None) -> List[AppConfig]:
@@ -29,7 +29,7 @@ def get_project_apps(exclude_apps: Optional[Tuple[str]] = None) -> List[AppConfi
 
     for app_path in PROJECT_APPS:
         if (
-            any([concludo_expressum(exclude, app_path) for exclude in exclude_apps])
+            any([search(exclude, app_path) for exclude in exclude_apps])
             or not app_path in installed_apps
         ):
             continue
