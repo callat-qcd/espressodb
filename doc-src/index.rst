@@ -14,4 +14,5 @@ Welcome to the documentation of `EspressoDB` -- an open source Python package fo
    :caption: Contents:
 
    README
+   usage
    api/index
