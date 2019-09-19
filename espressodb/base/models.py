@@ -1,5 +1,5 @@
 # pylint: disable=C0111, R0903, E1101
-"""Lattice structure tables
+"""Module provides base class for the espressodb module.
 """
 from typing import Dict
 from typing import List
@@ -15,6 +15,7 @@ from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from django.db.models.fields import Field
 
 from django_pandas.managers import DataFrameManager
 
@@ -22,25 +23,47 @@ LOGGER = logging.getLogger("base")
 
 
 class Base(models.Model):
-    """ Mother of all tables
+    """The base class for the espressodb module.
+
+    This class provides api for auto rendering pages and recursive insertions.
     """
 
-    id = models.AutoField(primary_key=True)
-    type = models.TextField(editable=False, null=False)  # autofield by inheritance
-    last_modified = models.DateTimeField(auto_now=True)  # also update
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True
+    #: Primary key for the base class
+    id = models.AutoField(primary_key=True, help_text="Primary key for Base class.")
+    #: [TextField].
+    #: Type for the base class. Will be auto set to specialized type on save
+    type = models.TextField(
+        editable=False,
+        null=False,
+        help_text="Type for the base class."
+        " Will be auto set to specialized type on save",
     )
-
+    #: Date the class was last modified
+    last_modified = models.DateTimeField(
+        auto_now=True, help_text="Date the class was last modified"
+    )
+    #: [ForeignKey](Optional).
+    #: User who updated this object. Set on save by connection to database.
+    #: Ananymous if not found.
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        help_text="User who updated this object. Set on save by connection to database."
+        " Ananymous if not found.",
+    )
+    #: User defined tag for easy searches
+    #: [TextField](Optional).
     tag = models.CharField(
         max_length=20,
         null=True,
         blank=True,
-        help_text="(Optional) Char(20): User defined tag for easy searches",
+        help_text="User defined tag for easy searches",
     )
-    misc = JSONField(
-        null=True, blank=True, help_text="(Optional) JSON: {'anything': 'you want'}"
-    )
+    #: [JSONField](Optional).
+    #: JSON: {'anything': 'you want'}
+    misc = JSONField(null=True, blank=True, help_text="JSON: {'anything': 'you want'}")
 
     @classmethod
     def get_slug(cls) -> str:
@@ -85,14 +108,12 @@ class Base(models.Model):
 
         Raise errors here if the model must fulfill checks.
 
-        **Arguments**
-            data: Dict[str, Any]
-                Dictionary containing the open column data of the class.
+        :param data: Dictionary containing the open column data of the class.
         """
 
     @classmethod
-    def get_open_fields(cls) -> List["Field"]:
-        """Returns keys which are editable and non ForeignKeys
+    def get_open_fields(cls) -> List[Field]:
+        """Returns list of fields for class which are editable and non-ForeignKeys.
         """
         fields = []
         for field in cls._meta.get_fields():  # pylint: disable=W0212
@@ -105,7 +126,7 @@ class Base(models.Model):
         return fields
 
     @classmethod
-    def get_label(cls):
+    def get_label(cls) -> str:
         """Returns descriptive string about class
         """
         base = f"[{cls.mro()[1].__name__}]" if cls != Base else ""
@@ -131,22 +152,13 @@ class Base(models.Model):
         info_str = f"({info})" if info else ""
         return f"{specialization.__class__.__name__}{base}{info_str}"
 
-    def clean(self):
-        """Sets the type name to the class instance name
-
-        (Used in form validation)
-        """
-        self.type = self.__class__.__name__
-
     def save(
         self, *args, save_instance_only: bool = False, **kwargs
     ):  # pylint: disable=W0221
         """Overwrites type with the class name and user with login info if not specified.
 
-        **Arguments**
-            save_instance_only: bool = False
-                If true, only saves columns of the instance and not associated
-                specialized columns.
+        :param save_instance_only: If true, only saves columns of the instance and not
+            associated specialized columns.
         """
         self.type = self.__class__.__name__
         if not self.user:
@@ -177,7 +189,7 @@ class Base(models.Model):
         return self
 
     @property
-    def specialization(self):
+    def specialization(self) -> "Base":
         """Returns the specialization of the instance (children with the same id).
 
         If the class has no children which match the id, this will be the same object.
@@ -203,13 +215,11 @@ class Base(models.Model):
     def _get_child_by_name(cls, class_name=str) -> "Base":
         """Compares name of cls and all subclasses to `class_name` and returns match
 
-        **Arguments**
-            class_name=str
+        :param class_name:
                 The name to match
 
-        **Raises**
-            KeyError:
-                In case no or more then one class matches the name.
+        :raises:
+            KeyError - In case no or more then one class matches the name.
         """
         class_family = [cls] + cls.__subclasses__()
         matched_cls = [
@@ -233,22 +243,18 @@ class Base(models.Model):
     ) -> Tuple[str, Optional[Dict[str, Any]]]:
         """Extracts the class name and sub tree for a given tree and key
 
-        **Arguments**
-            root_key: str
+        :param root_key:
                 The key to look up in the dictionary
 
-            tree: Dict[str, Any]
+        :param tree:
                 The tree of ForeignKey dependencies. This specify which class the
                 ForeignKey will take since only the base class is linked against.
                 Keys are strings corresponding to model fields, values are either
                 strings corresponding to classes
 
-        **Raises**
-            TypeError:
-                If the values of the dictionary are not of type string or Tuple
-
-            KeyError:
-                If the key was not found in the dictionary
+        :raises:
+            * TypeError - If the values of the dictionary are not of type string or Tuple
+            * KeyError - If the key was not found in the dictionary
         """
         sub_tree = {}
         for key, val in tree.items():
@@ -266,14 +272,13 @@ class Base(models.Model):
     ) -> Tuple[Dict[str, List[str]]]:
         """Recursively parses table including foreign keys to extract all column names.
 
-        **Arguments**
-            tree: Optional[Dict[str, Any]] = None
+        :param tree:
                 The tree of ForeignKey dependencies. This specify which class the
                 ForeignKey will take since only the base class is linked against.
                 Keys are strings corresponding to model fields, values are either
                 strings corresponding to classes
 
-            _class_name: Optional[str] = None
+        :param _class_name: Optional[str] = None
                 This key is used internaly to identified the specialization of the base
                 object.
         """
@@ -314,21 +319,27 @@ class Base(models.Model):
         """Recursively iterates ForeignKey field and tries to construc the foreign keys
         from parameters and parse tree using `get_or_create_from_parameters`.
 
-        **Arguments**
-            field: models.ForeignKey
+        :param field:
                 The foreign key field to get or create.
 
-            parameters: Dict[str, Any]
+        :param parameters:
                 The construction / query arguments. These parameters are shared among
                 all constructions.
 
-            tree: Optional[Dict[str, Any]] = None
+        :param tree:
                 The tree of ForeignKey dependencies. This specify which class the
                 ForeignKey will take since only the base class is linked against.
                 Keys are strings corresponding to model fields, values are either
                 strings corresponding to classes
 
-                Example:
+        :param dry_run:
+                Do not insert in database.
+
+        :param _recursion_level:
+                This key is used internaly to track number of recursions.
+
+        .. admonition:: Example
+
                 ```
                 class B(Base):
                     key2 = IntegerField() # or ForeignKey(C)
@@ -340,12 +351,6 @@ class Base(models.Model):
                 # or if B also depends on Foreign Keys
                 tree={"key1": "B", "key1.key2": "C"}
                 ```
-
-            dry_run: bool = False
-                Do not insert in database.
-
-            _recursion_level: int = 0
-                This key is used internaly to track number of recursions.
         """
         tree = tree or {}
 
@@ -389,6 +394,23 @@ class Base(models.Model):
     ) -> Tuple["Base", bool]:
         """Creates class and dependencies through top down approach from parameters.
 
+        :param calling_cls: The top class which starts the get or create chain.
+
+        :param parameters: The construction / query arguments.
+            These parameters are shared among all constructions.
+
+        :param tree: The tree of ForeignKey dependencies. This specify which class the
+                ForeignKey will take since only the base class is linked against.
+                Keys are strings corresponding to model fields, values are either
+                strings corresponding to classes
+
+        :param dry_run: Do not insert in database.
+
+        :param _class_name: This key is used internaly to identified the specialization
+            of the base object.
+
+        :param _recursion_level: This key is used internaly to track number of recursions.
+
         Populates columns from parameters and recursevily creates foreign keys need for
         construction.
         Foreign keys must be specified by the tree in order to instanciate the right
@@ -397,76 +419,58 @@ class Base(models.Model):
         use the `specialized_parameters` argument.
         This routine does not populate many to many keys.
 
-        **Example**
-            ```
-            class BA(BaseB):
-                b1 = IntegerField()
-                b2 = IntegerField()
+        .. admonition:: Example
 
-            class BB(BaseB):
-                b1 = IntegerField()
-                b2 = IntegerField()
-                b3 = IntegerField()
+            Below you can find an example how this method works.
 
-            class C(BaseC):
-                c1 = IntegerField()
-                c2 = ForeignKey(BaseB)
+            .. code-block:: python
 
-            class A(BaseA):
-                a = IntegerField()
-                b1 = ForeignKey(BaseB)
-                b2 = ForeignKey(BaseB)
-                c = ForeignKey(BaseC)
+                class BA(BaseB):
+                    b1 = IntegerField()
+                    b2 = IntegerField()
 
-            instance, created = A.get_or_create_from_parameters(
-                parameters={"a": 1, "b1": 2, "b2": 3, "b3": 4, "c1": 5, "b2.b2": 10},
-                tree={
-                    "b1": "BA",
-                    "b2": "BB",
-                    "c": "C",
-                    "c.c2": "BA"
-                }
-            )
-            ```
+                class BB(BaseB):
+                    b1 = IntegerField()
+                    b2 = IntegerField()
+                    b3 = IntegerField()
+
+                class C(BaseC):
+                    c1 = IntegerField()
+                    c2 = ForeignKey(BaseB)
+
+                class A(BaseA):
+                    a = IntegerField()
+                    b1 = ForeignKey(BaseB)
+                    b2 = ForeignKey(BaseB)
+                    c = ForeignKey(BaseC)
+
+                instance, created = A.get_or_create_from_parameters(
+                    parameters={"a": 1, "b1": 2, "b2": 3, "b3": 4, "c1": 5, "b2.b2": 10},
+                    tree={
+                        "b1": "BA",
+                        "b2": "BB",
+                        "c": "C",
+                        "c.c2": "BA"
+                    }
+                )
+
+
             will get or create the instances
-            ```
-            a0 = A.objects.all()[-1]
-            a0 == instance
 
-            a0.a == 1        # key of A from pars
-            a0.b1.b1 == 2    # a.b1 is BA through tree and a.b1.b1 is two from pars
-            a0.b1.b2 == 3
-            a0.b2.b1 == 2    # a.b2 is BB through tree and a.b1.b1 is two from pars
-            a0.b2.b2 == 10   # a.b2.b2 is overwriten by specialized parameters
-            a0.b2.b3 == 4
-            a0.c.c1 == 5     # a.c is C through tree
-            a0.c.c2.b1 == 2  # a.c.c2 is BA through tree
-            a0.c.c2.b2 == 3
-            ```
+            .. code-block:: python
 
-        **Arguments**
-            calling_cls: Base
-                The top class which starts the get or create chain.
+                a0 = A.objects.all()[-1]
+                a0 == instance
 
-            parameters: Dict[str, Any]
-                The construction / query arguments. These parameters are shared among
-                all constructions.
-
-            tree: Optional[Dict[str, Any]] = None
-                The tree of ForeignKey dependencies. This specify which class the
-                ForeignKey will take since only the base class is linked against.
-                Keys are strings corresponding to model fields, values are either
-                strings corresponding to classes
-
-            dry_run: bool = False
-                Do not insert in database.
-
-            _class_name: Optional[str] = None
-                This key is used internaly to identified the specialization of the base
-                object.
-
-            _recursion_level: int = 0
-                This key is used internaly to track number of recursions.
+                a0.a == 1        # key of A from pars
+                a0.b1.b1 == 2    # a.b1 is BA through tree and a.b1.b1 is two from pars
+                a0.b1.b2 == 3
+                a0.b2.b1 == 2    # a.b2 is BB through tree and a.b1.b1 is two from pars
+                a0.b2.b2 == 10   # a.b2.b2 is overwriten by specialized parameters
+                a0.b2.b3 == 4
+                a0.c.c1 == 5     # a.c is C through tree
+                a0.c.c2.b1 == 2  # a.c.c2 is BA through tree
+                a0.c.c2.b2 == 3
         """
         # parse full dependency and warn if duplicate columns
         indent = "|" if _recursion_level else ""
