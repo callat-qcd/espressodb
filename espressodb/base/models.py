@@ -162,7 +162,7 @@ class Base(models.Model):
         """
         self.type = self.__class__.__name__
         if not self.user:
-            username = settings.CONFIG.get("USER", None)
+            username = settings.DB_CONFIG.get("USER", None)
             if username:
                 self.user, _ = User.objects.get_or_create(username=username)
             else:
