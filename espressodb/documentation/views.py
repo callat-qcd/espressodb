@@ -1,6 +1,6 @@
 from django.views.generic.base import TemplateView
 
-from espressodb.base.utilities.models import get_apps_slug_map
+from espressodb.base.utilities.apps import get_apps_slug_map
 
 # Create your views here.
 
