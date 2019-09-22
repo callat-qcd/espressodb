@@ -54,6 +54,15 @@ class Command(StartProjectCommand):
         with open(settings_file, "w") as fout:
             fout.write(yaml.dump(settings))
 
+        db_file = os.path.join(settings_dir, "db-config.yaml")
+        with open(db_file, "r") as fin:
+            db_config = yaml.safe_load(fin.read())
+
+        db_config["NAME"] = os.path.join(settings_dir, name + "-db.sqlite")
+
+        with open(db_file, "w") as fout:
+            fout.write(yaml.dump(db_config))
+
         LOGGER.info("-> Done!")
         LOGGER.info("-> You can now:")
         LOGGER.info("     1a. Migrate models by running `python manange.py migrate`")
