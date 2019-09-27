@@ -5,12 +5,14 @@ from django import template
 from django_extensions.management.commands.show_urls import Command as URLFinder
 
 from espressodb.management.utilities.settings import PROJECT_APPS
+from espressodb.management.utilities.settings import PROJECT_NAME
 from espressodb.management.utilities.version import get_repo_version
 from espressodb.management.utilities.version import get_db_info
 from espressodb.base.utilities.apps import get_apps_slug_map
 from espressodb.base.utilities.apps import get_app_name
 from espressodb.base.urls import urlpatterns
 from espressodb.base.forms import MODELS
+
 
 register = template.Library()  # pylint: disable=C0103
 
@@ -106,3 +108,10 @@ def render_db_info() -> str:
     """
     name, user = get_db_info()
     return f"{user}@{name}"
+
+
+@register.simple_tag
+def project_name() -> str:
+    """Returns name of the project
+    """
+    return PROJECT_NAME

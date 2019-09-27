@@ -6,7 +6,7 @@ from django.conf import settings
 
 
 def init():
-    """Initializes the django environment for lattedb
+    """Initializes the django environment for espressodb
     """
     settings.configure(
         DEBUG=True,
