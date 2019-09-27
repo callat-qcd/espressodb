@@ -1,13 +1,13 @@
 {% load static %}
 {% load bootstrap4 %}
-{% load base_extras %}
+{% load espressodb_extras %}
 
 <!doctype html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>espressodb</title>
+        <title>{% project_name %}</title>
         <link rel="icon" sizes="32x32" type="image/vnd.microsoft.icon" href="{% static 'icons/favicon.ico' %}"/>
         <link rel="icon" sizes="128x128" type="image/icns" href="{% static 'icons/favicon.icns' %}"/>
         <link rel="icon" sizes="144x144" type="image/x-icon" href="{% static 'icons/favicon.png' %}"/>
@@ -24,7 +24,7 @@
             <nav class="navbar navbar-expand-sm navbar-light bg-light">
                 <!-- Brand -->
                 <a class="navbar-brand" href="{% url 'index' %}">
-                  <img src="{% static "espressodb_logo.png" %}" alt="espressodb" style="height: 35px" class="align-top">
+                  <img src="{% static "logo.png" %}" alt="{% project_name %}" style="height: 35px" class="align-top">
                 </a>
 
                 <!-- Links -->

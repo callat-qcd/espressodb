@@ -12,10 +12,17 @@ MODELS = {m.get_label(): m for m in get_espressodb_models()}
 
 class ModelSelectForm(forms.Form):
     """Form which les the user select app models
+
+    .. note:
+        Can only select models which are not the parent of another model.
     """
 
     model = forms.ChoiceField(
-        choices=[(label, label) for label in MODELS if "Base" not in label]
+        choices=[
+            (label, label)
+            for label, model in MODELS.items()
+            if not model.__subclasses__()
+        ]
     )
     parse_tree = forms.BooleanField(
         initial=True,
@@ -49,6 +56,7 @@ class ModelSelectForm(forms.Form):
                 List of strings which model must match to be present in this form
         """
         super().__init__(*args, **kwargs)
+
         if subset:
             self.fields["model"].choices = [
                 (key, val) for key, val in self.fields["model"].choices if key in subset

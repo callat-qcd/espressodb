@@ -1,16 +1,19 @@
 """Additional in template functions for the espressodb module
 """
 from django import template
+from django.conf import settings
 
 from django_extensions.management.commands.show_urls import Command as URLFinder
 
 from espressodb.management.utilities.settings import PROJECT_APPS
+from espressodb.management.utilities.settings import PROJECT_NAME
 from espressodb.management.utilities.version import get_repo_version
 from espressodb.management.utilities.version import get_db_info
 from espressodb.base.utilities.apps import get_apps_slug_map
 from espressodb.base.utilities.apps import get_app_name
 from espressodb.base.urls import urlpatterns
 from espressodb.base.forms import MODELS
+
 
 register = template.Library()  # pylint: disable=C0103
 
@@ -32,7 +35,7 @@ def render_link_list(
 
         import_path = view.__module__.split(".")
 
-        if import_path[0] != "espressodb":
+        if import_path[0] != PROJECT_NAME:
             continue
 
         app_name = import_path[1].capitalize()
@@ -44,7 +47,8 @@ def render_link_list(
             urls[app_name] = [(link_name, reverse_name)]
 
     documentation = []
-    if "espressodb.documentation" in PROJECT_APPS:
+
+    if "espressodb.documentation" in settings.INSTALLED_APPS:
         for app_slug, app in get_apps_slug_map().items():
             documentation.append((app_slug, get_app_name(app)))
 
@@ -106,3 +110,10 @@ def render_db_info() -> str:
     """
     name, user = get_db_info()
     return f"{user}@{name}"
+
+
+@register.simple_tag
+def project_name() -> str:
+    """Returns name of the project
+    """
+    return PROJECT_NAME

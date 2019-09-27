@@ -21,3 +21,11 @@ if ROOT_DIR is None:
         "Could not import `ROOT_DIR`."
         " Please set this directory in your root settings module."
     )
+
+PROJECT_NAME = settings.PROJECT_NAME
+
+if PROJECT_NAME is None:
+    raise ImproperlyConfigured(
+        "Could not import `PROJECT_NAME`."
+        " Please set this variable in your root settings module."
+    )
