@@ -1,5 +1,21 @@
 # pylint: disable=C0111, R0903, E1101
-"""Module provides base class for the espressodb module.
+"""
+Description
+-----------
+
+**Module name:** :mod:`espressodb.base.models`
+
+This module provides the :class:`~espressodb.base.models.Base` class which is an abstract
+model basis providing default interfaces for :mod:`espressodb`.
+
+.. autosummary::
+   Base.get_or_create_from_parameters
+   Base.save
+   Base.check_consistency
+   Base.specialization
+
+Details
+-------
 """
 from typing import Dict
 from typing import List
