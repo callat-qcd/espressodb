@@ -57,7 +57,7 @@ class PopulationView(View):
             if column_label:
                 form = self.form_class(subset=model_subset, name=column_label)
             else:
-                return redirect("base:populate-result")
+                return redirect("populate-result")
 
         return render(request, self.template_name, {"form": form})
 
