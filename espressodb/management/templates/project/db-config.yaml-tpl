@@ -1,2 +1,2 @@
 ENGINE: django.db.backends.sqlite3
-NAME: my-db
+NAME: {{db_name}}

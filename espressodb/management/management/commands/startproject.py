@@ -23,7 +23,12 @@ class Command(StartProjectCommand):
         "name in the current directory or optionally in the given directory."
     )
 
-    rewrite_template_suffixes = ((".py-tpl", ".py"), (".yaml-tpl", ".yaml"))
+    rewrite_template_suffixes = (
+        (".py-tpl", ".py"),
+        (".yaml-tpl", ".yaml"),
+        (".md-tpl", ".md"),
+        (".txt-tpl", ".txt"),
+    )
 
     def handle(self, **options):
         """Installs app in `espressodb`
@@ -35,9 +40,15 @@ class Command(StartProjectCommand):
         name = options.get("name")
 
         LOGGER.info("Setting up new project `%s` in `%s`", name, directory)
+
+        options["secret_key"] = get_random_secret_key()
+
+        options["extensions"] += ["md", "yaml"]
+        settings_dir = os.path.join(directory, name)
+        options["db_name"] = os.path.join(settings_dir, name + "-db.sqlite")
+
         super().handle(**options)
 
-        settings_dir = os.path.join(directory, name)
         LOGGER.info(
             "-> Creating `db-config.yaml` in the project root dir `%s`", settings_dir
         )
@@ -45,23 +56,6 @@ class Command(StartProjectCommand):
         LOGGER.info(
             "-> Creating `settings.yaml`. Adjust this file to include later apps"
         )
-        settings_file = os.path.join(settings_dir, "settings.yaml")
-        with open(settings_file, "r") as fin:
-            settings = yaml.safe_load(fin.read())
-
-        settings["SECRET_KEY"] = get_random_secret_key()
-
-        with open(settings_file, "w") as fout:
-            fout.write(yaml.dump(settings))
-
-        db_file = os.path.join(settings_dir, "db-config.yaml")
-        with open(db_file, "r") as fin:
-            db_config = yaml.safe_load(fin.read())
-
-        db_config["NAME"] = os.path.join(settings_dir, name + "-db.sqlite")
-
-        with open(db_file, "w") as fout:
-            fout.write(yaml.dump(db_config))
 
         LOGGER.info("-> Done!")
         LOGGER.info("-> You can now:")
