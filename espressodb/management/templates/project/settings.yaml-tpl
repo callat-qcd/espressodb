@@ -1,4 +1,4 @@
-SECRET_KEY: {{secret_key}}
+SECRET_KEY: "{{secret_key}}"
 PROJECT_APPS: []
 ALLOWED_HOSTS: []
 DEBUG: True
