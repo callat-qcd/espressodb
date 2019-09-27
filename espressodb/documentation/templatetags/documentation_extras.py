@@ -59,6 +59,7 @@ def render_documentation(app_slug: str, model_slug: str):
         context["module"] = model.__module__
         context["doc"] = model.__doc__
         context["base"] = model.__base__
-        context["columns"] = fields
+        # For the rare case where a field name is items, prefer this key val iteration
+        context["columns"] = [(key, val) for key, val in fields.items()]
 
     return context
