@@ -3,13 +3,14 @@
 import os
 import logging
 
-raise NotImplementedError("Need to update module")
-
 from django.core.management.commands.startapp import Command as StartAppCommand
-from espressodb.config.settings import BASE_DIR
 
+try:
+    from espressodb.management.utilities.settings import ROOT_DIR, PROJECT_NAME
+except ValueError:
+    pass
 
-LOGGER = logging.getLogger("main.commands")
+LOGGER = logging.getLogger("espressodb")
 
 
 class Command(StartAppCommand):
@@ -18,11 +19,14 @@ class Command(StartAppCommand):
 
     def handle(self, **options):
         """Installs app in `espressodb`
+
+        .. note: Overwrites default directory
         """
         app_name = options["name"]
-        directory = options.get("directory", None) or app_name
-        options["directory"] = base_dir = os.path.join(BASE_DIR, directory)
+        options["directory"] = base_dir = os.path.join(ROOT_DIR, PROJECT_NAME, app_name)
         os.makedirs(os.path.join(base_dir))
+
+        print(options)
         super().handle(**options)
         LOGGER.info(
             "App `%s` was successfully created. In order to install it", app_name
