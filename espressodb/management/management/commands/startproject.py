@@ -3,8 +3,6 @@
 import os
 import logging
 
-import yaml
-
 from django.core.management.commands.startproject import Command as StartProjectCommand
 from django.core.management.utils import get_random_secret_key
 

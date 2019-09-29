@@ -5,7 +5,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 
-PROJECT_APPS = settings.PROJECT_APPS
+PROJECT_APPS = getattr(settings, "PROJECT_APPS", None)
 
 if PROJECT_APPS is None:
     raise ImproperlyConfigured(
@@ -14,7 +14,7 @@ if PROJECT_APPS is None:
     )
 
 
-ROOT_DIR = settings.ROOT_DIR
+ROOT_DIR = getattr(settings, "ROOT_DIR", None)
 
 if ROOT_DIR is None:
     raise ImproperlyConfigured(
@@ -22,7 +22,7 @@ if ROOT_DIR is None:
         " Please set this directory in your root settings module."
     )
 
-PROJECT_NAME = settings.PROJECT_NAME
+PROJECT_NAME = getattr(settings, "PROJECT_NAME", None)
 
 if PROJECT_NAME is None:
     raise ImproperlyConfigured(
