@@ -6,6 +6,11 @@ from django.contrib import admin
 from django.db import models
 
 from espressodb.base.models import Base
+from espressodb.base.utilities.apps import get_project_apps
+
+from logging import getLogger
+
+LOGGER = getLogger("espressodb")
 
 
 class BaseAdmin(admin.ModelAdmin):
@@ -62,3 +67,21 @@ class ListViewAdmin(admin.ModelAdmin):
         """Returns the name of the instance
         """
         return str(obj)
+
+
+def register_admins(app_name: str):
+    """Tries to load all models from this app and registers ListViewAdmin sites
+    """
+    apps = [app for app in get_project_apps() if app.name == app_name]
+
+    print([(app, app.name) for app in get_project_apps()])
+
+    if len(apps) == 1:
+        for model in apps[0].get_models():
+            admin.site.register(model, ListViewAdmin)
+    else:
+        LOGGER.warning(
+            "Was not able to locate app `%s`."
+            " Is it in installed (see `settings.yaml`)?",
+            app_name,
+        )
