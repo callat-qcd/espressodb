@@ -74,8 +74,6 @@ def register_admins(app_name: str):
     """
     apps = [app for app in get_project_apps() if app.name == app_name]
 
-    print([(app, app.name) for app in get_project_apps()])
-
     if len(apps) == 1:
         for model in apps[0].get_models():
             admin.site.register(model, ListViewAdmin)
