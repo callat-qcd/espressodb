@@ -132,7 +132,7 @@ After this, you should be able to see a  _My Table_  entry within the documentat
 ```bash
 python manage.py runserver
 ```
-and visit [http://127.0.0.1:8000/documentation/my-table/](http://127.0.0.1:8000/documentation/my-table/).
+and visit [http://127.0.0.1:8000/documentation/my_app/](http://127.0.0.1:8000/documentation/my_app/).
 
 For implementing more sophisticated tables, see also the [django model documentation](https://docs.djangoproject.com/en/2.2/topics/db/models/).
 
