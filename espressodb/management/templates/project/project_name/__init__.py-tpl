@@ -1,0 +1,14 @@
+"""Prepares the usage of the {{project_name}} module
+"""
+import os
+from django import setup as _setup
+
+
+def _init():
+    """Initializes the django environment for {{project_name}}
+    """
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{project_name}}.config.settings")
+    _setup()
+
+
+_init()
