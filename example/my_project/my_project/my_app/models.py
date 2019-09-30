@@ -18,7 +18,13 @@ class SpinHamiltonian(Base):
 
 
 class IsingModel(SpinHamiltonian):
-    """Model which stores implementation of uniform Ising model without external field.
+    r"""Model which stores implementation of uniform Ising model without external field.
+
+    The Hamiltonian is given by
+    $$
+        H = -J\sum_{\text{NN}} \sigma_i \sigma_j
+    $$
+    where NN specifies the set of nearest neighbors.
     """
 
     j = models.DecimalField(
@@ -26,8 +32,7 @@ class IsingModel(SpinHamiltonian):
         max_digits=5,
         decimal_places=3,
         help_text="Interaction parameter of th the Ising Model."
-        " Implements uniform nearest neighbor interactions:"
-        r" \( -\sum_{NN} J_{ij} \sigma_i \sigma_j = -J\sum_{NN} \sigma_i \sigma_j \)",
+        " Implements uniform nearest neighbor interactions.",
     )
     n_sites = models.IntegerField(
         verbose_name="Number of sites",
@@ -39,7 +44,13 @@ class IsingModel(SpinHamiltonian):
 
 
 class ExteranlFieldIsingModel(SpinHamiltonian):
-    """Model which stores implementation of uniform Ising model with external field.
+    r"""Model which stores implementation of uniform Ising model with external field.
+
+    The Hamiltonian is given by
+    $$
+        H = -J\sum_{\text{NN}} \sigma_i \sigma_j - \mu h \sum_j \sigma_j
+    $$
+    where NN specifies the set of nearest neighbors.
     """
 
     j = models.DecimalField(
@@ -47,16 +58,14 @@ class ExteranlFieldIsingModel(SpinHamiltonian):
         max_digits=5,
         decimal_places=3,
         help_text="Interaction parameter of th the Ising Model."
-        " Implements uniform nearest neighbor interactions:"
-        r" \( -\sum_{NN} J_{ij} \sigma_i \sigma_j = -J\sum_{NN} \sigma_i \sigma_j \)",
+        " Implements uniform nearest neighbor interactions.",
     )
     h = models.DecimalField(
         verbose_name="External magnetic field",
         max_digits=5,
         decimal_places=3,
         help_text="Implements uniform magnetic field:"
-        " Implements uniform nearest neighbor interactions:"
-        r" \(-\mu \sum_{j} h_j \sigma_j = -\mu h \sum_{j} \sigma_j\)",
+        " Implements uniform nearest neighbor interactions.",
     )
     n_sites = models.IntegerField(
         verbose_name="Number of sites",
