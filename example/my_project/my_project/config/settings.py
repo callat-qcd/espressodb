@@ -53,7 +53,6 @@ INSTALLED_APPS = (
     ]
 )
 
-print(INSTALLED_APPS)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -91,7 +90,6 @@ for app in PROJECT_APPS[::-1]:
     if os.path.exists(_template_dir):
         TEMPLATES[0]["DIRS"].insert(0, _template_dir)
 
-print(TEMPLATES)
 
 WSGI_APPLICATION = "my_project.config.wsgi.application"
 
