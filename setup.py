@@ -22,6 +22,7 @@ with open(path.join(CWD, "requirements-dev.txt"), encoding="utf-8") as inp:
 
 setup(
     name="espressodb",
+    python_requires=">=3.6",
     version=__version__,
     description=None,
     long_description=LONG_DESCRIPTION,
