@@ -43,7 +43,7 @@ class ListViewAdmin(admin.ModelAdmin):
                 if not isinstance(field, models.ManyToManyField)
                 and field.name not in ["id", "tag"]
             ]
-            self.list_display += ["tag", "misc"]
+            self.list_display += ["tag"]
 
         else:
             self.list_display = kwargs["list_display"]
