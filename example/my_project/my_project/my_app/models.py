@@ -5,7 +5,7 @@ from espressodb.base.models import Base
 
 
 class SpinHamiltonian(Base):
-    """The root table for SpinHamiltonian's
+    """The root table for SpinHamiltonian's.
 
     This table does not store any infomration about the Hamiltonian itself
     """
