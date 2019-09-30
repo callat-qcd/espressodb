@@ -31,7 +31,7 @@ setup(
     author=__author__,
     author_email=None,
     keywords=[],
-    packages=find_packages(exclude=["docs", "tests"]),
+    packages=find_packages(exclude=["docs", "tests", "example"]),
     install_requires=REQUIREMENTS,
     entry_points={"console_scripts": ["espressodb=espressodb.manage:main"]},
     extras_require={"dev": REQUIREMENTS_DEV},
