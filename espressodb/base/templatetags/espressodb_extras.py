@@ -4,8 +4,8 @@ from django import template
 from django.conf import settings
 
 from django_extensions.management.commands.show_urls import Command as URLFinder
+from django.template.defaultfilters import Truncator
 
-from espressodb.management.utilities.settings import PROJECT_APPS
 from espressodb.management.utilities.settings import PROJECT_NAME
 from espressodb.management.utilities.version import get_repo_version
 from espressodb.management.utilities.version import get_db_info
@@ -70,7 +70,7 @@ def render_tree(tree, root):
         module = model.__module__
         cls = model.__name__
         app = model._meta.app_label  # pylint: disable=W0212
-        name = cls + app.capitalize()
+        name = f"{app}_{cls}"
         content += f"from {module} import {cls} as {name}\n"
         models[label] = (name, model)
 
@@ -80,14 +80,23 @@ def render_tree(tree, root):
         cls, model = models[label]
         fields = model.get_open_fields()
         args = "\n\t".join(
-            [f"{field.name}=..., # {field.help_text}" for field in fields]
+            [
+                f"{field.name}=..., # {Truncator(field.help_text).words(12)}"
+                for field in fields
+            ]
         )
         name = name.replace(".", "_")
         content += f"{name} = {cls}.get_or_create(\n\t{args}\n)\n\n"
 
     cls, model = models[root]
     fields = model.get_open_fields()
-    args = "\n\t".join([f"{field.name}=..., # {field.help_text}" for field in fields])
+
+    args = "\n\t".join(
+        [
+            f"{field.name}=..., # {Truncator(field.help_text).words(12)}"
+            for field in fields
+        ]
+    )
     name = name.replace(".", "_")
     content += f"{cls}.get_or_create(\n\t{args}\n)"
 
