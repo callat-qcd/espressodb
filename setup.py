@@ -35,4 +35,12 @@ setup(
     install_requires=REQUIREMENTS,
     entry_points={"console_scripts": ["espressodb=espressodb.manage:main"]},
     extras_require={"dev": REQUIREMENTS_DEV},
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Scientists",
+        "Topic :: Software Development :: Data Management",
+        "Topic :: Software Development :: Project Management",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+    ],
 )
