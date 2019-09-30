@@ -27,7 +27,7 @@ class IsingModel(SpinHamiltonian):
         decimal_places=3,
         help_text="Interaction parameter of th the Ising Model."
         " Implements uniform nearest neighbor interactions:"
-        r" $-\sum_{NN} J_{ij} \simga_i \simga_j = -J\sum_{NN} \simga_i \simga_j$",
+        r" \( -\sum_{NN} J_{ij} \sigma_i \sigma_j = -J\sum_{NN} \sigma_i \sigma_j \)",
     )
     n_sites = models.IntegerField(
         verbose_name="Number of sites",
@@ -48,7 +48,7 @@ class ExteranlFieldIsingModel(SpinHamiltonian):
         decimal_places=3,
         help_text="Interaction parameter of th the Ising Model."
         " Implements uniform nearest neighbor interactions:"
-        r" $-\sum_{NN} J_{ij} \simga_i \simga_j = -J\sum_{NN} \simga_i \simga_j$",
+        r" \( -\sum_{NN} J_{ij} \sigma_i \sigma_j = -J\sum_{NN} \sigma_i \sigma_j \)",
     )
     h = models.DecimalField(
         verbose_name="External magnetic field",
@@ -56,7 +56,7 @@ class ExteranlFieldIsingModel(SpinHamiltonian):
         decimal_places=3,
         help_text="Implements uniform magnetic field:"
         " Implements uniform nearest neighbor interactions:"
-        r" $-\mu \sum_{j} h_j \simga_j = -\mu h \sum_{j} \simga_j$",
+        r" \(-\mu \sum_{j} h_j \sigma_j = -\mu h \sum_{j} \sigma_j\)",
     )
     n_sites = models.IntegerField(
         verbose_name="Number of sites",
@@ -76,10 +76,10 @@ class Eigenvalue(Base):
         on_delete=models.CASCADE,
         help_text="Matrix for which the eigenvalue has been computed.",
     )
-    n_level = models.IntegerField(
+    n_level = models.PositiveIntegerField(
         help_text="The nth eigenvalue extracted in ascending order."
     )
-    value = models.FloatField("The value of the eigenvalue")
+    value = models.FloatField(help_text="The value of the eigenvalue")
 
     class Meta:  # pylint: disable=C0111, R0903
         unique_together = ["matrix", "n_level"]
