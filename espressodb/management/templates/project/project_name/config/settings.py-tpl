@@ -84,10 +84,10 @@ TEMPLATES = [
     }
 ]
 
-for app in PROJECT_APPS:
+for app in PROJECT_APPS[::-1]:
     _template_dir = os.path.join(ROOT_DIR, app.replace(".", os.sep), "templates")
     if os.path.exists(_template_dir):
-        TEMPLATES[0]["DIRS"].append(_template_dir)
+        TEMPLATES[0]["DIRS"].insert(0, _template_dir)
 
 WSGI_APPLICATION = "{{ project_name }}.config.wsgi.application"
 
