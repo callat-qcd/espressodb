@@ -1,10 +1,13 @@
 """Additional in template functions for the espressodb module
 """
+from typing import List
+
 from django import template
 from django.conf import settings
+from django.db.models.fields import Field
+from django.template.defaultfilters import Truncator
 
 from django_extensions.management.commands.show_urls import Command as URLFinder
-from django.template.defaultfilters import Truncator
 
 from espressodb.management.utilities.settings import PROJECT_NAME
 from espressodb.management.utilities.version import get_repo_version
@@ -57,6 +60,30 @@ def render_link_list(
     return context
 
 
+def render_field(field: Field) -> str:
+    """Returns verbose descriptor of model field
+    """
+    optional = "(Optional) " if field.null else ""
+    return f"{field.name}=..., # {optional}{Truncator(field.help_text).words(12)}"
+
+
+def render_fields(fields: List[Field]) -> List[str]:
+    """Renders fields to string.
+
+    Sorts fields by being optional or not.
+    """
+    descriptions = []
+    optional_descriptions = []
+    for field in fields:
+        text = render_field(field)
+        if field.null:
+            optional_descriptions.append(text)
+        else:
+            descriptions.append(text)
+
+    return descriptions + optional_descriptions
+
+
 @register.inclusion_tag("tree-to-python.html")
 def render_tree(tree, root):
     content = ""
@@ -79,24 +106,14 @@ def render_tree(tree, root):
     for name, label in list(tree.items())[::-1]:
         cls, model = models[label]
         fields = model.get_open_fields()
-        args = "\n\t".join(
-            [
-                f"{field.name}=..., # {Truncator(field.help_text).words(12)}"
-                for field in fields
-            ]
-        )
+        args = "\n\t".join(render_fields(fields))
         name = name.replace(".", "_")
         content += f"{name} = {cls}.get_or_create(\n\t{args}\n)\n\n"
 
     cls, model = models[root]
     fields = model.get_open_fields()
 
-    args = "\n\t".join(
-        [
-            f"{field.name}=..., # {Truncator(field.help_text).words(12)}"
-            for field in fields
-        ]
-    )
+    args = "\n\t".join(render_fields(fields))
     name = name.replace(".", "_")
     content += f"{cls}.get_or_create(\n\t{args}\n)"
 
