@@ -35,6 +35,7 @@ def get_project_settings(root_dir: str) -> Dict[str, Any]:
         raise ImproperlyConfigured(
             "The espressodb depends on you setting the 'SECRET_KEY' argument"
             f" in the `settings.yaml` file. Searched in directory `{root_dir}`"
+            f" Here is a list of available keys: {settings.keys()}"
         )
 
     return settings
@@ -63,12 +64,14 @@ def get_db_config(root_dir: str) -> Dict[str, str]:
         raise KeyError(
             "The espressodb depends on you setting the 'ENGINE' argument"
             f" in the `db-config.yaml` file. Searched in directory `{root_dir}`"
+            f" Here is a list of available keys: {db_config.keys()}"
         )
 
     if "NAME" not in db_config:
         raise KeyError(
-            "The espressodb depends on you setting the 'ENGINE' argument"
+            "The espressodb depends on you setting the 'NAME' argument"
             f" in the `db-config.yaml` file. Searched in directory `{root_dir}`"
+            f" Here is a list of available keys: {db_config.keys()}"
         )
 
     return db_config
