@@ -41,9 +41,12 @@ def main():
             print(f"  Found entry in table: {ising_entry}")
             # Check if eigenvalues have been computed before
             eigenvalues = Eigenvalue.objects.filter(matrix=ising_entry)
-            if eigenvalues.count() > 0:
+            if eigenvalues.count() == n_sites:
                 print("  But eigenvalues where already computed")
                 compute_entries = False
+            else:
+                print("  Eigenvalues incomplete. Deleting old computation.")
+                eigenvalues.delete()
         else:
             # Because we do not have a table entry yet, we create a Python instance
             ising_entry = IsingModel(j=j, n_sites=n_sites)
