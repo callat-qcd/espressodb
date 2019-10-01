@@ -7,17 +7,17 @@ from bokeh.plotting.figure import Figure
 from bokeh.embed import components
 from bokeh import __version__ as bokeh_version
 
-from my_project.hamiltonian.models import IsingModel
+from my_project.hamiltonian.models import Contact as ContactHamiltonian
 from my_project.hamiltonian.models import Eigenvalue
 
 # Create your views here.
 
 
-class IsingStatusView(TemplateView):
+class HamiltonianStatusView(TemplateView):
     """Presents heatmap of finished computations
     """
 
-    model = IsingModel
+    model = ContactHamiltonian
     template_name = "status.html"
 
     def get_context_data(self, **kwargs):
@@ -44,19 +44,19 @@ class IsingStatusView(TemplateView):
         hamiltonians = self.model.objects.all()
 
         # Find all energy levels which correspond to the hamiltonians
-        eigenvalues = Eigenvalue.objects.filter(matrix__in=hamiltonians)
+        eigenvalues = Eigenvalue.objects.filter(hamiltonian__in=hamiltonians)
 
         # Group all eigenvalues by their hamitonian and count them
         level_count = (
-            eigenvalues.to_dataframe(fieldnames=["matrix__id", "n_level"])
-            .rename(columns={"matrix__id": "id"})
+            eigenvalues.to_dataframe(fieldnames=["hamiltonian__id", "n_level"])
+            .rename(columns={"hamiltonian__id": "id"})
             .groupby(["id"])
             .count()
         )
 
         # Join the hamitonian table with the count table
         df = (
-            hamiltonians.to_dataframe(fieldnames=["id", "j", "n_sites"])
+            hamiltonians.to_dataframe(fieldnames=["id", "spacing", "n_sites", "c"])
             .set_index("id")
             .join(level_count, on="id")
         )
@@ -74,21 +74,22 @@ class IsingStatusView(TemplateView):
     def prepare_figure(data: DataFrame) -> Figure:
         """Prepares a bokeh heatmap for the input data.
 
-        Needs columns `j`, `n_sites`, `n_level` and `done`.
+        Needs columns `spacing`, `n_sites`, `c`, `n_level` and `done`.
         """
         fig = figure(
             x_axis_location="above",
             tools="hover",
             tooltips=[
-                ("Paramaters", "j = @j{(0.3f)}, # sites = @n_sites"),
+                ("Paramaters", "spacing = @spacing{(0.3f)}, # sites = @n_sites"),
                 ("Count", "@n_level/@n_sites "),
+                ("Interaction", "c = @c "),
             ],
             width=600,
             height=600,
         )
 
         fig.rect(
-            "j",
+            "spacing",
             "n_sites",
             width=0.09,
             height=4.6,
