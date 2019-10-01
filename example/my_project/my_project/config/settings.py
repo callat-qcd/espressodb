@@ -38,11 +38,7 @@ DEBUG = _SETTINGS.get("DEBUG", False)
 INSTALLED_APPS = (
     PROJECT_APPS
     + ["espressodb.base", "espressodb.documentation", "espressodb.management"]
-    + [
-        "bootstrap4",
-        "widget_tweaks",
-        # "django_extensions",
-    ]
+    + ["bootstrap4", "widget_tweaks"]
     + [
         "django.contrib.admin",
         "django.contrib.auth",
@@ -130,7 +126,12 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [os.path.join(ROOT_DIR, "base", "static")]
+STATICFILES_DIRS = []
+for app in PROJECT_APPS[::-1]:
+    _static_dir = os.path.join(ROOT_DIR, app.replace(".", os.sep), "static")
+    if os.path.exists(_static_dir):
+        STATICFILES_DIRS.insert(0, _static_dir)
+
 
 STATIC_ROOT = os.path.join(ROOT_DIR, "static")
 MEDIA_ROOT = os.path.join(ROOT_DIR, "media")
