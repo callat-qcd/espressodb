@@ -26,7 +26,7 @@
         <header>
             <nav class="navbar navbar-expand-sm navbar-light bg-light">
                 <!-- Brand -->
-                <a class="navbar-brand" href="{% url 'index' %}">
+                <a class="navbar-brand" href="{% url 'base:index' %}">
                   <img src="{% static "logo.png" %}" alt="{% project_name %}" style="height: 35px" class="align-top">
                 </a>
 
@@ -34,7 +34,7 @@
                 <ul class="navbar-nav">
                     {% render_link_list %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'populate' %}">
+                        <a class="nav-link" href="{% url 'base:populate' %}">
                           <i class="fas fa-plus mx-1"></i>Populate
                         </a>
                     </li>
