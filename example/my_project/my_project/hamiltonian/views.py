@@ -98,7 +98,7 @@ class HamiltonianStatusView(TemplateView):
             legend="done",
         )
 
-        fig.xaxis.axis_label = "j [eV]"
+        fig.xaxis.axis_label = "spacing [fm]"
         fig.xaxis.axis_label_standoff = 10
         fig.yaxis.axis_label = "# sites"
         fig.yaxis.axis_label_standoff = 10
