@@ -133,8 +133,8 @@ for app in PROJECT_APPS[::-1]:
 STATIC_ROOT = os.path.join(ROOT_DIR, "static")
 MEDIA_ROOT = os.path.join(ROOT_DIR, "media")
 
-LOGIN_REDIRECT_URL = "index"
-LOGOUT_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = "base:index"
+LOGOUT_REDIRECT_URL = "base:index"
 
 LOGGING = {
     "version": 1,
