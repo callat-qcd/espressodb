@@ -14,7 +14,6 @@ from espressodb.management.utilities.version import get_repo_version
 from espressodb.management.utilities.version import get_db_info
 from espressodb.base.utilities.apps import get_apps_slug_map
 from espressodb.base.utilities.apps import get_app_name
-from espressodb.base.urls import urlpatterns
 from espressodb.base.forms import MODELS
 
 
@@ -27,8 +26,10 @@ def render_link_list(
 ):
     """Renders all links as a nested list
     """
+    urlconf = __import__(settings.ROOT_URLCONF, {}, {}, [""])
+
     u = URLFinder()
-    view_infos = u.extract_views_from_urlpatterns(urlpatterns)
+    view_infos = u.extract_views_from_urlpatterns(urlconf.urlpatterns)
 
     urls = {}
     for view, path, reverse_name in view_infos:
