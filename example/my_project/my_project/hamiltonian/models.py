@@ -21,6 +21,22 @@ class Hamiltonian(Base):
         """
         return 0.5
 
+    def get_kinetic_matrix(self, n_sites: int, spacing: float) -> np.ndarray:
+        """Returns the matrix corresponding to the kinetic part of the Hamiltonian.
+
+        Implements a one-step Laplacian in one dimension.
+        """
+        matrix = np.zeros([n_sites, n_sites], dtype=float)
+
+        fact = 1 / 2 / self.mass / spacing ** 2
+
+        for n in range(n_sites):
+            matrix[n, n] += -2 * fact
+            matrix[n, (n + 1) % n_sites] += fact
+            matrix[n, (n - 1) % n_sites] += fact
+
+        return matrix
+
 
 class Contact(Hamiltonian):
     r"""Implementation of an 1D contact interaction Hamiltonian in coordinate space.
@@ -56,17 +72,13 @@ class Contact(Hamiltonian):
         unique_together = ["n_sites", "spacing", "c"]
 
     @property
-    def matrix(self):
+    def matrix(self) -> np.ndarray:
         """Returns the matrix corresponding to the Hamiltonian
         """
-        matrix = np.zeros([self.n_sites, self.n_sites], dtype=float)
+        spacing = float(self.spacing)
+        matrix = self.get_kinetic_matrix(self.n_sites, spacing)
 
-        for n in range(self.n_sites):
-            matrix[n, n] += -2 / 2 / self.mass / self.spacing ** 2
-            matrix[n, (n + 1) % self.n_sites] += 1 / 2 / self.mass / self.spacing ** 2
-            matrix[n, (n - 1) % self.n_sites] += 1 / 2 / self.mass / self.spacing ** 2
-
-        matrix[0, 0] += self.c / self.spacing
+        matrix[0, 0] += float(self.c) / spacing
 
         return matrix
 
@@ -107,17 +119,14 @@ class Coulomb(Hamiltonian):
         unique_together = ["n_sites", "spacing", "v"]
 
     @property
-    def matrix(self):
+    def matrix(self) -> np.ndarray:
         """Returns the matrix corresponding to the Hamiltonian
         """
-        matrix = np.zeros([self.n_sites, self.n_sites], dtype=float)
+        spacing = float(self.spacing)
+        matrix = self.get_kinetic_matrix(self.n_sites, spacing)
 
         for n in range(self.n_sites):
-            matrix[n, n] += -2 / 2 / self.mass / self.spacing ** 2
-            matrix[n, (n + 1) % self.n_sites] += 1 / 2 / self.mass / self.spacing ** 2
-            matrix[n, (n - 1) % self.n_sites] += 1 / 2 / self.mass / self.spacing ** 2
-
-            matrix[n, n] += self.v / (max(1, n) * self.spacing)
+            matrix[n, n] += self.v / (max(1, n) * spacing)
 
         return matrix
 
