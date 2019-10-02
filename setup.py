@@ -22,6 +22,7 @@ with open(path.join(CWD, "requirements-dev.txt"), encoding="utf-8") as inp:
 
 setup(
     name="espressodb",
+    python_requires=">=3.6",
     version=__version__,
     description=None,
     long_description=LONG_DESCRIPTION,
@@ -30,8 +31,16 @@ setup(
     author=__author__,
     author_email=None,
     keywords=[],
-    packages=find_packages(exclude=["docs", "tests"]),
+    packages=find_packages(exclude=["docs", "tests", "example"]),
     install_requires=REQUIREMENTS,
     entry_points={"console_scripts": ["espressodb=espressodb.manage:main"]},
     extras_require={"dev": REQUIREMENTS_DEV},
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Scientists",
+        "Topic :: Software Development :: Data Management",
+        "Topic :: Software Development :: Project Management",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+    ],
 )

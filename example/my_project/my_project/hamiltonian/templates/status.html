@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head-extra %}
+<link href="https://cdn.pydata.org/bokeh/release/bokeh-{{bokeh_version}}.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-{{bokeh_version}}.min.css" rel="stylesheet" type="text/css">
+<script defer src="https://cdn.pydata.org/bokeh/release/bokeh-{{bokeh_version}}.min.js"></script>
+<script defer src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-{{bokeh_version}}.min.js"></script>
+<script defer src="https://cdn.pydata.org/bokeh/release/bokeh-tables-{{bokeh_version}}.min.js"></script>
+{% endblock%}
+
+{% block content %}
+<div class="jumbotron">
+    <h1><code>{{model}}</code> Status</h1>
+    <h5>This page summarizes the status of <code>{{model}}</code> computations</h2>
+    <p>
+        A job is considered done if, for given parameters, one has as many eigenvalues stored in the database as one has sites.
+    </p>
+</div>
+<div class="container">
+    <h1>Grid view of executed jobs</h1>
+    {{div| safe}}
+</div>
+<div class="container my-4">
+    <p>Feel free to visit the <a href="{% url 'admin:index' %}">admin page</a> and add or delete entries for eigenvalues or hamiltonians</p>
+    <p>Once entries are missing, you can rerun <code>add_data.py</code> to fill up this view again.</p>
+</div>
+{{script| safe}}
+{% endblock %}

@@ -38,6 +38,7 @@ class PopulationView(View):
         request.session["tree"] = {}
         request.session["column"] = None
         request.session["root"] = None
+        request.session.modified = True  # tell django to store changes
         return render(request, self.template_name, {"form": form})
 
     def post(self, request, *args, **kwargs):  # pylint: disable=W0613
@@ -70,6 +71,7 @@ class PopulationView(View):
 
         if root is None:
             session["root"] = model.get_label()
+            session.modified = True  # tell django to store changes
 
         return model
 
@@ -95,6 +97,7 @@ class PopulationView(View):
             session["column"] = next_column
             next_model = MODELS[next_label]
             next_model_choices = [next_model.get_label()]
+
             if next_model.__subclasses__():
                 next_model_choices = [m.get_label() for m in next_model.__subclasses__()]
 
@@ -107,6 +110,7 @@ class PopulationView(View):
         else:
             next_column = next_model_choices = None
 
+        session.modified = True  # tell django to store changes
         return next_column, next_model_choices
 
 
@@ -118,13 +122,16 @@ class PopulationResultView(View):
 
         This starts the parsing of the tree.
         """
+
         for key in ["todo", "column"]:
             if key in request.session:
                 request.session.pop(key)
+                request.session.modified = True  # tell django to store changes
 
         context = (
             {"root": request.session.get("root"), "tree": request.session.get("tree")}
             if "root" in request.session and "tree" in request.session
             else {}
         )
+
         return render(request, self.template_name, context)

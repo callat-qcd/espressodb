@@ -28,7 +28,6 @@ import logging
 from django.db import models
 from django.db import connection
 from django.conf import settings
-from django.contrib.postgres.fields import JSONField
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models.fields import Field
@@ -77,9 +76,6 @@ class Base(models.Model):
         blank=True,
         help_text="User defined tag for easy searches",
     )
-    #: [JSONField](Optional).
-    #: JSON: {'anything': 'you want'}
-    misc = JSONField(null=True, blank=True, help_text="JSON: {'anything': 'you want'}")
 
     @classmethod
     def get_slug(cls) -> str:
