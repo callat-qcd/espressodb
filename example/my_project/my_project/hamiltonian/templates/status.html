@@ -18,7 +18,12 @@
     </p>
 </div>
 <div class="container">
+    <h1>Grid view of executed jobs</h1>
     {{div| safe}}
+</div>
+<div class="container my-4">
+    <p>Feel free to visit the <a href="{% url 'admin:index' %}">admin page</a> and add or delete entries for eigenvalues or hamiltonians</p>
+    <p>Once entries are missing, you can rerun <code>add_data.py</code> to fill up this view again.</p>
 </div>
 {{script| safe}}
 {% endblock %}
