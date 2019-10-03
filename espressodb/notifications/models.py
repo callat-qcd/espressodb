@@ -15,7 +15,7 @@ class Notification(models.Model):
     """
 
     title = models.CharField(
-        max_length=200, help_text="The title of the notification", null=True
+        max_length=200, help_text="The title of the notification", null=True, blank=True
     )
     content = models.TextField(help_text="The content of the notification")
     level = models.CharField(
@@ -24,10 +24,11 @@ class Notification(models.Model):
         help_text="The level of the notification mimicing logging levels",
     )
     tag = models.CharField(
-        max_length=100, null=True, help_text="A tag for fast searches"
+        max_length=100, null=True, help_text="A tag for fast searches", blank=True
     )
     groups = models.ManyToManyField(
         Group,
+        blank=True,
         help_text="The group of users how are allowed to read this notification",
         related_name="notifications",
     )
@@ -36,6 +37,7 @@ class Notification(models.Model):
     )
     read_by = models.ManyToManyField(
         User,
+        blank=True,
         help_text="The users who have read the notification",
         related_name="read_notifications",
     )
@@ -46,14 +48,14 @@ class Notification(models.Model):
     def add_user_to_read_by(self, user: User):
         """Adds the user to the read_by list and inserts in the db.
         """
-        if not self.was_read_by(user):
+        if not self.has_been_read_by(user):
             self.read_by.add(user)  # pylint: disable=E1101
             self.save()
 
-    def was_read_by(self, user: User):
+    def has_been_read_by(self, user: User):
         """Checks if the user has read the notification
         """
-        return self.read_by.filter(user=user).exists()  # pylint: disable=E1101
+        return self.read_by.filter(pk=user.pk).exists()  # pylint: disable=E1101
 
     def viewable_by(self, user: Optional[User]):
         """Checks if the user is allowed to read this notification.
@@ -130,7 +132,7 @@ class Notifier:
         Raises KeyError if `fail_if_not_exists` is True and not all groups are found.
         Else returns found groups.
         """
-        groups = Group.objects.filter(name=group_names)
+        groups = Group.objects.filter(name__in=group_names)
 
         if self.fail_if_not_exists and groups.count() != len(group_names):
             missing_groups = set(group_names).difference(
