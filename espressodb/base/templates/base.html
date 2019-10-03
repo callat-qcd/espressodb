@@ -39,10 +39,17 @@
                         </a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                       <a class="nav-link" href="{% url 'notifications:notifications-list' %}">
-                         <i class="fas fa-user-cog mx-1"></i>Notifications
-                       </a>
+                    <li class="nav-item dropdown">
+                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop-notifications" data-toggle="dropdown">
+                       <i class="fas fa-book mx-1"></i>Notifications
+                     </a>
+                     <div class="dropdown-menu">
+                       <a class="dropdown-item" href="{% url 'notifications:notifications-list' %}">All</a>
+                       <a class="dropdown-item" href="{% url 'notifications:notifications-list-debug' %}">Debug</a>
+                       <a class="dropdown-item" href="{% url 'notifications:notifications-list-info' %}">Info</a>
+                       <a class="dropdown-item" href="{% url 'notifications:notifications-list-warning' %}">Warning</a>
+                       <a class="dropdown-item" href="{% url 'notifications:notifications-list-error' %}">Error</a>
+                     </div>
                     </li>
                     <li class="nav-item">
                        <a class="nav-link" href="{% url 'admin:index' %}">
