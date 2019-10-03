@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load static %}
+{% load notifications_extras %}
 
 
 {% block content %}
@@ -9,5 +10,33 @@
     <h1>List of notifications</h1>
 </div>
 <div class="container">
+{% if notification_list %}
+    {% for notification in notification_list %}
+        {% render_notification notification %}
+    {% endfor %}
+{% else %}
+    <p>There are no new notifications</p>
+{% endif %}
 </div>
+{% if is_paginated %}
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        {% endif %}
+
+        <li class="page-item active">
+            <span class="page-link">
+                {{ page_obj.number }}<span class="sr-only">of {{ paginator.num_pages }}</span>
+            </span>
+        </li>
+
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ paginator.num_pages }}">Last &raquo;</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
 {% endblock %}

@@ -1,0 +1,8 @@
+<div class="card mb-3">
+  <div class="card-body">
+    {% if notification.title %}<h5 class="card-title">{{notification.title}}</h5>{% endif %}
+    {% if notification.tag %}<h6 class="card-subtitle mb-2 text-muted">{{ notification.tag }}</h6>{% endif %}
+    <p class="card-text">{{ notification.content }}</p>
+    <p class="card-text"><small class="text-muted">{{ notification.timestamp }}</small></p>
+  </div>
+</div>
