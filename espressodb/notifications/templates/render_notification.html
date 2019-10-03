@@ -1,12 +1,12 @@
 {% load notifications_extras %}
 <div class="alert alert-{% bootstrap_level notification.level %} mb-3" id="notification-{{notification.pk}}" role="alert">
-    <div>
+    {% if show_close %}
     <form action="{% url 'notifications:notification-read' pk=notification.pk %}" method="post">
         {% csrf_token %}
     <button type="submit" class="close" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-    </div>
+    {% endif %}
     {% if notification.title %}<h5 class="alert-heading">{{notification.title}}</h5>{% endif %}
     {% if notification.tag %}<h6 class="card-subtitle mb-2 text-muted">{{ notification.tag }}</h6>{% endif %}
     <p class="card-text mb-1">{{ notification.content }}</p>

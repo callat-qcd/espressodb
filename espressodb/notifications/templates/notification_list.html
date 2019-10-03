@@ -20,7 +20,7 @@
 <div class="container">
 {% if notification_list %}
     {% for notification in notification_list %}
-        {% render_notification notification %}
+        {% render_notification notification hide_close=all %}
     {% endfor %}
 {% else %}
     <p>There are no new notifications</p>

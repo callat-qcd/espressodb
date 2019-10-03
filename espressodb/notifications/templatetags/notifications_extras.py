@@ -8,10 +8,10 @@ register = template.Library()  # pylint: disable=C0103
 
 
 @register.inclusion_tag("render_notification.html")
-def render_notification(notification: Notification):
+def render_notification(notification: Notification, hide_close: bool = False):
     """Renders notification
     """
-    context = {"notification": notification}
+    context = {"notification": notification, "hide_close": hide_close}
 
     return context
 
