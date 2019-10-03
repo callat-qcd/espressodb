@@ -8,7 +8,14 @@
 
 <div class="jumbotron">
     <h1>List of {{level}} notifications</h1>
-    <p><a href="{{request.path}}?all=True">Show all read notifications as well</a></p>
+    <p>
+        {% if all %}
+        <a href="{{request.path}}">Just show new notifications</a>
+        {% else %}
+        <a href="{{request.path}}?all=True">Show all read notifications as well
+        </a>
+        {% endif %}
+    </p>
 </div>
 <div class="container">
 {% if notification_list %}

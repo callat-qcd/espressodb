@@ -1,15 +1,15 @@
-<div class="card mb-3" id="notification-{{notification.pk}}">
-  <div class="card-header">
+{% load notifications_extras %}
+<div class="alert alert-{% bootstrap_level notification.level %} mb-3" id="notification-{{notification.pk}}" role="alert">
+    <div>
     <form action="{% url 'notifications:notification-read' pk=notification.pk %}" method="post">
         {% csrf_token %}
     <button type="submit" class="close" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
-  </div>
-  <div class="card-body">
-    {% if notification.title %}<h5 class="card-title">{{notification.title}}</h5>{% endif %}
+    </div>
+    {% if notification.title %}<h5 class="alert-heading">{{notification.title}}</h5>{% endif %}
     {% if notification.tag %}<h6 class="card-subtitle mb-2 text-muted">{{ notification.tag }}</h6>{% endif %}
-    <p class="card-text">{{ notification.content }}</p>
+    <p class="card-text mb-1">{{ notification.content }}</p>
+    <hr class="my-1">
     <p class="card-text"><small class="text-muted">{{ notification.timestamp }}</small></p>
-  </div>
 </div>
