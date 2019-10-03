@@ -27,8 +27,6 @@ class HamiltonianStatusView(TemplateView):
         fig = self.prepare_figure(df)
         script, div = components(fig)
 
-        print(bokeh_version)
-
         context["script"] = script
         context["div"] = div
         context["model"] = self.model
