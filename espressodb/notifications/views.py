@@ -18,7 +18,7 @@ class NotificationsView(LoginRequiredMixin, ListView):
     login_url = "/login/"
 
     model = Notification
-    paginate_by = 2
+    paginate_by = 20
     template_name = "notification_list.html"
     level = ""
 
