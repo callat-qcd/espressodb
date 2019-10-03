@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 LEVELS = ("DEBUG", "INFO", "WARNING", "ERROR")
 
 # Create your models here.
-class Notfication(models.Model):
+class Notification(models.Model):
     """Model which implements logging like notification module
     """
 
@@ -39,6 +39,9 @@ class Notfication(models.Model):
         help_text="The users who have read the notification",
         related_name="read_notifications",
     )
+
+    class Meta:  # pylint: disable=C0111, R0903
+        ordering = ["-timestamp"]
 
     def add_user_to_read_by(self, user: User):
         """Adds the user to the read_by list and inserts in the db.
@@ -147,7 +150,7 @@ class Notifier:
         title: Optional[str] = None,
         tag: Optional[str] = None,
         groups: Optional[List[str]] = None,
-    ) -> Notfication:
+    ) -> Notification:
         """Creates a debug notification
 
         :param content: The content of the notification
@@ -166,7 +169,7 @@ class Notifier:
         title: Optional[str] = None,
         tag: Optional[str] = None,
         groups: Optional[List[str]] = None,
-    ) -> Notfication:
+    ) -> Notification:
         """Creates an info notification
 
         :param content: The content of the notification
@@ -185,7 +188,7 @@ class Notifier:
         title: Optional[str] = None,
         tag: Optional[str] = None,
         groups: Optional[List[str]] = None,
-    ) -> Notfication:
+    ) -> Notification:
         """Creates a warning notification
 
         :param content: The content of the notification
@@ -204,7 +207,7 @@ class Notifier:
         title: Optional[str] = None,
         tag: Optional[str] = None,
         groups: Optional[List[str]] = None,
-    ) -> Notfication:
+    ) -> Notification:
         """Creates a error notification
 
         :param content: The content of the notification
@@ -217,7 +220,7 @@ class Notifier:
             content=content, title=title, tag=tag, groups=groups, level="ERROR"
         )
 
-    def _create_notification(self, **kwargs) -> Notfication:
+    def _create_notification(self, **kwargs) -> Notification:
         """Creates a notification entry in the db.
 
         :param content: The content of the notification
@@ -233,7 +236,7 @@ class Notifier:
         groups = options.pop("groups", None)
         groups = self.get_groups_from_names(groups) if groups else self.groups
 
-        notification = Notfication.objects.create(**options)  # pylint: disable=E1101
-        notification.add(groups)
+        notification = Notification.objects.create(**options)  # pylint: disable=E1101
+        notification.groups.add(*groups)
 
         return notification
