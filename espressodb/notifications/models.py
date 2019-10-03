@@ -1,3 +1,4 @@
+# pylint: disable=E1101
 """Implements notifications similar to logging with optional viewer restrictions
 """
 from typing import Optional
@@ -49,7 +50,7 @@ class Notification(models.Model):
         """Adds the user to the read_by list and inserts in the db.
         """
         if not self.has_been_read_by(user):
-            self.read_by.add(user)  # pylint: disable=E1101
+            self.read_by.add(user)
             self.save()
 
     def has_been_read_by(self, user: User):
@@ -68,6 +69,35 @@ class Notification(models.Model):
             if not Group.objects.intersection(user.groups, self.groups).exists():
                 allowed_to_read = False
         return allowed_to_read
+
+    @classmethod
+    def get_notifications(
+        cls, user: User, level: Optional[str] = None, show_all: bool = False
+    ) -> List["Notification"]:
+        """Returns all notifications the user is allowed to see.
+
+        :param user: The user who wants to see notifications
+        :param level: The notification level to specialize
+        :param show_all: If True also shows already read messages
+
+        Results are order by timestamp in decreasing order.
+        """
+        general_notifications = cls.objects.filter(groups=None)
+
+        if user.groups.exists():
+            specific_notifications = cls.objects.filter(groups__in=user.groups.all())
+        else:
+            specific_notifications = cls.objects.none()
+
+        notifications = general_notifications | specific_notifications
+
+        if not show_all:
+            notifications = notifications.exclude(read_by=user)
+
+        if level and level in LEVELS:
+            notifications = notifications.filter(level=level)
+
+        return notifications.order_by("-timestamp")
 
 
 class Notifier:

@@ -34,27 +34,8 @@ class NotificationsView(LoginRequiredMixin, ListView):
         """
         """
         user = self.request.user
-
         show_all = self.request.GET.get("all", "False").lower() == "true"
-
-        general_notifications = Notification.objects.filter(groups=None)
-
-        if user.groups.exists():
-            specific_notifications = Notification.objects.filter(
-                groups__in=user.groups.all()
-            )
-        else:
-            specific_notifications = Notification.objects.none()
-
-        notifications = general_notifications | specific_notifications
-
-        if not show_all:
-            notifications = notifications.exclude(read_by=user)
-
-        if self.level in LEVELS:
-            notifications = notifications.filter(level=self.level)
-
-        return notifications.order_by("-timestamp")
+        return Notification.get_notifications(user, self.level, show_all)
 
 
 class HasReadView(LoginRequiredMixin, SingleObjectMixin, View):
