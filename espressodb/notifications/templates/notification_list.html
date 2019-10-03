@@ -7,7 +7,8 @@
 {% block content %}
 
 <div class="jumbotron">
-    <h1>List of notifications</h1>
+    <h1>List of {{level}} notifications</h1>
+    <p><a href="{{request.path}}?all=True">Show all read notifications as well</a></p>
 </div>
 <div class="container">
 {% if notification_list %}
@@ -22,8 +23,8 @@
 <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
         {% if page_obj.has_previous %}
-        <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="?page=1{% if all %}&all=True{% endif %}">&laquo; First</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if all %}&all=True{% endif %}">Previous</a></li>
         {% endif %}
 
         <li class="page-item active">
@@ -33,8 +34,8 @@
         </li>
 
         {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ paginator.num_pages }}">Last &raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if all %}&all=True{% endif %}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{ paginator.num_pages }}{% if all %}&all=True{% endif %}">Last &raquo;</a></li>
         {% endif %}
     </ul>
 </nav>
