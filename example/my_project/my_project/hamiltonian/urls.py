@@ -19,4 +19,4 @@ from django.urls import path
 from my_project.hamiltonian.views import HamiltonianStatusView
 
 app_name = "hamiltonian"
-urlpatterns = [path("status", HamiltonianStatusView.as_view(), name="status")]
+urlpatterns = [path("status/", HamiltonianStatusView.as_view(), name="status")]
