@@ -1,6 +1,7 @@
 {% load static %}
 {% load bootstrap4 %}
 {% load espressodb_extras %}
+{% load notifications_extras %}
 
 <!doctype html>
 <html>
@@ -38,25 +39,7 @@
                           <i class="fas fa-plus mx-1"></i>Populate
                         </a>
                     </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop-notifications" data-toggle="dropdown">
-                       <i class="fas fa-bell mx-1"></i>Notifications
-                     </a>
-                     <div class="dropdown-menu">
-                       <a class="dropdown-item" href="{% url 'notifications:notifications-list' %}">All</a>
-                       <a class="dropdown-item" href="{% url 'notifications:notifications-list-debug' %}">Debug</a>
-                       <a class="dropdown-item" href="{% url 'notifications:notifications-list-info' %}">Info</a>
-                       <a class="dropdown-item" href="{% url 'notifications:notifications-list-warning' %}">Warning</a>
-                       <a class="dropdown-item" href="{% url 'notifications:notifications-list-error' %}">Error</a>
-                     </div>
-                    </li>
-                    <li class="nav-item">
-                       <a class="nav-link" href="{% url 'admin:index' %}">
-                         <i class="fas fa-user-cog mx-1"></i>Admin
-                       </a>
-                    </li>
-                    {% endif %}
+                    {% render_notification_links user %}
                 </ul>
                 <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}

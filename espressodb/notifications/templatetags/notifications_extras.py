@@ -1,8 +1,10 @@
 """Additional in template functions for the espressodb module
 """
 from django import template
+from django.contrib.auth.models import User
 
 from espressodb.notifications.models import Notification
+from espressodb.notifications.models import LEVELS
 
 register = template.Library()  # pylint: disable=C0103
 
@@ -25,4 +27,22 @@ def bootstrap_level(level: str) -> str:
         "INFO": "info",
         "WARNING": "warning",
         "ERROR": "danger",
-    }.get(level, "light")
+    }.get(level.upper(), "light")
+
+
+@register.inclusion_tag("render_notification_links.html")
+def render_notification_links(user: User):
+    """Renders notification links.
+
+    Also adds informations about notifications which are viewable by user.
+    """
+    notifications = Notification.get_notifications(user)
+    notification_count = {}
+    for level in LEVELS:
+        notification_count[level.lower()] = notifications.filter(level=level).count()
+
+    return {
+        "total": sum(notification_count.values()),
+        "user": user,
+        "notification_count": notification_count,
+    }
