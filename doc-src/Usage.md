@@ -28,11 +28,11 @@ It provides a wrapper interface for [`djangos` project creation](https://docs.dj
     ```bash
     python manage.py migrate
     ```
-6. _(Optional)_ [Launch a local web app](#launch-a-web-app)
+6. _(Optional)_ [Launch a local web app](#launch-a-local-web-app)
     ```bash
     python manage.py runserver
     ```
-7. _(Optional)_ [Install your project locally](#install-your-project) to use it in other modules
+7. _(Optional)_ [Install your project locally](#install-your-project-locally) to use it in other modules
     ```
     pip install [--user] [-e] .
     ```
@@ -141,13 +141,24 @@ To apply the migrations run
 python manage.py migrate
 ```
 
-After successfully migrating new or updated models, you are good to go and can for example [launch a web app](#launch-a-web-app).
+After successfully migrating new or updated models, you are good to go and can for example [launch a web app](#launch-a-local-web-app).
 
 For further [migration strategies, see also the django docs](https://docs.djangoproject.com/en/dev/topics/migrations/).
 
+### Launch a local web app
+Django provides an easy interface to launch a local web server.
+Once you project is set up, you can run
+```
+python manage.py runserver
+```
+to start a local lightweight server which runs by default on localhost: [http://127.0.0.1:8000/](http://127.0.0.1:8000/).
+EspressoDB provides default views, meaning once your tables have been successfully migrated, you can directly see your project home page.
+Everyone who has access to this port on your machine can access the launched web page.
+This means, by default, you are the only one able to see it.
 
 ### Create a new app
-To start a new app, the sub module for new tables, run the following command
+Apps are submodules within your project and implement new tables and other features.
+To start a new app, run the following command
 ```bash
 python manage.py startapp my_app
 ```
@@ -167,7 +178,16 @@ my_project/
         |-- __init__.py
 ```
 
-To let your project know that it also has to run the new app, change the `settings.yaml` to also include
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>
+    EspressoDB makes use of the project and app structure by, e.g., finding import paths and static files.
+    Thus, unless you know what you are doing, it is recommended to stick to this folder layout.
+</p>
+</div>
+
+
+To let your project know that it also has to include the new app, change the `settings.yaml` to also include
 ```
 PROJECT_APPS:
     - my_project.my_app
@@ -175,23 +195,28 @@ PROJECT_APPS:
 
 Because the project is empty, nothing significant has changed thus far.
 
-To implement your first table, you must adjust the models file.
-E.g., to create a table which works with the `EspressoDB` default features, update `my_app/models.py` to
+To implement your first table, you must adjust the app models.
+E.g., to create a table which works with the EspressoDB default features, update `my_project/my_app/models.py` to
 ```python
 from espressodb.base.models import Base
 
 class MyTable(Base):
     pass
 ```
-This implements a new model with the default columns provided by the `EspressoDB` base model (e.g., `user`, `last_modified`,  `tag`, `type`).
+This implements a new model with the default columns provided by the EspressoDB base model (e.g., `user`, `last_modified`, `tag`, `type`).
 
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>
+    Note that you have to replace <code>models.Model</code> with EspressoDB's <code>Base</code>. <code>Base</code> derives from django's default <code>models.Model</code> but provides further features needed by EspressoDB.
+</p>
+</div>
 
-To update your database you have to (again) create and migrate `migrations`.
+To update your database you have to (again) [create and migrate `migrations`](#create-or-update-the-database).
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
-
 After this, you should be able to see a  _My Table_  entry within the documentation
 ```bash
 python manage.py runserver
@@ -200,17 +225,17 @@ and visit [http://127.0.0.1:8000/documentation/my_app/](http://127.0.0.1:8000/do
 
 For implementing more sophisticated tables, see also the [django model documentation](https://docs.djangoproject.com/en/2.2/topics/db/models/).
 
->>> Note that you have to replace `models.Model` with `EspressoDB`s `Base`.
-    `Base` derives from django's default `models.Model` but provides further features needed by `EspressoDB`.
 
-### Using your models in external modules
-The easiest way to let your other Python modules use these tables is to install your project as a pip moduel (not on a Python index page, just in your local path).
-To do so take a look at `setup.py`, adjust it to your means and run
+### Install your project locally
+The easiest way to let your other Python modules use these tables is to install your project as a pip module (not on Python package index, just in your local path).
+To do so, take a look at `setup.py`, [adjust it to your means](https://docs.python.org/3.7/distutils/setupscript.html) and run
 ```
 python -m pip install [--user] [-e] .
 ```
 The `[-e]` options symlinks the install against this folder and can be useful incase you want to continue updating this module, e.g., for development purposes.
+
 That's it.
+
 You can now use your tables in any Python program like
 ```python
 from my_project.my_app.models import MyTable
