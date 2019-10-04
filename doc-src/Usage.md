@@ -1,7 +1,5 @@
 # How to use EspressoDB
 
-## Description
-
 This section explains how to use EspressoDB to create projects and apps.
 It provides a wrapper interface for [`djangos` project creation](https://docs.djangoproject.com/en/2.2/intro/tutorial01/#creating-a-project) which streamlines the creation process.
 
