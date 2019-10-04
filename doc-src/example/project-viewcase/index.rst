@@ -12,4 +12,7 @@ In this section,
     :caption: Contents:
 
     install
-    views
+    public-views
+    private-views
+    install-script
+    external-scripts
