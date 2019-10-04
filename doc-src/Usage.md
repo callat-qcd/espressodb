@@ -47,7 +47,7 @@ pip install [--user] espressodb
 
 You can also install the project from source
 ```bash
-git clone https://www.github.com/callat-qcd/espressodb
+git clone https://www.github.com/callat-qcd/espressodb.git
 cd espressodb
 pip install [--user] [-e] .
 ```
