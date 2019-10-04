@@ -3,3 +3,5 @@ Developer Notes
 
 .. toctree::
    :glob:
+
+   *
