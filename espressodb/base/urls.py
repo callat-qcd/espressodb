@@ -10,8 +10,8 @@ urlpatterns = []
 app_name = "base"
 urlpatterns += [
     path("", views.IndexView.as_view(), name="index"),
-    path("populate", views.PopulationView.as_view(), name="populate"),
+    path("populate/", views.PopulationView.as_view(), name="populate"),
     path(
-        "populate-result", views.PopulationResultView.as_view(), name="populate-result"
+        "populate-result/", views.PopulationResultView.as_view(), name="populate-result"
     ),
 ]
