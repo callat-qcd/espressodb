@@ -1,6 +1,7 @@
 {% load static %}
 {% load bootstrap4 %}
 {% load espressodb_extras %}
+{% load notifications_extras %}
 
 <!doctype html>
 <html>
@@ -38,13 +39,7 @@
                           <i class="fas fa-plus mx-1"></i>Populate
                         </a>
                     </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                       <a class="nav-link" href="{% url 'admin:index' %}">
-                         <i class="fas fa-user-cog mx-1"></i>Admin
-                       </a>
-                    </li>
-                    {% endif %}
+                    {% if user.is_authenticated %}{% render_notification_links user %}{% endif %}
                 </ul>
                 <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}

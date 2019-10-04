@@ -34,6 +34,10 @@ urlpatterns = [
         r"documentation/",
         include("espressodb.documentation.urls", namespace="documentation"),
     ),
+    path(
+        r"notifications/",
+        include("espressodb.notifications.urls", namespace="notifications"),
+    ),
 ]
 
 for app in PROJECT_APPS:

@@ -4,14 +4,19 @@ from itertools import product
 
 import numpy as np
 
+from espressodb.notifications import get_notifier
+
 from my_project.hamiltonian.models import Contact as ContactHamiltonian
 from my_project.hamiltonian.models import Eigenvalue
+
 
 RANGES = {
     "spacing": np.linspace(0.1, 1.0, 10),
     "n_sites": np.arange(10, 51, 5),
     "c": [-1],
 }
+
+NOTIFIER = get_notifier(tag="add_data")
 
 
 def main():
@@ -43,6 +48,9 @@ def main():
                 compute_entries = False
             else:
                 print("  Eigenvalues incomplete. Deleting old computation.")
+                NOTIFIER.debug(
+                    f"Deleted {eigenvalues.count()} entries for {hamiltonian}."
+                )
                 eigenvalues.delete()
         else:
             # Because we do not have a table entry yet, we create a Python instance
@@ -68,6 +76,7 @@ def main():
             ## And connect to the DB only once -- when all Python objects are known
             bulk = Eigenvalue.objects.bulk_create(eigen_entries)
             print(f"  Exported {len(bulk)} entries")
+            NOTIFIER.info(f"Exported {len(bulk)} entries for {hamiltonian}.")
 
     print("Done")
 

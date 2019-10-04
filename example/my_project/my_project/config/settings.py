@@ -37,7 +37,12 @@ DEBUG = _SETTINGS.get("DEBUG", False)
 
 INSTALLED_APPS = (
     PROJECT_APPS
-    + ["espressodb.base", "espressodb.documentation", "espressodb.management"]
+    + [
+        "espressodb.base",
+        "espressodb.documentation",
+        "espressodb.management",
+        "espressodb.notifications",
+    ]
     + ["bootstrap4", "widget_tweaks"]
     + [
         "django.contrib.admin",
@@ -68,6 +73,7 @@ TEMPLATES = [
         "DIRS": [
             os.path.join(ESPRESSO_DB_ROOT, "espressodb", "base", "templates"),
             os.path.join(ESPRESSO_DB_ROOT, "espressodb", "documentation", "templates"),
+            os.path.join(ESPRESSO_DB_ROOT, "espressodb", "notifications", "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
