@@ -1,6 +1,4 @@
-# What can I do with the example project?
-
-## Install the project
+# Install the project
 The example project lives in the repository root `example/my_project` directory.
 In order to use it, you have to clone the repository
 ```bash

@@ -1,7 +1,8 @@
-The example project
-===================
+What can I do?
+==============
 
 EspressoDB aims to create projects fast.
+
 In this section,
 
 1. we want to present an example project and a few of EspressoDB's features.
@@ -10,5 +11,5 @@ In this section,
 .. toctree::
     :caption: Contents:
 
-    project-viewcase/index
-    project-creation/index
+    install
+    views
