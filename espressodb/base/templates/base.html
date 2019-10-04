@@ -39,7 +39,7 @@
                           <i class="fas fa-plus mx-1"></i>Populate
                         </a>
                     </li>
-                    {% render_notification_links user %}
+                    {% if user.is_authenticated %}{% render_notification_links user %}{% endif %}
                 </ul>
                 <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
