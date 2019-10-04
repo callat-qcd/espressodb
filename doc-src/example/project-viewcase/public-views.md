@@ -1,4 +1,4 @@
-## The views
+## The public views
 
 After launching a local server
 ```
@@ -56,13 +56,22 @@ Once all dependencies are identified, they return a Python script which can be r
 ![Population query](../../_static/example-population-script.png)
 
 
+### The login page
 
-### The home page
+![The login view](../../_static/example-login.png)
 
-The homepage is just a plain page which should summarize infos.
-For this project, there are no specific informations here.
+The login page logs you in as a registered user.
+See also [the private views](private-views) for what to expect there.
+
 
 ### The Hamiltonian status page
 
-The status page displays informations about one of the tables called `Contact[Hamiltonian]` -- which is a toy example for a scientific object.
-This particular Hamiltonian has three
+![The login view](../../_static/example-status.png)
+
+The status page displays informations about one of the tables called `Contact[Hamiltonian]`.
+It displays a dynamically generated grid plot which visualisazies the status of computations.
+A green field corresponds to completed jobs, a red field to not finished jobs.
+A mouse-over effect displays further information.
+Once the database is updated (and the web page reloaded) the plot will also update.
+
+This view is the only view which comes not as a default when initializing a project with EspressoDB.
