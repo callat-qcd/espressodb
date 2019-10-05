@@ -83,21 +83,50 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="README.html">EspressoDB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="README.html#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#what-does-espressodb-provide">What does EspressoDB provide?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#how-to-install-it">How to install it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#what-s-the-story-behind-it">What’s the story behind it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#who-is-responsible-for-it">Who is responsible for it?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">How to use EspressoDB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#tl-dr">TL;DR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#details">Details</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#start-a-project">Start a project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#create-the-database-and-tables">Create the database and tables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#create-a-new-app">Create a new app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#using-your-models-in-external-modules">Using your models in external modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Usage.html">How to use EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Usage.html#tl-dr">TL;DR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Usage.html#details">Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#install-espressodb">Install EspressoDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#start-a-project">Start a project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#configure-your-project">Configure your project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#create-or-update-the-database">Create or update the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#launch-a-local-web-app">Launch a local web app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#create-a-new-app">Create a new app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#install-your-project-locally">Install your project locally</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example/index.html">The example project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example/project-viewcase/index.html">What can I do?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/install.html">Install the project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/public-views.html">The public views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/private-views.html">The private views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/external-scripts.html">Using your project in external modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example/project-creation/index.html">How do I set up the example project myself?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example/project-creation/project-creation.html">How do I set up the example project myself?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="features/index.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="features/base.html">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/documentation.html">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/management.html">Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/notifications.html">The notifications module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/index.html">Advanced Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/web-accessability.html">How to set up a server which can be seen by others</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference of EspressoDB</a><ul>
@@ -179,7 +208,6 @@
  | <a href="#G"><strong>G</strong></a>
  | <a href="#I"><strong>I</strong></a>
  | <a href="#L"><strong>L</strong></a>
- | <a href="#M"><strong>M</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
@@ -243,14 +271,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/base/models.html#espressodb.base.models.Base.last_modified">last_modified (espressodb.base.models.Base attribute)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="M">M</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api/base/models.html#espressodb.base.models.Base.misc">misc (espressodb.base.models.Base attribute)</a>
 </li>
   </ul></td>
 </tr></table>

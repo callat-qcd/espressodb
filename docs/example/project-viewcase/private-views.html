@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>espressodb.base &mdash; EspressoDB 0.1.0 documentation</title>
+  <title>The private views &mdash; EspressoDB 0.1.0 documentation</title>
   
 
   
@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="models" href="models.html" />
-    <link rel="prev" title="API Reference of EspressoDB" href="../index.html" /> 
+    <link rel="next" title="Using your project in external modules" href="external-scripts.html" />
+    <link rel="prev" title="The public views" href="public-views.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -104,16 +104,16 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../example/index.html">The example project</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../example/project-viewcase/index.html">What can I do?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/install.html">Install the project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/public-views.html">The public views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/private-views.html">The private views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html">Using your project in external modules</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The example project</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">What can I do?</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="install.html">Install the project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="public-views.html">The public views</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">The private views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="external-scripts.html">Using your project in external modules</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../example/project-creation/index.html">How do I set up the example project myself?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/project-creation.html">How do I set up the example project myself?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../project-creation/index.html">How do I set up the example project myself?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../project-creation/project-creation.html">How do I set up the example project myself?</a></li>
 </ul>
 </li>
 </ul>
@@ -130,9 +130,9 @@
 <li class="toctree-l2"><a class="reference internal" href="../../advanced/web-accessability.html">How to set up a server which can be seen by others</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference of EspressoDB</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">espressodb.base</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="models.html"><code class="docutils literal notranslate"><span class="pre">models</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference of EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/base/index.html"><code class="docutils literal notranslate"><span class="pre">espressodb.base</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/models.html"><code class="docutils literal notranslate"><span class="pre">models</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -182,15 +182,17 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-          <li><a href="../index.html">API Reference of EspressoDB</a> &raquo;</li>
+          <li><a href="../index.html">The example project</a> &raquo;</li>
         
-      <li><code class="docutils literal notranslate"><span class="pre">espressodb.base</span></code></li>
+          <li><a href="index.html">What can I do?</a> &raquo;</li>
+        
+      <li>The private views</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/api/base/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/example/project-viewcase/private-views.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -203,16 +205,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="espressodb-base">
-<h1><code class="docutils literal notranslate"><span class="pre">espressodb.base</span></code><a class="headerlink" href="#espressodb-base" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="models.html"><code class="docutils literal notranslate"><span class="pre">models</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="models.html#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="models.html#details">Details</a></li>
-</ul>
-</li>
-</ul>
+  <div class="section" id="the-private-views">
+<h1>The private views<a class="headerlink" href="#the-private-views" title="Permalink to this headline">¶</a></h1>
+<p>By default, views you create are public – any user who has access to the address where the web page is launched, is able to see the content.
+It is also possible to require the user to be logged in (and have specified permissions) to see views.</p>
+<p>Since you have just created the database, there is no user specified.
+You can create a new user by running</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</pre></div>
+</div>
+<p>This information is stored (encrypted) in the database <code class="docutils literal notranslate"><span class="pre">my_project.sqlite</span></code>.</p>
+<p>Once you have logged in, you will be able to access two more pages:</p>
+<p><img alt="The login view" src="../../_images/example-admin-links.png" /></p>
+<ol class="simple">
+<li><p>The notifications page: <a class="reference external" href="http://127.0.0.1:8000/notifications/">http://127.0.0.1:8000/notifications/</a></p></li>
+<li><p>And the admin pages: <a class="reference external" href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a></p></li>
+</ol>
+<p>Both pages are present by default once you create your project with EspressoDB.</p>
+<div class="section" id="the-notifications-page">
+<h2>The notifications page<a class="headerlink" href="#the-notifications-page" title="Permalink to this headline">¶</a></h2>
+<p><img alt="The home page" src="../../_images/example-notifications.png" /></p>
+<p>The notifications page works similarly to Python’s <code class="docutils literal notranslate"><span class="pre">logging</span></code> module.
+You can create a notifier instance and directly log messages to the database</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">espressodb.notifications</span> <span class="kn">import</span> <span class="n">get_notifier</span>
+
+<span class="n">NOTIFIER</span> <span class="o">=</span> <span class="n">get_notifier</span><span class="p">()</span>
+
+<span class="n">NOTIFIER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which can be viewed on the notifications page.
+Different to logging you can also specify groups which are allowed to see this message – a user not present in this group will not be able to see them.</p>
+<p>For more informations, see the <a class="reference internal" href="../../features/notifications.html"><span class="doc">the notification doc</span></a>.</p>
+</div>
+<div class="section" id="the-admin-pages">
+<h2>The admin pages<a class="headerlink" href="#the-admin-pages" title="Permalink to this headline">¶</a></h2>
+<p><img alt="The home page" src="../../_images/example-admin-view.png" /></p>
+<p>As the name suggests, the admin pages have full management control over all other pages <a class="reference internal" href="../../advanced/security.html"><span class="doc">(unless you restrict your database access)</span></a>.
+You can search, add, change and delete existing entries from this page.
+By default, all models specified in your <code class="docutils literal notranslate"><span class="pre">PROJECT_APPS</span></code> will be listed here.</p>
+<p><img alt="The home page" src="../../_images/example-admin-notifications.png" /></p>
 </div>
 </div>
 
@@ -224,10 +256,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="models.html" class="btn btn-neutral float-right" title="models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="external-scripts.html" class="btn btn-neutral float-right" title="Using your project in external modules" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral float-left" title="API Reference of EspressoDB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="public-views.html" class="btn btn-neutral float-left" title="The public views" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

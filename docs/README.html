@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="How to use EspressoDB" href="usage.html" />
+    <link rel="next" title="How to use EspressoDB" href="Usage.html" />
     <link rel="prev" title="Welcome to EspressoDB’s documentation!" href="index.html" /> 
 </head>
 
@@ -84,21 +84,50 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">EspressoDB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install">Install</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-does-espressodb-provide">What does EspressoDB provide?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-install-it">How to install it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-s-the-story-behind-it">What’s the story behind it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#who-is-responsible-for-it">Who is responsible for it?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">How to use EspressoDB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#tl-dr">TL;DR</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#details">Details</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#start-a-project">Start a project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#create-the-database-and-tables">Create the database and tables</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#create-a-new-app">Create a new app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#using-your-models-in-external-modules">Using your models in external modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Usage.html">How to use EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Usage.html#tl-dr">TL;DR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Usage.html#details">Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#install-espressodb">Install EspressoDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#start-a-project">Start a project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#configure-your-project">Configure your project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#create-or-update-the-database">Create or update the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#launch-a-local-web-app">Launch a local web app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#create-a-new-app">Create a new app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Usage.html#install-your-project-locally">Install your project locally</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example/index.html">The example project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="example/project-viewcase/index.html">What can I do?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/install.html">Install the project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/public-views.html">The public views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/private-views.html">The private views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/external-scripts.html">Using your project in external modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="example/project-creation/index.html">How do I set up the example project myself?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="example/project-creation/project-creation.html">How do I set up the example project myself?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="features/index.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="features/base.html">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/documentation.html">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/management.html">Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="features/notifications.html">The notifications module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced/index.html">Advanced Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="advanced/security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="advanced/web-accessability.html">How to set up a server which can be seen by others</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference of EspressoDB</a><ul>
@@ -174,19 +203,64 @@
             
   <div class="section" id="espressodb">
 <h1>EspressoDB<a class="headerlink" href="#espressodb" title="Permalink to this headline">¶</a></h1>
-<p>Science database interface using <a class="reference external" href="https://docs.djangoproject.com/en/2.2/intro/tutorial01/">Django</a> as the content manager.</p>
-<div class="section" id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="install">
-<h2>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
-<p>Install via pip</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="o">[</span>--user<span class="o">]</span> <span class="o">[</span>-e<span class="o">]</span> .
+<p>EspressoDB is a Python framework designed to organize (relational) data without loosing flexibility.
+It’s objective is to be intuitve and fast.</p>
+<p>More specifically, EspressoDB is build on top of the Object-Relational Mapping web framework <a class="reference external" href="https://docs.djangoproject.com">Django</a> and adds additional convenience functionalities to easily set up your project.</p>
+<div class="section" id="what-does-espressodb-provide">
+<h2>What does EspressoDB provide?<a class="headerlink" href="#what-does-espressodb-provide" title="Permalink to this headline">¶</a></h2>
+<p>EspressoDB provides an easy to use database interface which helps you to make educated decisions fast.</p>
+<p>Once you have created your Python project (e.g., <code class="docutils literal notranslate"><span class="pre">my_project</span></code>) with EspressoDB</p>
+<ul>
+<li><p>you can use it in all your Python apps to query your data. For example,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">my_project.hamiltonian.models</span> <span class="kn">import</span> <span class="n">Contact</span> <span class="k">as</span> <span class="n">ContactHamiltonian</span>
+
+<span class="c1"># Ask the database for specific entries</span>
+<span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">ContactHamiltonian</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">n_sites</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+<span class="c1"># Use class methods for an intuitive interface</span>
+<span class="c1">## Print a formatted summary of the table entry</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">)</span>
+
+<span class="c1">## Allocate an actual matrix for given entry and use it for computations</span>
+<span class="n">eigs</span><span class="p">,</span> <span class="n">vecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">hamiltonian</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Instances of a <code class="docutils literal notranslate"><span class="pre">models</span></code> class are regular classes in Python.
+You can provide additional class methods for convenience.
+Also, they know how to talk to the database, e.g., you can query (read) and update (write) your data to a central database.</p>
+</li>
+<li><p>you can generate web-views which summarize your tables and data.
+<img alt="Docpage example" src="_images/webview-example.png" />
+Because the webpages use a Python API as well, this means that you can completely customize views with code you have already developed.
+E.g., you can automate plots and display summaries in your browser.
+If you want to, you can also make your web app public (with different layers of accessibility) and share results with others.</p></li>
+</ul>
+<p>We provide further examples of features in the <a class="reference internal" href="features/index.html"><span class="doc">features section</span></a> and provide a specific implementation in the <a class="reference internal" href="example/index.html"><span class="doc">example section</span></a>.</p>
 </div>
-<div class="section" id="authors">
-<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-install-it">
+<h2>How to install it?<a class="headerlink" href="#how-to-install-it" title="Permalink to this headline">¶</a></h2>
+<p>EspressoDB can be installed via pip</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="o">[</span>--user<span class="o">]</span> espressodb
+</pre></div>
+</div>
+<p>For more details, see also the <a class="reference internal" href="Usage.html"><span class="doc">How to use EspressoDB guide</span></a>.</p>
+</div>
+<div class="section" id="what-s-the-story-behind-it">
+<h2>What’s the story behind it?<a class="headerlink" href="#what-s-the-story-behind-it" title="Permalink to this headline">¶</a></h2>
+<p>EspressoDB was developed when we created <a class="reference external" href="https://www.github.com/callat-qcd/lattedb">LatteDB</a> – a database for organizing Lattice Quantum Chromodynamics research.
+We intended to create a database for several purposes, e.g. to optimize the scheduling of architecture dependent many-node jobs and to help in the eventual analysis process.
+For this reason we started to abstract our thinking of how to organize physics objects.</p>
+<p>It was the goal to have easily sharable and completely reproducible snapshots of our workflow, while being flexible and not restricting ourselves too much – in the end science is full of surprises.
+The challenge we encountered where</p>
+<ol class="simple">
+<li><p>How can we program a table structure which can be easily extended in the future?</p></li>
+<li><p>How do we write a database such that users not familiar with the database concept can start using this tool with minimal effort?</p></li>
+</ol>
+<p>The core module of LatteDB, EspressoDB, is trying to address those challenges.</p>
+</div>
+<div class="section" id="who-is-responsible-for-it">
+<h2>Who is responsible for it?<a class="headerlink" href="#who-is-responsible-for-it" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/cchang5">&#64;cchang5</a></p></li>
 <li><p><a class="reference external" href="https://github.com/ckoerber">&#64;ckoerber</a></p></li>
@@ -202,7 +276,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="usage.html" class="btn btn-neutral float-right" title="How to use EspressoDB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Usage.html" class="btn btn-neutral float-right" title="How to use EspressoDB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="Welcome to EspressoDB’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
