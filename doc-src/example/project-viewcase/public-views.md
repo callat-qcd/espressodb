@@ -19,7 +19,7 @@ Whenever you create a new app, EspressoDB directly scans your app and adds docum
 The only view which is specifically implemented for the project is [the Hamiltonian status page](#the-hamiltonian-status-page).
 
 All of the pages are completely customizable.
-We explain [how to update pages](../../devel/index) in the developers section for that.
+We explain [how to update pages](../../advanced/index) in the developers section for that.
 
 On the bottom of the page, the current version of EspressoDB and the repo is displayed.
 

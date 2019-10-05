@@ -17,5 +17,5 @@ Welcome to the documentation of `EspressoDB` -- an open source Python package fo
    Usage
    example/index
    features/index
-   devel/index
+   advanced/index
    api/index

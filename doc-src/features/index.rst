@@ -6,7 +6,7 @@ In this sense, everything which is present in Django, it is also present in Espr
 To get started fast, even if you do not have much background with Object-Relational Mapping and specifically Django, we decided to streamline processes as much as possible.
 
 This feature summary rather targets developers which are not familiar with Django.
-We point more experienced users to the :doc:`../devel/index` section.
+We point more experienced users to the :doc:`../advanced/index` section.
 
 .. toctree::
     :glob:
