@@ -41,7 +41,7 @@ For more informations, see the [the notification doc](../../features/notificatio
 
 ![The home page](../../_static/example-admin-view.png)
 
-As the name suggests, the admin pages have full management control over all other pages [(unless you restrict your database access)](../../advanced/web-accessability).
+As the name suggests, the admin pages have full management control over all other pages [(unless you restrict your database access)](../../advanced/security).
 You can search, add, change and delete existing entries from this page.
 By default, all models specified in your `PROJECT_APPS` will be listed here.
 
