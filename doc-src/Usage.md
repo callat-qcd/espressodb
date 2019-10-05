@@ -35,6 +35,8 @@ It provides a wrapper interface for [`djangos` project creation](https://docs.dj
     pip install [--user] [-e] .
     ```
 
+For more details how to customize your project, take a look at the [how to create the example project](example/project-creation/index) guide.
+
 ## Details
 
 ### Install EspressoDB
