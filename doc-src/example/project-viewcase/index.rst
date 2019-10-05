@@ -14,5 +14,4 @@ In this section,
     install
     public-views
     private-views
-    install-script
     external-scripts
