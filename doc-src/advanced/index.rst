@@ -1,4 +1,4 @@
-Developer Notes
+Advanced Notes
 ====================================
 
 .. toctree::
