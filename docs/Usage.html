@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The example project" href="example/index.html" />
+    <link rel="next" title="API Reference of EspressoDB" href="api/index.html" />
     <link rel="prev" title="EspressoDB" href="README.html" /> 
 </head>
 
@@ -84,50 +84,21 @@
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="README.html">EspressoDB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="README.html#what-does-espressodb-provide">What does EspressoDB provide?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#how-to-install-it">How to install it?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#what-s-the-story-behind-it">What’s the story behind it?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#who-is-responsible-for-it">Who is responsible for it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#install">Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="README.html#authors">Authors</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">How to use EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tl-dr">TL;DR</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#details">Details</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#install-espressodb">Install EspressoDB</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#start-a-project">Start a project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#configure-your-project">Configure your project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#create-or-update-the-database">Create or update the database</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#launch-a-local-web-app">Launch a local web app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-the-database-and-tables">Create the database and tables</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#create-a-new-app">Create a new app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#install-your-project-locally">Install your project locally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-your-models-in-external-modules">Using your models in external modules</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="example/index.html">The example project</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="example/project-viewcase/index.html">What can I do?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/install.html">Install the project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/public-views.html">The public views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/private-views.html">The private views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="example/project-viewcase/external-scripts.html">Using your project in external modules</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="example/project-creation/index.html">How do I set up the example project myself?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="example/project-creation/project-creation.html">How do I set up the example project myself?</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="features/index.html">Features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="features/base.html">Base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="features/documentation.html">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="features/management.html">Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="features/notifications.html">The notifications module</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="advanced/index.html">Advanced Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="advanced/security.html">Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="advanced/web-accessability.html">How to set up a server which can be seen by others</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference of EspressoDB</a><ul>
@@ -188,7 +159,7 @@
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/Usage.md.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/usage.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -203,67 +174,34 @@
             
   <div class="section" id="how-to-use-espressodb">
 <h1>How to use EspressoDB<a class="headerlink" href="#how-to-use-espressodb" title="Permalink to this headline">¶</a></h1>
-<p>This section explains how to use EspressoDB to create projects and apps.
-It provides a wrapper interface for <a class="reference external" href="https://docs.djangoproject.com/en/2.2/intro/tutorial01/#creating-a-project"><code class="docutils literal notranslate"><span class="pre">djangos</span></code> project creation</a> which streamlines the creation process.</p>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>This section explains how to use EspressoDB to create apps.
+It provides a wrapper interface for <a class="reference external" href="https://docs.djangoproject.com/en/2.2/intro/tutorial01/#creating-a-project"><code class="docutils literal notranslate"><span class="pre">djangos</span></code> project creation</a> which automatically installs EspressoDB apps.</p>
+</div>
 <div class="section" id="tl-dr">
 <h2>TL;DR<a class="headerlink" href="#tl-dr" title="Permalink to this headline">¶</a></h2>
-<ol>
-<li><p><a class="reference external" href="#install-espressodb">Install EspressoDB</a></p></li>
-<li><p><a class="reference external" href="#start-a-project">Create a new project</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>espressodb startproject my_project
-</pre></div>
-</div>
-<p>The following commands must be run in the project root directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> my_project
-</pre></div>
-</div>
+<ol class="simple">
+<li><p>Create a new project: <code class="docutils literal notranslate"><span class="pre">espressodb</span> <span class="pre">startproject</span> <span class="pre">my_project;</span> <span class="pre">cd</span> <span class="pre">my_project</span></code></p>
+<ul class="simple">
+<li><p>(Optional) Configure the project infos in <code class="docutils literal notranslate"><span class="pre">db-config.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code></p></li>
+<li><p>(Optional) Create a new app <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">startapp</span> <span class="pre">my_app</span></code> and configure it and create new migrations
+<code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">makemigrations</span></code></p></li>
+</ul>
 </li>
-<li><p><em>(Optional)</em> <a class="reference external" href="#configure-your-project">Update the configurations of the project</a> in <code class="docutils literal notranslate"><span class="pre">db-config.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code></p></li>
-<li><p><em>(Optional)</em> <a class="reference external" href="#create-a-new-app">Create a new app</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py startapp my_app
-</pre></div>
-</div>
-<p>configure it and <a class="reference external" href="#create-migrations">create new migrations</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations
-</pre></div>
-</div>
-</li>
-<li><p><a class="reference external" href="#migrate-changes">Create or update the tables</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py migrate
-</pre></div>
-</div>
-</li>
-<li><p><em>(Optional)</em> <a class="reference external" href="#launch-a-local-web-app">Launch a local web app</a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py runserver
-</pre></div>
-</div>
-</li>
-<li><p><em>(Optional)</em> <a class="reference external" href="#install-your-project-locally">Install your project locally</a> to use it in other modules</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="p">[</span><span class="o">--</span><span class="n">user</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="o">.</span>
-</pre></div>
-</div>
+<li><p>Migrate the tables to the database <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">migrate</span></code></p>
+<ul class="simple">
+<li><p>(Optional) Launch a local web server <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span></code></p></li>
+<li><p>(Optional) Install your project locally  <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">-e</span> <span class="pre">.</span></code></p></li>
+</ul>
 </li>
 </ol>
-<p>For more details how to customize your project, take a look at the <a class="reference internal" href="example/project-creation/index.html"><span class="doc">how to create the example project</span></a> guide.</p>
 </div>
 <div class="section" id="details">
 <h2>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="install-espressodb">
-<h3>Install EspressoDB<a class="headerlink" href="#install-espressodb" title="Permalink to this headline">¶</a></h3>
-<p>You can pip install this package by running</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install <span class="o">[</span>--user<span class="o">]</span> espressodb
-</pre></div>
-</div>
-<p>You can also install the project from source</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://www.github.com/callat-qcd/espressodb.git
-<span class="nb">cd</span> espressodb
-pip install <span class="o">[</span>--user<span class="o">]</span> <span class="o">[</span>-e<span class="o">]</span> .
-</pre></div>
-</div>
-</div>
 <div class="section" id="start-a-project">
 <h3>Start a project<a class="headerlink" href="#start-a-project" title="Permalink to this headline">¶</a></h3>
-<p>A project is the core module which manages the settings for your (future) tables like connections to the database, security levels and so on.</p>
+<p>A project is the root module which manages the settings for your (future) tables like connections to the database, security levels and so on.</p>
 <p>You can initialize an empty project by running</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>espressodb startproject my_project
 </pre></div>
@@ -283,87 +221,49 @@ pip install <span class="o">[</span>--user<span class="o">]</span> <span class="
         <span class="p">|</span>-- wsgi.py
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>EspressoDB makes use of the project structure by, e.g., finding import paths and static files.
-Thus, unless you know what you are doing, it is recommended to stick to this folder layout.</p>
-</div></div>
-<div class="section" id="configure-your-project">
-<h3>Configure your project<a class="headerlink" href="#configure-your-project" title="Permalink to this headline">¶</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">db-config.yaml</span></code> are convenience files for easy updates (without accidentally committing secret passwords).
+<p>The <code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code> and <code class="docutils literal notranslate"><span class="pre">db-config.yaml</span></code> are convenience files which are imported in the <code class="docutils literal notranslate"><span class="pre">settings.py</span></code> file.
 Both of them may contain passwords (<code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span></code> in the <code class="docutils literal notranslate"><span class="pre">settings</span></code> and database <code class="docutils literal notranslate"><span class="pre">PASSWORD</span></code> in the db config) and thus you should pay attention if or with whom you want to share them.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">db-config.yaml</span></code> provides the <code class="docutils literal notranslate"><span class="pre">default</span></code> database option</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ENGINE</span><span class="p">:</span> <span class="n">django</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">sqlite3</span>
-<span class="n">NAME</span><span class="p">:</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">my_project</span><span class="o">/</span><span class="n">db</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span>
-</pre></div>
+<p>The <code class="docutils literal notranslate"><span class="pre">db-config.yaml</span></code> provides the <code class="docutils literal notranslate"><span class="pre">default</span></code> database option.
+As a start, it uses a <code class="docutils literal notranslate"><span class="pre">sqlite</span></code> database.
+You can specify different options like a <code class="docutils literal notranslate"><span class="pre">postgres</span></code> model in here (see also the <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/settings/#databases">docs</a>).</p>
 </div>
-<p>The first option specifies the database backend.
-As default, it uses the file based <code class="docutils literal notranslate"><span class="pre">sqlite</span></code> database.
-For this case, the name points to the absolute path of the file (which allows interface for external apps).
-You can specify different database options like a <code class="docutils literal notranslate"><span class="pre">postgres</span></code> model in this file (see also the <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/settings/#databases">docs</a>).</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code> specifies the database encryption, which [apps](Create a new app) your projects will use and, in case you want to, how you want to run the web server</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SECRET_KEY</span><span class="p">:</span> <span class="s2">&quot;Sup3r_compl1cated-P4ssw0rd!&quot;</span>
-<span class="n">PROJECT_APPS</span><span class="p">:</span> <span class="p">[]</span>
-<span class="n">ALLOWED_HOSTS</span><span class="p">:</span> <span class="p">[]</span>
-<span class="n">DEBUG</span><span class="p">:</span> <span class="kc">True</span>
-</pre></div>
-</div>
-<p>Both files are needed and eventually imported by <code class="docutils literal notranslate"><span class="pre">my_project/my_project/config/settings.py</span></code>.
-If you want to learn more or have different setups, feel free to adjust this file with help of the <a class="reference external" href="https://docs.djangoproject.com/en/dev/ref/settings/">settings documentation</a>.</p>
-</div>
-<div class="section" id="create-or-update-the-database">
-<h3>Create or update the database<a class="headerlink" href="#create-or-update-the-database" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="create-the-database-and-tables">
+<h3>Create the database and tables<a class="headerlink" href="#create-the-database-and-tables" title="Permalink to this headline">¶</a></h3>
 <p>After you have created a project for the first time, you have to initialize your tables.
 Django provides an interface to manage the communication with the database without you running any SQL commands directly.
-Specifically, you can program Python classes, which specify a given table layout, and know how to talk to a database.
-This concept is called Object-Relational Mapping (ORM).
+Specifically, you can program python classes, which specify a given table layout, and know how to talk to a database.
 These classes are called models and have a one-to-one correspondence to tables within the database.
 By default django provides a few basic models like the <code class="docutils literal notranslate"><span class="pre">User</span></code> class.</p>
 <p>Updating the database with new tables or modifying old ones is a crucial step.
-If the Python backend encounters tables which do not match what the user specified, this could cause the ORM to fail.
-To ensure table and code updates are executed in a consistent way django, implements the following two-step procedure:</p>
-<div class="section" id="create-migrations">
-<h4>Create migrations<a class="headerlink" href="#create-migrations" title="Permalink to this headline">¶</a></h4>
-<p>Once the Python models have been updated, django identifies a strategy how the existing tables within the DB must be adjusted to match the new specifications.
-E.g., if a column was added, how to populate old entries which did not have this column yet.
-If a change is implemented which needs user input, django will ask you how to proceed.
-This update strategy will be summarized in a <code class="docutils literal notranslate"><span class="pre">migration</span></code> file.
-You start this procedure by running</p>
+If the python backend encounters tables which do not match what the user specified, this could cause the ORM to fail.
+To ensure table and code updates are executed in a consistent way django implements the following two-step procedure:</p>
+<ol class="simple">
+<li><p>Once the python models have been updated, django identifies a strategy how the existing tables within the DB must be adjusted to match the new specifications.
+E.g., if a column was added, how to populate old entries which did not have this column.
+In this step, the database is not touched yet and <code class="docutils literal notranslate"><span class="pre">migration</span></code> files are created.
+You start this procedure by running</p></li>
+</ol>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
 </pre></div>
 </div>
-<p>In this step, the database is not modified.
-So if this step fails, nothing crucial has happened yet.
+<p>If this fails, nothing crucial has happend yet.
 However you should make sure that before continuing, everything works as expected.</p>
-</div>
-<div class="section" id="migrate-changes">
-<h4>Migrate changes<a class="headerlink" href="#migrate-changes" title="Permalink to this headline">¶</a></h4>
-<p>To update the database, you have to <code class="docutils literal notranslate"><span class="pre">migrate</span></code> changes.
+<ol class="simple">
+<li><p>To update the database, you have to <code class="docutils literal notranslate"><span class="pre">migrate</span></code> changes.
 This applies the specifications in the <code class="docutils literal notranslate"><span class="pre">migration</span></code> files and alters your database.
-To apply the migrations run</p>
+To apply the migrations run</p></li>
+</ol>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py migrate
 </pre></div>
 </div>
-<p>After successfully migrating new or updated models, you are good to go and can for example <a class="reference external" href="#launch-a-local-web-app">launch a web app</a>.</p>
-<p>For further <a class="reference external" href="https://docs.djangoproject.com/en/dev/topics/migrations/">migration strategies, see also the django docs</a>.</p>
-</div>
-</div>
-<div class="section" id="launch-a-local-web-app">
-<h3>Launch a local web app<a class="headerlink" href="#launch-a-local-web-app" title="Permalink to this headline">¶</a></h3>
-<p>Django provides an easy interface to launch a local web server.
-Once you project is set up, you can run</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+<p>After successfully migrating new or updated models, you can start using your project by, e.g., launching the web interface:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py runserver
 </pre></div>
 </div>
-<p>to start a local lightweight server which runs by default on localhost: <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.
-EspressoDB provides default views, meaning once your tables have been successfully migrated, you can directly see your project home page.
-Everyone who has access to this port on your machine can access the launched web page.
-This means, by default, you are the only one able to see it.</p>
 </div>
 <div class="section" id="create-a-new-app">
 <h3>Create a new app<a class="headerlink" href="#create-a-new-app" title="Permalink to this headline">¶</a></h3>
-<p>Apps are submodules within your project and implement new tables and other features.
-To start a new app, run the following command</p>
+<p>To start a new app, the sub module for new tables, run the following command</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py startapp my_app
 </pre></div>
 </div>
@@ -381,33 +281,22 @@ To start a new app, run the following command</p>
         <span class="p">|</span>-- __init__.py
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>
-    EspressoDB makes use of the project and app structure by, e.g., finding import paths and static files.
-    Thus, unless you know what you are doing, it is recommended to stick to this folder layout.
-</p>
-</div><p>To let your project know that it also has to include the new app, change the <code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code> to also include</p>
+<p>To let your project know that it also has to run the new app, change the <code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code> to also include</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROJECT_APPS</span><span class="p">:</span>
     <span class="o">-</span> <span class="n">my_project</span><span class="o">.</span><span class="n">my_app</span>
 </pre></div>
 </div>
 <p>Because the project is empty, nothing significant has changed thus far.</p>
-<p>To implement your first table, you must adjust the app models.
-E.g., to create a table which works with the EspressoDB default features, update <code class="docutils literal notranslate"><span class="pre">my_project/my_app/models.py</span></code> to</p>
+<p>To implement your first table, you must adjust the models file.
+E.g., to create a table which works with the <code class="docutils literal notranslate"><span class="pre">EspressoDB</span></code> default features, update <code class="docutils literal notranslate"><span class="pre">my_app/models.py</span></code> to</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">espressodb.base.models</span> <span class="kn">import</span> <span class="n">Base</span>
 
 <span class="k">class</span> <span class="nc">MyTable</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="k">pass</span>
 </pre></div>
 </div>
-<p>This implements a new model with the default columns provided by the EspressoDB base model (e.g., <code class="docutils literal notranslate"><span class="pre">user</span></code>, <code class="docutils literal notranslate"><span class="pre">last_modified</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code>).</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>
-    Note that you have to replace <code>models.Model</code> with EspressoDB's <code>Base</code>. <code>Base</code> derives from django's default <code>models.Model</code> but provides further features needed by EspressoDB.
-</p>
-</div><p>To update your database you have to (again) <a class="reference external" href="#create-or-update-the-database">create and migrate <code class="docutils literal notranslate"><span class="pre">migrations</span></code></a>.</p>
+<p>This implements a new model with the default columns provided by the <code class="docutils literal notranslate"><span class="pre">EspressoDB</span></code> base model (e.g., <code class="docutils literal notranslate"><span class="pre">user</span></code>, <code class="docutils literal notranslate"><span class="pre">last_modified</span></code>,  <code class="docutils literal notranslate"><span class="pre">tag</span></code>, <code class="docutils literal notranslate"><span class="pre">type</span></code>, <code class="docutils literal notranslate"><span class="pre">misc</span></code>).</p>
+<p>To update your database you have to (again) create and migrate <code class="docutils literal notranslate"><span class="pre">migrations</span></code>.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py makemigrations
 python manage.py migrate
 </pre></div>
@@ -418,17 +307,25 @@ python manage.py migrate
 </div>
 <p>and visit <a class="reference external" href="http://127.0.0.1:8000/documentation/my_app/">http://127.0.0.1:8000/documentation/my_app/</a>.</p>
 <p>For implementing more sophisticated tables, see also the <a class="reference external" href="https://docs.djangoproject.com/en/2.2/topics/db/models/">django model documentation</a>.</p>
+<blockquote>
+<div><blockquote>
+<div><blockquote>
+<div><p>Note that you have to replace <code class="docutils literal notranslate"><span class="pre">models.Model</span></code> with <code class="docutils literal notranslate"><span class="pre">EspressoDB</span></code>s <code class="docutils literal notranslate"><span class="pre">Base</span></code>.
+<code class="docutils literal notranslate"><span class="pre">Base</span></code> derives from django’s default <code class="docutils literal notranslate"><span class="pre">models.Model</span></code> but provides further features needed by <code class="docutils literal notranslate"><span class="pre">EspressoDB</span></code>.</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
 </div>
-<div class="section" id="install-your-project-locally">
-<h3>Install your project locally<a class="headerlink" href="#install-your-project-locally" title="Permalink to this headline">¶</a></h3>
-<p>The easiest way to let your other Python modules use these tables is to install your project as a pip module (not on Python package index, just in your local path).
-To do so, take a look at <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <a class="reference external" href="https://docs.python.org/3.7/distutils/setupscript.html">adjust it to your means</a> and run</p>
+<div class="section" id="using-your-models-in-external-modules">
+<h3>Using your models in external modules<a class="headerlink" href="#using-your-models-in-external-modules" title="Permalink to this headline">¶</a></h3>
+<p>The easiest way to let your other python modules use these tables is to install your project as a pip moduel (not on a python index page, just in your local path).
+To do so take a look at <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, adjust it to your means and run</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">[</span><span class="o">--</span><span class="n">user</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">]</span> <span class="o">.</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">[-e]</span></code> options symlinks the install against this folder and can be useful incase you want to continue updating this module, e.g., for development purposes.</p>
-<p>That’s it.</p>
-<p>You can now use your tables in any Python program like</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">[-e]</span></code> options symlinks the install against this folder and can be useful incase you want to continue updating this module, e.g., for development purposes.
+That’s it.
+You can now use your tables in any python program like</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">my_project.my_app.models</span> <span class="kn">import</span> <span class="n">MyTable</span>
 
 <span class="n">all_entries</span> <span class="o">=</span> <span class="n">MyTable</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -450,7 +347,7 @@ To do so, take a look at <code class="docutils literal notranslate"><span class=
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="example/index.html" class="btn btn-neutral float-right" title="The example project" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api/index.html" class="btn btn-neutral float-right" title="API Reference of EspressoDB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="README.html" class="btn btn-neutral float-left" title="EspressoDB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
