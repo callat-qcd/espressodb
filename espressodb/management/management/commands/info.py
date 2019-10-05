@@ -1,7 +1,8 @@
 """Script to completely whipe migrations.
 """
 from django.core.management.base import BaseCommand
-from espressodb.espressodb.utilities.version import get_db_info, get_repo_version
+
+from espressodb.management.utilities.version import get_db_info, get_repo_version
 
 
 class Command(BaseCommand):
