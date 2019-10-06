@@ -1,4 +1,4 @@
-"""Overrides default startapp command to match new folder layout
+"""Overrides default startproject command to match new folder layout
 """
 import os
 import logging

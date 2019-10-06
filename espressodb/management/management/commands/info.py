@@ -1,4 +1,4 @@
-"""Script to completely whipe migrations.
+"""Script to return version info.
 """
 from django.core.management.base import BaseCommand
 
