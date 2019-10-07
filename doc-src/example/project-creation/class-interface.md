@@ -42,9 +42,15 @@ Since we always expect to have the same mass, this mass is not a column but a in
 
 Also note that the `spacing` and `c` column values are cast to a float because they were stored as a `DecimalField`.
 
-With this interface, you can now run your code as
+To test if it works, start an IPython shell
+```bash
+python manage.py shell
+```
+and test run following code
 ```python
-h = Contact.objects.first()
+[1] from my_project.hamiltonian.models import Contact
 
-h.matrix # this is a numpy array
+[2] h = Contact.objects.first()
+
+[3] h.matrix # this is a numpy array
 ```
