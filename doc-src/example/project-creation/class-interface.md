@@ -54,3 +54,10 @@ and test run following code
 
 [3] h.matrix # this is a numpy array
 ```
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>
+    Note that since we only have modified the Python model for the table but not the actual table (e.g., columns), we do not have to migrate changes.
+</p>
+</div>
