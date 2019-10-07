@@ -61,3 +61,33 @@ Running migrations:
 ```
 
 ## Updating the run script
+
+We now want to extend the script to export eigenvalues in case computations are non-existent or incomplete.
+Non-existent is defined by: "We have no eigenvalues" for a given Hamiltonian, incomplete means: "We find less eigenvalues then expected".
+
+This logic is implemented by adjusting the `main` function in `add_data.py`:
+```
+def main():
+
+    ...
+
+    compute_entries = True
+
+    eigenvalues = Eigenvalue.objects.filter(hamiltonian=hamiltonian)
+
+    if eigenvalues.count() == n_sites:
+        compute_entries = False
+    else:
+        print("  Eigenvalues incomplete. Deleting old computation.")
+        eigenvalues.delete()
+
+    if compute_entries:
+        print("  Computing eigenvalues")
+        eigs, _ = np.linalg.eigh(hamiltonian.matrix)
+        print("  Preparing export of eigenvalues")
+        for n_level, value in enumerate(eigs):
+            Eigenvalue.objects.create(hamiltonian=hamiltonian, n_level=n_level, value=value)
+
+    print("Done")
+```
+Running this script will compute all the eigenvalues.
