@@ -41,12 +41,18 @@ h.eigenvalue_set.all()
 ```
 would return of all eigenvalues associated with the hamiltonian.
 
+The `on_delete` specifies what happens if a hamiltonian associated with eigenvalues is deleted.
+In particularly, the `models.CASCADE` means if you delete a hamiltonian you also delete all associated eigenvalues.
+
 Since now the table structure was modified, changes need to be migrated
 ```bash
 $ python manage.py makemigrations
 Migrations for 'hamiltonian':
   my_project/hamiltonian/migrations/0002_eigenvalue.py
     - Create model Eigenvalue
+```
+and
+```bash
 $ python manage.py migrate
 Operations to perform:
   Apply all migrations: admin, auth, contenttypes, hamiltonian, notifications, sessions
