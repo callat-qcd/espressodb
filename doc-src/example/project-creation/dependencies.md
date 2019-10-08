@@ -67,26 +67,31 @@ Non-existent is defined by: "We have no eigenvalues" for a given Hamiltonian, in
 
 This logic is implemented by adjusting the `main` function in `add_data.py`:
 ```
+...
+
+from my_project.hamiltonian.models import Eigenvalue
+
 def main():
 
-    ...
+    for values in product(*RANGES.values()):
+        ...
 
-    compute_entries = True
+        compute_entries = True
 
-    eigenvalues = Eigenvalue.objects.filter(hamiltonian=hamiltonian)
+        eigenvalues = Eigenvalue.objects.filter(hamiltonian=hamiltonian)
 
-    if eigenvalues.count() == n_sites:
-        compute_entries = False
-    else:
-        print("  Eigenvalues incomplete. Deleting old computation.")
-        eigenvalues.delete()
+        if eigenvalues.count() == n_sites:
+            compute_entries = False
+        else:
+            print("  Eigenvalues incomplete. Deleting old computation.")
+            eigenvalues.delete()
 
-    if compute_entries:
-        print("  Computing eigenvalues")
-        eigs, _ = np.linalg.eigh(hamiltonian.matrix)
-        print("  Preparing export of eigenvalues")
-        for n_level, value in enumerate(eigs):
-            Eigenvalue.objects.create(hamiltonian=hamiltonian, n_level=n_level, value=value)
+        if compute_entries:
+            print("  Computing eigenvalues")
+            eigs, _ = np.linalg.eigh(hamiltonian.matrix)
+            print("  Preparing export of eigenvalues")
+            for n_level, value in enumerate(eigs):
+                Eigenvalue.objects.create(hamiltonian=hamiltonian, n_level=n_level, value=value)
 
     print("Done")
 ```
