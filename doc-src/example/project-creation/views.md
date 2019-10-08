@@ -51,12 +51,14 @@ Last but not least, EspressoDB comes with a few default css and javascript packa
 
 A nice feature of the Python backend is that you can directly export your plots to a homepage.
 Whenever new data is added, your plot is dynamically updated.
+So a possible plot page for this project would be a status view which summaries for which Hamiltonian all of the eigenvalues have been computed and which computations need to be repeated.
+
 It is possible to just use matplotlib, store images dynamically and display them in your view.
 In this example we have decided to use [Bokeh](https://bokeh.pydata.org/en/latest/) as it allows to have dynamic plots, which allow to, e.g., to zoomi, or use mouse over effects on the web view (without storing images in an intermediate step).
 
 To prepare the usage, you should install
 ```bash
-pip install pandas bokeh
+pip install bokeh
 ```
 It is good practice to place all dependencies in the project `requirements.txt` file as well.
 
@@ -121,3 +123,49 @@ E.g., when you visit [http://127.0.0.1:8000/hamiltonian/status/](http://127.0.0.
 By default, EspressoDB scans all your app directories and adds links to the navbar.
 Thus, you should now be able to obtain the following web view
 ![The new hamiltonian status view](../../_static/example-create-hamiltonian-status-1.png)
+
+
+### Preparing data
+
+Next we want to prepare data for the status view
+```python
+...
+
+from my_project.hamiltonian.models import Eigenvalue
+
+class HamiltonianStatusView(TemplateView):
+
+    ...
+
+    def prepare_data(self) -> "DataFrame":
+        hamiltonians = self.model.objects.all()
+
+        eigenvalues = Eigenvalue.objects.filter(hamiltonian__in=hamiltonians)
+
+        level_count = (
+            eigenvalues.to_dataframe(fieldnames=["hamiltonian__id", "n_level"])
+            .rename(columns={"hamiltonian__id": "id"})
+            .groupby(["id"])
+            .count()
+        )
+
+        df = (
+            hamiltonians.to_dataframe(fieldnames=["id", "spacing", "n_sites", "c"])
+            .set_index("id")
+            .join(level_count, on="id")
+        )
+
+        df["done"] = df["n_sites"] == df["n_level"]
+
+        df["color"] = "green"
+        df["color"] = df.color.where(df.done, "red")
+
+        return df
+```
+By default EspressoDB queries can be [converted to pandas DataFrames using django-pandas](https://github.com/chrisdev/django-pandas) this simplifies the logic of this code:
+1. We get all Hamiltonians for the specified `self.model`
+2. We find all eigenvalues associated with the Hamiltonians
+3. For each hamiltonian (id), we count the number of associated entries
+4. We join the count information with the Hamiltonian information
+5. We define that a job is done if the numbers of sites is the same as the numbers of eigenvalues
+6. We add a color column corresponding to the "done" status
