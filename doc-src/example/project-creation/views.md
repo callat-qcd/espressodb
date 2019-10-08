@@ -169,3 +169,126 @@ By default EspressoDB queries can be [converted to pandas DataFrames using djang
 4. We join the count information with the Hamiltonian information
 5. We define that a job is done if the numbers of sites is the same as the numbers of eigenvalues
 6. We add a color column corresponding to the "done" status
+
+### Preparing the plot
+Next we create a Bokeh grid plot within the status view class which will take the prepared DataFrame as input
+```python
+...
+
+from bokeh.plotting import figure
+
+class HamiltonianStatusView(TemplateView):
+
+    ...
+
+    @staticmethod
+    def prepare_figure(data: "DataFrame") -> "Figure":
+        fig = figure(
+            x_axis_location="above",
+            tools="hover",
+            tooltips=[
+                ("Paramaters", "spacing = @spacing{(0.3f)}, # sites = @n_sites"),
+                ("Count", "@n_level/@n_sites "),
+                ("Interaction", "c = @c "),
+            ],
+            width=600,
+            height=600,
+        )
+
+        fig.rect(
+            "spacing",
+            "n_sites",
+            width=0.09,
+            height=4.6,
+            source=data,
+            fill_color="color",
+            legend="done",
+        )
+
+        fig.xaxis.axis_label = "spacing [fm]"
+        fig.xaxis.axis_label_standoff = 10
+        fig.yaxis.axis_label = "# sites"
+        fig.yaxis.axis_label_standoff = 10
+
+        fig.outline_line_color = None
+        fig.grid.grid_line_color = None
+        fig.axis.axis_line_color = None
+        fig.axis.major_tick_line_color = None
+        fig.axis.minor_tick_line_color = None
+
+        fig.x_range.range_padding = 0.0
+        fig.y_range.range_padding = 0.0
+
+        return fig
+```
+
+### Wrapping things together
+To let the template know that we have created a plot, we need to pass the infromation to the context.
+Thus we have to update the previously written `get_context_data` method
+```python
+...
+
+from bokeh.embed import components
+from bokeh import __version__ as bokeh_version
+
+class HamiltonianStatusView(TemplateView):
+
+    model = ContactHamiltonian
+    template_name = "status.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        df = self.prepare_data()
+        fig = self.prepare_figure(df)
+        script, div = components(fig)
+
+        context["script"] = script
+        context["div"] = div
+        context["model"] = self.model
+        context["bokeh_version"] = bokeh_version
+
+        return context
+```
+The `bokeh.embed.components` transforms our figure into html and javascript objects which the webpage can render.
+Furthermore, we need the `bokeh_version` to ensure that your Python `bokeh` installation matches the Bokeh javascript version.
+
+Finally, we need to let the template know how to render the plot.
+The new `status.html` should look like this
+```html
+{% extends 'base.html' %}
+
+{% block head-extra %}
+<link href="https://cdn.pydata.org/bokeh/release/bokeh-{{bokeh_version}}.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-{{bokeh_version}}.min.css" rel="stylesheet" type="text/css">
+<script defer src="https://cdn.pydata.org/bokeh/release/bokeh-{{bokeh_version}}.min.js"></script>
+<script defer src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-{{bokeh_version}}.min.js"></script>
+<script defer src="https://cdn.pydata.org/bokeh/release/bokeh-tables-{{bokeh_version}}.min.js"></script>
+{% endblock%}
+
+{% block content %}
+<div class="jumbotron">
+    <h1><code>{{model}}</code> Status</h1>
+    <h5>This page summarizes the status of <code>{{model}}</code> computations</h2>
+    <p>
+        A job is considered done if, for given parameters, one has as many eigenvalues stored in the database as one has sites.
+    </p>
+</div>
+<div class="container">
+    <h1>Grid view of executed jobs</h1>
+    {{div|safe}}
+</div>
+<div class="container my-4">
+    <p>Feel free to visit the <a href="{% url 'admin:index' %}">admin page</a> and add or delete entries for eigenvalues or hamiltonians</p>
+    <p>Once entries are missing, you can rerun <code>add_data.py</code> to fill up this view again.</p>
+</div>
+{{script|safe}}
+{% endblock %}
+```
+In the `{% block head-extra %}`, we have loaded the CSS and javascript file version of Bokeh.
+We have decided to not included it ourselves (meaning on you machine), as this allows you to install any Bokeh version you like.
+But therefore they will be downloaded once you view this page.
+
+Furthermore, we have added the additional `|sage` template filter for `{{div|safe}}` and `{{script|safe}}`.
+This means that django should trust this source and actually execute html / javascript statements.
+Without that, the template variables would not be rendered and presented as raw code. 
