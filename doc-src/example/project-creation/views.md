@@ -291,4 +291,12 @@ But therefore they will be downloaded once you view this page.
 
 Furthermore, we have added the additional `|sage` template filter for `{{div|safe}}` and `{{script|safe}}`.
 This means that django should trust this source and actually execute html / javascript statements.
-Without that, the template variables would not be rendered and presented as raw code. 
+Without that, the template variables would not be rendered and presented as raw code.
+
+If you now visit the status page, you should either see a completely red or completely green status report, depending on if you have run the updated eigenvalues script
+![The new index page](../../_static/example-create-status-view-2.png)
+
+You can now play around and delete some hamiltonians or eigenvalues, e.g., from the admin page and rerun the computation script.
+
+### Summary
+The final source code for this example can also be found in the [EspressoDB repository](https://github.com/callat-qcd/espressodb/tree/master/example/my_project).
