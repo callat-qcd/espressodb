@@ -1,7 +1,7 @@
-espressodb.documentation
+espressodb.notifications
 ========================
 
-.. automodule:: espressodb.documentation
+.. automodule:: espressodb.notifications
     :members:
 
 .. toctree::

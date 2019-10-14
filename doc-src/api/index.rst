@@ -1,8 +1,13 @@
 API Reference of EspressoDB
 ====================================
 
+.. automodule:: espressodb
+
+
 .. toctree::
-   :glob:
+   :caption: Contents:
 
    base/index
    documentation/index
+   notifications/index
+   management/index

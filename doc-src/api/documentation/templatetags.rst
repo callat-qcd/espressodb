@@ -1,7 +1,5 @@
-``templatetags.documentation_extras``
-=====================================
+templatetags
+==================================
 
-.. automodule:: espressodb.documentation.templatetags.documentation_extras
+.. automodule:: espressodb.documentation.templatetags
     :members:
-    :undoc-members:
-    :show-inheritance:
