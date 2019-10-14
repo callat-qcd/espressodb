@@ -18,13 +18,13 @@
     </p>
 </div>
 <div class="container">
-{% if notification_list %}
+    {% if notification_list %}
     {% for notification in notification_list %}
-        {% render_notification notification hide_close=all %}
+    {% render_notification notification hide_close=all %}
     {% endfor %}
-{% else %}
+    {% else %}
     <p>There are no new notifications</p>
-{% endif %}
+    {% endif %}
 </div>
 {% if is_paginated %}
 <nav aria-label="Page navigation example">
@@ -41,8 +41,8 @@
         </li>
 
         {% if page_obj.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if all %}&all=True{% endif %}">Next</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ paginator.num_pages }}{% if all %}&all=True{% endif %}">Last &raquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}{% if all %}&all=True{% endif %}">Next</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ paginator.num_pages }}{% if all %}&all=True{% endif %}">Last &raquo;</a></li>
         {% endif %}
     </ul>
 </nav>

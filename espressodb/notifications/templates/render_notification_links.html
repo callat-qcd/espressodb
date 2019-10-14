@@ -2,33 +2,33 @@
 {% load notifications_extras %}
 
 <li class="nav-item dropdown">
- <a class="nav-link dropdown-toggle" href="#" id="navbardrop-notifications" data-toggle="dropdown">
-   {% if total > 0 %}
-   <span class="badge badge-pill badge-danger"><i class="fas fa-bell mx-1"></i></span>
-   {% else %}
-   <i class="fas fa-bell mx-1"></i>
-   {% endif %}
-   Notifications
- </a>
- <div class="dropdown-menu">
-    <a class="dropdown-item" href="{% url 'notifications:notifications-list' %}">All</a>
-    {% for level, count in notification_count.items %}
-
-    {% with "notifications:notifications-list-"|add:level as url %}
-    <a class="dropdown-item" href="{% url url %}">
-        {{level|title }}
-        {% if count > 0 %}
-        <span class="badge badge-pill badge-{% bootstrap_level level %}">{{count}}</span>
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop-notifications" data-toggle="dropdown">
+        {% if total > 0 %}
+        <span class="badge badge-pill badge-danger"><i class="fas fa-bell mx-1"></i></span>
+        {% else %}
+        <i class="fas fa-bell mx-1"></i>
         {% endif %}
+        Notifications
     </a>
-    {% endwith %}
-    {% endfor %}
- </div>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="{% url 'notifications:notifications-list' %}">All</a>
+        {% for level, count in notification_count.items %}
+
+        {% with "notifications:notifications-list-"|add:level as url %}
+        <a class="dropdown-item" href="{% url url %}">
+            {{level|title }}
+            {% if count > 0 %}
+            <span class="badge badge-pill badge-{% bootstrap_level level %}">{{count}}</span>
+            {% endif %}
+        </a>
+        {% endwith %}
+        {% endfor %}
+    </div>
 </li>
 <li class="nav-item">
-   <a class="nav-link" href="{% url 'admin:index' %}">
-     <i class="fas fa-user-cog mx-1"></i>Admin
-   </a>
+    <a class="nav-link" href="{% url 'admin:index' %}">
+        <i class="fas fa-user-cog mx-1"></i>Admin
+    </a>
 </li>
 
 {% endif %}

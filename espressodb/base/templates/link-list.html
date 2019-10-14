@@ -1,24 +1,24 @@
 {% for app_name, links in urls.items %}
-    <li class="nav-item dropdown">
-     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-       {{app_name}}
-     </a>
-     <div class="dropdown-menu">
-     {% for link_name, reverse_link in links %}
-       <a class="dropdown-item" href="{% url reverse_link %}">{{link_name}}</a>
-     {% endfor%}
-     </div>
-    </li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        {{app_name}}
+    </a>
+    <div class="dropdown-menu">
+        {% for link_name, reverse_link in links %}
+        <a class="dropdown-item" href="{% url reverse_link %}">{{link_name}}</a>
+        {% endfor%}
+    </div>
+</li>
 {% endfor %}
 {% if documentation %}
 <li class="nav-item dropdown">
- <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-   <i class="fas fa-book mx-1"></i>Documentation
- </a>
- <div class="dropdown-menu">
- {% for app_slug, app_name in documentation %}
-   <a class="dropdown-item" href="{% url 'documentation:details' app_slug %}">{{app_name}}</a>
- {% endfor%}
- </div>
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        <i class="fas fa-book mx-1"></i>Documentation
+    </a>
+    <div class="dropdown-menu">
+        {% for app_slug, app_name in documentation %}
+        <a class="dropdown-item" href="{% url 'documentation:details' app_slug %}">{{app_name}}</a>
+        {% endfor%}
+    </div>
 </li>
 {% endif %}
