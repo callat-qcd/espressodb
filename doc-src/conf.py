@@ -37,6 +37,7 @@ extensions = [
     "sphinx_rtd_theme",
     "sphinx.ext.autodoc",
     "sphinx_autodoc_typehints",
+    "sphinx_markdown_tables",
     # "sphinx.ext.viewcode",
     "recommonmark",
     "sphinx.ext.autosummary",
