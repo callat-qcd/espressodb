@@ -5,3 +5,4 @@ API Reference of EspressoDB
    :glob:
 
    base/index
+   documentation/index
