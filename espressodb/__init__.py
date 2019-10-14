@@ -1,5 +1,5 @@
 # pylint: disable=C0413
-"""Prepares the usage of the espressodb app
+"""General statement
 """
 from django import setup as _setup
 from django.conf import settings
@@ -14,6 +14,7 @@ def init(**kwargs):
             "espressodb.base",
             "espressodb.documentation",
             "espressodb.management",
+            "espressodb.notifications",
             "django.contrib.auth",
             "django.contrib.contenttypes",
         ],
