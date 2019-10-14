@@ -5,7 +5,7 @@ from django import setup as _setup
 from django.conf import settings
 
 
-def init():
+def init(**kwargs):
     """Initializes the django environment for espressodb
     """
     settings.configure(
@@ -29,6 +29,7 @@ def init():
                 }
             },
         },
+        **kwargs
     )
 
     _setup()
