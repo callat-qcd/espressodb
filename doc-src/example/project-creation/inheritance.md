@@ -14,7 +14,6 @@ But still you are interested in eigenvalue solutions which connection is hard co
 A possible solution would be to code up the new `CoulombHamiltoninan` and introduce a new `CoulombEigenvalue` which `hamiltonian` foreign key points to the `CoulombHamiltoninan`.
 
 ```python
-
 class Coulomb(Base):
     ...
 
@@ -40,8 +39,9 @@ This way, you will always have one eigenvalue class which generalizes to all ide
 
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>We first want to present the general idea and then show how to updated existing tables to get there.</p>
+<p>In this section we want to present the general idea for more complex tables.</p>
 <p>It is in general difficult to completely reshape existing tables and therefore one should plan ahead!</p>
+<p>To test the changes for this project, we recommend starting the database from scratch (e.g., remove the <code>.sqlite</code> file and <code>my_project/hamiltonian/migrations</code> files)</p>
 </div>
 
 ### The implementation
@@ -210,6 +210,3 @@ h2.c == -1.0 # only present if h2 is of type contact, else it is .v
 ```
 
 See also the [features section for more information about `Base` object overloads](../../../features/base).
-
-
-## Migrating existing tables
