@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>espressodb.notifications &mdash; EspressoDB 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="models" href="models.html" />
+    <link rel="prev" title="views" href="../documentation/views.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> EspressoDB
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#what-does-espressodb-provide">What does EspressoDB provide?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#how-to-install-it">How to install it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#what-s-the-story-behind-it">What’s the story behind it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#who-is-responsible-for-it">Who is responsible for it?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Usage.html">How to use EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Usage.html#tl-dr">TL;DR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Usage.html#details">Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-espressodb">Install EspressoDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#start-a-project">Start a project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#configure-your-project">Configure your project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-or-update-the-database">Create or update the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#launch-a-local-web-app">Launch a local web app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-a-new-app">Create a new app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-your-project-locally">Install your project locally</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../example/index.html">The example project</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../example/project-viewcase/index.html">What can I do?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/install.html">Install the project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/public-views.html">The public views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/private-views.html">The private views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html">Using your project in external modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../example/project-creation/index.html">How do I set up the example project myself?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/project-creation.html">Create your own project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/app-creation.html">Create the hamiltonians app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/adding-data.html">Adding data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/class-interface.html">Providing short cuts with class methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/dependencies.html">Adding tables with relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/views.html">Creating web views for summaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/inheritance.html">More complicated tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../features/index.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features/base.html">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/documentation.html">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/management.html">Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/notifications.html">The notifications module</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference of EspressoDB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../base/index.html">espressodb.base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../base/models.html">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/static.html">static</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">espressodb.documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">espressodb.notifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../management/index.html">espressodb.management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../management/management.html">management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../management/utilities.html">utilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">EspressoDB</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">API Reference of EspressoDB</a> &raquo;</li>
+        
+      <li>espressodb.notifications</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/api/notifications/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-espressodb.notifications">
+<span id="espressodb-notifications"></span><h1>espressodb.notifications<a class="headerlink" href="#module-espressodb.notifications" title="Permalink to this headline">¶</a></h1>
+<p>Fast access to Notifier</p>
+<dl class="function">
+<dt id="espressodb.notifications.get_notifier">
+<code class="sig-prename descclassname">espressodb.notifications.</code><code class="sig-name descname">get_notifier</code><span class="sig-paren">(</span><em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em>, <em class="sig-param">fail_if_not_exists=True</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.get_notifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns the Notifier class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.</p></li>
+<li><p><strong>groups</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – The user groups which are allowed to view this notfication.
+No groups means not logged in users are able to view the notfication.</p></li>
+<li><p><strong>fail_if_not_exists</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – If the user specifies group names which are not found,
+the default behavior is that storing of notfications will fail
+(e.g., raising KeyErrors).
+If this is set to False, the code progress but logs Notifications to other
+groups.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templates.html">templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="templatetags.html">templatetags</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views.html">views</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="models.html" class="btn btn-neutral float-right" title="models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../documentation/views.html" class="btn btn-neutral float-left" title="views" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Christopher Körber, Jason Chang
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>How do I set up the example project myself? &mdash; EspressoDB 0.1.0 documentation</title>
+  <title>Create your own project &mdash; EspressoDB 0.1.0 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Features" href="../../features/index.html" />
+    <link rel="next" title="Create the hamiltonians app" href="app-creation.html" />
     <link rel="prev" title="How do I set up the example project myself?" href="index.html" /> 
 </head>
 
@@ -113,7 +113,13 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">How do I set up the example project myself?</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">How do I set up the example project myself?</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Create your own project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app-creation.html">Create the hamiltonians app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="adding-data.html">Adding data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class-interface.html">Providing short cuts with class methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dependencies.html">Adding tables with relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html">Creating web views for summaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="inheritance.html">More complicated tables</a></li>
 </ul>
 </li>
 </ul>
@@ -125,14 +131,32 @@
 <li class="toctree-l2"><a class="reference internal" href="../../features/notifications.html">The notifications module</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../advanced/index.html">Advanced Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../advanced/security.html">Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../advanced/web-accessability.html">How to set up a server which can be seen by others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference of EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/base/index.html">espressodb.base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/models.html">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/static.html">static</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/views.html">views</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference of EspressoDB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../api/base/index.html"><code class="docutils literal notranslate"><span class="pre">espressodb.base</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../api/base/models.html"><code class="docutils literal notranslate"><span class="pre">models</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/documentation/index.html">espressodb.documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/documentation/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/documentation/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/documentation/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/notifications/index.html">espressodb.notifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/notifications/models.html">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/notifications/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/notifications/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/notifications/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/management/index.html">espressodb.management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/management/management.html">management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/management/utilities.html">utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -186,7 +210,7 @@
         
           <li><a href="index.html">How do I set up the example project myself?</a> &raquo;</li>
         
-      <li>How do I set up the example project myself?</li>
+      <li>Create your own project</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -205,13 +229,86 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="how-do-i-set-up-the-example-project-myself">
-<h1>How do I set up the example project myself?<a class="headerlink" href="#how-do-i-set-up-the-example-project-myself" title="Permalink to this headline">¶</a></h1>
-<p>This section is a step by step tutorial how to create the <code class="docutils literal notranslate"><span class="pre">my_project</span></code> project yourself.</p>
-<p>.. toctree::
-:caption: Contents:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">-</span><span class="n">creation</span>
+  <div class="section" id="create-your-own-project">
+<h1>Create your own project<a class="headerlink" href="#create-your-own-project" title="Permalink to this headline">¶</a></h1>
+<p>The starting point is that you have <a class="reference external" href="../../Usage.md#install-espressodb">installed EspressoDB</a>.</p>
+<div class="section" id="start-the-project">
+<h2>Start the project<a class="headerlink" href="#start-the-project" title="Permalink to this headline">¶</a></h2>
+<p>Go to your directory of choice and type</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ espressodb startproject my_project
 </pre></div>
+</div>
+<p>This will return</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Setting up new project `my_project` in `/path/to/project`
+-&gt; Creating `db-config.yaml` in the project root dir `/path/to/project/my_project`
+   Adjust this file to establish a connection to the database
+-&gt; Creating `settings.yaml`. Adjust this file to include later apps
+-&gt; Done!
+-&gt; You can now:
+     1a. Migrate models by running `python manange.py migrate`
+     1b. and launch a web app by running `python manange.py runserver`
+     2. Add new models using `python manange.py startapp {APP_NAME}`
+     3. Run `python -m pip install [--user] [-e] .` in the project root directory to add your package to your python path.
+        See alse `/path/to/project/my_project/setup.py`.
+</pre></div>
+</div>
+<p>and create the folder structure of the project.</p>
+<p>You can find two files in this directory:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">db-config.yaml</span></code> which describes how to connect to a database and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code> which describes how to encrypt passwords before entering in the DB, which apps are installed and how to run the web interface.</p></li>
+</ol>
+<p>Both files are important in the sense that they possibly contain sensitive information.
+The <code class="docutils literal notranslate"><span class="pre">SECRET_KEY</span></code> in <code class="docutils literal notranslate"><span class="pre">settings.yaml</span></code> and the database access in <code class="docutils literal notranslate"><span class="pre">db-config.yaml</span></code>.
+You should think about with whom you want to share those files.
+For now, the database will be a local SQLite file located at <code class="docutils literal notranslate"><span class="pre">/path/to/project/my_project/my_project-db.sqlite</span></code> which is generally not encrypted.
+Let’s create this database.</p>
+<p>To verify that everything worked, enter the directory, apply migrations and start a local server</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> my_project
+$ python manange.py makemigrations
+No changes detected
+$ python manange.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, notifications, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying notifications.0001_initial... OK
+  Applying notifications.0002_auto_20191003_1920... OK
+  Applying notifications.0003_auto_20191003_1925... OK
+  Applying notifications.0004_auto_20191005_1435... OK
+  Applying sessions.0001_initial... OK
+</pre></div>
+</div>
+<p>The last command will create the database <code class="docutils literal notranslate"><span class="pre">my_project-db.sqlite</span></code> with EspressoDB’s default tables.</p>
+<p>After this you can run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python manange.py runserver
+Watching <span class="k">for</span> file changes with StatReloader
+Performing system checks...
+
+System check identified no issues <span class="o">(</span><span class="m">0</span> silenced<span class="o">)</span>.
+October <span class="m">07</span>, <span class="m">2019</span> - <span class="m">17</span>:28:59
+Django version <span class="m">2</span>.2.2, using settings <span class="s1">&#39;my_project.config.settings&#39;</span>
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+</pre></div>
+</div>
+<p>And visit <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> to see the for now empty homepage</p>
+<p><img alt="The home empty page" src="../../_images/example-create-home-1.png" /></p>
 </div>
 </div>
 
@@ -223,7 +320,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../features/index.html" class="btn btn-neutral float-right" title="Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="app-creation.html" class="btn btn-neutral float-right" title="Create the hamiltonians app" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="How do I set up the example project myself?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

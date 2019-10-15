@@ -113,7 +113,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="project-creation/index.html">How do I set up the example project myself?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="project-creation/project-creation.html">How do I set up the example project myself?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/project-creation.html">Create your own project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/app-creation.html">Create the hamiltonians app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/adding-data.html">Adding data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/class-interface.html">Providing short cuts with class methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/dependencies.html">Adding tables with relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/views.html">Creating web views for summaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/inheritance.html">More complicated tables</a></li>
 </ul>
 </li>
 </ul>
@@ -125,14 +131,32 @@
 <li class="toctree-l2"><a class="reference internal" href="../features/notifications.html">The notifications module</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../advanced/index.html">Advanced Notes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/security.html">Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../advanced/web-accessability.html">How to set up a server which can be seen by others</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference of EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/base/index.html">espressodb.base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/base/models.html">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/base/static.html">static</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/base/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/base/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/base/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/base/views.html">views</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference of EspressoDB</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../api/base/index.html"><code class="docutils literal notranslate"><span class="pre">espressodb.base</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../api/base/models.html"><code class="docutils literal notranslate"><span class="pre">models</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api/documentation/index.html">espressodb.documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/documentation/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/documentation/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/documentation/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/notifications/index.html">espressodb.notifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/notifications/models.html">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/notifications/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/notifications/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/notifications/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api/management/index.html">espressodb.management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/management/management.html">management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/management/utilities.html">utilities</a></li>
 </ul>
 </li>
 </ul>
@@ -236,7 +260,61 @@ In this section,</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="project-creation/index.html">How do I set up the example project myself?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="project-creation/project-creation.html">How do I set up the example project myself?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project-creation/project-creation.html">Create your own project</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/project-creation.html#start-the-project">Start the project</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project-creation/app-creation.html">Create the hamiltonians app</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/app-creation.html#creating-the-infrastructure">Creating the infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/app-creation.html#creating-tables">Creating tables</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project-creation/adding-data.html">Adding data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/adding-data.html#the-admin-page">The admin page</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/adding-data.html#data-scripts">Data scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project-creation/class-interface.html">Providing short cuts with class methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="project-creation/dependencies.html">Adding tables with relationships</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/dependencies.html#updating-the-models">Updating the models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/dependencies.html#updating-the-run-script">Updating the run script</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project-creation/views.html">Creating web views for summaries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/views.html#adjusting-the-index-template">Adjusting the index template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/views.html#views-with-plots">Views with plots</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/views.html#creating-a-template-view">Creating a template view</a></li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/views.html#creating-the-template">Creating the template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/views.html#update-the-urls">Update the urls</a></li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/views.html#preparing-data">Preparing data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/views.html#preparing-the-plot">Preparing the plot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/views.html#wrapping-things-together">Wrapping things together</a></li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/views.html#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="project-creation/inheritance.html">More complicated tables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/inheritance.html#in-which-scenario-are-they-helpful">In which scenario are they helpful</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project-creation/inheritance.html#implementation-of-common-base">Implementation of common base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/inheritance.html#the-implementation">The implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/inheritance.html#underlaying-tables">Underlaying tables</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="project-creation/inheritance.html#hamiltonian-hamiltonian"><code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="project-creation/inheritance.html#hamiltonian-contact"><code class="docutils literal notranslate"><span class="pre">hamiltonian_contact</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="project-creation/inheritance.html#hamiltonian-coulomb"><code class="docutils literal notranslate"><span class="pre">hamiltonian_coulomb</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="project-creation/inheritance.html#hamiltonian-eigenvalue"><code class="docutils literal notranslate"><span class="pre">hamiltonian_eigenvalue</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/inheritance.html#unique-constraints">Unique constraints</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="project-creation/inheritance.html#id1"><code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code></a></li>
+<li class="toctree-l5"><a class="reference internal" href="project-creation/inheritance.html#id2"><code class="docutils literal notranslate"><span class="pre">hamiltonian_contact</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="project-creation/inheritance.html#queries-and-member-access">Queries and member access</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

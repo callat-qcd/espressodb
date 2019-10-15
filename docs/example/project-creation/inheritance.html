@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>More complicated tables &mdash; EspressoDB 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Features" href="../../features/index.html" />
+    <link rel="prev" title="Creating web views for summaries" href="views.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> EspressoDB
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../README.html">EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#what-does-espressodb-provide">What does EspressoDB provide?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#how-to-install-it">How to install it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#what-s-the-story-behind-it">What’s the story behind it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#who-is-responsible-for-it">Who is responsible for it?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../Usage.html">How to use EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Usage.html#tl-dr">TL;DR</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Usage.html#details">Details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-espressodb">Install EspressoDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#start-a-project">Start a project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#configure-your-project">Configure your project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-or-update-the-database">Create or update the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#launch-a-local-web-app">Launch a local web app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-a-new-app">Create a new app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-your-project-locally">Install your project locally</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">The example project</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../project-viewcase/index.html">What can I do?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../project-viewcase/install.html">Install the project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project-viewcase/public-views.html">The public views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project-viewcase/private-views.html">The private views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project-viewcase/external-scripts.html">Using your project in external modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">How do I set up the example project myself?</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="project-creation.html">Create your own project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app-creation.html">Create the hamiltonians app</a></li>
+<li class="toctree-l3"><a class="reference internal" href="adding-data.html">Adding data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="class-interface.html">Providing short cuts with class methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dependencies.html">Adding tables with relationships</a></li>
+<li class="toctree-l3"><a class="reference internal" href="views.html">Creating web views for summaries</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">More complicated tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../features/index.html">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../features/base.html">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/documentation.html">Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/management.html">Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../features/notifications.html">The notifications module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference of EspressoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/base/index.html">espressodb.base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/models.html">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/static.html">static</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/base/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/documentation/index.html">espressodb.documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/documentation/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/documentation/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/documentation/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/notifications/index.html">espressodb.notifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/notifications/models.html">models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/notifications/templates.html">templates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/notifications/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/notifications/views.html">views</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api/management/index.html">espressodb.management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/management/management.html">management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/management/utilities.html">utilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">EspressoDB</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">The example project</a> &raquo;</li>
+        
+          <li><a href="index.html">How do I set up the example project myself?</a> &raquo;</li>
+        
+      <li>More complicated tables</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/example/project-creation/inheritance.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="more-complicated-tables">
+<h1>More complicated tables<a class="headerlink" href="#more-complicated-tables" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="in-which-scenario-are-they-helpful">
+<h2>In which scenario are they helpful<a class="headerlink" href="#in-which-scenario-are-they-helpful" title="Permalink to this headline">¶</a></h2>
+<p>In science projects it is usually hard if not impossible to plan out each step at the beginning of a project.
+Thus it is important to stay flexible enough to incorporate unexpected changes – which, on first thought, is not along the notions of using relatively fixed tables.</p>
+<p>Suppose you are in the scenario where you want to extend the previously coded up <code class="docutils literal notranslate"><span class="pre">ContactHamiltoninan</span></code>.
+If it makes sense, you can add new columns and decide how previous entries in the tables, which where inserted without this new columns in mind, add default values.</p>
+<p>Sometimes this is not enough – it would not make sense to adjust existing tables such that all new changes are present.
+As an example, you would like to include a new Hamiltonian, e.g., corresponding to Coulomb interactions which are conceptually completely different from the <code class="docutils literal notranslate"><span class="pre">ContactHamiltoninan</span></code>.
+But still you are interested in eigenvalue solutions which connection is hard coded to the <code class="docutils literal notranslate"><span class="pre">ContactHamiltoninan</span></code> by the <code class="docutils literal notranslate"><span class="pre">hamiltonian</span></code> foreign key.</p>
+<p>A possible solution would be to code up the new <code class="docutils literal notranslate"><span class="pre">CoulombHamiltoninan</span></code> and introduce a new <code class="docutils literal notranslate"><span class="pre">CoulombEigenvalue</span></code> which <code class="docutils literal notranslate"><span class="pre">hamiltonian</span></code> foreign key points to the <code class="docutils literal notranslate"><span class="pre">CoulombHamiltoninan</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Coulomb</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="k">class</span>  <span class="nc">CoulombEigenvalue</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Coulomb</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>However, this now means that we have two <code class="docutils literal notranslate"><span class="pre">Eigenvalue</span></code> classes which represent the same thing and their only difference is the hamiltonian they point to</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Eigenvalue</span> <span class="o">-&gt;</span> <span class="n">Contact</span>
+<span class="n">CoulombEigenvalue</span> <span class="o">-&gt;</span> <span class="n">Coulomb</span>
+</pre></div>
+</div>
+<p>A nicer solution would be if the eigenvalue point to a common base class, e.g., a Hamiltonian which is either a <code class="docutils literal notranslate"><span class="pre">Coulomb</span></code> or <code class="docutils literal notranslate"><span class="pre">Contact</span></code> Hamiltonian</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Eigenvalue</span> <span class="o">-&gt;</span> <span class="n">Hamiltonian</span> <span class="o">&lt;-&gt;</span> <span class="n">Contact</span>
+                          <span class="o">&lt;-&gt;</span> <span class="n">Coulomb</span>
+</pre></div>
+</div>
+<p>This way, you will always have one eigenvalue class which generalizes to all ideas of an Hamiltonian class.</p>
+</div>
+<div class="section" id="implementation-of-common-base">
+<h2>Implementation of common base<a class="headerlink" href="#implementation-of-common-base" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In this section we want to present the general idea for more complex tables.</p>
+<p>It is in general difficult to completely reshape existing tables and therefore one should plan ahead!</p>
+<p>To test the changes for this project, we recommend starting the database from scratch (e.g., remove the <code>.sqlite</code> file and <code>my_project/hamiltonian/migrations</code> files)</p>
+</div><div class="section" id="the-implementation">
+<h3>The implementation<a class="headerlink" href="#the-implementation" title="Permalink to this headline">¶</a></h3>
+<p>Django already provides a framework for implementing such common base tables using inheritance.
+E.g., the most minimal setup for such a scenario would be</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Hamiltonian</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Contact</span><span class="p">(</span><span class="n">Hamiltonian</span><span class="p">):</span>
+    <span class="n">n_sites</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">spacing</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">3</span><span class="p">,)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">unique_together</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;n_sites&quot;</span><span class="p">,</span> <span class="s2">&quot;spacing&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">Coulomb</span><span class="p">(</span><span class="n">Hamiltonian</span><span class="p">):</span>
+    <span class="n">n_sites</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">spacing</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span> <span class="n">max_digits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">unique_together</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;n_sites&quot;</span><span class="p">,</span> <span class="s2">&quot;spacing&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">Eigenvalue</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Hamiltonian</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+    <span class="n">n_level</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">PositiveIntegerField</span><span class="p">()</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">unique_together</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hamiltonian&quot;</span><span class="p">,</span> <span class="s2">&quot;n_level&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Eigenvalue</span></code> class now points to the <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> table and the <code class="docutils literal notranslate"><span class="pre">Contact</span></code> and <code class="docutils literal notranslate"><span class="pre">Coulomb</span></code> Hamiltonian classes now inherit from <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code>.</p>
+<p>The new classes can be used as before, e.g.,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h1</span> <span class="o">=</span> <span class="n">Contact</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">n_sites</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">c</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">Coulomb</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">n_sites</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">e1</span>  <span class="o">=</span> <span class="n">Eigenvalue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">hamiltonian</span><span class="o">=</span><span class="n">h1</span><span class="p">,</span> <span class="n">n_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=-</span><span class="mf">363.823</span><span class="p">)</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">Eigenvalue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">hamiltonian</span><span class="o">=</span><span class="n">h2</span><span class="p">,</span> <span class="n">n_level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">234.567</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="underlaying-tables">
+<h3>Underlaying tables<a class="headerlink" href="#underlaying-tables" title="Permalink to this headline">¶</a></h3>
+<p>Different to the base table, the <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> table is not abstract and thus will actually be created.
+E.g., these models will create the following tables after migrating</p>
+<div class="section" id="hamiltonian-hamiltonian">
+<h4><code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code><a class="headerlink" href="#hamiltonian-hamiltonian" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>id</th>
+<th>type</th>
+<th>last_modified</th>
+<th>tag</th>
+<th>userid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Contact</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Contact</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>42</td>
+<td>Coulomb</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table><p>The <code class="docutils literal notranslate"><span class="pre">id</span></code> column is the primary key to identify a certain entry.
+All the other columns come from the EspressoDB <code class="docutils literal notranslate"><span class="pre">Base</span></code> class (which does not have it’s own table) to enable EspressoDB’s features and have additional meta information.
+For example the <code class="docutils literal notranslate"><span class="pre">type</span></code> column informs that the entry is associated with the <em>specialized</em> class <code class="docutils literal notranslate"><span class="pre">Contact</span></code> or <code class="docutils literal notranslate"><span class="pre">Coulomb</span></code>.</p>
+</div>
+<div class="section" id="hamiltonian-contact">
+<h4><code class="docutils literal notranslate"><span class="pre">hamiltonian_contact</span></code><a class="headerlink" href="#hamiltonian-contact" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>hamiltonian_ptr_id</th>
+<th>n_sites</th>
+<th>spacing</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10</td>
+<td>0.1</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>15</td>
+<td>0.1</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table><p>The specialized <code class="docutils literal notranslate"><span class="pre">hamiltonian_contact</span></code> table has no own <code class="docutils literal notranslate"><span class="pre">id</span></code>.
+It uses the <code class="docutils literal notranslate"><span class="pre">id</span></code> column of the <code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code> table using the <code class="docutils literal notranslate"><span class="pre">hamiltonian_ptr_id</span></code>.
+The other entries are specific to the actual implementation.</p>
+</div>
+<div class="section" id="hamiltonian-coulomb">
+<h4><code class="docutils literal notranslate"><span class="pre">hamiltonian_coulomb</span></code><a class="headerlink" href="#hamiltonian-coulomb" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>hamiltonian_ptr_id</th>
+<th>n_sites</th>
+<th>spacing</th>
+<th>v</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>42</td>
+<td>10</td>
+<td>0.1</td>
+<td>-02</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table><p>Similarly, the <code class="docutils literal notranslate"><span class="pre">hamiltonian_coulomb</span></code> borrwos it’s primary key from the <code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code> table and adds information specific to it in it’s own table.</p>
+<p>Thus, all implementations have a corresponding entry in the base <code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code> table but specific information in their own table.</p>
+</div>
+<div class="section" id="hamiltonian-eigenvalue">
+<h4><code class="docutils literal notranslate"><span class="pre">hamiltonian_eigenvalue</span></code><a class="headerlink" href="#hamiltonian-eigenvalue" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>id</th>
+<th>type</th>
+<th>last_modified</th>
+<th>tag</th>
+<th>n_level</th>
+<th>value</th>
+<th>hamiltonian_id</th>
+<th>userid</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>1</td>
+<td>-363.823</td>
+<td>1</td>
+<td>...</td>
+</tr>
+<tr>
+<td>1</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>2</td>
+<td>-361.803</td>
+<td>1</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td></td>
+</tr>
+</tbody>
+</table><p>Because the <code class="docutils literal notranslate"><span class="pre">hamiltonian_eigenvalue</span></code> table inherits from <code class="docutils literal notranslate"><span class="pre">Base</span></code>, it comes with the default <code class="docutils literal notranslate"><span class="pre">Base</span></code> columns.
+In addition, it now points to the <code class="docutils literal notranslate"><span class="pre">hamiltonian_id</span></code> in the <code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code> table which corresponds to either a specialized <code class="docutils literal notranslate"><span class="pre">Coulomb</span></code> or <code class="docutils literal notranslate"><span class="pre">Contact</span></code> entry.</p>
+</div>
+</div>
+<div class="section" id="unique-constraints">
+<h3>Unique constraints<a class="headerlink" href="#unique-constraints" title="Permalink to this headline">¶</a></h3>
+<p>Because both the <code class="docutils literal notranslate"><span class="pre">Contact</span></code> and <code class="docutils literal notranslate"><span class="pre">Coulomb</span></code> table have information about <code class="docutils literal notranslate"><span class="pre">n_sites</span></code> and <code class="docutils literal notranslate"><span class="pre">spacing</span></code>, it would actually be possible to move these information to the base <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> table.
+This is generally possible and might also be good practice depending on the specific situation.
+However, in case there are joined unique constraints, it might not always be possible because this constraint is enforced at the table level.</p>
+<p>Suppose you want all the <code class="docutils literal notranslate"><span class="pre">Contact</span></code> entries to be unique in <code class="docutils literal notranslate"><span class="pre">[&quot;n_sites&quot;,</span> <span class="pre">&quot;spacing&quot;,</span> <span class="pre">&quot;c&quot;]</span></code>.
+If you place the additional columns <code class="docutils literal notranslate"><span class="pre">n_sites</span></code> and <code class="docutils literal notranslate"><span class="pre">spacing</span></code> from <code class="docutils literal notranslate"><span class="pre">Contact</span></code> to <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> and add an unique constraint in <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> according to <code class="docutils literal notranslate"><span class="pre">[&quot;n_sites&quot;,</span> <span class="pre">&quot;spacing&quot;,</span> <span class="pre">&quot;type&quot;]</span></code>,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Hamiltonian</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">n_sites</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">spacing</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">unique_together</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;n_sites&quot;</span><span class="p">,</span> <span class="s2">&quot;spacing&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">Contact</span><span class="p">(</span><span class="n">Hamiltonian</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DecimalField</span><span class="p">(</span><span class="n">max_digits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">decimal_places</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">unique_together</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hamiltonian_ptr_id&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>it is <strong>not</strong> possible to have table entries for same <code class="docutils literal notranslate"><span class="pre">n_site</span></code> and <code class="docutils literal notranslate"><span class="pre">spacing</span></code> but different <code class="docutils literal notranslate"><span class="pre">c</span></code>,</p>
+<div class="section" id="id1">
+<h4><code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>id</th>
+<th>type</th>
+<th>n_sites</th>
+<th>spacing</th>
+<th>...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Contact</td>
+<td>10</td>
+<td>0.1</td>
+<td>...</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="id2">
+<h4><code class="docutils literal notranslate"><span class="pre">hamiltonian_contact</span></code><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>hamiltonian_ptr_id</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>-1.0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>-2.0 <em>(this is not possible)</em></td>
+</tr>
+</tbody>
+</table><p>because each entry in <code class="docutils literal notranslate"><span class="pre">hamiltonian_contact</span></code> creates a new <code class="docutils literal notranslate"><span class="pre">id</span></code> in <code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code> which is unique constrained in the parameters we want to have present.</p>
+<p>In principle one could unique constrain <code class="docutils literal notranslate"><span class="pre">[&quot;id&quot;,</span> <span class="pre">&quot;n_sites&quot;,</span> <span class="pre">&quot;spacing&quot;,</span> <span class="pre">&quot;type&quot;]</span></code> in <code class="docutils literal notranslate"><span class="pre">hamiltonian_hamiltonian</span></code>, however unique constraining any combination of columns containing the <code class="docutils literal notranslate"><span class="pre">id</span></code> is equivalent to not constraining at all (because the <code class="docutils literal notranslate"><span class="pre">id</span></code> is supposed to be unique).</p>
+</div>
+</div>
+<div class="section" id="queries-and-member-access">
+<h3>Queries and member access<a class="headerlink" href="#queries-and-member-access" title="Permalink to this headline">¶</a></h3>
+<p>In case of inheritance, queries and member access changes slightly.
+E.g., if one wants to look up the corresponding <code class="docutils literal notranslate"><span class="pre">Contact</span></code> Hamiltonian of eigenvalues, one would have to use the following code</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h1</span> <span class="o">=</span> <span class="n">Eigenvalue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">hamiltonian__type</span><span class="o">=</span><span class="s2">&quot;Contact&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">Eigenvalue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">hamiltonian__contact__c</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Or on the python level</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">e1</span> <span class="o">=</span> <span class="n">Eigenvalue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">e1</span><span class="o">.</span><span class="n">hamiltonian</span><span class="o">.</span><span class="n">contact</span> <span class="c1"># potentially fails if wrong type</span>
+<span class="n">h2</span><span class="o">.</span><span class="n">c</span> <span class="o">==</span> <span class="o">-</span><span class="mf">1.0</span>
+</pre></div>
+</div>
+<p>Note that this access might fail if the Hamiltonian is a <code class="docutils literal notranslate"><span class="pre">Coulomb</span></code> Hamiltonian.</p>
+<p>EspressoDB provides convenience methods to circumvent the access of Python objects.
+E.g., it is possible to use the syntax</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">e1</span> <span class="o">=</span> <span class="n">Eigenvalue</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<span class="n">h2</span> <span class="o">=</span> <span class="n">e1</span><span class="o">.</span><span class="n">hamiltonian</span> <span class="c1"># no extra access to .contact</span>
+<span class="n">h2</span><span class="o">.</span><span class="n">c</span> <span class="o">==</span> <span class="o">-</span><span class="mf">1.0</span> <span class="c1"># only present if h2 is of type contact, else it is .v</span>
+</pre></div>
+</div>
+<p>See also the <a class="reference internal" href="../../features/base.html"><span class="doc">features section for more information about Base object overloads</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../features/index.html" class="btn btn-neutral float-right" title="Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="views.html" class="btn btn-neutral float-left" title="Creating web views for summaries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Christopher Körber, Jason Chang
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
