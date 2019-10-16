@@ -1,6 +1,5 @@
 Django
 django-bootstrap4
-django-pandas
-django-extensions
 django-widget-tweaks
+django-pandas
 PyYAML
