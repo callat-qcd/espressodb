@@ -1,5 +1,7 @@
 from django.apps import AppConfig
 
 
-class baseConfig(AppConfig):
-    name = "base"
+class BaseConfig(AppConfig):
+    name = "espressodb.base"
+    verbose_name = "EspressoDB Base"
+    label = "base"
