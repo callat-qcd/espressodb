@@ -37,6 +37,6 @@ def get_db_info() -> Tuple[str, str]:
     """
     db = DATABASES.get("default", {})
     name, user = db.get("NAME"), db.get("USER")
-    if os.sep in name:
+    if name is not None and os.sep in name:
         name = name.split(os.sep)[-1]
     return name, user
