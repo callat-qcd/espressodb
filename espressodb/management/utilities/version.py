@@ -24,8 +24,16 @@ def get_repo_version() -> Tuple[str, str]:
     branch_cmd = ["git", f"--git-dir={BASE_DIR}", "rev-parse", "--abbrev-ref", "HEAD"]
 
     try:
-        tag_commit = subprocess.check_output(tag_commit_cmd).decode("utf-8").strip()
-        branch = subprocess.check_output(branch_cmd).decode("utf-8").strip()
+        tag_commit = (
+            subprocess.check_output(tag_commit_cmd, stderr=subprocess.DEVNULL)
+            .decode("utf-8")
+            .strip()
+        )
+        branch = (
+            subprocess.check_output(branch_cmd, stderr=subprocess.DEVNULL)
+            .decode("utf-8")
+            .strip()
+        )
     except subprocess.CalledProcessError:
         tag_commit = branch = None
 
