@@ -158,6 +158,8 @@ LOGGING = {
 
 PROJECT_NAME = "{{project_name}}"
 
+MIGRATION_MODULES = {"notifications": "{{project_name}}.config.migrations.notifications"}
+
 if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
