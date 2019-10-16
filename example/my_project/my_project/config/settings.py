@@ -162,6 +162,8 @@ LOGGING = {
 
 PROJECT_NAME = "my_project"
 
+MIGRATION_MODULES = {"notifications": "my_project.config.migrations.notifications"}
+
 if not DEBUG:
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True
