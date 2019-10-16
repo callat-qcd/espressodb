@@ -1,47 +1,47 @@
-{% load espressodb_extras %}
+{% load base_extras %}
 
 <div class="card my-4" id="{{model_slug}}">
-  <div class="card-header p-4 bg-light">
-    <h3><code>{{name}}</code></h3>
-    <p>
-        {{doc}}
-    </p>
-    <p>
-        Module: <code>{{module}}</code>
-    </p>
-    {% if base %}
-    <p>
-        Base: <code>{{base}}</code>
-    </p>
-    {% endif %}
-  </div>
-  <div class="card-body">
-      <h4>Columns</h4>
-     {% if columns %}
-     <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Type</th>
-          <th scope="col">Help</th>
-        </tr>
-      </thead>
-      <tbody>
-          {% for name, col in columns %}
-            <tr>
-              <td><code>{{col.name}}</code></td>
-              <td>
-                  <code>{{col.type}}</code>{% if col.relation %}:
-                    <a href="{{col.relation.doc_link}}#{{col.relation.model_slug}}">{{col.relation.model}}</a>
-                  {% endif %}
-                  {% if col.optional %}(Optional){%endif%}
-                  {% if col.default %}[<code>={{col.default}}</code>]{%endif%}
-              </td>
-              <td>{{col.help}}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    {% endif  %}
-  </div>
+    <div class="card-header p-4 bg-light">
+        <h3><code>{{name}}</code></h3>
+        <p>
+            {{doc}}
+        </p>
+        <p>
+            Module: <code>{{module}}</code>
+        </p>
+        {% if base %}
+        <p>
+            Base: <code>{{base}}</code>
+        </p>
+        {% endif %}
+    </div>
+    <div class="card-body">
+        <h4>Columns</h4>
+        {% if columns %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Help</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for name, col in columns %}
+                <tr>
+                    <td><code>{{col.name}}</code></td>
+                    <td>
+                        <code>{{col.type}}</code>{% if col.relation %}:
+                        <a href="{{col.relation.doc_link}}#{{col.relation.model_slug}}">{{col.relation.model}}</a>
+                        {% endif %}
+                        {% if col.optional %}(Optional){%endif%}
+                        {% if col.default %}[<code>={{col.default}}</code>]{%endif%}
+                    </td>
+                    <td>{{col.help}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
 </div>

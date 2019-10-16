@@ -13,11 +13,15 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
-import sphinx_rtd_theme
+import os
 
 from espressodb import init
 
-init()
+init(
+    ROOT_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    PROJECT_NAME="EspressoDB",
+    PROJECT_APPS=[],
+)
 # -- Project information -----------------------------------------------------
 
 project = "EspressoDB"
@@ -37,6 +41,7 @@ extensions = [
     "sphinx_rtd_theme",
     "sphinx.ext.autodoc",
     "sphinx_autodoc_typehints",
+    "sphinx_markdown_tables",
     # "sphinx.ext.viewcode",
     "recommonmark",
     "sphinx.ext.autosummary",

@@ -1,11 +1,13 @@
 """Additional in template functions for the espressodb module
 """
-from typing import List
+from typing import List, Dict, Tuple
 
 from django import template
 from django.conf import settings
 from django.db.models.fields import Field
 from django.template.defaultfilters import Truncator
+
+from django.urls import reverse, NoReverseMatch
 
 from django_extensions.management.commands.show_urls import Command as URLFinder
 
@@ -23,8 +25,13 @@ register = template.Library()  # pylint: disable=C0103
 @register.inclusion_tag("link-list.html")
 def render_link_list(
     exclude=("", "populate", "populate-result", "admin", "documentation")
-):
-    """Renders all links as a nested list
+) -> Dict[str, Tuple[str, str]]:
+    """Renders all app and documentation page links
+
+    Returns context with keys urls and documentation where each value is a list of
+    Tuples with the reverse url name and display name.
+
+    Ignores urls which do not result in a match.
     """
     urlconf = __import__(settings.ROOT_URLCONF, {}, {}, [""])
 
@@ -33,6 +40,11 @@ def render_link_list(
 
     urls = {}
     for view, path, reverse_name in view_infos:
+
+        try:
+            reverse(reverse_name)
+        except NoReverseMatch:
+            continue
 
         if path.split("/")[0] in exclude:
             continue

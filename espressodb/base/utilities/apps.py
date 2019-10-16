@@ -6,7 +6,7 @@ from typing import List
 from typing import Dict
 
 from django.apps.config import AppConfig
-from django.apps import apps
+from django.apps import apps as django_apps
 
 from django.template.defaultfilters import slugify
 
@@ -23,7 +23,7 @@ def get_project_apps(exclude_apps: Optional[Tuple[str]] = None) -> List[AppConfi
     exclude_apps = list(exclude_apps) if exclude_apps is not None else []
     exclude_apps += ["espressodb.base", "espressodb.documentation"]
 
-    installed_apps = {app.name: app for app in apps.app_configs.values()}
+    installed_apps = {app.name: app for app in django_apps.app_configs.values()}
 
     available_apps = []
 

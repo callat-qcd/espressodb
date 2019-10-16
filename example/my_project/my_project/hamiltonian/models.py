@@ -45,7 +45,7 @@ class Contact(Hamiltonian):
     $$
         H = \frac{1}{2 m} p^2 + c \delta(r - r)
     $$
-    where p^2 is the Laplace operator.
+    where \( p^2 \) is the Laplace operator.
 
     The basis is a lattice with constant lattice spacing and peridic boundary conditions.
     """
@@ -90,7 +90,7 @@ class Coulomb(Hamiltonian):
     $$
         H = \frac{1}{2 m} p^2 + \frac{v}{r}
     $$
-    where p^2 is the Laplace operator.
+    where \( p^2 \) is the Laplace operator.
 
     The basis is a lattice with constant lattice spacing \(\epsilon\) and peridic
     boundary conditions.

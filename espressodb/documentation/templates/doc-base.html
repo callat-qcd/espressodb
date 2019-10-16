@@ -1,11 +1,7 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
-{% load static %}
 {% load documentation_extras %}
 
-
 {% block content %}
-
 {% if app_name %}
 <div class="jumbotron">
     <h1>Documentation of <code>{{app_name}}</code></h1>
@@ -14,13 +10,13 @@
 <div class="container">
     {% if models %}
     {% for model in models %}
-        {% render_documentation app_slug model %}
+    {% render_documentation app_slug model %}
     {% endfor %}
     {% else %}
-        <h2>No models found</h2>
+    <h2>No models found</h2>
     {% endif %}
 </div>
 {% else %}
-    <h1>Was not able to locate app</h1>
+<h1>Was not able to locate app</h1>
 {% endif %}
 {% endblock %}

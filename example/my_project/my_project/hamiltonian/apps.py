@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class HamiltonianConfig(AppConfig):
-    name = "Hamiltonian"
+    name = "my_project.hamiltonian"
