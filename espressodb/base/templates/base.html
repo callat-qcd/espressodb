@@ -69,8 +69,7 @@
     {% block footer %}
     <div class="container-fluid">
         <ol class="breadcrumb bg-light my-1 py-0 text-muted">
-            <li class="breadcrumb-item">espressodb</a></li>
-            <li class="breadcrumb-item">Version: {% render_version %}</li>
+            <li class="breadcrumb-item">EspressoDB version: {% render_version %}</li>
             {% if user.is_authenticated %}
             <li class="breadcrumb-item">Database: {% render_db_info %}</li>
             {% endif %}
