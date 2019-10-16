@@ -148,7 +148,7 @@ def render_db_info() -> str:
     """Returns descriptive db string
     """
     name, user = get_db_info()
-    return f"{user}@{name}"
+    return (f"{user}@" if user else " ") + f"{name}"
 
 
 @register.simple_tag

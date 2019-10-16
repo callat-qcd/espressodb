@@ -5,10 +5,9 @@ from typing import Tuple
 import subprocess
 import os
 
-try:
-    from django.conf.settings import DATABASES
-except ImportError:
-    DATABASES = {}
+from django.conf import settings
+
+DATABASES = getattr(settings, "DATABASES", {})
 
 _FILE_PATH = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
 BASE_DIR = os.path.abspath(
@@ -37,4 +36,7 @@ def get_db_info() -> Tuple[str, str]:
     """Returns the name of the DB and the user
     """
     db = DATABASES.get("default", {})
-    return db.get("NAME"), db.get("USER")
+    name, user = db.get("NAME"), db.get("USER")
+    if os.sep in name:
+        name = name.split(os.sep)[-1]
+    return name, user

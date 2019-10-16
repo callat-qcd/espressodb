@@ -10,13 +10,14 @@ class Command(BaseCommand):
     helps = "Returns espressodb version infos and db access"
 
     def handle(self, *args, **options):
-        name, user = get_db_info()
+
         branch, version = get_repo_version()
-        print(
-            f"espressodb version: {version} ({branch})"
-            + (
-                f"\nDB access: {user}@{name}"
-                if user is not None or name is not None
-                else ""
-            )
-        )
+        info = f"espressodb version: {version} ({branch})"
+
+        name, user = get_db_info()
+        if name:
+            info += "\nDB access:"
+            info += f"{user}@" if user else " "
+            info += f"{name}"
+
+        print(info)
