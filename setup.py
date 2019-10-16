@@ -43,4 +43,13 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
     ],
+    package_data={
+        "static": ["espressodb/base/static/*"],
+        "templates": [
+            "espressodb/base/templates/*",
+            "espressodb/documentation/templates/*",
+            "espressodb/management/templates/*",
+            "espressodb/notifications/templates/*",
+        ],
+    },
 )
