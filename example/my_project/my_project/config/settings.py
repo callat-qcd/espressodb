@@ -132,7 +132,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = []
+STATICFILES_DIRS = [os.path.join(ESPRESSO_DB_ROOT, "espressodb", "base", "static")]
 for app in PROJECT_APPS[::-1]:
     _static_dir = os.path.join(ROOT_DIR, app.replace(".", os.sep), "static")
     if os.path.exists(_static_dir):
