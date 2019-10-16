@@ -60,9 +60,6 @@ Running migrations:
   Applying auth.0010_alter_group_name_max_length... OK
   Applying auth.0011_update_proxy_permissions... OK
   Applying notifications.0001_initial... OK
-  Applying notifications.0002_auto_20191003_1920... OK
-  Applying notifications.0003_auto_20191003_1925... OK
-  Applying notifications.0004_auto_20191005_1435... OK
   Applying sessions.0001_initial... OK
 ```
 The last command will create the database `my_project-db.sqlite` with EspressoDB's default tables.
