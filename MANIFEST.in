@@ -1,0 +1,5 @@
+graft espressodb/base/static
+graft espressodb/base/templates
+graft espressodb/documentation/templates
+graft espressodb/management/templates
+graft espressodb/notifications/templates
