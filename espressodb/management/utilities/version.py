@@ -1,6 +1,7 @@
-"""Tools to keep track of the current repository version
+"""Tools to keep track of the current repository version and database.
 """
 from typing import Tuple
+from typing import Optional
 
 import subprocess
 import os
@@ -15,9 +16,15 @@ BASE_DIR = os.path.abspath(
 )
 
 
-def get_repo_version() -> Tuple[str, str]:
-    """Returns the branch and the git tag-commit version of the repository if still
-    linked.
+def get_repo_version() -> Tuple[Optional[str], Optional[str]]:
+    """Finds information about the EspressoDB repository if possible.
+
+    Only works if EspressoDB is installed from the github repository.
+
+    #ToDo: Should return EspressoDB version if not installed from repo.
+
+    Returns:
+        The branch and the git tag-commit version as strings if found. Else None.
     """
 
     tag_commit_cmd = ["git", f"--git-dir={BASE_DIR}", "describe", "--always", "--long"]
@@ -40,8 +47,14 @@ def get_repo_version() -> Tuple[str, str]:
     return branch, tag_commit
 
 
-def get_db_info() -> Tuple[str, str]:
-    """Returns the name of the DB and the user
+def get_db_info() -> Tuple[Optional[str], Optional[str]]:
+    """Extract database informations from the settings.
+
+    Returns:
+        The name of the db and the name of the db user if found.
+
+    Note:
+        ``.sqlite`` databases do not specify a user.
     """
     db = DATABASES.get("default", {})
     name, user = db.get("NAME"), db.get("USER")
