@@ -6,6 +6,10 @@ espressodb.base
 
 
 .. toctree::
+   :titlesonly:
    :glob:
 
+
    *
+   utilities/index
+   templatetags/index

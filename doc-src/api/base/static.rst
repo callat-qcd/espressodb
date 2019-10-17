@@ -1,2 +1,2 @@
-static
+espressodb.base.static
 ========================
