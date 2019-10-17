@@ -1,11 +1,4 @@
 """Functions for identifying files relevant for EspressoDB.
-
-.. autosummary::
-   get_project_settings
-   get_db_config
-   ESPRESSO_DB_ROOT
-
-------
 """
 from typing import Dict
 from typing import Any
