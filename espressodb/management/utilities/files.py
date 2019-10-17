@@ -54,7 +54,7 @@ def get_project_settings(root_dir: str) -> Dict[str, Any]:
 def get_db_config(root_dir: str) -> Dict[str, str]:
     """Reads the db settings file for given project and performs checks.
 
-    Expects to find the keys ``ENGINE `` and ``NAME``.
+    Expects to find the keys ``ENGINE`` and ``NAME``.
 
     Args:
         root_dir: The root directory of the project.
