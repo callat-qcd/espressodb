@@ -8,3 +8,4 @@ espressodb.notifications
    :glob:
 
    *
+   templatetags/index
