@@ -2,6 +2,8 @@ files
 ==================================================
 **Module**: :mod:`espressodb.management.utilities.files`
 
+.. currentmodule:: espressodb.management.utilities.files
+
 .. autosummary::
    get_project_settings
    get_db_config

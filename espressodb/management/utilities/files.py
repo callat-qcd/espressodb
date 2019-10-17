@@ -52,14 +52,18 @@ def get_project_settings(root_dir: str) -> Dict[str, Any]:
 
 
 def get_db_config(root_dir: str) -> Dict[str, str]:
-    """Reads the settings file for given project and performs checks.
+    """Reads the db settings file for given project and performs checks.
 
-    :param root_dir: The root directory of the project.
+    Expects to find the keys ``ENGINE `` and ``NAME``.
 
+    Args:
+        root_dir: The root directory of the project.
 
-    Implemented checks:
-        * "ENGINE" is specified
-        * "NAME" is specified
+    Returns:
+        Database settings found in settings file.
+
+    Raises:
+        ImproperlyConfigured: If not all of the essential keys are set.
     """
 
     db_config_file = os.path.join(root_dir, "db-config.yaml")
