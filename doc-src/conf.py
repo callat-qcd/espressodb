@@ -86,3 +86,4 @@ html_context = {
 }
 
 autosummary_generate = True
+add_module_names = False
