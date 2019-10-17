@@ -8,3 +8,4 @@ espressodb.documentation
    :glob:
 
    *
+   templatetags/index

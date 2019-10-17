@@ -1,0 +1,5 @@
+espressodb.management.utilities.version
+==========================================
+
+.. automodule:: espressodb.management.utilities.version
+    :members:
