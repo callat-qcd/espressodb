@@ -1,2 +1,3 @@
-espressodb.management.templates
-====================================
+templates
+==================================================
+**Module**: :mod:`espressodb.management.templates`

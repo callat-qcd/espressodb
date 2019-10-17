@@ -1,2 +1,3 @@
-espressodb.documentation.templates
-==================================
+templates
+==================================================
+**Module**: :mod:`espressodb.documentation.templates`

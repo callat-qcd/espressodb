@@ -1,5 +1,7 @@
-espressodb.base.utilities.models
-================================
+models
+==================================================
+**Module**: :mod:`espressodb.base.utilities.models`
+
 
 .. automodule:: espressodb.base.utilities.models
     :members:

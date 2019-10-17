@@ -1,5 +1,7 @@
-espressodb.documentation.templatetags.documentation_extras
-==========================================================
+documentation_extras
+==================================================
+**Module**: :mod:`espressodb.documentation.templatetags.documentation_extras`
+
 
 .. automodule:: espressodb.documentation.templatetags.documentation_extras
     :members:

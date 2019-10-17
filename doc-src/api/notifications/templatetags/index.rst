@@ -1,5 +1,7 @@
-espressodb.notifications.templatetags
-================================================
+templatetags
+==================================================
+**Module**: :mod:`espressodb.notifications.templatetags`
+
 
 .. automodule:: espressodb.notifications.templatetags
     :members:

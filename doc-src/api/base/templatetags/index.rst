@@ -1,5 +1,6 @@
-espressodb.base.templatetags
-==============================
+templatetags
+==================================================
+**Module**: :mod:`espressodb.base.templatetags`
 
 .. automodule:: espressodb.base.templatetags
     :members:

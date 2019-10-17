@@ -1,5 +1,7 @@
-espressodb.management.management.commands.startapp
-============================================================
+startapp
+==================================================
+**Module**: :mod:`espressodb.management.management.commands.startapp`
+
 
 .. automodule:: espressodb.management.management.commands.startapp
     :members:

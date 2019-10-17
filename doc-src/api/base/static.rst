@@ -1,2 +1,3 @@
-espressodb.base.static
-========================
+static
+==================================================
+**Module**: :mod:`espressodb.base.static`

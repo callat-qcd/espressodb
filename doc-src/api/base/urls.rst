@@ -1,5 +1,7 @@
-espressodb.base.urls
-===========================
+urls
+==================================================
+**Module**: :mod:`espressodb.base.urls`
+
 
 .. automodule:: espressodb.base.urls
     :members:

@@ -1,5 +1,7 @@
 espressodb.base
-===============
+==================================================
+**Module**: :mod:`espressodb.base`
+
 
 .. automodule:: espressodb.base
     :members:

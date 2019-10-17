@@ -1,5 +1,7 @@
-espressodb.base.utilities.blackmagicsorcery
-===========================================
+blackmagicsorcery
+==================================================
+**Module**: :mod:`espressodb.base.utilities.blackmagicsorcery`
+
 
 .. automodule:: espressodb.base.utilities.blackmagicsorcery
     :members:

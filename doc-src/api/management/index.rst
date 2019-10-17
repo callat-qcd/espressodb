@@ -1,5 +1,7 @@
 espressodb.management
-=====================
+==================================================
+**Module**: :mod:`espressodb.management`
+
 
 .. automodule:: espressodb.management
     :members:
