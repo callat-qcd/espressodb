@@ -10,11 +10,11 @@ espressodb.management
    espressodb.management.utilities
    espressodb.management.management.commands
 
-------
+The ``startapp`` and ``startproject`` templates are located in ``espressodb/management/templates``.
+
 
 .. toctree::
-   :glob:
-   
-   *
-   utilities/index
-   management_commands/index
+    :hidden:
+
+    utilities/index
+    management_commands/index

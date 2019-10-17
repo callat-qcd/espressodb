@@ -30,6 +30,7 @@ if ROOT_DIR is None:
     )
 
 #: Name of the current project.
+#: Must match the name of the project Python module
 PROJECT_NAME: str = getattr(settings, "PROJECT_NAME", None)
 
 if PROJECT_NAME is None:

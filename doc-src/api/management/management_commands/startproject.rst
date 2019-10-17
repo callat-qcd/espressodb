@@ -6,3 +6,4 @@ startproject
 .. automodule:: espressodb.management.management.commands.startproject
     :members:
     :special-members:
+    :exclude-members: handle

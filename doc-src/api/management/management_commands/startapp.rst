@@ -6,3 +6,4 @@ startapp
 .. automodule:: espressodb.management.management.commands.startapp
     :members:
     :special-members:
+    :exclude-members: handle
