@@ -1,2 +1,2 @@
-templates
-========================
+espressodb.documentation.templates
+==================================
