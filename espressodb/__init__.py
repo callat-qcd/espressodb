@@ -1,12 +1,17 @@
 # pylint: disable=C0413
-"""General statement
+"""Initializes minimal settings to launch EspressoDB
 """
 from django import setup as _setup
 from django.conf import settings
 
 
 def init(**kwargs):
-    """Initializes the django environment for espressodb
+    """Initializes minimal settings to launch EspressoDB without a project
+
+    Launches  ``django.conf.settings.configure`` and runs ``django.setup``.
+
+    Keyword Args:
+        kwargs: Kwargs are fed to ``settings.configure``.
     """
     settings.configure(
         DEBUG=True,
@@ -21,7 +26,9 @@ def init(**kwargs):
         LOGGING={
             "version": 1,
             "disable_existing_loggers": False,
-            "handlers": {"console": {"level": "INFO", "class": "logging.StreamHandler"}},
+            "handlers": {
+                "console": {"level": "INFO", "class": "logging.StreamHandler"}
+            },
             "loggers": {
                 "espressodb": {
                     "handlers": ["console"],
