@@ -42,6 +42,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx_markdown_tables",
     # "sphinx.ext.viewcode",
+    "sphinx.ext.todo",
     "recommonmark",
     "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
@@ -88,3 +89,5 @@ html_context = {
 
 autosummary_generate = True
 add_module_names = False
+todo_include_todos = True
+todo_emit_warnings = True

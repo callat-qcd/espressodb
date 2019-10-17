@@ -21,7 +21,8 @@ def get_repo_version() -> Tuple[Optional[str], Optional[str]]:
 
     Only works if EspressoDB is installed from the github repository.
 
-    #ToDo: Should return EspressoDB version if not installed from repo.
+    Todo:
+        Should return EspressoDB version if not installed from repo.
 
     Returns:
         The branch and the git tag-commit version as strings if found. Else None.
