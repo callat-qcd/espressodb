@@ -1,12 +1,6 @@
 # pylint: disable=C0111, R0903, E1101
-"""
-Description
------------
-
-**Module name:** :mod:`espressodb.base.models`
-
-This module provides the :class:`~espressodb.base.models.Base` class which is an abstract
-model basis providing default interfaces for :mod:`espressodb`.
+"""This module provides the :class:`~espressodb.base.models.Base` class which is an
+abstract model basis providing default interfaces for :mod:`espressodb`.
 
 .. autosummary::
    Base.get_or_create_from_parameters
@@ -14,8 +8,7 @@ model basis providing default interfaces for :mod:`espressodb`.
    Base.check_consistency
    Base.specialization
 
-Details
--------
+------
 """
 from typing import Dict
 from typing import List
@@ -488,7 +481,9 @@ class Base(models.Model):
         indent = "|" if _recursion_level else ""
         indent += "-" * _recursion_level * 2
 
-        cls = calling_cls._get_child_by_name(_class_name) if _class_name else calling_cls
+        cls = (
+            calling_cls._get_child_by_name(_class_name) if _class_name else calling_cls
+        )
 
         if _recursion_level == 0:
             for key, tables in cls.get_recursive_columns(tree).items():
@@ -525,7 +520,9 @@ class Base(models.Model):
         try:
             instance, created = cls.objects.get_or_create(**kwargs)
         except Exception as e:
-            LOGGER.debug("Get or create call for %s failed with kwargs\n%s", cls, kwargs)
+            LOGGER.debug(
+                "Get or create call for %s failed with kwargs\n%s", cls, kwargs
+            )
             raise e
 
         LOGGER.debug(
