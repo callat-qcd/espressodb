@@ -1,13 +1,25 @@
+"""Contains views for the documentation app
+
+Views
+-----
+
+* :class:`.DocView`
+"""
 from django.views.generic.base import TemplateView
 
 from espressodb.base.utilities.apps import get_apps_slug_map
 
-# Create your views here.
 
 SLUG_MAP = get_apps_slug_map()
 
 
 class DocView(TemplateView):
+    """Renders the documentation page for apps present in EspressoDBs models.
+
+    Uses :meth:`espressodb.base.utilities.apps.get_apps_slug_map` to locate apps.
+
+    Provides context for template ``doc-base.html``.
+    """
 
     template_name = "doc-base.html"
 
