@@ -157,7 +157,7 @@ class Notifier:
         """Parses the group names to actual groups
 
         :param group_names: List of group names which will be converted to a list of
-            :py:class:`espressodb.notifications.models.Notification`s.
+                :class:`espressodb.notifications.models.Notification`.
 
         Raises KeyError if `fail_if_not_exists` is True and not all groups are found.
         Else returns found groups.
