@@ -1,4 +1,11 @@
-"""Functions for identifying files relevant for espressodb
+"""Functions for identifying files relevant for EspressoDB.
+
+.. autosummary::
+   get_project_settings
+   get_db_config
+   ESPRESSO_DB_ROOT
+
+------
 """
 from typing import Dict
 from typing import Any
@@ -44,6 +51,9 @@ def get_project_settings(root_dir: str) -> Dict[str, Any]:
 def get_db_config(root_dir: str) -> Dict[str, str]:
     """Reads the settings file for given project and performs checks.
 
+    :param root_dir: The root directory of the project.
+
+
     Implemented checks:
         * "ENGINE" is specified
         * "NAME" is specified
@@ -77,6 +87,7 @@ def get_db_config(root_dir: str) -> Dict[str, str]:
     return db_config
 
 
+#: Root directory of the EspressoDB installation
 ESPRESSO_DB_ROOT = os.path.abspath(
     os.path.join(os.path.realpath(__file__), os.pardir, os.pardir, os.pardir, os.pardir)
 )
