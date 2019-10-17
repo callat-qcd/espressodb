@@ -5,3 +5,4 @@ info
 
 .. automodule:: espressodb.management.management.commands.info
     :members:
+    :special-members:

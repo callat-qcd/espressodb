@@ -5,3 +5,4 @@ settings
 
 .. automodule:: espressodb.management.utilities.settings
     :members:
+    :special-members:

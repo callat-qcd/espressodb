@@ -5,6 +5,7 @@ templatetags
 
 .. automodule:: espressodb.notifications.templatetags
     :members:
+    :special-members:
 
 
 .. toctree::

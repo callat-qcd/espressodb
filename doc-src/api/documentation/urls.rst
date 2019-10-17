@@ -4,3 +4,4 @@ urls
 
 .. automodule:: espressodb.documentation.urls
     :members:
+    :special-members:

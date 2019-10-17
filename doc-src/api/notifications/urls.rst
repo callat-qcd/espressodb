@@ -4,3 +4,4 @@ urls
 
 .. automodule:: espressodb.notifications.urls
     :members:
+    :special-members:

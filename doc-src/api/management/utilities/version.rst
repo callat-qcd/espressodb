@@ -5,3 +5,4 @@ version
 
 .. automodule:: espressodb.management.utilities.version
     :members:
+    :special-members:

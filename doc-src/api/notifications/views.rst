@@ -4,3 +4,4 @@ views
 
 .. automodule:: espressodb.notifications.views
     :members:
+    :special-members:

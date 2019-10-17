@@ -5,3 +5,4 @@ admin
 
 .. automodule:: espressodb.base.admin
     :members:
+    :special-members:

@@ -5,3 +5,4 @@ views
 
 .. automodule:: espressodb.base.views
     :members:
+    :special-members:

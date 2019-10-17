@@ -5,3 +5,4 @@ blackmagicsorcery
 
 .. automodule:: espressodb.base.utilities.blackmagicsorcery
     :members:
+    :special-members:

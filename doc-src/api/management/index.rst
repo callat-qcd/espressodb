@@ -5,6 +5,7 @@ espressodb.management
 
 .. automodule:: espressodb.management
     :members:
+    :special-members:
 
 .. toctree::
    :glob:

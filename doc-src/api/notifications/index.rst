@@ -5,6 +5,7 @@ espressodb.notifications
 
 .. automodule:: espressodb.notifications
     :members:
+    :special-members:
 
 .. toctree::
    :glob:

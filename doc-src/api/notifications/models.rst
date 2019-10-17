@@ -4,3 +4,4 @@ models
 
 .. automodule:: espressodb.notifications.models
     :members:
+    :special-members:

@@ -5,3 +5,4 @@ apps
 
 .. automodule:: espressodb.base.utilities.apps
     :members:
+    :special-members:

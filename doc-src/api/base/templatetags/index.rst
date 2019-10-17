@@ -4,6 +4,7 @@ templatetags
 
 .. automodule:: espressodb.base.templatetags
     :members:
+    :special-members:
 
 
 .. toctree::
