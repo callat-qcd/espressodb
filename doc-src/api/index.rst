@@ -1,13 +1,20 @@
 API Reference of EspressoDB
 ====================================
 
-.. automodule:: espressodb
+EspressoDB splits up into 4 submodules
 
 .. autosummary::
    espressodb.base
    espressodb.documentation
    espressodb.notifications
    espressodb.management
+
+--------
+
+**Module**: :mod:`espressodb`
+
+.. automodule:: espressodb
+    :members:
 
 
 .. toctree::
