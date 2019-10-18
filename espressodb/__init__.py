@@ -9,6 +9,7 @@ def init(**kwargs):
     """Initializes minimal settings to launch EspressoDB without a project
 
     Launches  ``django.conf.settings.configure`` and runs ``django.setup``.
+    This is needed to use EspressoDB command line tools.
 
     Keyword Args:
         kwargs: Kwargs are fed to ``settings.configure``.
