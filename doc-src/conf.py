@@ -86,7 +86,7 @@ html_static_path = ["_static"]
 html_context = {
     "css_files": ["_static/theme_overrides.css"]  # override wide tables in RTD theme
 }
-
+napoleon_use_admonition_for_examples = True
 autosummary_generate = True
 add_module_names = False
 todo_include_todos = True
