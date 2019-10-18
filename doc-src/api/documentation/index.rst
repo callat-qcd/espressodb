@@ -2,6 +2,12 @@ espressodb.documentation
 ==================================================
 **Module**: :mod:`espressodb.documentation`
 
+.. autosummary::
+    espressodb.documentation.urls
+    espressodb.documentation.views
+    espressodb.documentation.templatetags
+
+------
 
 .. automodule:: espressodb.documentation
     :members:
@@ -9,6 +15,7 @@ espressodb.documentation
 
 .. toctree::
    :glob:
+   :hidden:
 
    *
    templatetags/index
