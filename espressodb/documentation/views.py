@@ -21,6 +21,7 @@ class DocView(TemplateView):
     Provides context for template ``doc-base.html``.
     """
 
+    #: The used template file.
     template_name = "doc-base.html"
 
     def get_context_data(self, **kwargs):

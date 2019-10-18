@@ -7,8 +7,11 @@ templatetags
     :members:
     :special-members:
 
+.. autosummary::
+    espressodb.notifications.templatetags.notifications_extras
 
 .. toctree::
-   :glob:
+    :hidden:
+    :glob:
 
-   *
+    *

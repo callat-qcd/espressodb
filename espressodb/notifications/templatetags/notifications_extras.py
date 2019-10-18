@@ -1,5 +1,7 @@
 """Additional in template functions for the espressodb module
 """
+from typing import Dict, Any
+
 from django import template
 from django.contrib.auth.models import User
 
@@ -10,8 +12,18 @@ register = template.Library()  # pylint: disable=C0103
 
 
 @register.inclusion_tag("render_notification.html")
-def render_notification(notification: Notification, hide_close: bool = False):
-    """Renders notification
+def render_notification(
+    notification: Notification, hide_close: bool = False
+) -> Dict[str, Any]:
+    """Renders notifications
+
+    Arguments:
+        notification:
+            The notification.
+        hide_close:
+            Hide the has read button in view for this notfication.
+
+    Uses template ``espressodb/notfications/templates/render_notification.html``.
     """
     context = {"notification": notification, "hide_close": hide_close}
 
@@ -21,6 +33,9 @@ def render_notification(notification: Notification, hide_close: bool = False):
 @register.simple_tag
 def bootstrap_level(level: str) -> str:
     """Maps logging levels to bootstrap levels. Defaults to light.
+
+    Arguments:
+        level: The logging level.
     """
     return {
         "DEBUG": "secondary",
@@ -34,7 +49,12 @@ def bootstrap_level(level: str) -> str:
 def render_notification_links(user: User):
     """Renders notification links.
 
+    Arguments:
+        user: The currently logged in user.
+
     Also adds informations about notifications which are viewable by user.
+
+    Uses template ``espressodb/notfications/templates/render_notification_links.html``.
     """
     notifications = Notification.get_notifications(user)
     notification_count = {}

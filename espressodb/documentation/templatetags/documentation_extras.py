@@ -16,6 +16,8 @@ SLUG_MAP = get_apps_slug_map()
 @register.inclusion_tag("model-doc.html")
 def render_documentation(app_slug: str, model_slug: str):
     """Renders documentation of model
+
+    Uses the template ``model-doc.html``.
     """
     context = {"app_slug": app_slug, "model_slug": model_slug}
 
