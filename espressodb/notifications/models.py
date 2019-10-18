@@ -120,9 +120,14 @@ class Notification(models.Model):
     ) -> List["Notification"]:
         """Returns all notifications the user is allowed to see.
 
-        :param user: The user who wants to see notifications
-        :param level: The notification level to specialize
-        :param show_all: If True also shows already read messages
+        Arguments:
+            user:
+                The user who wants to see notifications
+            level:
+                The notification level to specialize.
+                Shows notifications for all levels if not specified.
+            show_all:
+                If True also shows already read messages
 
         Results are order by timestamp in decreasing order.
         """
