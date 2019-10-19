@@ -16,7 +16,7 @@ LOGGER = logging.getLogger("espressodb")
 def get_project_settings(root_dir: str) -> Dict[str, Any]:
     """Reads the settings file for given project and performs checks.
 
-    Expects to find the keys ``SECRET_KEY``, ``DEBUG``, ``ALLOWED_HOST`` and
+    Expects to find the keys ``SECRET_KEY``, ``DEBUG``, ``ALLOWED_HOSTS`` and
     ``PROJECT_APPS``.
 
     Args:
@@ -40,7 +40,7 @@ def get_project_settings(root_dir: str) -> Dict[str, Any]:
     with open(settings_file, "r") as fin:
         settings = yaml.safe_load(fin.read())
 
-    for key in ["SECRET_KEY", "DEBUG", "ALLOWED_HOST", "PROJECT_APPS"]:
+    for key in ["SECRET_KEY", "DEBUG", "ALLOWED_HOSTS", "PROJECT_APPS"]:
         if key not in settings:
             raise ImproperlyConfigured(
                 f"The EspressoDB depends on you setting the '{key}' value"
