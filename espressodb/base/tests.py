@@ -6,7 +6,8 @@ from django.test import TestCase
 from django.db import connection
 from django.apps import apps
 
-from espressodb.config.settings import PROJECT_APPS
+from django.conf import settings
+
 
 # Create your tests here.
 
@@ -84,7 +85,7 @@ class AppTest(TestCase):
         """
 
         installed_apps = set(el.name for el in apps.app_configs.values())
-        project_apps = set(PROJECT_APPS)
+        project_apps = set(settings.PROJECT_APPS)
 
         self.assertTrue(
             project_apps.issubset(installed_apps),
