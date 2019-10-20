@@ -1,4 +1,4 @@
-"""Additional in template functions for the espressodb module
+"""Additional in template functions for the documentation module
 """
 from django import template
 from django.template.defaultfilters import slugify

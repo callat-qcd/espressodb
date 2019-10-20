@@ -1,4 +1,4 @@
-"""Additional in template functions for the espressodb module
+"""Additional in template functions for the base module
 """
 from typing import List, Dict, Tuple
 
