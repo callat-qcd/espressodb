@@ -8,6 +8,7 @@ EspressoDB splits up into 4 submodules
    espressodb.documentation
    espressodb.notifications
    espressodb.management
+   summary
 
 --------
 
@@ -25,3 +26,4 @@ EspressoDB splits up into 4 submodules
    documentation/index
    notifications/index
    management/index
+   summary
