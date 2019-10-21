@@ -519,7 +519,7 @@ class Base(models.Model):
         try:
             instance, created = cls.objects.get_or_create(**kwargs)
         except Exception as e:
-            LOGGER.debug(
+            LOGGER.error(
                 "Get or create call for %s failed with kwargs\n%s", cls, kwargs
             )
             raise e
