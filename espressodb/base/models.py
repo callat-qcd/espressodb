@@ -102,7 +102,8 @@ class Base(models.Model):
 
         Raise errors here if the model must fulfill checks.
 
-        :param data: Dictionary containing the open column data of the class.
+        Arguments:
+            data: Dictionary containing the (open) column data of the class.
         """
 
     @classmethod
@@ -148,11 +149,13 @@ class Base(models.Model):
 
     def save(
         self, *args, save_instance_only: bool = False, **kwargs
-    ):  # pylint: disable=W0221
+    ) -> "Base":  # pylint: disable=W0221
         """Overwrites type with the class name and user with login info if not specified.
 
-        :param save_instance_only: If true, only saves columns of the instance and not
-            associated specialized columns.
+        Arguments:
+            save_instance_only:
+                If true, only saves columns of the instance and not associated
+                specialized columns.
         """
         self.type = self.__class__.__name__
         if not self.user:
@@ -207,13 +210,13 @@ class Base(models.Model):
 
     @classmethod
     def _get_child_by_name(cls, class_name=str) -> "Base":
-        """Compares name of cls and all subclasses to `class_name` and returns match
+        """Compares name of cls and all subclasses to ``class_name`` and returns match
 
-        :param class_name:
-                The name to match
+        Arguments:
+            class_name: The name to match.
 
-        :raises:
-            KeyError - In case no or more then one class matches the name.
+        Raises:
+            KeyError: In case no or more then one class matches the name.
         """
         class_family = [cls] + cls.__subclasses__()
         matched_cls = [
@@ -237,18 +240,19 @@ class Base(models.Model):
     ) -> Tuple[str, Optional[Dict[str, Any]]]:
         """Extracts the class name and sub tree for a given tree and key
 
-        :param root_key:
+        Arguments:
+            root_key:
                 The key to look up in the dictionary
 
-        :param tree:
+            tree:
                 The tree of ForeignKey dependencies. This specify which class the
                 ForeignKey will take since only the base class is linked against.
                 Keys are strings corresponding to model fields, values are either
                 strings corresponding to classes
 
-        :raises:
-            * TypeError - If the values of the dictionary are not of type string or Tuple
-            * KeyError - If the key was not found in the dictionary
+        Raises:
+            TypeError: If the values of the dictionary are not of type string or Tuple
+            KeyError: If the key was not found in the dictionary
         """
         sub_tree = {}
         for key, val in tree.items():
@@ -266,13 +270,13 @@ class Base(models.Model):
     ) -> Tuple[Dict[str, List[str]]]:
         """Recursively parses table including foreign keys to extract all column names.
 
-        :param tree:
+        Arguments:
+            tree:
                 The tree of ForeignKey dependencies. This specify which class the
                 ForeignKey will take since only the base class is linked against.
                 Keys are strings corresponding to model fields, values are either
                 strings corresponding to classes
-
-        :param _class_name: Optional[str] = None
+            _class_name:
                 This key is used internaly to identified the specialization of the base
                 object.
         """
@@ -313,28 +317,26 @@ class Base(models.Model):
         """Recursively iterates ForeignKey field and tries to construc the foreign keys
         from parameters and parse tree using `get_or_create_from_parameters`.
 
-        :param field:
+        Arguments:
+            field:
                 The foreign key field to get or create.
-
-        :param parameters:
+            parameters:
                 The construction / query arguments. These parameters are shared among
                 all constructions.
-
-        :param tree:
+            tree:
                 The tree of ForeignKey dependencies. This specify which class the
                 ForeignKey will take since only the base class is linked against.
                 Keys are strings corresponding to model fields, values are either
                 strings corresponding to classes
-
-        :param dry_run:
+            dry_run:
                 Do not insert in database.
-
-        :param _recursion_level:
+            _recursion_level:
                 This key is used internaly to track number of recursions.
 
-        .. admonition:: Example
+        Example:
 
-                ```
+            .. code::
+
                 class B(Base):
                     key2 = IntegerField() # or ForeignKey(C)
 
@@ -388,22 +390,29 @@ class Base(models.Model):
     ) -> Tuple["Base", bool]:
         """Creates class and dependencies through top down approach from parameters.
 
-        :param calling_cls: The top class which starts the get or create chain.
+        Arguments:
+            calling_cls:
+                The top class which starts the get or create chain.
 
-        :param parameters: The construction / query arguments.
-            These parameters are shared among all constructions.
+            parameters:
+                The construction / query arguments.
+                These parameters are shared among all constructions.
 
-        :param tree: The tree of ForeignKey dependencies. This specify which class the
+            tree:
+                The tree of ForeignKey dependencies. This specify which class the
                 ForeignKey will take since only the base class is linked against.
                 Keys are strings corresponding to model fields, values are either
                 strings corresponding to classes
 
-        :param dry_run: Do not insert in database.
+            dry_run:
+                Do not insert in database.
 
-        :param _class_name: This key is used internaly to identified the specialization
-            of the base object.
+            _class_name:
+                This key is used internaly to identified the specialization
+                of the base object.
 
-        :param _recursion_level: This key is used internaly to track number of recursions.
+            _recursion_level:
+                This key is used internaly to track number of recursions.
 
         Populates columns from parameters and recursevily creates foreign keys need for
         construction.
@@ -413,7 +422,7 @@ class Base(models.Model):
         use the `specialized_parameters` argument.
         This routine does not populate many to many keys.
 
-        .. admonition:: Example
+        Example:
 
             Below you can find an example how this method works.
 
