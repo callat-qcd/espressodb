@@ -1,14 +1,6 @@
 # pylint: disable=C0111, R0903, E1101
-"""This module provides the :class:`~espressodb.base.models.Base` class which is an
-abstract model basis providing default interfaces for :mod:`espressodb`.
-
-.. autosummary::
-   Base.get_or_create_from_parameters
-   Base.save
-   Base.check_consistency
-   Base.specialization
-
-------
+"""This module provides the :class:`Base` class which is an abstract model basis
+providing default interfaces for :mod:`espressodb`.
 """
 from typing import Dict
 from typing import List
@@ -38,7 +30,6 @@ class Base(models.Model):
 
     #: Primary key for the base class
     id = models.AutoField(primary_key=True, help_text="Primary key for Base class.")
-    #: [TextField].
     #: Type for the base class. Will be auto set to specialized type on save
     type = models.TextField(
         editable=False,
@@ -50,7 +41,6 @@ class Base(models.Model):
     last_modified = models.DateTimeField(
         auto_now=True, help_text="Date the class was last modified"
     )
-    #: [ForeignKey](Optional).
     #: User who updated this object. Set on save by connection to database.
     #: Ananymous if not found.
     user = models.ForeignKey(
@@ -62,7 +52,6 @@ class Base(models.Model):
         " Ananymous if not found.",
     )
     #: User defined tag for easy searches
-    #: [TextField](Optional).
     tag = models.CharField(
         max_length=20,
         null=True,
