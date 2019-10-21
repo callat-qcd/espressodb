@@ -120,6 +120,7 @@ def register_admins(app_name: str):
     else:
         LOGGER.warning(
             "Was not able to locate app `%s`."
+            " This is needed to register admin pages."
             " Is it in installed (see `settings.yaml`)?",
             app_name,
         )
