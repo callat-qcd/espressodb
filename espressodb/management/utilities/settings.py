@@ -1,11 +1,17 @@
-"""Provides package settings variables needed by espressodb
+"""Provides package settings variables needed by espressodb.
+
+Raises ``ImproperlyConfigured`` errors if variables are not found.
 """
+from typing import List
+
 from django.conf import settings
 
 from django.core.exceptions import ImproperlyConfigured
 
 
-PROJECT_APPS = getattr(settings, "PROJECT_APPS", None)
+#: List of apps used in the project.
+#: Will be added to Django's ``INSTALLED_APPS``
+PROJECT_APPS: List[str] = getattr(settings, "PROJECT_APPS", None)
 
 if PROJECT_APPS is None:
     raise ImproperlyConfigured(
@@ -14,7 +20,8 @@ if PROJECT_APPS is None:
     )
 
 
-ROOT_DIR = getattr(settings, "ROOT_DIR", None)
+#: Root directory of the current project
+ROOT_DIR: str = getattr(settings, "ROOT_DIR", None)
 
 if ROOT_DIR is None:
     raise ImproperlyConfigured(
@@ -22,7 +29,9 @@ if ROOT_DIR is None:
         " Please set this directory in your root settings module."
     )
 
-PROJECT_NAME = getattr(settings, "PROJECT_NAME", None)
+#: Name of the current project.
+#: Must match the name of the project Python module
+PROJECT_NAME: str = getattr(settings, "PROJECT_NAME", None)
 
 if PROJECT_NAME is None:
     raise ImproperlyConfigured(

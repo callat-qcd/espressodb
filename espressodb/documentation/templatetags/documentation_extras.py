@@ -1,4 +1,4 @@
-"""Additional in template functions for the espressodb module
+"""Additional in template functions for the documentation module
 """
 from django import template
 from django.template.defaultfilters import slugify
@@ -8,14 +8,23 @@ from espressodb.base.utilities.apps import get_apps_slug_map, get_app_name
 
 register = template.Library()  # pylint: disable=C0103
 
-# Create your views here.
-
 SLUG_MAP = get_apps_slug_map()
 
 
 @register.inclusion_tag("model-doc.html")
 def render_documentation(app_slug: str, model_slug: str):
     """Renders documentation of model
+
+    Arguments:
+        app_slug:
+            Slug of the app to be rendered.
+            Uses :meth:`espressodb.base.utilities.apps.get_apps_slug_map` to obtain
+            app from app names.
+        model_slug:
+            Slug of the model to be rendered.
+
+
+    Uses the template ``model-doc.html``.
     """
     context = {"app_slug": app_slug, "model_slug": model_slug}
 

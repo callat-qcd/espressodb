@@ -40,10 +40,12 @@ release = "0.1.0"
 extensions = [
     "sphinx_rtd_theme",
     "sphinx.ext.autodoc",
-    "sphinx_autodoc_typehints",
     "sphinx_markdown_tables",
     # "sphinx.ext.viewcode",
+    "sphinx.ext.todo",
     "recommonmark",
+    "sphinx.ext.napoleon",
+    "sphinx_autodoc_typehints",
     "sphinx.ext.autosummary",
 ]
 
@@ -72,7 +74,7 @@ html_theme = "sphinx_rtd_theme"
 html_theme_options = {
     "collapse_navigation": False,
     "sticky_navigation": True,
-    "navigation_depth": 3,
+    "navigation_depth": 4,
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -84,5 +86,8 @@ html_static_path = ["_static"]
 html_context = {
     "css_files": ["_static/theme_overrides.css"]  # override wide tables in RTD theme
 }
-
+napoleon_use_admonition_for_examples = True
 autosummary_generate = True
+add_module_names = False
+todo_include_todos = True
+todo_emit_warnings = True

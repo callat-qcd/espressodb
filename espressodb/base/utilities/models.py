@@ -1,4 +1,4 @@
-"""Help functions to inspect models
+"""Help functions to inspect :class:`espressodb.base.models.Base` models.
 """
 from typing import Optional
 from typing import Tuple
@@ -11,7 +11,10 @@ from espressodb.base.models import Base
 
 
 def get_espressodb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.Model:
-    """Returns all installed project models which are not in the exclude list
+    """Returns all installed project models which are not in the exclude list.
+
+    Arguments:
+        exclude_apps: The apps to exclude.
     """
     return [
         model for app in get_project_apps(exclude_apps) for model in app.get_models()
@@ -21,20 +24,16 @@ def get_espressodb_models(exclude_apps: Optional[Tuple[str]] = None) -> models.M
 def iter_tree(model: Base, name: Optional[str] = None) -> List[Tuple[str, str]]:
     """Extracts all foreign keys of model and inserters them in list.
 
-    Returns strings in flat tree format, e.g., `propagator.gaugeconfig`.
+    Returns strings in flat tree format, e.g., ``model_column_A.model_column_B``.
 
-    **Arguments**
-        model: Base
-            A child of the base model.
+    Arguments:
+        model: A child of the base model.
+        name: The (path) name of the model.
 
-        name: Optional[str] = None
-            The (path) name of the model.
-
-    **Returns**
-        tree: List[Tuple[str, str]]
-            First element of tuple are name names of the foreign keys in format
-            `{name}.{field.name}`.
-            Second element are the actual classes.
+    Returns:
+        First element of tuple are name names of the foreign keys in format
+        ``{name}.{field.name}``.
+        Second element are the actual classes.
     """
     tree = []
 

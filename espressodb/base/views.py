@@ -17,21 +17,55 @@ from espressodb.base.utilities.models import iter_tree
 
 
 class IndexView(TemplateView):
+    """The default index view.
+    """
 
+    #: The used template file.
     template_name = "index.html"
 
 
 class PopulationView(View):
-    """View which queries the user for creating a tree for a selected table.
+    """View which guides the user in creating a nested model population script.
+
+    This view queries which model the user wants to populate.
+    If the model has Foreign Keys, it queries the user which table to select in case
+    there are multiple options (in case there is just one, this table will be selceted).
+
+    The logic works as follows, the root table might depend on other tables which might
+    depend on other tables as well.
+    This defines a tree of tables where each ForeignKey of the current table column needs
+    to be matched against possible table options.
+    This view iterates user choices and queries the user for open column-table pairs.
+
+    This view uses the request ``session`` (e.g, cookies) to store previously selected
+    values.
+    Thus there exist no unique link for the view.
+
+    The following keywords are used to identify the nested dependencies:
+        * ``root`` - the model on top of the tree (e.g, the first choosen table)
+        * ``todo`` - tables which need to be specified by the user to parse the tree
+        * ``tree`` - cloumn-tables pairs which have been specified by the user.
+          The column name reflects recursice column names. See the ``column`` key.
+        * ``column`` - the current column name. This name might be a combination of
+          nested column dependencies like ``columnA_columnB`` and so on.
+
+    Both the ``todo`` and ``tree`` lists are odered such that models are created bottom
+    up to create an executable script.
+
+    Warning:
+        The querying logic breaks if the user navigates backwards.
     """
 
+    #: The used template file.
     template_name = "select-table.html"
+    #: The used form.
     form_class = ModelSelectForm
 
     def get(self, request):
-        """Initializes from which queries user which table he wants to populate.
+        """Initializes from which queries the user about tables for population.
 
-        This starts the parsing of the tree.
+        Initializes the ``root``, ``todo``, ``tree`` and ``column`` ``session`` context
+        to empty values.
         """
         form = self.form_class()
         request.session["todo"] = []
@@ -42,10 +76,16 @@ class PopulationView(View):
         return render(request, self.template_name, {"form": form})
 
     def post(self, request, *args, **kwargs):  # pylint: disable=W0613
-        """Processes the selected model, pops the next task and adds its subclasses
-        to todo. Once the todo list is empty, it returns the tree.
+        """Processes the selected model and prepares the next choices.
 
-        This view uses cookies for creating the query.
+        The ``session`` context is modified in the following way:
+
+        1. If the form is valid, extract the current column-table choice using
+           :meth:`PopulationView.get_choice`.
+        2. Get the next column-table option the user has to specify using
+           :meth:`PopulationView.get_next`.
+        3. Return a new column-table from for the user to answer if not done yet.
+        4. Redirect to :class:`PopulationResultView` if there is nothing to do.
         """
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -64,7 +104,11 @@ class PopulationView(View):
 
     @staticmethod
     def get_choice(form: ModelSelectForm, session: Dict[str, Any]) -> Base:
-        """Reads form and sets root model if not present.
+        """Reads form and sets ``root`` model if not present in ``session``.
+
+        Arguments:
+            form: The valid form.
+            session: The current session. Will be updated if ``root is None``.
         """
         model = form.get_model()
         root = session.get("root", None)
@@ -78,7 +122,31 @@ class PopulationView(View):
     def get_next(
         self, model: Base, session: Dict[str, Any], parse_tree: bool = True
     ) -> Tuple[Base, List[Base]]:
-        """
+        """Updates the ``todo`` list by working through present entries.
+
+        Arguments:
+            model: The current ``column`` model.
+            parse_tree:
+                Adds possible user choices for dependencies of current
+                ``column`` if True to ``todo`` list.
+            session: The current session. Will be updated if ``root is None``.
+
+        This method works the following way:
+
+        1. Add current select model to tree if present.
+        2. Parse the tree of the current model if ``parse_tree`` using
+           :meth:`espressodb.base.utilities.models.iter_tree`.
+        3. Update ``todo`` if present (see below) else return (render result view).
+
+        The ``todo`` update works as follows:
+
+        1. Pop the first entry in the ``todo`` list and add this entry to ``column``
+        2. Find possible tables which can be chosen for this model. This modifies the
+           ``column`` context.
+        3. If there is more then one choices, ask the user which model to select.
+           This means returning back to the form query page.
+        4. Pick the only option if there is just one choice, and recursively call this
+           method for this choice.
         """
         # Add current model to tree
         column = session.get("column", None)
@@ -99,7 +167,9 @@ class PopulationView(View):
             next_model_choices = [next_model.get_label()]
 
             if next_model.__subclasses__():
-                next_model_choices = [m.get_label() for m in next_model.__subclasses__()]
+                next_model_choices = [
+                    m.get_label() for m in next_model.__subclasses__()
+                ]
 
             # Make choice automatically if only one choice
             if len(next_model_choices) == 1:
@@ -115,12 +185,20 @@ class PopulationView(View):
 
 
 class PopulationResultView(View):
+    """View which presents the result of the population query process.
+
+    This view generates a Python script which can be used to query or create nested
+    models once the user has filled out columns in script.
+    """
+
+    #: The used template file.
     template_name = "present-populate.html"
 
     def get(self, request):
-        """Initializes from which queries user which table he wants to populate.
+        """Presents the population results.
 
-        This starts the parsing of the tree.
+        Modifies the ``session``.
+        E.g., the ``todo`` and ``column`` entries are deleted.
         """
 
         for key in ["todo", "column"]:

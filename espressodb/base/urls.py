@@ -1,5 +1,17 @@
-# pylint: disable=C0103
-"""Url patters for base
+# pylint: disable=invalid-name, line-too-long
+"""Contains url patterns for the base app. This includes the index view.
+
+The URL-app name is ``base``.
+
++-----------------+----------------------+-----------------------------------------------------+
+| Name            | Path                 | View                                                |
++=================+======================+=====================================================+
+| index           | ``""``               | :class:`espressodb.base.views.IndexView`            |
++-----------------+----------------------+-----------------------------------------------------+
+| populate        | ``populate/``        | :class:`espressodb.base.views.PopulationView`       |
++-----------------+----------------------+-----------------------------------------------------+
+| populate-result | ``populate-result/`` | :class:`espressodb.base.views.PopulationResultView` |
++-----------------+----------------------+-----------------------------------------------------+
 """
 from django.urls import path
 

@@ -17,6 +17,10 @@ from espressodb.base.utilities.blackmagicsorcery import search
 def get_project_apps(exclude_apps: Optional[Tuple[str]] = None) -> List[AppConfig]:
     """Finds all apps which are part of the project.
 
+    Arguments:
+        exclude_apps:
+            Name of the apps to exclude. Must match ``settings.yaml`` specification.
+
     Iterates over apps specified in the settings.yaml file and returns django app configs
     if installed.
     """
@@ -41,6 +45,9 @@ def get_project_apps(exclude_apps: Optional[Tuple[str]] = None) -> List[AppConfi
 
 def get_app_name(app: AppConfig) -> str:
     """Returns a readable name for the app
+
+    Arguments:
+        app: The app config.
     """
     return " ".join([s.capitalize() for s in app.name.split(".")[1:]])
 

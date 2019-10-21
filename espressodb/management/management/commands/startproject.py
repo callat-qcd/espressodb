@@ -13,7 +13,39 @@ LOGGER = logging.getLogger("espressodb")
 
 
 class Command(StartProjectCommand):
-    """Start a new project in the current or specified directory
+    """Start a new project.
+
+    See also :data:`espressodb.management.utilities.settings.ROOT_DIR` and
+    :data:`espressodb.management.utilities.settings.PROJECT_NAME`
+
+    The default project layout is (see also the templates.)
+
+    .. code::
+
+        {ROOT_DIR}/
+        |-- manage.py
+        |-- db-config.yaml
+        |-- settings.yaml
+        |-- setup.py
+        |-- {PROJECT_NAME}/
+            |-- __init__.py
+            |-- config/
+                |-- __init__.py
+                |-- settings.py
+                |-- urls.py
+                |-- wsgi.py
+                |-- migrations/
+                    |-- __init__.py
+                    |-- notifications/
+                        |-- __init__.py
+                        |-- 0001_initial.py
+
+    Important:
+        EspressoDB requires this layout for import statements and static/template path
+        finding.
+
+    Note:
+        This command overrides default startproject command to match new folder layout.
     """
 
     help = (
