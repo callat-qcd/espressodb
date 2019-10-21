@@ -105,7 +105,7 @@ class ListViewAdmin(admin.ModelAdmin):
 
 
 def register_admins(app_name: str):
-    """Tries to load all models from this app and registers ListViewAdmin sites
+    """Tries to load all models from this app and registers :class:`ListViewAdmin` sites.
 
     Arguments:
         app_name: The name of the app.
