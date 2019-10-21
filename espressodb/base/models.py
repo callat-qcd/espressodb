@@ -510,7 +510,8 @@ class Base(models.Model):
                 if value is None and not field.null:
                     raise KeyError(
                         f"Missing value for constructing {cls}."
-                        f" Parameter dictionary has no value for {field.name}"
+                        f" Parameter dictionary has no value for {field.name}."
+                        f" Here are the keys {parameters.keys()}."
                     )
                 elif value is not None:
                     kwargs[field.name] = field.get_db_prep_value(value, connection)
