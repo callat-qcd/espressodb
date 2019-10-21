@@ -1,4 +1,4 @@
-"""Additional in template functions for the base module
+"""Additional in template functions for the base module.
 """
 from typing import List, Dict, Tuple
 
@@ -28,10 +28,16 @@ def render_link_list(
 ) -> Dict[str, Tuple[str, str]]:
     """Renders all app and documentation page links
 
-    Returns context with keys urls and documentation where each value is a list of
-    Tuples with the reverse url name and display name.
+    Arguments:
+        exclude: The link names to exclude.
+
+    Returns:
+        Context with keys ``urls`` and ``documentation`` where each value is a list
+        of Tuples with the reverse url name and display name.
 
     Ignores urls which do not result in a match.
+
+    Uses the template ``link-list.html``.
     """
     urlconf = __import__(settings.ROOT_URLCONF, {}, {}, [""])
 
@@ -75,6 +81,9 @@ def render_link_list(
 
 def render_field(field: Field) -> str:
     """Returns verbose descriptor of model field
+
+    Arguments:
+        field: The field to render.
     """
     optional = "(Optional) " if field.null else ""
     return f"{field.name}=..., # {optional}{Truncator(field.help_text).words(12)}"
@@ -82,6 +91,9 @@ def render_field(field: Field) -> str:
 
 def render_fields(fields: List[Field]) -> List[str]:
     """Renders fields to string.
+
+    Arguments:
+        fields: The fields to render.
 
     Sorts fields by being optional or not.
     """
@@ -98,7 +110,18 @@ def render_fields(fields: List[Field]) -> List[str]:
 
 
 @register.inclusion_tag("tree-to-python.html")
-def render_tree(tree, root):
+def render_tree(tree: Dict[str, str], root: str) -> Dict[str, str]:
+    """Renders a model population tree to Python code.
+
+    Arguments:
+        tree: The column names ForeignKey dependency tree of the root model.
+        root: The name of the root model.
+
+    Returns:
+        Context containing the Python code unde key ``content``.
+
+    Uses the template ``tree-to-python.html``.
+    """
     content = ""
     models = {}
 
