@@ -35,15 +35,13 @@ Once you have created your Python project (e.g., `my_project`) with EspressoDB
     E.g., you can automate plots and display summaries in your browser.
     If you want to, you can also make your web app public (with different layers of accessibility) and share results with others.
 
-We provide further examples of features in the [features section](features/index) and provide a specific implementation in the [example section](example/index).
-
 
 ## How to install it?
 EspressoDB can be installed via pip
 ```bash
 pip install [--user] espressodb
 ```
-For more details, see also the [How to use EspressoDB guide](Usage.md).
+For more details, see also the [How to use EspressoDB guide](doc-src/Usage.md).
 
 ## What's the story behind it?
 
