@@ -2,7 +2,7 @@
 """Setup file for EspressoDB
 """
 __author__ = "@cchang5, @ckoerber"
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 
 from os import path
 
@@ -38,11 +38,11 @@ setup(
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Science/Research",
-        "Topic :: Software Development :: Data Management",
-        "Topic :: Software Development :: Project Management",
+        "Topic :: Database :: Database Engines/Servers",
+        "Topic :: Database",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
-        "License :: OSI Approved :: BSD 3-Clause License",
+        "License :: OSI Approved :: BSD License",
         "Operating System :: OS Independent",
     ],
     include_package_data=True,
