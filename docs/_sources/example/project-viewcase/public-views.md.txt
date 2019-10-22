@@ -19,7 +19,6 @@ Whenever you create a new app, EspressoDB directly scans your app and adds docum
 The only view which is specifically implemented for the project is [the Hamiltonian status page](#the-hamiltonian-status-page).
 
 All of the pages are completely customizable.
-We explain [how to update pages](../../advanced/index) in the developers section for that.
 
 On the bottom of the page, the current version of EspressoDB and the repo is displayed.
 
@@ -69,7 +68,7 @@ See also [the private views](private-views) for what to expect there.
 ![The login view](../../_static/example-status.png)
 
 The status page displays informations about one of the tables called `Contact[Hamiltonian]`.
-It displays a dynamically generated grid plot which visualisazies the status of computations.
+It displays a dynamically generated grid plot which visualizes the status of computations.
 A green field corresponds to completed jobs, a red field to not finished jobs.
 A mouse-over effect displays further information.
 Once the database is updated (and the web page reloaded) the plot will also update.

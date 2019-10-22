@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="espressodb.documentation" href="../documentation/index.html" />
-    <link rel="prev" title="utilities" href="utilities.html" /> 
+    <link rel="next" title="utilities" href="utilities/index.html" />
+    <link rel="prev" title="urls" href="urls.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,6 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#how-to-install-it">How to install it?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#what-s-the-story-behind-it">What’s the story behind it?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#who-is-responsible-for-it">Who is responsible for it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#license">License</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Usage.html">How to use EspressoDB</a><ul>
@@ -96,7 +97,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-espressodb">Install EspressoDB</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#start-a-project">Start a project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#configure-your-project">Configure your project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-or-update-the-database">Create or update the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-or-update-the-database">Create or update the database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Usage.html#create-migrations">Create migrations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Usage.html#migrate-changes">Migrate changes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#launch-a-local-web-app">Launch a local web app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-a-new-app">Create a new app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-your-project-locally">Install your project locally</a></li>
@@ -107,19 +112,58 @@
 <li class="toctree-l1"><a class="reference internal" href="../../example/index.html">The example project</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../example/project-viewcase/index.html">What can I do?</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/install.html">Install the project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/public-views.html">The public views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/private-views.html">The private views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html">Using your project in external modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/public-views.html">The public views</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-home-page">The home page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-doc-page">The doc page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-population-views">The population views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-login-page">The login page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-hamiltonian-status-page">The Hamiltonian status page</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/private-views.html">The private views</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/private-views.html#the-notifications-page">The notifications page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/private-views.html#the-admin-pages">The admin pages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html">Using your project in external modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#installing-your-module">Installing your module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#using-tables">Using tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#the-add-data-py-script">The <code class="docutils literal notranslate"><span class="pre">add_data.py</span></code> script</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../example/project-creation/index.html">How do I set up the example project myself?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/project-creation.html">Create your own project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/app-creation.html">Create the hamiltonians app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/adding-data.html">Adding data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/project-creation.html">Create your own project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/project-creation.html#start-the-project">Start the project</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/app-creation.html">Create the hamiltonians app</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/app-creation.html#creating-the-infrastructure">Creating the infrastructure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/app-creation.html#creating-tables">Creating tables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/adding-data.html">Adding data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/adding-data.html#the-admin-page">The admin page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/adding-data.html#data-scripts">Data scripts</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/class-interface.html">Providing short cuts with class methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/dependencies.html">Adding tables with relationships</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/views.html">Creating web views for summaries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/inheritance.html">More complicated tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/dependencies.html">Adding tables with relationships</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/dependencies.html#updating-the-models">Updating the models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/dependencies.html#updating-the-run-script">Updating the run script</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/views.html">Creating web views for summaries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/views.html#adjusting-the-index-template">Adjusting the index template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/views.html#views-with-plots">Views with plots</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/inheritance.html">More complicated tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/inheritance.html#in-which-scenario-are-they-helpful">In which scenario are they helpful</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/inheritance.html#implementation-of-common-base">Implementation of common base</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -133,30 +177,70 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference of EspressoDB</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">espressodb.base</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="admin.html">admin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="models.html">models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="static.html">static</a></li>
-<li class="toctree-l3"><a class="reference internal" href="templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="templatetags.html">templatetags</a></li>
-<li class="toctree-l3"><a class="reference internal" href="utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="urls.html">urls</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="utilities/index.html">utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="utilities/apps.html">apps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilities/blackmagicsorcery.html">blackmagicsorcery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="utilities/models.html">models</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="templatetags/base_extras.html">base_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">espressodb.documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../documentation/templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../documentation/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../documentation/views.html">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../documentation/templatetags/documentation_extras.html">documentation_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../notifications/index.html">espressodb.notifications</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../notifications/models.html">models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../notifications/templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../notifications/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../notifications/urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../notifications/views.html">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../notifications/templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../notifications/templatetags/notification_extras.html">notifications_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../management/index.html">espressodb.management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../management/management.html">management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../management/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../management/utilities/index.html">utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/files.html">files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/settings.html">settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/version.html">version</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../management/management_commands/index.html">commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/info.html">info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/startapp.html">startapp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/startproject.html">startproject</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../summary.html">Summary of EspressoDB functionality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../summary.html#urls">URLs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-base-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.base.urls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-documentation-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.documentation.urls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-notifications-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.notifications.urls</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../summary.html#templatetags">Templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-base-templatetags-base-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.base.templatetags.base_extras</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-documentation-templatetags-documentation-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.documentation.templatetags.documentation_extras</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-notifications-templatetags-notifications-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.notifications.templatetags.notifications_extras</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -229,30 +313,94 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-espressodb.base.views">
-<span id="views"></span><h1>views<a class="headerlink" href="#module-espressodb.base.views" title="Permalink to this headline">¶</a></h1>
-<p>Views for the base module</p>
+  <div class="section" id="views">
+<h1>views<a class="headerlink" href="#views" title="Permalink to this headline">¶</a></h1>
+<p><strong>Module</strong>: <a class="reference internal" href="#module-espressodb.base.views" title="espressodb.base.views"><code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.base.views</span></code></a></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#espressodb.base.views.IndexView" title="espressodb.base.views.IndexView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IndexView</span></code></a>(**kwargs)</p></td>
+<td><p>The default index view.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#espressodb.base.views.PopulationView" title="espressodb.base.views.PopulationView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PopulationView</span></code></a>(**kwargs)</p></td>
+<td><p>View which guides the user in creating a nested model population script.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#espressodb.base.views.PopulationResultView" title="espressodb.base.views.PopulationResultView"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PopulationResultView</span></code></a>(**kwargs)</p></td>
+<td><p>View which presents the result of the population query process.</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<span class="target" id="module-espressodb.base.views"></span><p>Views for the base module</p>
 <dl class="class">
 <dt id="espressodb.base.views.IndexView">
-<em class="property">class </em><code class="sig-prename descclassname">espressodb.base.views.</code><code class="sig-name descname">IndexView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.IndexView" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<em class="property">class </em><code class="sig-name descname">IndexView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.IndexView" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default index view.</p>
+<dl class="attribute">
+<dt id="espressodb.base.views.IndexView.template_name">
+<code class="sig-name descname">template_name</code><em class="property"> = 'index.html'</em><a class="headerlink" href="#espressodb.base.views.IndexView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The used template file.</p>
+</dd></dl>
+
+</dd></dl>
 
 <dl class="class">
 <dt id="espressodb.base.views.PopulationResultView">
-<em class="property">class </em><code class="sig-prename descclassname">espressodb.base.views.</code><code class="sig-name descname">PopulationResultView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationResultView" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<em class="property">class </em><code class="sig-name descname">PopulationResultView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationResultView" title="Permalink to this definition">¶</a></dt>
+<dd><p>View which presents the result of the population query process.</p>
+<p>This view generates a Python script which can be used to query or create nested
+models once the user has filled out columns in script.</p>
+<dl class="method">
 <dt id="espressodb.base.views.PopulationResultView.get">
 <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationResultView.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializes from which queries user which table he wants to populate.</p>
-<p>This starts the parsing of the tree.</p>
+<dd><p>Presents the population results.</p>
+<p>Modifies the <code class="docutils literal notranslate"><span class="pre">session</span></code>.
+E.g., the <code class="docutils literal notranslate"><span class="pre">todo</span></code> and <code class="docutils literal notranslate"><span class="pre">column</span></code> entries are deleted.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.base.views.PopulationResultView.template_name">
+<code class="sig-name descname">template_name</code><em class="property"> = 'present-populate.html'</em><a class="headerlink" href="#espressodb.base.views.PopulationResultView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The used template file.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="espressodb.base.views.PopulationView">
-<em class="property">class </em><code class="sig-prename descclassname">espressodb.base.views.</code><code class="sig-name descname">PopulationView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationView" title="Permalink to this definition">¶</a></dt>
-<dd><p>View which queries the user for creating a tree for a selected table.</p>
+<em class="property">class </em><code class="sig-name descname">PopulationView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationView" title="Permalink to this definition">¶</a></dt>
+<dd><p>View which guides the user in creating a nested model population script.</p>
+<p>This view queries which model the user wants to populate.
+If the model has Foreign Keys, it queries the user which table to select in case
+there are multiple options (in case there is just one, this table will be selceted).</p>
+<p>The logic works as follows, the root table might depend on other tables which might
+depend on other tables as well.
+This defines a tree of tables where each ForeignKey of the current table column needs
+to be matched against possible table options.
+This view iterates user choices and queries the user for open column-table pairs.</p>
+<p>This view uses the request <code class="docutils literal notranslate"><span class="pre">session</span></code> (e.g, cookies) to store previously selected
+values.
+Thus there exist no unique link for the view.</p>
+<dl class="simple">
+<dt>The following keywords are used to identify the nested dependencies:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">root</span></code> - the model on top of the tree (e.g, the first choosen table)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">todo</span></code> - tables which need to be specified by the user to parse the tree</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tree</span></code> - cloumn-tables pairs which have been specified by the user.
+The column name reflects recursice column names. See the <code class="docutils literal notranslate"><span class="pre">column</span></code> key.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">column</span></code> - the current column name. This name might be a combination of
+nested column dependencies like <code class="docutils literal notranslate"><span class="pre">columnA_columnB</span></code> and so on.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Both the <code class="docutils literal notranslate"><span class="pre">todo</span></code> and <code class="docutils literal notranslate"><span class="pre">tree</span></code> lists are odered such that models are created bottom
+up to create an executable script.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The querying logic breaks if the user navigates backwards.</p>
+</div>
 <dl class="attribute">
 <dt id="espressodb.base.views.PopulationView.form_class">
 <code class="sig-name descname">form_class</code><a class="headerlink" href="#espressodb.base.views.PopulationView.form_class" title="Permalink to this definition">¶</a></dt>
@@ -262,17 +410,24 @@
 <dl class="method">
 <dt id="espressodb.base.views.PopulationView.get">
 <code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationView.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Initializes from which queries user which table he wants to populate.</p>
-<p>This starts the parsing of the tree.</p>
+<dd><p>Initializes from which queries the user about tables for population.</p>
+<p>Initializes the <code class="docutils literal notranslate"><span class="pre">root</span></code>, <code class="docutils literal notranslate"><span class="pre">todo</span></code>, <code class="docutils literal notranslate"><span class="pre">tree</span></code> and <code class="docutils literal notranslate"><span class="pre">column</span></code> <code class="docutils literal notranslate"><span class="pre">session</span></code> context
+to empty values.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="espressodb.base.views.PopulationView.get_choice">
 <em class="property">static </em><code class="sig-name descname">get_choice</code><span class="sig-paren">(</span><em class="sig-param">form</em>, <em class="sig-param">session</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationView.get_choice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads form and sets root model if not present.</p>
+<dd><p>Reads form and sets <code class="docutils literal notranslate"><span class="pre">root</span></code> model if not present in <code class="docutils literal notranslate"><span class="pre">session</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="models.html#espressodb.base.models.Base" title="espressodb.base.models.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>form</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">ModelSelectForm</span></code>) – The valid form.</p></li>
+<li><p><strong>session</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – The current session. Will be updated if <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">is</span> <span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="models.html#espressodb.base.models.Base" title="espressodb.base.models.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -280,7 +435,35 @@
 <dl class="method">
 <dt id="espressodb.base.views.PopulationView.get_next">
 <code class="sig-name descname">get_next</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">session</em>, <em class="sig-param">parse_tree=True</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationView.get_next" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Updates the <code class="docutils literal notranslate"><span class="pre">todo</span></code> list by working through present entries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference internal" href="models.html#espressodb.base.models.Base" title="espressodb.base.models.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a>) – The current <code class="docutils literal notranslate"><span class="pre">column</span></code> model.</p></li>
+<li><p><strong>parse_tree</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Adds possible user choices for dependencies of current
+<code class="docutils literal notranslate"><span class="pre">column</span></code> if True to <code class="docutils literal notranslate"><span class="pre">todo</span></code> list.</p></li>
+<li><p><strong>session</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code>]) – The current session. Will be updated if <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">is</span> <span class="pre">None</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This method works the following way:</p>
+<ol class="arabic simple">
+<li><p>Add current select model to tree if present.</p></li>
+<li><p>Parse the tree of the current model if <code class="docutils literal notranslate"><span class="pre">parse_tree</span></code> using
+<a class="reference internal" href="utilities/models.html#espressodb.base.utilities.models.iter_tree" title="espressodb.base.utilities.models.iter_tree"><code class="xref py py-meth docutils literal notranslate"><span class="pre">espressodb.base.utilities.models.iter_tree()</span></code></a>.</p></li>
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">todo</span></code> if present (see below) else return (render result view).</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">todo</span></code> update works as follows:</p>
+<ol class="arabic simple">
+<li><p>Pop the first entry in the <code class="docutils literal notranslate"><span class="pre">todo</span></code> list and add this entry to <code class="docutils literal notranslate"><span class="pre">column</span></code></p></li>
+<li><p>Find possible tables which can be chosen for this model. This modifies the
+<code class="docutils literal notranslate"><span class="pre">column</span></code> context.</p></li>
+<li><p>If there is more then one choices, ask the user which model to select.
+This means returning back to the form query page.</p></li>
+<li><p>Pick the only option if there is just one choice, and recursively call this
+method for this choice.</p></li>
+</ol>
+<dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<a class="reference internal" href="models.html#espressodb.base.models.Base" title="espressodb.base.models.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<a class="reference internal" href="models.html#espressodb.base.models.Base" title="espressodb.base.models.Base"><code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></a>]]</p>
 </dd>
@@ -290,9 +473,22 @@
 <dl class="method">
 <dt id="espressodb.base.views.PopulationView.post">
 <code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.base.views.PopulationView.post" title="Permalink to this definition">¶</a></dt>
-<dd><p>Processes the selected model, pops the next task and adds its subclasses
-to todo. Once the todo list is empty, it returns the tree.</p>
-<p>This view uses cookies for creating the query.</p>
+<dd><p>Processes the selected model and prepares the next choices.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">session</span></code> context is modified in the following way:</p>
+<ol class="arabic simple">
+<li><p>If the form is valid, extract the current column-table choice using
+<a class="reference internal" href="#espressodb.base.views.PopulationView.get_choice" title="espressodb.base.views.PopulationView.get_choice"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PopulationView.get_choice()</span></code></a>.</p></li>
+<li><p>Get the next column-table option the user has to specify using
+<a class="reference internal" href="#espressodb.base.views.PopulationView.get_next" title="espressodb.base.views.PopulationView.get_next"><code class="xref py py-meth docutils literal notranslate"><span class="pre">PopulationView.get_next()</span></code></a>.</p></li>
+<li><p>Return a new column-table from for the user to answer if not done yet.</p></li>
+<li><p>Redirect to <a class="reference internal" href="#espressodb.base.views.PopulationResultView" title="espressodb.base.views.PopulationResultView"><code class="xref py py-class docutils literal notranslate"><span class="pre">PopulationResultView</span></code></a> if there is nothing to do.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.base.views.PopulationView.template_name">
+<code class="sig-name descname">template_name</code><em class="property"> = 'select-table.html'</em><a class="headerlink" href="#espressodb.base.views.PopulationView.template_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The used template file.</p>
 </dd></dl>
 
 </dd></dl>
@@ -307,10 +503,10 @@ to todo. Once the todo list is empty, it returns the tree.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../documentation/index.html" class="btn btn-neutral float-right" title="espressodb.documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="utilities/index.html" class="btn btn-neutral float-right" title="utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="utilities.html" class="btn btn-neutral float-left" title="utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="urls.html" class="btn btn-neutral float-left" title="urls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

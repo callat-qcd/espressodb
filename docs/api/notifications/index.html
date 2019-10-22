@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="models" href="models.html" />
-    <link rel="prev" title="views" href="../documentation/views.html" /> 
+    <link rel="prev" title="documentation_extras" href="../documentation/templatetags/documentation_extras.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,6 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#how-to-install-it">How to install it?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#what-s-the-story-behind-it">What’s the story behind it?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#who-is-responsible-for-it">Who is responsible for it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#license">License</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Usage.html">How to use EspressoDB</a><ul>
@@ -96,7 +97,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-espressodb">Install EspressoDB</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#start-a-project">Start a project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#configure-your-project">Configure your project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-or-update-the-database">Create or update the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-or-update-the-database">Create or update the database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Usage.html#create-migrations">Create migrations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Usage.html#migrate-changes">Migrate changes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#launch-a-local-web-app">Launch a local web app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-a-new-app">Create a new app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-your-project-locally">Install your project locally</a></li>
@@ -107,19 +112,58 @@
 <li class="toctree-l1"><a class="reference internal" href="../../example/index.html">The example project</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../example/project-viewcase/index.html">What can I do?</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/install.html">Install the project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/public-views.html">The public views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/private-views.html">The private views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html">Using your project in external modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/public-views.html">The public views</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-home-page">The home page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-doc-page">The doc page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-population-views">The population views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-login-page">The login page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-hamiltonian-status-page">The Hamiltonian status page</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/private-views.html">The private views</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/private-views.html#the-notifications-page">The notifications page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/private-views.html#the-admin-pages">The admin pages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html">Using your project in external modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#installing-your-module">Installing your module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#using-tables">Using tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#the-add-data-py-script">The <code class="docutils literal notranslate"><span class="pre">add_data.py</span></code> script</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../example/project-creation/index.html">How do I set up the example project myself?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/project-creation.html">Create your own project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/app-creation.html">Create the hamiltonians app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/adding-data.html">Adding data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/project-creation.html">Create your own project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/project-creation.html#start-the-project">Start the project</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/app-creation.html">Create the hamiltonians app</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/app-creation.html#creating-the-infrastructure">Creating the infrastructure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/app-creation.html#creating-tables">Creating tables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/adding-data.html">Adding data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/adding-data.html#the-admin-page">The admin page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/adding-data.html#data-scripts">Data scripts</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/class-interface.html">Providing short cuts with class methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/dependencies.html">Adding tables with relationships</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/views.html">Creating web views for summaries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/inheritance.html">More complicated tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/dependencies.html">Adding tables with relationships</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/dependencies.html#updating-the-models">Updating the models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/dependencies.html#updating-the-run-script">Updating the run script</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/views.html">Creating web views for summaries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/views.html#adjusting-the-index-template">Adjusting the index template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/views.html#views-with-plots">Views with plots</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/inheritance.html">More complicated tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/inheritance.html#in-which-scenario-are-they-helpful">In which scenario are they helpful</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/inheritance.html#implementation-of-common-base">Implementation of common base</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -133,30 +177,70 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference of EspressoDB</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../base/index.html">espressodb.base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../base/admin.html">admin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../base/models.html">models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../base/static.html">static</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../base/templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../base/templatetags.html">templatetags</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../base/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../base/views.html">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/utilities/index.html">utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../base/utilities/apps.html">apps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../base/utilities/blackmagicsorcery.html">blackmagicsorcery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../base/utilities/models.html">models</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../base/templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../base/templatetags/base_extras.html">base_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">espressodb.documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../documentation/templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../documentation/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../documentation/views.html">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../documentation/templatetags/documentation_extras.html">documentation_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">espressodb.notifications</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="models.html">models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="views.html">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="templatetags/notification_extras.html">notifications_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../management/index.html">espressodb.management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../management/management.html">management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../management/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../management/utilities/index.html">utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/files.html">files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/settings.html">settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/version.html">version</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../management/management_commands/index.html">commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/info.html">info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/startapp.html">startapp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/startproject.html">startproject</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../summary.html">Summary of EspressoDB functionality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../summary.html#urls">URLs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-base-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.base.urls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-documentation-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.documentation.urls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-notifications-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.notifications.urls</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../summary.html#templatetags">Templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-base-templatetags-base-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.base.templatetags.base_extras</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-documentation-templatetags-documentation-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.documentation.templatetags.documentation_extras</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-notifications-templatetags-notifications-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.notifications.templatetags.notifications_extras</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -227,36 +311,64 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-espressodb.notifications">
-<span id="espressodb-notifications"></span><h1>espressodb.notifications<a class="headerlink" href="#module-espressodb.notifications" title="Permalink to this headline">¶</a></h1>
-<p>Fast access to Notifier</p>
+  <div class="section" id="espressodb-notifications">
+<h1>espressodb.notifications<a class="headerlink" href="#espressodb-notifications" title="Permalink to this headline">¶</a></h1>
+<p><strong>Module</strong>: <a class="reference internal" href="#module-espressodb.notifications" title="espressodb.notifications"><code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.notifications</span></code></a></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="models.html#module-espressodb.notifications.models" title="espressodb.notifications.models"><code class="xref py py-obj docutils literal notranslate"><span class="pre">espressodb.notifications.models</span></code></a></p></td>
+<td><p>Implements notifications similar to logging with optional viewer restrictions</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="views.html#module-espressodb.notifications.views" title="espressodb.notifications.views"><code class="xref py py-obj docutils literal notranslate"><span class="pre">espressodb.notifications.views</span></code></a></p></td>
+<td><p>Views for notifications module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="urls.html#module-espressodb.notifications.urls" title="espressodb.notifications.urls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">espressodb.notifications.urls</span></code></a></p></td>
+<td><p>Contains url patterns for the notifications app</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="templatetags/index.html#module-espressodb.notifications.templatetags" title="espressodb.notifications.templatetags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">espressodb.notifications.templatetags</span></code></a></p></td>
+<td><p>Templatetags for the notifications module.</p></td>
+</tr>
+</tbody>
+</table>
+<span class="target" id="module-espressodb.notifications"></span><p>The notification module provides a Python logging.Logger like class which stores and
+reads information to the database.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>The notfier works just like a Logger, e.g.,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">notifier</span> <span class="o">=</span> <span class="n">get_notifier</span><span class="p">()</span>
+<span class="n">notifier</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Test the notifier&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See also the <a class="reference internal" href="models.html#espressodb.notifications.models.Notifier" title="espressodb.notifications.models.Notifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">espressodb.notifications.models.Notifier</span></code></a> class for more
+information.</p>
+</div>
+<hr class="docutils" />
 <dl class="function">
 <dt id="espressodb.notifications.get_notifier">
-<code class="sig-prename descclassname">espressodb.notifications.</code><code class="sig-name descname">get_notifier</code><span class="sig-paren">(</span><em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em>, <em class="sig-param">fail_if_not_exists=True</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.get_notifier" title="Permalink to this definition">¶</a></dt>
-<dd><p>returns the Notifier class</p>
+<code class="sig-name descname">get_notifier</code><span class="sig-paren">(</span><em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.get_notifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a notifier instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.</p></li>
 <li><p><strong>groups</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – The user groups which are allowed to view this notfication.
 No groups means not logged in users are able to view the notfication.</p></li>
-<li><p><strong>fail_if_not_exists</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – If the user specifies group names which are not found,
-the default behavior is that storing of notfications will fail
-(e.g., raising KeyErrors).
-If this is set to False, the code progress but logs Notifications to other
-groups.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="models.html#espressodb.notifications.models.Notifier" title="espressodb.notifications.models.Notifier"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notifier</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A notifier instance</p>
 </dd>
 </dl>
 </dd></dl>
 
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="models.html">models</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templates.html">templates</a></li>
-<li class="toctree-l1"><a class="reference internal" href="templatetags.html">templatetags</a></li>
-<li class="toctree-l1"><a class="reference internal" href="views.html">views</a></li>
-</ul>
 </div>
 </div>
 
@@ -271,7 +383,7 @@ groups.</p></li>
         <a href="models.html" class="btn btn-neutral float-right" title="models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../documentation/views.html" class="btn btn-neutral float-left" title="views" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../documentation/templatetags/documentation_extras.html" class="btn btn-neutral float-left" title="documentation_extras" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -61,3 +61,7 @@ The core module of LatteDB, EspressoDB, is trying to address those challenges.
 ## Who is responsible for it?
 * [@cchang5](https://github.com/cchang5)
 * [@ckoerber](https://github.com/ckoerber)
+
+## License
+
+BSD 3-Clause License. See also the [LICENSE](LICENSE.md) file.

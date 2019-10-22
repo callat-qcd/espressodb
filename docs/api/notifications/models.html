@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="templates" href="templates.html" />
+    <link rel="next" title="urls" href="urls.html" />
     <link rel="prev" title="espressodb.notifications" href="index.html" /> 
 </head>
 
@@ -88,6 +88,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#how-to-install-it">How to install it?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#what-s-the-story-behind-it">What’s the story behind it?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../README.html#who-is-responsible-for-it">Who is responsible for it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../README.html#license">License</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../Usage.html">How to use EspressoDB</a><ul>
@@ -96,7 +97,11 @@
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-espressodb">Install EspressoDB</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#start-a-project">Start a project</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#configure-your-project">Configure your project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-or-update-the-database">Create or update the database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-or-update-the-database">Create or update the database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../Usage.html#create-migrations">Create migrations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../Usage.html#migrate-changes">Migrate changes</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#launch-a-local-web-app">Launch a local web app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#create-a-new-app">Create a new app</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../Usage.html#install-your-project-locally">Install your project locally</a></li>
@@ -107,19 +112,58 @@
 <li class="toctree-l1"><a class="reference internal" href="../../example/index.html">The example project</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../example/project-viewcase/index.html">What can I do?</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/install.html">Install the project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/public-views.html">The public views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/private-views.html">The private views</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html">Using your project in external modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/public-views.html">The public views</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-home-page">The home page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-doc-page">The doc page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-population-views">The population views</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-login-page">The login page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/public-views.html#the-hamiltonian-status-page">The Hamiltonian status page</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/private-views.html">The private views</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/private-views.html#the-notifications-page">The notifications page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/private-views.html#the-admin-pages">The admin pages</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html">Using your project in external modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#installing-your-module">Installing your module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#using-tables">Using tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-viewcase/external-scripts.html#the-add-data-py-script">The <code class="docutils literal notranslate"><span class="pre">add_data.py</span></code> script</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../example/project-creation/index.html">How do I set up the example project myself?</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/project-creation.html">Create your own project</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/app-creation.html">Create the hamiltonians app</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/adding-data.html">Adding data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/project-creation.html">Create your own project</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/project-creation.html#start-the-project">Start the project</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/app-creation.html">Create the hamiltonians app</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/app-creation.html#creating-the-infrastructure">Creating the infrastructure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/app-creation.html#creating-tables">Creating tables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/adding-data.html">Adding data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/adding-data.html#the-admin-page">The admin page</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/adding-data.html#data-scripts">Data scripts</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/class-interface.html">Providing short cuts with class methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/dependencies.html">Adding tables with relationships</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/views.html">Creating web views for summaries</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/inheritance.html">More complicated tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/dependencies.html">Adding tables with relationships</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/dependencies.html#updating-the-models">Updating the models</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/dependencies.html#updating-the-run-script">Updating the run script</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/views.html">Creating web views for summaries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/views.html#adjusting-the-index-template">Adjusting the index template</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/views.html#views-with-plots">Views with plots</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../example/project-creation/inheritance.html">More complicated tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/inheritance.html#in-which-scenario-are-they-helpful">In which scenario are they helpful</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../example/project-creation/inheritance.html#implementation-of-common-base">Implementation of common base</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -133,30 +177,70 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference of EspressoDB</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../base/index.html">espressodb.base</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../base/admin.html">admin</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../base/models.html">models</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../base/static.html">static</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../base/templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../base/templatetags.html">templatetags</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../base/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../base/views.html">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../base/utilities/index.html">utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../base/utilities/apps.html">apps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../base/utilities/blackmagicsorcery.html">blackmagicsorcery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../base/utilities/models.html">models</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../base/templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../base/templatetags/base_extras.html">base_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">espressodb.documentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../documentation/templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../documentation/templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../documentation/views.html">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../documentation/templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../documentation/templatetags/documentation_extras.html">documentation_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">espressodb.notifications</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="templates.html">templates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="templatetags.html">templatetags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="views.html">views</a></li>
+<li class="toctree-l3"><a class="reference internal" href="templatetags/index.html">templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="templatetags/notification_extras.html">notifications_extras</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../management/index.html">espressodb.management</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../management/management.html">management</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../management/utilities.html">utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../management/utilities/index.html">utilities</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/files.html">files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/settings.html">settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/utilities/version.html">version</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../management/management_commands/index.html">commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/info.html">info</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/startapp.html">startapp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../management/management_commands/startproject.html">startproject</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../summary.html">Summary of EspressoDB functionality</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../summary.html#urls">URLs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-base-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.base.urls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-documentation-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.documentation.urls</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-notifications-urls"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.notifications.urls</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../summary.html#templatetags">Templatetags</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-base-templatetags-base-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.base.templatetags.base_extras</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-documentation-templatetags-documentation-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.documentation.templatetags.documentation_extras</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../summary.html#module-espressodb-notifications-templatetags-notifications-extras"><strong>Module</strong>: <code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.notifications.templatetags.notifications_extras</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -229,13 +313,66 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-espressodb.notifications.models">
-<span id="models"></span><h1>models<a class="headerlink" href="#module-espressodb.notifications.models" title="Permalink to this headline">¶</a></h1>
-<p>Implements notifications similar to logging with optional viewer restrictions</p>
+  <div class="section" id="models">
+<h1>models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h1>
+<p><strong>Module</strong>: <a class="reference internal" href="#module-espressodb.notifications.models" title="espressodb.notifications.models"><code class="xref py py-mod docutils literal notranslate"><span class="pre">espressodb.notifications.models</span></code></a></p>
+<span class="target" id="module-espressodb.notifications.models"></span><p>Implements notifications similar to logging with optional viewer restrictions</p>
+<p>The purpose of this module is having logging like capabilities which can be accessed
+in web views.
+Mimicing logging messages, notifications have a content field, a timestamp and a level.
+To have control over what might be displayed on web views, the notifications come with
+additional optional features:</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#espressodb.notifications.models.Notification.title" title="espressodb.notifications.models.Notification.title"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Notification.title</span></code></a></p></td>
+<td><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.CharField</span></code>) - The title of the notification</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#espressodb.notifications.models.Notification.tag" title="espressodb.notifications.models.Notification.tag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Notification.tag</span></code></a></p></td>
+<td><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.CharField</span></code>) - A tag for fast searches</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#espressodb.notifications.models.Notification.groups" title="espressodb.notifications.models.Notification.groups"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Notification.groups</span></code></a></p></td>
+<td><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.ManyToManyField</span></code> -&gt; <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.models.Group</span></code>) - The group of users who are allowed to read this notification</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#espressodb.notifications.models.Notification.read_by" title="espressodb.notifications.models.Notification.read_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Notification.read_by</span></code></a></p></td>
+<td><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.ManyToManyField</span></code> -&gt; <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.models.User</span></code>) - The users who have read the notification</p></td>
+</tr>
+</tbody>
+</table>
+<p>The notifications view will be rendered on default whenever a user is logged in.</p>
+<hr class="docutils" />
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#espressodb.notifications.models.LEVELS" title="espressodb.notifications.models.LEVELS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LEVELS</span></code></a></p></td>
+<td><p>The available notifications levels</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Notification</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Model which implements logging like notification interface.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#espressodb.notifications.models.Notifier" title="espressodb.notifications.models.Notifier"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Notifier</span></code></a>([tag, groups])</p></td>
+<td><p>Logger like object which interactions with the Notification model.</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<dl class="data">
+<dt id="espressodb.notifications.models.LEVELS">
+<code class="sig-name descname">LEVELS</code><em class="property"> = ('DEBUG', 'INFO', 'WARNING', 'ERROR')</em><a class="headerlink" href="#espressodb.notifications.models.LEVELS" title="Permalink to this definition">¶</a></dt>
+<dd><p>The available notifications levels</p>
+</dd></dl>
+
 <dl class="class">
 <dt id="espressodb.notifications.models.Notification">
-<em class="property">class </em><code class="sig-prename descclassname">espressodb.notifications.models.</code><code class="sig-name descname">Notification</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notification" title="Permalink to this definition">¶</a></dt>
-<dd><p>Model which implements logging like notification module</p>
+<em class="property">class </em><code class="sig-name descname">Notification</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model which implements logging like notification interface.</p>
+<p>The model is ordered according to <cite>timestamp</cite> in descending order.</p>
 <dl class="exception">
 <dt id="espressodb.notifications.models.Notification.DoesNotExist">
 <em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#espressodb.notifications.models.Notification.DoesNotExist" title="Permalink to this definition">¶</a></dt>
@@ -249,7 +386,18 @@
 <dl class="method">
 <dt id="espressodb.notifications.models.Notification.add_user_to_read_by">
 <code class="sig-name descname">add_user_to_read_by</code><span class="sig-paren">(</span><em class="sig-param">user</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notification.add_user_to_read_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds the user to the read_by list and inserts in the db.</p>
+<dd><p>Adds the user to the <a class="reference internal" href="#espressodb.notifications.models.Notification.read_by" title="espressodb.notifications.models.Notification.read_by"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Notification.read_by</span></code></a> list and inserts in the db.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code>) – The user to check.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notification.content">
+<code class="sig-name descname">content</code><a class="headerlink" href="#espressodb.notifications.models.Notification.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.TextField</span></code>) - The content of the notification</p>
 </dd></dl>
 
 <dl class="method">
@@ -260,7 +408,8 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>user</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code>) – The user who wants to see notifications</p></li>
-<li><p><strong>level</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The notification level to specialize</p></li>
+<li><p><strong>level</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The notification level to specialize.
+Shows notifications for all levels if not specified.</p></li>
 <li><p><strong>show_all</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – If True also shows already read messages</p></li>
 </ul>
 </dd>
@@ -273,66 +422,129 @@
 </dl>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notification.groups">
+<code class="sig-name descname">groups</code><a class="headerlink" href="#espressodb.notifications.models.Notification.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.ManyToManyField</span></code> -&gt; <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.models.Group</span></code>) -
+The group of users who are allowed to read this notification</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="espressodb.notifications.models.Notification.has_been_read_by">
 <code class="sig-name descname">has_been_read_by</code><span class="sig-paren">(</span><em class="sig-param">user</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notification.has_been_read_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the user has read the notification</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notification.level">
+<code class="sig-name descname">level</code><a class="headerlink" href="#espressodb.notifications.models.Notification.level" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.CharField</span></code>) -
+The level of the notification mimicing logging levels. See also <a class="reference internal" href="#espressodb.notifications.models.LEVELS" title="espressodb.notifications.models.LEVELS"><code class="xref py py-data docutils literal notranslate"><span class="pre">LEVELS</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notification.read_by">
+<code class="sig-name descname">read_by</code><a class="headerlink" href="#espressodb.notifications.models.Notification.read_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.ManyToManyField</span></code> -&gt; <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.models.User</span></code>) -
+The users who have read the notification</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notification.tag">
+<code class="sig-name descname">tag</code><a class="headerlink" href="#espressodb.notifications.models.Notification.tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.CharField</span></code>) - A tag for fast searches</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notification.timestamp">
+<code class="sig-name descname">timestamp</code><a class="headerlink" href="#espressodb.notifications.models.Notification.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.DateTimeField</span></code>) -
+Creation date of the notification</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notification.title">
+<code class="sig-name descname">title</code><a class="headerlink" href="#espressodb.notifications.models.Notification.title" title="Permalink to this definition">¶</a></dt>
+<dd><p>(<code class="xref py py-class docutils literal notranslate"><span class="pre">models.CharField</span></code>) - The title of the notification</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="espressodb.notifications.models.Notification.viewable_by">
 <code class="sig-name descname">viewable_by</code><span class="sig-paren">(</span><em class="sig-param">user</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notification.viewable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks if the user is allowed to read this notification.</p>
-<p>Returns False if the notification groups are not empty and user is not in the
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code>]) – The user to check.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>False if the notification groups are not empty and user is not in the
 specified groups.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="espressodb.notifications.models.Notifier">
-<em class="property">class </em><code class="sig-prename descclassname">espressodb.notifications.models.</code><code class="sig-name descname">Notifier</code><span class="sig-paren">(</span><em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em>, <em class="sig-param">fail_if_not_exists=True</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier" title="Permalink to this definition">¶</a></dt>
-<dd><p>Logger like object to set notifications</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="../base/models.html#espressodb.base.models.Base.tag" title="espressodb.base.models.Base.tag"><strong>tag</strong></a> – The tag of the notification. Used for fast searches.</p></li>
-<li><p><strong>groups</strong> – The user groups which are allowed to view this notfication.
-No groups means not logged in users are able to view the notfication.</p></li>
-<li><p><strong>fail_if_not_exists</strong> – If the user specifies group names which are not found,
-the default behavior is that storing of notfications will fail
-(e.g., raising KeyErrors).
-If this is set to False, the code progress but logs Notifications to other
-groups.</p></li>
-</ul>
-</dd>
-</dl>
+<em class="property">class </em><code class="sig-name descname">Notifier</code><span class="sig-paren">(</span><em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logger like object which interactions with the Notification model.</p>
 <div class="admonition-example admonition">
 <p class="admonition-title">Example</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">notifier</span> <span class="pre">=</span> <span class="pre">Notifier(tag=&quot;my_app&quot;,</span> <span class="pre">groups=[&quot;admin&quot;])</span>
-<span class="pre">notifer.debug(&quot;Set</span> <span class="pre">up</span> <span class="pre">notifier&quot;)</span>
-<span class="pre">notifier.info(&quot;Start</span> <span class="pre">to</span> <span class="pre">invesitgate</span> <span class="pre">app&quot;)</span>
-<span class="pre">...</span>
-<span class="pre">notifier.error(&quot;Here</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">error</span> <span class="pre">message</span> <span class="pre">...&quot;,</span> <span class="pre">title=&quot;NEED</span> <span class="pre">urgent</span> <span class="pre">attention!&quot;)</span>
-<span class="pre">`</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">notifier</span> <span class="o">=</span> <span class="n">Notifier</span><span class="p">(</span><span class="n">tag</span><span class="o">=</span><span class="s2">&quot;my_app&quot;</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;admin&quot;</span><span class="p">])</span>
+<span class="n">notifer</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Set up notifier&quot;</span><span class="p">)</span>
+<span class="n">notifier</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Start to invesitgate app&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="n">notifier</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;ERROR! read this ...&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;NEED urgent attention!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">tag</span></code> and <code class="docutils literal notranslate"><span class="pre">groups</span></code> can be overwriten by the kwargs of the notifier
+methods, e.g., <code class="docutils literal notranslate"><span class="pre">notifer.debug(&quot;Set</span> <span class="pre">up</span> <span class="pre">notifier&quot;,</span> <span class="pre">tag=&quot;set</span> <span class="pre">up&quot;)</span></code></p>
 </div>
 <dl class="method">
-<dt id="espressodb.notifications.models.Notifier.debug">
-<code class="sig-name descname">debug</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">title=None</em>, <em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier.debug" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a debug notification</p>
+<dt id="espressodb.notifications.models.Notifier.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Init the Notifier class</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>content</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The content of the notification</p></li>
-<li><p><strong>title</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The title of the notification</p></li>
 <li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.</p></li>
 <li><p><strong>groups</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – The user groups which are allowed to view this notfication.
 No groups means not logged in users are able to view the notfication.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="espressodb.notifications.models.Notifier.debug">
+<code class="sig-name descname">debug</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">title=None</em>, <em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates notification at debug level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The content of the notification</p></li>
+<li><p><strong>title</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The title of the notification</p></li>
+<li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.
+Overrides Notifier default tag.</p></li>
+<li><p><strong>groups</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – The user groups which are allowed to view this notfication.
+No groups means not logged in users are able to view the notfication.
+Overrides Notifier default groups.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If groups are present but not found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -340,78 +552,105 @@ No groups means not logged in users are able to view the notfication.</p></li>
 <dl class="method">
 <dt id="espressodb.notifications.models.Notifier.error">
 <code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">title=None</em>, <em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier.error" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a error notification</p>
+<dd><p>Creates notification at error level.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>content</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The content of the notification</p></li>
 <li><p><strong>title</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The title of the notification</p></li>
-<li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.</p></li>
+<li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.
+Overrides Notifier default tag.</p></li>
 <li><p><strong>groups</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – The user groups which are allowed to view this notfication.
-No groups means not logged in users are able to view the notfication.</p></li>
+No groups means not logged in users are able to view the notfication.
+Overrides Notifier default groups.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If groups are present but not found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="espressodb.notifications.models.Notifier.get_groups_from_names">
-<code class="sig-name descname">get_groups_from_names</code><span class="sig-paren">(</span><em class="sig-param">group_names</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier.get_groups_from_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parses the group names to actual groups</p>
+<em class="property">static </em><code class="sig-name descname">get_groups_from_names</code><span class="sig-paren">(</span><em class="sig-param">group_names</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier.get_groups_from_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the group names to <code class="xref py py-class docutils literal notranslate"><span class="pre">Groups</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>group_names</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – List of group names which will be converted to a list of
-:py:class:<a href="#id1"><span class="problematic" id="id2">`</span></a>espressodb.notifications.models.Notification`s.</p>
+<a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">espressodb.notifications.models.Notification</span></code></a>.</p>
 </dd>
-</dl>
-<p>Raises KeyError if <cite>fail_if_not_exists</cite> is True and not all groups are found.
-Else returns found groups.</p>
-<dl class="field-list simple">
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If not all groups are found.</p>
+</dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code>]</p>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notifier.groups">
+<code class="sig-name descname">groups</code><em class="property"> = None</em><a class="headerlink" href="#espressodb.notifications.models.Notifier.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user groups which are allowed to view this notfication.
+No groups means not logged in users are able to view the notfication.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="espressodb.notifications.models.Notifier.info">
 <code class="sig-name descname">info</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">title=None</em>, <em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier.info" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates an info notification</p>
+<dd><p>Creates notification at info level.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>content</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The content of the notification</p></li>
 <li><p><strong>title</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The title of the notification</p></li>
-<li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.</p></li>
+<li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.
+Overrides Notifier default tag.</p></li>
 <li><p><strong>groups</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – The user groups which are allowed to view this notfication.
-No groups means not logged in users are able to view the notfication.</p></li>
+No groups means not logged in users are able to view the notfication.
+Overrides Notifier default groups.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If groups are present but not found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="espressodb.notifications.models.Notifier.tag">
+<code class="sig-name descname">tag</code><em class="property"> = None</em><a class="headerlink" href="#espressodb.notifications.models.Notifier.tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>The tag of the notification. Used for fast searches.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="espressodb.notifications.models.Notifier.warning">
 <code class="sig-name descname">warning</code><span class="sig-paren">(</span><em class="sig-param">content</em>, <em class="sig-param">title=None</em>, <em class="sig-param">tag=None</em>, <em class="sig-param">groups=None</em><span class="sig-paren">)</span><a class="headerlink" href="#espressodb.notifications.models.Notifier.warning" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a warning notification</p>
+<dd><p>Creates notification at warning level.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>content</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The content of the notification</p></li>
 <li><p><strong>title</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The title of the notification</p></li>
-<li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.</p></li>
+<li><p><strong>tag</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The tag of the notification. Used for fast searches.
+Overrides Notifier default tag.</p></li>
 <li><p><strong>groups</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – The user groups which are allowed to view this notfication.
-No groups means not logged in users are able to view the notfication.</p></li>
+No groups means not logged in users are able to view the notfication.
+Overrides Notifier default groups.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>KeyError</strong> – If groups are present but not found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#espressodb.notifications.models.Notification" title="espressodb.notifications.models.Notification"><code class="xref py py-class docutils literal notranslate"><span class="pre">Notification</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -428,7 +667,7 @@ No groups means not logged in users are able to view the notfication.</p></li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="templates.html" class="btn btn-neutral float-right" title="templates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="urls.html" class="btn btn-neutral float-right" title="urls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="espressodb.notifications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -74,6 +74,11 @@ my_project/
         |-- settings.py
         |-- urls.py
         |-- wsgi.py
+        |-- migrations/
+            |-- __init__.py
+            |-- notifications/
+                |-- __init__.py
+                |-- 0001_initial.py
 ```
 
 <div class="admonition note">
