@@ -37,7 +37,7 @@ setup(
     extras_require={"dev": REQUIREMENTS_DEV},
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Intended Audience :: Scientists",
+        "Intended Audience :: Science/Research",
         "Topic :: Software Development :: Data Management",
         "Topic :: Software Development :: Project Management",
         "Programming Language :: Python :: 3.6",
