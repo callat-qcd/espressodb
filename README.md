@@ -30,7 +30,7 @@ Once you have created your Python project (e.g., `my_project`) with EspressoDB
     You can provide additional class methods for convenience.
     Also, they know how to talk to the database, e.g., you can query (read) and update (write) your data to a central database.
 * you can generate web-views which summarize your tables and data.
-    ![Docpage example](https://github.com/callat-qcd/espressodb/blob/master/doc-src/_static/webview-example.png)
+    ![Docpage example](https://raw.githubusercontent.com/callat-qcd/espressodb/master/doc-src/_static/webview-example.png)
     Because the webpages use a Python API as well, this means that you can completely customize views with code you have already developed.
     E.g., you can automate plots and display summaries in your browser.
     If you want to, you can also make your web app public (with different layers of accessibility) and share results with others.
