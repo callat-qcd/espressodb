@@ -2,7 +2,7 @@
 """Setup file for EspressoDB
 """
 __author__ = "@cchang5, @ckoerber"
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 from os import path
 
