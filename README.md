@@ -41,7 +41,6 @@ EspressoDB can be installed via pip
 ```bash
 pip install [--user] espressodb
 ```
-For more details, see also the [How to use EspressoDB guide](doc-src/Usage.md).
 
 ## What's the story behind it?
 
