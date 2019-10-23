@@ -48,6 +48,4 @@ setup(
         "Operating System :: OS Independent",
     ],
     include_package_data=True,
-    tests_require=["pytest", "pytest-cov", "pytest-django"],
-    test_suite="example.my_project.runtests",
 )
