@@ -39,11 +39,15 @@ Once you have created your Python project (e.g., `my_project`) with EspressoDB
     If you want to, you can also make your web app public (with different layers of accessibility) and share results with others.
 
 
+See also the [Documentation](https://espressodb.readthedocs.io/en/latest/) for more detailed usage instructions.
+
 ## How to install it?
 EspressoDB can be installed via pip
 ```bash
 pip install [--user] espressodb
 ```
+
+
 
 ## What's the story behind it?
 
