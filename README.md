@@ -1,3 +1,6 @@
+[![Documentation Status](https://readthedocs.org/projects/espressodb/badge/?version=latest)](https://espressodb.readthedocs.io/en/latest/?badge=latest)
+
+
 # EspressoDB
 
 EspressoDB is a Python framework designed to organize (relational) data without loosing flexibility.
