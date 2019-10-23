@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Setup file for EspressoDB
 """
+from esporessodb import __version__
+
 __author__ = "@cchang5, @ckoerber"
-__version__ = "0.1.0"
+
 
 from os import path
 
