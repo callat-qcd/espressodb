@@ -27,10 +27,9 @@ jobs:
               run: |
                   python -m pip install --upgrade pip
                   pip install -r requirements.txt
-                  pip install .
             - name: Install espressodb
-              run: pip install .
-            - name: Install my_project
-              run: pip install -e ./example/my_project
+              run: pip install -e .
+            - name: Install my_project dependencies
+              run: pip install -r ./example/my_project/requirements.txt
             - name: Run test
               run: espressodb test
