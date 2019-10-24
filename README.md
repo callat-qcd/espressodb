@@ -1,4 +1,5 @@
 [![Documentation Status](https://readthedocs.org/projects/espressodb/badge/?version=latest)](https://espressodb.readthedocs.io/en/latest/?badge=latest)
+[![Tests](https://github.com/callat-qcd/espressodb/workflows/Tests/badge.svg)](https://github.com/callat-qcd/espressodb/actions)
 
 
 # EspressoDB

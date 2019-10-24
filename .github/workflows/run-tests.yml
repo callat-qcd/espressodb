@@ -1,21 +1,14 @@
 name: Tests
 
-on:
-    push:
-        branches:
-            - master
-            - v0.2.0
-    pull_request:
-        branches:
-            - master
+on: [push, pull_request]
 
 jobs:
     test:
         strategy:
             max-parallel: 4
             matrix:
-                python-version: [3.7]
-                platform: [macos-latest]
+                python-version: [3.6, 3.7]
+                platform: [ubuntu-latest, macos-latest]
         runs-on: ${{ matrix.platform }}
         steps:
             - uses: actions/checkout@v1
