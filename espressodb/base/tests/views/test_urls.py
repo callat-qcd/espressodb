@@ -4,6 +4,8 @@ from django.test import TestCase
 
 from django.contrib.auth.models import User
 
+from espressodb.base.utilities.apps import get_apps_slug_map
+
 URLS = ["/", "/populate/", "/populate-result/"]
 
 LOGGED_IN_URLS = [
@@ -13,8 +15,6 @@ LOGGED_IN_URLS = [
     "/notifications/warning/",
     "/notifications/error/",
 ]
-
-APP_DEPNEND_URLS = ["documentation/{app_slug}"]
 
 
 class URLViewTest(TestCase):
@@ -62,5 +62,18 @@ class URLViewTest(TestCase):
 
         for url in LOGGED_IN_URLS:
             with self.subTest(url=url):
+                response = self.client.get(url)
+                self.assertEqual(response.status_code, 200)
+
+    def test_documentation_pages(self):
+        """Tests wether documentation pages are present for each project app with models.
+        """
+        for app_slug, app in get_apps_slug_map().items():
+
+            if not app.get_models():
+                continue
+
+            url = f"/documentation/{app_slug}/"
+            with self.subTest(app=app, url=url):
                 response = self.client.get(url)
                 self.assertEqual(response.status_code, 200)
