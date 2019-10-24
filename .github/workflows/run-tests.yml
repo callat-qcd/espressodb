@@ -31,6 +31,6 @@ jobs:
             - name: Install espressodb
               run: pip install .
             - name: Install my_project
-              run: pip install ./example/my_project
+              run: pip install -e ./example/my_project
             - name: Run test
               run: espressodb test
