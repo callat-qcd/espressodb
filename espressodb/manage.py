@@ -17,7 +17,14 @@ def main():
             )
 
     if "test" in sys.argv:
-        sys.path.insert(0, os.path.join(ROOT, "example", "my_project"))
+        example_path = os.path.join(ROOT, "example", "my_project")
+        if not os.path.exists(example_path):
+            raise OSError(
+                "Could not locate the example project."
+                f" Looked up {example_path}."
+                " Are you running espressodb from the repo installation?"
+            )
+        sys.path.insert(0, example_path)
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "my_project.config.settings")
     else:
         options = {
