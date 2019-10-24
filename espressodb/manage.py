@@ -9,10 +9,6 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def main():
     """Launches the web app.
     """
-    print(os.getcwd())
-    print(os.environ["PYTHONPATH"])
-    print(sys.path)
-
     for cmd in ["startapp", "makemigrations", "migrate", "runserver"]:
         if cmd in sys.argv:
             raise KeyError(
@@ -52,8 +48,6 @@ def main():
             ) from exc
 
         settings.configure(**options)
-
-    print(sys.path)
 
     try:
         from django.core.management import execute_from_command_line
