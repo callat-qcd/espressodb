@@ -14,6 +14,10 @@ LOGGED_IN_URLS = [
     "/notifications/info/",
     "/notifications/warning/",
     "/notifications/error/",
+    "/admin/",
+    "/admin/auth/group/",
+    "/admin/auth/user/",
+    "/admin/notifications/notification/",
 ]
 
 
@@ -51,7 +55,8 @@ class URLViewTest(TestCase):
                     response = self.client.get(url, follow=True)
                     self.assertEqual(response.status_code, 200)
                     self.assertEqual(
-                        response.redirect_chain[-1][0], f"/login/?next={url}"
+                        response.redirect_chain[-1][0],
+                        ("/admin" if "admin" in url else "") + f"/login/?next={url}",
                     )
 
     def test_logged_in_urls_as_logged_in(self):
@@ -63,7 +68,7 @@ class URLViewTest(TestCase):
         for url in LOGGED_IN_URLS:
             with self.subTest(url=url):
                 response = self.client.get(url)
-                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.status_code, 302 if "admin" in url else 200)
 
     def test_documentation_pages(self):
         """Tests wether documentation pages are present for each project app with models.
