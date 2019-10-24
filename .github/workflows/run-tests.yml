@@ -31,4 +31,5 @@ jobs:
             - name: Install package
               run: pip install .
             - name: Run test
+              working-directory: ./example/my_project
               run: espressodb test
