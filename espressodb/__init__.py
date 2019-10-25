@@ -6,6 +6,26 @@ from django.conf import settings
 
 __version__ = "0.2.0"
 
+DEFAULT_OPTIONS = {
+    "DEBUG": True,
+    "INSTALLED_APPS": [
+        "espressodb.base",
+        "espressodb.documentation",
+        "espressodb.management",
+        "espressodb.notifications",
+        "django.contrib.auth",
+        "django.contrib.contenttypes",
+    ],
+    "LOGGING": {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "handlers": {"console": {"level": "INFO", "class": "logging.StreamHandler"}},
+        "loggers": {
+            "espressodb": {"handlers": ["console"], "level": "DEBUG", "propagate": True}
+        },
+    },
+}
+
 
 def init(**kwargs):
     """Initializes minimal settings to launch EspressoDB without a project
@@ -16,31 +36,7 @@ def init(**kwargs):
     Keyword Args:
         kwargs: Kwargs are fed to ``settings.configure``.
     """
-    settings.configure(
-        DEBUG=True,
-        INSTALLED_APPS=[
-            "espressodb.base",
-            "espressodb.documentation",
-            "espressodb.management",
-            "espressodb.notifications",
-            "django.contrib.auth",
-            "django.contrib.contenttypes",
-        ],
-        LOGGING={
-            "version": 1,
-            "disable_existing_loggers": False,
-            "handlers": {
-                "console": {"level": "INFO", "class": "logging.StreamHandler"}
-            },
-            "loggers": {
-                "espressodb": {
-                    "handlers": ["console"],
-                    "level": "DEBUG",
-                    "propagate": True,
-                }
-            },
-        },
-        **kwargs
-    )
+    options = {**DEFAULT_OPTIONS, **kwargs}
+    settings.configure(**options)
 
     _setup()

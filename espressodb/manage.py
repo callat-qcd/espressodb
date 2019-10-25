@@ -3,6 +3,8 @@
 import sys
 import os
 
+from espressodb import DEFAULT_OPTIONS
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -16,24 +18,9 @@ def main():
                 f" `espressodb` file to use {cmd}."
             )
 
-    options = {
-        "DEBUG": True,
-        "INSTALLED_APPS": ["espressodb.management"],
-        "LOGGING": {
-            "version": 1,
-            "disable_existing_loggers": False,
-            "handlers": {
-                "console": {"level": "INFO", "class": "logging.StreamHandler"}
-            },
-            "loggers": {
-                "espressodb": {
-                    "handlers": ["console"],
-                    "level": "DEBUG",
-                    "propagate": True,
-                }
-            },
-        },
-    }
+    options = DEFAULT_OPTIONS.copy()
+    options["INSTALLED_APPS"] = ["espressodb.management"]
+
     try:
         from django.conf import settings
         from django.core.management import execute_from_command_line
