@@ -7,8 +7,6 @@ import os
 from django.test import TestCase
 from django.conf import settings
 
-from espressodb.management.utilities.version import get_db_info
-
 
 class InfoCommandTest(TestCase):
     """Test case for the ``espressodb info`` command

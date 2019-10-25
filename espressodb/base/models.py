@@ -147,7 +147,7 @@ class Base(models.Model):
         info_str = f"({info})" if info else ""
         return f"{specialization.__class__.__name__}{base}{info_str}"
 
-    def save(
+    def save(  # pylint: disable=W0221
         self, *args, save_instance_only: bool = False, **kwargs
     ) -> "Base":  # pylint: disable=W0221
         """Overwrites type with the class name and user with login info if not specified.
@@ -156,6 +156,9 @@ class Base(models.Model):
             save_instance_only:
                 If true, only saves columns of the instance and not associated
                 specialized columns.
+
+        Note:
+            The keyword ``save_instance_only`` is not present in standard Django.
         """
         self.type = self.__class__.__name__
         if not self.user:
