@@ -1,5 +1,5 @@
 SECRET_KEY: "-l=u=x6#dt1mv_h*j-rj9f3g4^0wmv^z3kg1%8!kp-85jf2azz"
 PROJECT_APPS:
     - my_project.hamiltonian
-ALLOWED_HOSTS: ["testserver"]
+ALLOWED_HOSTS: ["testserver", "localhost", "127.0.0.1"]
 DEBUG: True
