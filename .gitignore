@@ -6,3 +6,5 @@ espressodb.egg-info/
 build/
 dist/
 *.sqlite
+htmlcov/
+.coverage
