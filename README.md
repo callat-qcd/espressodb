@@ -48,7 +48,19 @@ EspressoDB can be installed via pip
 pip install [--user] espressodb
 ```
 
-
+## Run the Tests
+Since EspressoDB is about creating projects, the tests are implemented for the example project.
+To run the tests, clone this repo, install the dependencies
+```bash
+pip install .
+pip install -r requirements-dev.txt
+pip install -r example/my_project/requirements.txt
+```
+and run `pytest` (or the regular test) in `example/my_project`
+```bash
+cd example/my_project
+pytest
+```
 
 ## What's the story behind it?
 
