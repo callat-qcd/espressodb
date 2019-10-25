@@ -72,6 +72,7 @@ my_project/
     |-- config/
         |-- __init__.py
         |-- settings.py
+        |-- tests.py
         |-- urls.py
         |-- wsgi.py
         |-- migrations/
