@@ -59,7 +59,7 @@ pip install -r example/my_project/requirements.txt
 and run `pytest` (or the regular test) in `example/my_project`
 ```bash
 cd example/my_project
-pytest
+pytest [--cov=espressodb]
 ```
 
 ## What's the story behind it?
