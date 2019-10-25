@@ -208,5 +208,3 @@ e1 = Eigenvalue.objects.first()
 h2 = e1.hamiltonian # no extra access to .contact
 h2.c == -1.0 # only present if h2 is of type contact, else it is .v
 ```
-
-See also the [features section for more information about `Base` object overloads](../../../features/base).
