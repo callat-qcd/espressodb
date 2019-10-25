@@ -26,4 +26,5 @@ jobs:
             - name: Install my_project dependencies
               run: pip install -r ./example/my_project/requirements.txt
             - name: Run test
-              run: espressodb test
+              working-directory: ./example/my_project/
+              run: pytest

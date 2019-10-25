@@ -35,7 +35,7 @@ class IndexViewTest(TestCase):
     def get_links(response) -> Set[str]:
         """Finds all the links present in the navbar (which ar not ["/", "#"]).
         """
-        soup = BeautifulSoup(response.content, "lxml")
+        soup = BeautifulSoup(response.content, "html.parser")
         nav = soup.find("nav")
         return set(
             link["href"]
