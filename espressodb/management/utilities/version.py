@@ -21,11 +21,9 @@ def get_repo_version() -> Tuple[Optional[str], Optional[str]]:
 
     Only works if EspressoDB is installed from the github repository.
 
-    Todo:
-        Should return EspressoDB version if not installed from repo.
-
     Returns:
-        The branch and the git tag-commit version as strings if found. Else None.
+        The branch and the git tag-commit version as strings if found.
+        If not installed (and symlinked from the repo), returns the PyPi version.
     """
 
     tag_commit_cmd = ["git", f"--git-dir={BASE_DIR}", "describe", "--always", "--long"]
@@ -43,7 +41,10 @@ def get_repo_version() -> Tuple[Optional[str], Optional[str]]:
             .strip()
         )
     except subprocess.CalledProcessError:
-        tag_commit = branch = None
+        from espressodb import __version__
+
+        tag_commit = __version__
+        branch = None
 
     return branch, tag_commit
 

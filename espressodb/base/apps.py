@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 from django.apps import AppConfig
 
 

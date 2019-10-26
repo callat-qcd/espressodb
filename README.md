@@ -1,3 +1,7 @@
+[![Documentation Status](https://readthedocs.org/projects/espressodb/badge/?version=latest)](https://espressodb.readthedocs.io/en/latest/?badge=latest)
+[![Tests](https://github.com/callat-qcd/espressodb/workflows/Tests/badge.svg)](https://github.com/callat-qcd/espressodb/actions)
+
+
 # EspressoDB
 
 EspressoDB is a Python framework designed to organize (relational) data without loosing flexibility.
@@ -36,10 +40,26 @@ Once you have created your Python project (e.g., `my_project`) with EspressoDB
     If you want to, you can also make your web app public (with different layers of accessibility) and share results with others.
 
 
+See also the [Documentation](https://espressodb.readthedocs.io/en/latest/) for more detailed usage instructions.
+
 ## How to install it?
 EspressoDB can be installed via pip
 ```bash
 pip install [--user] espressodb
+```
+
+## Run the Tests
+Since EspressoDB is about creating projects, the tests are implemented for the example project.
+To run the tests, clone this repo, install the dependencies
+```bash
+pip install .
+pip install -r requirements-dev.txt
+pip install -r example/my_project/requirements.txt
+```
+and run `pytest` (or the regular test) in `example/my_project`
+```bash
+cd example/my_project
+pytest [--cov=espressodb]
 ```
 
 ## What's the story behind it?

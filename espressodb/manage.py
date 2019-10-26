@@ -1,14 +1,28 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
 import sys
+import os
 
-from django.conf import settings
+from espressodb import DEFAULT_OPTIONS
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def main():
     """Launches the web app.
     """
+    for cmd in ["startapp", "makemigrations", "migrate", "runserver", "test"]:
+        if cmd in sys.argv:
+            raise KeyError(
+                "You must use the project `manage.py` insetead of"
+                f" `espressodb` file to use {cmd}."
+            )
+
+    options = DEFAULT_OPTIONS.copy()
+    options["INSTALLED_APPS"] = ["espressodb.management"]
+
     try:
+        from django.conf import settings
         from django.core.management import execute_from_command_line
     except ImportError as exc:
         raise ImportError(
@@ -17,22 +31,7 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
 
-    settings.configure(
-        DEBUG=True,
-        INSTALLED_APPS=["espressodb.management"],
-        LOGGING={
-            "version": 1,
-            "disable_existing_loggers": False,
-            "handlers": {"console": {"level": "INFO", "class": "logging.StreamHandler"}},
-            "loggers": {
-                "espressodb": {
-                    "handlers": ["console"],
-                    "level": "DEBUG",
-                    "propagate": True,
-                }
-            },
-        },
-    )
+    settings.configure(**options)
     execute_from_command_line(sys.argv)
 
 

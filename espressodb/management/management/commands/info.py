@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         branch, version = get_repo_version()
-        info = f"espressodb version: {version} ({branch})"
+        info = f"espressodb version: {version}" + (f" ({branch})" if branch else "")
 
         name, user = get_db_info()
         if name:

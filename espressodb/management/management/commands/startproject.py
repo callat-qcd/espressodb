@@ -32,6 +32,7 @@ class Command(StartProjectCommand):
             |-- config/
                 |-- __init__.py
                 |-- settings.py
+                |-- tests.py
                 |-- urls.py
                 |-- wsgi.py
                 |-- migrations/

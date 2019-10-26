@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """Setup file for EspressoDB
 """
+from espressodb import __version__
+
 __author__ = "@cchang5, @ckoerber"
-__version__ = "0.1.0"
+
 
 from os import path
 
@@ -46,6 +48,4 @@ setup(
         "Operating System :: OS Independent",
     ],
     include_package_data=True,
-    tests_require=["pytest", "pytest-cov", "pytest-django"],
-    test_suite="example.my_project.runtests",
 )

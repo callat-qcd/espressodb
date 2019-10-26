@@ -35,8 +35,6 @@ NOTIFIER.info("Hello world!")
 which can be viewed on the notifications page.
 Different to logging you can also specify groups which are allowed to see this message -- a user not present in this group will not be able to see them.
 
-For more informations, see the [the notification doc](../../features/notifications).
-
 ### The admin pages
 
 ![The home page](../../_static/example-admin-view.png)
