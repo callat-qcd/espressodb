@@ -4,7 +4,7 @@
 from django import setup as _setup
 from django.conf import settings
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 DEFAULT_OPTIONS = {
     "DEBUG": True,
