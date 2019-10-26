@@ -1,0 +1,11 @@
+Django>=2.2.2
+django-extensions>=2.2.1
+django-bootstrap4>=0.0.6
+django-widget-tweaks>=1.4.5
+django-pandas>=0.6.1
+PyYAML>=3.13
+sphinx>=2.2.0
+recommonmark>=0.6.0
+sphinx_rtd_theme>=0.4.3
+sphinx-autodoc-typehints>=1.8.0
+sphinx-markdown-tables>=0.0.9
