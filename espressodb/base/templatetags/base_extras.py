@@ -144,7 +144,8 @@ def render_tree(tree: Dict[str, str], root: str) -> Dict[str, str]:
         fields = model.get_open_fields()
         args = "\n\t".join(render_fields(fields))
         name = name.replace(".", "_")
-        content += f"{name} = {cls}.get_or_create(\n\t{args}\n)\n\n"
+        content += f"{name}, created_{name} ="
+        content += f" {cls}.objects.get_or_create(\n\t{args}\n)\n\n"
 
     cls, model = models[root]
     fields = model.get_open_fields()
