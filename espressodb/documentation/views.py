@@ -3,6 +3,7 @@
 from typing import Dict, Any
 
 from django.views.generic.base import TemplateView
+from django.http import Http404
 
 from espressodb.base.utilities.apps import get_apps_slug_map
 
@@ -24,7 +25,11 @@ class DocView(TemplateView):
         """Adds ``app_name`` from slug and adds all app model slugs to conext.
         """
         context = super().get_context_data(**kwargs)
-        app = SLUG_MAP.get(context["app_slug"], None)
+        app_slug = context["app_slug"]
+        app = SLUG_MAP.get(app_slug, None)
+
+        if app is None:
+            raise Http404(f"App for slug <code>{app_slug}</code> does not")
 
         app_name = app.name if app is not None else ""
 
