@@ -68,6 +68,7 @@ class PopulationView(View):
         to empty values.
         """
         form = self.form_class()
+        request.session["help"] = {}
         request.session["todo"] = []
         request.session["tree"] = {}
         request.session["column"] = None
@@ -157,6 +158,11 @@ class PopulationView(View):
         if parse_tree:
             for sub_column, sub_model in iter_tree(model, column):
                 session["todo"].insert(0, (sub_column, sub_model.get_label()))
+                session["help"][sub_column] = [
+                    field.help_text
+                    for field in model.get_open_fields()
+                    if field.name == sub_column.split(".")[-1]
+                ][0]
 
         if session["todo"]:
 
@@ -200,8 +206,7 @@ class PopulationResultView(View):
         Modifies the ``session``.
         E.g., the ``todo`` and ``column`` entries are deleted.
         """
-
-        for key in ["todo", "column"]:
+        for key in ["todo", "column", "help"]:
             if key in request.session:
                 request.session.pop(key)
                 request.session.modified = True  # tell django to store changes
