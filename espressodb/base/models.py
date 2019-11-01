@@ -53,7 +53,7 @@ class Base(models.Model):
     )
     #: User defined tag for easy searches
     tag = models.CharField(
-        max_length=20,
+        max_length=200,
         null=True,
         blank=True,
         help_text="User defined tag for easy searches",
