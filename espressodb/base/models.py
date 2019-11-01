@@ -16,8 +16,11 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models.fields import Field
+from django.urls import reverse, Resolver404
 
 from django_pandas.managers import DataFrameManager
+
+from espressodb.base.utilities.apps import APPS_TO_SLUG
 
 LOGGER = logging.getLogger("base")
 
@@ -88,6 +91,30 @@ class Base(models.Model):
                 if field.name not in dir(self):
                     self._specialized_keys.append(field.name)
                     setattr(self, field.name, getattr(self.specialization, field.name))
+
+    @classmethod
+    def get_app_doc_url(cls) -> Optional[str]:
+        """Returns the url tp the doc page of the app.
+
+        Returns:
+            Url if look up exist else None.
+        """
+        app_slug = APPS_TO_SLUG.get(cls._meta.app_config)
+        try:
+            url = reverse("documentation:details", args=[app_slug])
+        except Resolver404:
+            url = None
+        return url
+
+    @classmethod
+    def get_doc_url(cls) -> Optional[str]:
+        """Returns the url to the doc page.
+
+        Returns:
+            Url if look up exist else None.
+        """
+        app_url = cls.get_app_doc_url()
+        return f"{app_url}#{cls.get_slug()}" if app_url is not None else None
 
     def __setattr__(self, key, value):
         """Tries to set the attribute in specialization if it is a specialized attribute
