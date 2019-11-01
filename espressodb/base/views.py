@@ -152,7 +152,10 @@ class PopulationView(View):
         # Add current model to tree
         column = session.get("column", None)
         if column:
-            session["tree"][column] = model.get_label()
+            session["tree"][column] = {
+                "label": model.get_label(),
+                "doc_url": model.get_doc_url(),
+            }
 
         # Add dpendencies of sub model to tree
         if parse_tree:
@@ -212,7 +215,13 @@ class PopulationResultView(View):
                 request.session.modified = True  # tell django to store changes
 
         context = (
-            {"root": request.session.get("root"), "tree": request.session.get("tree")}
+            {
+                "root": request.session.get("root"),
+                "tree": {
+                    key: value["label"]
+                    for key, value in request.session.get("tree", {}).items()
+                },
+            }
             if "root" in request.session and "tree" in request.session
             else {}
         )

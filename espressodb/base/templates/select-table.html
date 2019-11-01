@@ -52,7 +52,7 @@
             {% for key, val in request.session.tree.items %}
             <tr>
                 <td>{{key}}</td>
-                <td>{{val}}</td>
+                <td>{% if val.doc_url %}<a href="{{val.doc_url}}" target="_blank">{{val.label}}</a>{% else %}{{val.label}}{% endif %}</td>
                 <td>{{ request.session.help|get_item:key}}</td>
             </tr>
             {% endfor %}
