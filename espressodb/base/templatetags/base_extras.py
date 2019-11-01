@@ -1,6 +1,6 @@
 """Additional in template functions for the base module.
 """
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, Any
 
 from django import template
 from django.conf import settings
@@ -202,3 +202,16 @@ def project_name() -> str:
     """Returns name of the project
     """
     return PROJECT_NAME
+
+
+@register.filter
+def get_item(dictionary: Dict[str, Any], key: str) -> Any:
+    """Extract key from dictionary
+
+    Arguments:
+        dictionary: The dictionary to search
+        key: The key to look up
+
+    See also: https://stackoverflow.com/a/8000091
+    """
+    return dictionary.get(key)
