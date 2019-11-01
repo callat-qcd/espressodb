@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models.fields import Field
 from django.urls import reverse, Resolver404
+from django.apps.config import AppConfig
 
 from django_pandas.managers import DataFrameManager
 
@@ -93,13 +94,25 @@ class Base(models.Model):
                     setattr(self, field.name, getattr(self.specialization, field.name))
 
     @classmethod
+    def get_app(cls) -> AppConfig:
+        """Returns the name of the current moule app
+        """
+        return cls._meta.app_config
+
+    @classmethod
+    def get_app_name(cls) -> str:
+        """Returns the name of the current moule app
+        """
+        return cls.get_app().verbose_name
+
+    @classmethod
     def get_app_doc_url(cls) -> Optional[str]:
         """Returns the url tp the doc page of the app.
 
         Returns:
             Url if look up exist else None.
         """
-        app_slug = APPS_TO_SLUG.get(cls._meta.app_config)
+        app_slug = APPS_TO_SLUG.get(cls.get_app())
         try:
             url = reverse("documentation:details", args=[app_slug])
         except Resolver404:

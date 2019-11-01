@@ -84,8 +84,8 @@
                     </div>
                 </div>
                 {% if form.model.help_text %}
-                <div class="form-row">
-                    <small id="form-help" class="form-text text-muted">Help: {{form.model.help_text}}</small>
+                <div class="form-group">
+                    <small id="form-help" class="form-text text-muted">Help: {{form.model.help_text|safe}}</small>
                 </div>
                 {% endif %}
             </form>

@@ -46,7 +46,7 @@ class ModelSelectForm(forms.Form):
         subset: Optional[List[str]] = None,
         name: Optional[str] = None,
         help_text: Optional[str] = None,
-        **kwargs
+        **kwargs,
     ):
         """Initializes the form
 
@@ -58,11 +58,27 @@ class ModelSelectForm(forms.Form):
         """
         super().__init__(*args, **kwargs)
 
+        if help_text:
+            self.fields["model"].help_text = help_text
+
         if subset:
             self.fields["model"].choices = [
                 (key, val) for key, val in self.fields["model"].choices if key in subset
             ]
-        if help_text:
-            self.fields["model"].help_text = help_text
+            references = {
+                f'<a href="{MODELS[label].get_app_doc_url()}" target="_blank">'
+                f"{MODELS[label].get_app_name()}</a>"
+                for label in subset
+                if label in MODELS
+            }
+            references_text = (
+                "See also the documentation for " + ", ".join(references) + "."
+            )
+            if self.fields["model"].help_text:
+                sep = ". " if not self.fields["model"].help_text.endswith(".") else " "
+                self.fields["model"].help_text += sep + references_text
+            else:
+                self.fields["model"].help_text = references_text
+
         if name:
             self.fields["model"].label = name
