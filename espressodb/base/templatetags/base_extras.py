@@ -86,7 +86,7 @@ def render_field(field: Field) -> str:
         field: The field to render.
     """
     optional = "(Optional) " if field.null else ""
-    return f"{field.name}=..., # {optional}{Truncator(field.help_text).words(12)}"
+    return f"{field.name}=, # {optional}{Truncator(field.help_text).words(12)}"
 
 
 def render_fields(fields: List[Field]) -> List[str]:
