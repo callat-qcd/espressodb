@@ -14,11 +14,14 @@
     <p>
         This page helps you to generate a python population script for a given database table.
     </p>
-    <p>
+    <div class="alert alert-danger" role="alert">
+        It is not supported to go backwards &mdash; you have to start over if you want to change entries.
+    </div>
+    <div>
         <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#help" aria-expanded="false" aria-controls="help">
             <i class="far fa-question-circle mr-1"></i>Help
         </button>
-    </p>
+    </div>
     <div class="collapse" id="help">
         <div class="card border-info mb-3">
             <div class="card-header">Info</div>
@@ -28,9 +31,6 @@
                 </li>
                 <li class="list-group-item">
                     If you already know how to create a certain object, (e.g. by a database query) you can tell the webpage to ignore dependencies.
-                </li>
-                <li class="list-group-item">
-                    It is not supported to go backwards &mdash; you have to start over if you want to change entries.
                 </li>
             </ul>
         </div>
