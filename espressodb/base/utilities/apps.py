@@ -60,3 +60,6 @@ def get_apps_slug_map() -> Dict[str, str]:
         name = get_app_name(app)
         slug_map[slugify(name)] = app
     return slug_map
+
+
+APPS_TO_SLUG = {app: slug for slug, app in get_apps_slug_map().items()}
