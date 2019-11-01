@@ -83,6 +83,11 @@
                         <button class="btn btn-outline-secondary" type="submit" type="submit">Submit</button>
                     </div>
                 </div>
+                {% if form.model.help_text %}
+                <div class="form-row">
+                    <small id="form-help" class="form-text text-muted">Help: {{form.model.help_text}}</small>
+                </div>
+                {% endif %}
             </form>
         </div>
     </div>

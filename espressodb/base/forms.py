@@ -45,6 +45,7 @@ class ModelSelectForm(forms.Form):
         *args,
         subset: Optional[List[str]] = None,
         name: Optional[str] = None,
+        help_text: Optional[str] = None,
         **kwargs
     ):
         """Initializes the form
@@ -61,5 +62,7 @@ class ModelSelectForm(forms.Form):
             self.fields["model"].choices = [
                 (key, val) for key, val in self.fields["model"].choices if key in subset
             ]
+        if help_text:
+            self.fields["model"].help_text = help_text
         if name:
             self.fields["model"].label = name
