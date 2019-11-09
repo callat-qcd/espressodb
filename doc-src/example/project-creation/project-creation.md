@@ -16,9 +16,9 @@ Setting up new project `my_project` in `/path/to/project`
 -> Creating `settings.yaml`. Adjust this file to include later apps
 -> Done!
 -> You can now:
-     1a. Migrate models by running `python manange.py migrate`
-     1b. and launch a web app by running `python manange.py runserver`
-     2. Add new models using `python manange.py startapp {APP_NAME}`
+     1a. Migrate models by running `python manage.py migrate`
+     1b. and launch a web app by running `python manage.py runserver`
+     2. Add new models using `python manage.py startapp {APP_NAME}`
      3. Run `python -m pip install [--user] [-e] .` in the project root directory to add your package to your python path.
         See alse `/path/to/project/my_project/setup.py`.
 ```
@@ -37,9 +37,9 @@ Let's create this database.
 To verify that everything worked, enter the directory, apply migrations and start a local server
 ```bash
 $ cd my_project
-$ python manange.py makemigrations
+$ python manage.py makemigrations
 No changes detected
-$ python manange.py migrate
+$ python manage.py migrate
 Operations to perform:
   Apply all migrations: admin, auth, contenttypes, notifications, sessions
 Running migrations:
@@ -66,7 +66,7 @@ The last command will create the database `my_project-db.sqlite` with EspressoDB
 
 After this you can run
 ```bash
-$ python manange.py runserver
+$ python manage.py runserver
 Watching for file changes with StatReloader
 Performing system checks...
 
