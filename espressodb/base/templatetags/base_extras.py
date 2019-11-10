@@ -24,7 +24,7 @@ register = template.Library()  # pylint: disable=C0103
 
 
 @register.inclusion_tag("link-list.html")
-def render_link_list(
+def render_link_list(  # pylint: disable=R0914
     exclude=("", "populate", "populate-result", "admin", "documentation")
 ) -> Dict[str, Tuple[str, str]]:
     """Renders all app and documentation page links
@@ -39,6 +39,10 @@ def render_link_list(
     Ignores urls which do not result in a match.
 
     Uses the template ``link-list.html``.
+
+    Note:
+        It is possible to give class based views the ``exclude_from_nav`` flag.
+        If this flag is set, the view will not be rendered.
     """
     urlconf = __import__(settings.ROOT_URLCONF, {}, {}, [""])
 
@@ -54,6 +58,14 @@ def render_link_list(
             continue
 
         if path.split("/")[0] in exclude:
+            continue
+
+        cls = None
+        if hasattr(view, "view_class"):
+            cls = view.view_class
+        elif hasattr(view, "cls"):
+            cls = view.cls
+        if cls and hasattr(cls, "exclude_from_nav") and cls.exclude_from_nav:
             continue
 
         import_path = view.__module__.split(".")
