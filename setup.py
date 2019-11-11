@@ -30,6 +30,11 @@ setup(
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     url="https://github.com/callat-qcd/espressodb",
+    project_urls={
+        "Bug Reports": "https://github.com/callat-qcd/espressodb/issues",
+        "Source": "https://github.com/callat-qcd/espressodb",
+        "Documentation": "https://espressodb.readthedocs.io",
+    },
     author=__author__,
     author_email="ckoerber@berkeley.edu",
     keywords=["Database", "Workflow", "Django"],
