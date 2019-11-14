@@ -1,29 +1,31 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: 'EspressoDB: A scientific database for managing high-performance computing workflow'
 tags:
   - Python
-  - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
+  - Django
+  - High-performance computing
+  - Lattice QCD
 authors:
-  - name: Adrian M. Price-Whelan
-    orcid: 0000-0003-0872-7098
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
+  - name: Chia Cheng Chang
+    orcid: 0000-0002-3790-309X
+    affiliation: "1, 2, 3"
+  - name: Christopher K\"orber
+    orcid: 0000-000X
     affiliation: 2
+  - name: Andr\'e Walker-Loud
+    orcid: 0000-000X
+    affiliation: "3, 2"
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
+ - name: iTHEMS RIKEN, Wako, Saitama 351-0198 
    index: 1
- - name: Institution 2
+ - name: University of California, Berkeley, California 94720
    index: 2
-date: 13 August 2017
+ - name: Lawrence Berkeley National Laboratory, Berkeley California 94720
+   index: 3
+ 
+date: 14 November 2019
 bibliography: paper.bib
 
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-aas-journal: Astrophysical Journal <- The name of the AAS journal.
 ---
 
 # Summary
