@@ -11,12 +11,12 @@ authors:
     affiliation: "1, 2, 3"
   - name: Christopher Körber
     orcid: 0000-0002-9271-8022
-    affiliation: 2
+    affiliation: "2, 3"
   - name: André Walker-Loud
     orcid: 0000-0002-4686-3667
     affiliation: "3, 2, 4"
 affiliations:
- - name: iTHEMS RIKEN, Wako, Saitama 351-0198 
+ - name: iTHEMS RIKEN, Wako, Saitama 351-0198
    index: 1
  - name: University of California, Berkeley, California 94720
    index: 2
@@ -24,7 +24,7 @@ affiliations:
    index: 3
  - name: Lawrence Livermore National Laboratory, Livermore, California 94550
    index: 4
- 
+
 date: 14 November 2019
 bibliography: paper.bib
 
@@ -96,5 +96,6 @@ Figures can be included like this: ![Example figure.](figure.png)
 
 We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
 Oh, and support from Kathryn Johnston during the genesis of this project.
+C.K. gratefully acknowledges funding through the Alexander von Humboldt Foundation through a Feodor Lynen Research Fellowship
 
 # References
