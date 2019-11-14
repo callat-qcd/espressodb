@@ -9,10 +9,10 @@ authors:
   - name: Chia Cheng Chang
     orcid: 0000-0002-3790-309X
     affiliation: "1, 2, 3"
-  - name: Christopher K\"orber
+  - name: Christopher Körber
     orcid: 0000-0002-9271-8022
     affiliation: 2
-  - name: Andr\'e Walker-Loud
+  - name: André Walker-Loud
     orcid: 0000-0002-4686-3667
     affiliation: "3, 2"
 affiliations:
