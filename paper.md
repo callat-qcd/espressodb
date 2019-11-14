@@ -10,10 +10,10 @@ authors:
     orcid: 0000-0002-3790-309X
     affiliation: "1, 2, 3"
   - name: Christopher K\"orber
-    orcid: 0000-000X
+    orcid: 0000-0002-9271-8022
     affiliation: 2
   - name: Andr\'e Walker-Loud
-    orcid: 0000-000X
+    orcid: 0000-0002-4686-3667
     affiliation: "3, 2"
 affiliations:
  - name: iTHEMS RIKEN, Wako, Saitama 351-0198 
