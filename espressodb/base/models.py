@@ -23,6 +23,8 @@ from django_pandas.managers import DataFrameManager
 
 from espressodb.base.utilities.apps import APPS_TO_SLUG
 
+from espressodb.base.exceptions import ConsistencyError
+
 LOGGER = logging.getLogger("base")
 
 
@@ -137,6 +139,20 @@ class Base(models.Model):
             setattr(self.specialization, key, value)
         super().__setattr__(key, value)
 
+    def _check_consistency(self, data: Dict[str, Any]):
+        """Wraps check_consistency method to raise custom ConsistencyError.
+
+        Raises:
+            ConsistencyError: If check_consistency raises any error.
+
+        Arguments:
+            data: Dictionary containing the (open) column data of the class.
+        """
+        try:
+            self.check_consistency(data)
+        except Exception as error:
+            raise ConsistencyError(error, self.__cls__, data=data)
+
     def check_consistency(self, data: Dict[str, Any]):
         """Method is called before save.
 
@@ -188,7 +204,11 @@ class Base(models.Model):
         return f"{specialization.__class__.__name__}{base}{info_str}"
 
     def save(  # pylint: disable=W0221
-        self, *args, save_instance_only: bool = False, **kwargs
+        self,
+        *args,
+        save_instance_only: bool = False,
+        check_consistency: bool = True,
+        **kwargs,
     ) -> "Base":  # pylint: disable=W0221
         """Overwrites type with the class name and user with login info if not specified.
 
@@ -196,6 +216,8 @@ class Base(models.Model):
             save_instance_only:
                 If true, only saves columns of the instance and not associated
                 specialized columns.
+            check_consistency:
+                If true, runs consistency checks before saving.
 
         Note:
             The keyword ``save_instance_only`` is not present in standard Django.
@@ -219,7 +241,8 @@ class Base(models.Model):
                     else field.model.objects.none()
                 )
 
-        self.check_consistency(data)
+        if check_consistency:
+            self._check_consistency(data)
 
         if self != self.specialization and not save_instance_only:
             self.specialization.save(*args, **kwargs)

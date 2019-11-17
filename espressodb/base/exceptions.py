@@ -2,7 +2,7 @@
 """
 from typing import Optional, Dict, Any
 
-from espressodb.base.models import Base
+from django.db.models import Model
 
 
 class ConsistencyError(Exception):
@@ -14,7 +14,7 @@ class ConsistencyError(Exception):
     """
 
     def __init__(
-        self, error: Exception, model: Base, data: Optional[Dict[str, Any]] = None,
+        self, error: Exception, model: Model, data: Optional[Dict[str, Any]] = None,
     ):
         """Initialize consistency error and prepares custom error method.
 
