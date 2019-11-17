@@ -115,3 +115,64 @@ class EigenvalueTest(TestCase):
 
         eigenvalues = Eigenvalue.objects.all()
         self.assertEqual(0, eigenvalues.count())
+
+    def test_safe_get_or_create_consistency(self):
+        """Tests wether inserting an eigenvalue entry using `safe_get_or_create` works as
+        expected.
+
+        Also checks if calling this method twice with the same input returns the same
+        eigenvalue entry.
+
+        Tests:
+            1. Save method calls check_consistency with expected arguments
+            2. The eigenvalue is properly inserted
+        """
+        data = {
+            "hamiltonian": self.hamiltonian,
+            "n_level": 0,
+            "value": Decimal("0.0"),
+            "tag": None,
+        }
+
+        with patch.object(Eigenvalue, "check_consistency") as mocked_check_consistency:
+            ev, created = Eigenvalue.objects.safe_get_or_create(**data)
+
+        self.assertTrue(created)
+        mocked_check_consistency.assert_called_with(data)
+
+        eigenvalues = Eigenvalue.objects.all()
+        self.assertEqual(1, eigenvalues.count())
+
+        stored_eigenvalue = eigenvalues.first()
+        for key, value in data.items():
+            self.assertEqual(value, getattr(stored_eigenvalue, key))
+
+        with patch.object(Eigenvalue, "check_consistency") as mocked_check_consistency:
+            ev2, created = Eigenvalue.objects.safe_get_or_create(**data)
+
+        self.assertFalse(created)
+        mocked_check_consistency.assert_called_with(data)
+
+        eigenvalues = Eigenvalue.objects.all()
+        self.assertEqual(1, eigenvalues.count())
+        self.assertEqual(ev, ev2)
+
+    def test_safe_get_or_create_consistency_fail(self):
+        """Calls `safe_get_or_create` such that an `ConsistencyError` is triggered.
+
+        Expects `ConsistencyError` is raised an no eigenvalue is created.
+        """
+        data = {
+            "hamiltonian": self.hamiltonian,
+            "n_level": self.hamiltonian.n_sites + 1,
+            "value": Decimal("0.0"),
+            "tag": None,
+        }
+
+        with self.assertRaises(ConsistencyError) as context:
+            Eigenvalue.objects.safe_get_or_create(**data)
+
+        self.assertIsInstance(context.exception.error, ValueError)
+
+        eigenvalues = Eigenvalue.objects.all()
+        self.assertEqual(0, eigenvalues.count())

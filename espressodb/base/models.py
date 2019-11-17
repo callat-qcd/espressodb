@@ -34,11 +34,20 @@ class BaseManager(DataFrameManager):
     Same as regular manager but provides `safe` methods which run consistency checks.
     """
 
-    def safe_create(self, **kwargs):
-        """Same as create but runs model dependent consistency checks before hand.
+    def safe_create(self, **kwargs) -> "Base":
+        """Same as create but runs model dependent consistency checks before.
         """
         self.model._check_consistency(kwargs)  # pylint: disable=W0212
         return self.create(**kwargs)
+
+    def safe_get_or_create(self, defaults=None, **kwargs) -> Tuple["Base", bool]:
+        """Same as get_or_create but runs model dependent consistency checks before.
+
+        Note:
+            The checks are run independent of if the entry exists or not.
+        """
+        self.model._check_consistency(kwargs)  # pylint: disable=W0212
+        return self.get_or_create(defaults=defaults, **kwargs)
 
 
 class Base(models.Model):
