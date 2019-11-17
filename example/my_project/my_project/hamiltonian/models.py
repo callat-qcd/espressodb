@@ -1,5 +1,7 @@
 """Models of hamiltonian
 """
+from typing import Dict, Any
+
 from django.db import models
 
 import numpy as np
@@ -147,3 +149,10 @@ class Eigenvalue(Base):
 
     class Meta:  # pylint: disable=C0111, R0903
         unique_together = ["hamiltonian", "n_level"]
+
+    @classmethod
+    def check_consistency(cls, data: Dict[str, Any]):
+        """Checks if the n_level entry does not exceed the dimension of the hamiltonian.
+        """
+        if data["n_level"] > data["hamiltonian"].n_sites:
+            raise ValueError("Eigenstate index larger than matrix allows.")
