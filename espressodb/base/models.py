@@ -139,8 +139,12 @@ class Base(models.Model):
             setattr(self.specialization, key, value)
         super().__setattr__(key, value)
 
-    def _check_consistency(self, data: Dict[str, Any]):
+    @classmethod
+    def _check_consistency(cls, data: Dict[str, Any]):
         """Wraps check_consistency method to raise custom ConsistencyError.
+
+        Copies the data before calling `check_consistency` to avoid unintended
+        manipulations.
 
         Raises:
             ConsistencyError: If check_consistency raises any error.
@@ -149,11 +153,12 @@ class Base(models.Model):
             data: Dictionary containing the (open) column data of the class.
         """
         try:
-            self.check_consistency(data)
+            cls.check_consistency(data.copy())
         except Exception as error:
-            raise ConsistencyError(error, self.__cls__, data=data)
+            raise ConsistencyError(error, cls, data=data)
 
-    def check_consistency(self, data: Dict[str, Any]):
+    @classmethod
+    def check_consistency(cls, data: Dict[str, Any]):
         """Method is called before save.
 
         Raise errors here if the model must fulfill checks.
