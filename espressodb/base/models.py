@@ -28,6 +28,19 @@ from espressodb.base.exceptions import ConsistencyError
 LOGGER = logging.getLogger("base")
 
 
+class BaseManager(DataFrameManager):
+    """Manager class for Base model.
+
+    Same as regular manager but provides `safe` methods which run consistency checks.
+    """
+
+    def safe_create(self, **kwargs):
+        """Same as create but runs model dependent consistency checks before hand.
+        """
+        self.model._check_consistency(kwargs)  # pylint: disable=W0212
+        return self.create(**kwargs)
+
+
 class Base(models.Model):
     """The base class for the espressodb module.
 
@@ -70,7 +83,7 @@ class Base(models.Model):
         """Returns import path as slug name"""
         return slugify(cls.__name__)
 
-    objects = DataFrameManager()
+    objects = BaseManager()
 
     class Meta:
         abstract = True
