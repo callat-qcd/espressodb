@@ -35,5 +35,6 @@ class DocView(TemplateView):
 
         context["app_name"] = app_name
         context["models"] = [model.get_slug() for model in app.get_models()]
+        context["module_doc"] = app.module.models.__doc__
 
         return context
