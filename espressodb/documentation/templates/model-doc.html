@@ -3,9 +3,7 @@
 <div class="card my-4" id="{{model_slug}}">
     <div class="card-header p-4 bg-light">
         <h3><code>{{name}}</code> <a href="#{{model_slug}}"><small><i class="fas fa-link" style="color:#E83E8C"></i></small></a></h3>
-        <p>
-            {{doc}}
-        </p>
+        {{doc|safe}}
         <p>
             Module: <code>{{module}}</code>
         </p>
@@ -37,7 +35,7 @@
                         {% if col.optional %}(Optional){%endif%}
                         {% if col.default %}[<code>={{col.default}}</code>]{%endif%}
                     </td>
-                    <td>{{col.help}}</td>
+                    <td>{{col.help|safe}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

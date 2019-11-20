@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView
 from django.http import Http404
 
 from espressodb.base.utilities.apps import get_apps_slug_map
-
+from espressodb.documentation.utilities.markdown import convert_string
 
 #: Maps app-slugs to apps
 SLUG_MAP = get_apps_slug_map()
@@ -35,6 +35,8 @@ class DocView(TemplateView):
 
         context["app_name"] = app_name
         context["models"] = [model.get_slug() for model in app.get_models()]
-        context["module_doc"] = app.module.models.__doc__
+        context["module_doc"] = convert_string(
+            app.module.models.__doc__, wrap_blocks=True
+        )
 
         return context

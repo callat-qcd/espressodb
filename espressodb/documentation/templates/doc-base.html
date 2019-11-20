@@ -5,7 +5,7 @@
 {% if app_name %}
 <div class="jumbotron">
     <h1>Documentation of <code>{{app_name}}</code></h1>
-    {% if module_doc %}<p>{{ module_doc }}</p>{% endif %}
+    {% if module_doc %}{{ module_doc|safe }}{% endif %}
 </div>
 <div class="container">
     {% if models %}

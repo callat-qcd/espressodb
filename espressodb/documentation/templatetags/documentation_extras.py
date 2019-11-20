@@ -6,6 +6,9 @@ from django.urls import reverse
 
 from espressodb.base.utilities.apps import get_apps_slug_map, get_app_name
 
+from espressodb.documentation.utilities.markdown import convert_string
+
+
 register = template.Library()  # pylint: disable=C0103
 
 SLUG_MAP = get_apps_slug_map()
@@ -59,14 +62,14 @@ def render_documentation(app_slug: str, model_slug: str):
                 "name": field.name,
                 "optional": field.null,
                 "default": field.default if field.has_default() else None,
-                "help": field.help_text,
+                "help": convert_string(field.help_text),
                 "type": field.get_internal_type(),
                 "relation": relation,
             }
 
         context["name"] = model.__name__
         context["module"] = model.__module__
-        context["doc"] = model.__doc__
+        context["doc"] = convert_string(model.__doc__, wrap_blocks=True)
         context["base"] = model.__base__
         # For the rare case where a field name is items, prefer this key val iteration
         context["columns"] = [(key, val) for key, val in fields.items()]
