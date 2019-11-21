@@ -160,8 +160,8 @@ def render_tree(tree: Dict[str, str], root: str) -> Dict[str, str]:
     content = ""
     models = {}
 
-    labels = set(tree.values())
-    labels.add(root)
+    labels = sorted(list(set(tree.values())))
+    labels.append(root)
 
     for label in labels:
         model = MODELS[label]
