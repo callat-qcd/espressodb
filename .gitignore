@@ -8,3 +8,4 @@ dist/
 *.sqlite
 htmlcov/
 .coverage
+paper.pdf
