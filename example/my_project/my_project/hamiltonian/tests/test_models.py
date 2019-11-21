@@ -176,3 +176,65 @@ class EigenvalueTest(TestCase):
 
         eigenvalues = Eigenvalue.objects.all()
         self.assertEqual(0, eigenvalues.count())
+
+    def test_get_or_create_from_parameters_1(self):
+        """Tests the get or create from parameters method for existing hamiltonian.
+        """
+        data = {
+            "n_level": 0,
+            "value": Decimal("0.0"),
+            "n_sites": self.hamiltonian.n_sites,
+            "spacing": self.hamiltonian.spacing,
+            "c": self.hamiltonian.c,
+        }
+        tree = {"hamiltonian": "Contact"}
+        _, created = Eigenvalue.get_or_create_from_parameters(data, tree=tree)
+
+        self.assertTrue(created)
+
+        hamiltonians = Hamiltonian.objects.all()
+        self.assertEqual(hamiltonians.count(), 1)
+
+        hamiltonian = hamiltonians.first()
+        self.assertEqual(hamiltonian.type, tree["hamiltonian"])
+        self.assertEqual(hamiltonian.n_sites, data["n_sites"])
+        self.assertEqual(hamiltonian.spacing, data["spacing"])
+        self.assertEqual(hamiltonian.c, data["c"])
+
+        eigenvalues = Eigenvalue.objects.all()
+        self.assertEqual(eigenvalues.count(), 1)
+        eigenvalue = eigenvalues.first()
+        self.assertEqual(eigenvalue.hamiltonian, hamiltonian)
+        self.assertEqual(eigenvalue.value, data["value"])
+        self.assertEqual(eigenvalue.n_level, data["n_level"])
+
+    def test_get_or_create_from_parameters_2(self):
+        """Tests the get or create from parameters method for existing hamiltonian.
+        """
+        data = {
+            "n_level": 0,
+            "value": Decimal("0.0"),
+            "n_sites": 10,
+            "spacing": Decimal("0.1"),
+            "c": Decimal("-2.0"),
+        }
+        tree = {"hamiltonian": "Contact"}
+        _, created = Eigenvalue.get_or_create_from_parameters(data, tree=tree)
+
+        self.assertTrue(created)
+
+        hamiltonians = Hamiltonian.objects.all()
+        self.assertEqual(hamiltonians.count(), 2)
+
+        hamiltonian = hamiltonians.last()
+        self.assertEqual(hamiltonian.type, tree["hamiltonian"])
+        self.assertEqual(hamiltonian.n_sites, data["n_sites"])
+        self.assertEqual(hamiltonian.spacing, data["spacing"])
+        self.assertEqual(hamiltonian.c, data["c"])
+
+        eigenvalues = Eigenvalue.objects.all()
+        self.assertEqual(eigenvalues.count(), 1)
+        eigenvalue = eigenvalues.first()
+        self.assertEqual(eigenvalue.hamiltonian, hamiltonian)
+        self.assertEqual(eigenvalue.value, data["value"])
+        self.assertEqual(eigenvalue.n_level, data["n_level"])
