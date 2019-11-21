@@ -6,10 +6,11 @@
         <button type="submit" class="close" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        {% endif %}
-        {% if notification.title %}<h5 class="alert-heading">{{notification.title}}</h5>{% endif %}
-        {% if notification.tag %}<h6 class="card-subtitle mb-2 text-muted">{{ notification.tag }}</h6>{% endif %}
-        <p class="card-text mb-1">{{ notification.content }}</p>
-        <hr class="my-1">
-        <p class="card-text"><small class="text-muted">{{ notification.timestamp }}</small></p>
+    </form>
+    {% endif %}
+    {% if notification.title %}<h5 class="alert-heading">{{notification.title}}</h5>{% endif %}
+    {% if notification.tag %}<h6 class="card-subtitle mb-2 text-muted">{{ notification.tag }}</h6>{% endif %}
+    <p class="card-text mb-1">{{ notification.content }}</p>
+    <hr class="my-1">
+    <p class="card-text"><small class="text-muted">{{ notification.timestamp }}</small></p>
 </div>
