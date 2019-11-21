@@ -85,5 +85,28 @@ class PopulationViewTestCase(TestCase):
         return code.text
 
     def test_05_generated_script(self):
-        """Follows the call chain and tests the generated script
+        """Follows the call chain and tests the generated script.
+
+        The generated script is filled out with data, dumped to file and run.
+        After the run, the tables are checked if the objects where created.
         """
+        code = self.test_04_pick_hamiltonian()
+        expected_code = r"""
+from my_project.hamiltonian.models import Contact as hamiltonian_Contact
+from my_project.hamiltonian.models import Eigenvalue as hamiltonian_Eigenvalue
+
+hamiltonian, created = hamiltonian_Contact.objects.get_or_create(
+	n_sites=, # Number of sites in one spatial dimension
+	spacing=, # The lattice spacing between sites
+	c=, # Interaction parameter of th the Hamiltonian. Implements a contact interaction.
+	tag=, # (Optional) User defined tag for easy searches
+)
+
+hamiltonian_eigenvalue, created = hamiltonian_Eigenvalue.objects.get_or_create(
+	hamiltonian=hamiltonian, # Matrix for which the eigenvalue has been computed.
+	n_level=, # The nth eigenvalue extracted in ascending order.
+	value=, # The value of the eigenvalue
+	tag=, # (Optional) User defined tag for easy searches
+)
+"""
+        self.assertEqual(code, expected_code)
