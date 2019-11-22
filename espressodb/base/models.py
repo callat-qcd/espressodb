@@ -58,13 +58,6 @@ class Base(models.Model):
 
     #: Primary key for the base class
     id = models.AutoField(primary_key=True, help_text="Primary key for Base class.")
-    #: Type for the base class. Will be auto set to specialized type on save
-    type = models.TextField(
-        editable=False,
-        null=False,
-        help_text="Type for the base class."
-        " Will be auto set to specialized type on save",
-    )
     #: Date the class was last modified
     last_modified = models.DateTimeField(
         auto_now=True, help_text="Date the class was last modified"
@@ -116,6 +109,12 @@ class Base(models.Model):
                 if field.name not in dir(self):
                     self._specialized_keys.append(field.name)
                     setattr(self, field.name, getattr(self.specialization, field.name))
+
+    @property
+    def type(self) -> "Base":
+        """Returns the table type
+        """
+        return self.specialization.__class__.__name__
 
     @classmethod
     def get_app(cls) -> AppConfig:
@@ -196,7 +195,7 @@ class Base(models.Model):
         fields = []
         for field in cls._meta.get_fields():  # pylint: disable=W0212
             if not (
-                field.name in ["id", "type", "user"]
+                field.name in ["id", "user"]
                 or not field.editable
                 or field.name.endswith("_ptr")
             ):
@@ -237,7 +236,7 @@ class Base(models.Model):
         check_consistency: bool = True,
         **kwargs,
     ) -> "Base":  # pylint: disable=W0221
-        """Overwrites type with the class name and user with login info if not specified.
+        """Overwrites user with login info if not specified and runs consistency checks.
 
         Arguments:
             save_instance_only:
@@ -247,9 +246,9 @@ class Base(models.Model):
                 If true, runs consistency checks before saving.
 
         Note:
-            The keyword ``save_instance_only`` is not present in standard Django.
+            The keyword ``save_instance_only`` and ``check_consistency`` is not present
+            in standard Django.
         """
-        self.type = self.__class__.__name__
         if not self.user:
             username = settings.DB_CONFIG.get("USER", None)
             if username:
