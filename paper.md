@@ -56,20 +56,46 @@ The [*Use case* section](#use-case) presents how ``LatteDB`` is integrated in th
 
 # Features
 
-EspressoDB allows to store and query vast amount of data.
+The main objective behind ``EspressoDB`` is to store vast amount of data and provide an easy to use framework which helps making informed decision fast.
+The latter condition demands a that it possible to query the data and store relations between different datasets, e.g., an SQL based framework.
+To ensure that this framework is accessible and users do not have to learn SQL to get started, ``EspressoDB`` makes use of an Object-Relational Mapping (ORM).
+E.g., instead of having a (file based) table system, Python objects correspond to rows in this table.
+Columns of such tables correspond to attributes of the objects.
+Thus it is possible to filter for objects by their attributes or generate summary tables (``pandas.DataFrame``) within one line of code.
+Furthermore, using an ORM allows to have the same interface independent of the backend.
+It is possible to store data in a file based `SQLite` solution, or use more scalable options like `MySQL` or `Postgresql`.
 
-EspressoDB provides a data integrity framework.
+``EspressoDB`` builds on top of Python's ``Django`` ORM framework.
+``Django`` is part of many open-source projects and thus comes with a extensive documentation.
+It is scalable, comes with reliable support and tests which manifests in the fact that commonly is used in industry projects (BitBucket, Instagram, Mozilla, NASA and many more).
+One guiding principle of ``EspressoDB`` is to stay close to it's roots and therefore leverage the support coming with ``Django``.
+This has the consequence that one can easily incorporate many of ``Django``'s extensions and find solutions to technical questions online.
 
-EspressoDB makes it easy to automates workflows.
+On top of ``Django``, ``EspressoDB`` provides features important to scientific projects.
 
-EspressoDB allows to have a centralized data platform.
+* The Base tables | EspressoDB is flexible.
+* Automated views
+* Automated docs
+* Population framework
+* Integrity checks | EspressoDB provides a data integrity framework.
 
-EspressoDB makes it possible to share progress in real time.
+One purpose of ``EspressoDB`` is to support collaborative and open-data oriented projects.
+In addition of providing a centralized data platform, it is possible to, depending on the configuration[^1], to spawn customized web pages which can be viewed
 
-EspressoDB automatically documents work.
+* on a local machine only,
+* on a local network or
+* the world wide web.
 
-EspressoDB is relatively easy to use.
-EspressoDB leverages a strong community support.
+On default, ``EspressoDB`` spawns documentation views of implemented tables, a project wide notification system, Python interface guidelines and admin pages for interacting with data in a GUI.
+This interface can be set up [within three steps](https://espressodb.readthedocs.io/en/latest/Usage.html#tl-dr).
+Further views can be implemented to interact with data and can utilize existing Python libraries to summarize and visualize information on the fly---thus automating workflows and providing progress updates in real time.
+
+[^1]: Depending on the configuration, it is possible to provided selected access for multiple users.
+
+
+
+
+
 
 # Use case
 
