@@ -600,7 +600,9 @@ class Base(models.Model):
 
             else:
                 value = parameters.get(field.name, None)
-                if value is None and not field.null:
+                if value is None and not (
+                    field.null or isinstance(field, models.ManyToManyField)
+                ):
                     raise KeyError(
                         f"Missing value for constructing {cls}."
                         f" Parameter dictionary has no value for {field.name}."
