@@ -94,17 +94,16 @@ E.g., these models will create the following tables after migrating
 
 #### `hamiltonian_hamiltonian`
 
-| id | type | last_modified | tag | userid|
-|---|---|---|---|---|
-| 1 | Contact | ... | ... | ...|
-| 2 | Contact | ... | ... | ...|
-| ... | ... | ... | ... | ...|
-| 42 | Coulomb | ... | ... | ...|
-| ... | ... | ... | ... | ...|
+| id | last_modified | tag | userid|
+|---|---|---|---|
+| 1 | ... | ... | ...|
+| 2  ... | ... | ...|
+| ... | ... | ... | ...|
+| 42 | ... | ... | ...|
+| ... | ... | ... | ...|
 
 The `id` column is the primary key to identify a certain entry.
 All the other columns come from the EspressoDB `Base` class (which does not have it's own table) to enable EspressoDB's features and have additional meta information.
-For example the `type` column informs that the entry is associated with the *specialized* class `Contact` or `Coulomb`.
 
 #### `hamiltonian_contact`
 
@@ -131,11 +130,11 @@ Thus, all implementations have a corresponding entry in the base `hamiltonian_ha
 
 #### `hamiltonian_eigenvalue`
 
-| id | type | last_modified | tag | n_level | value | hamiltonian_id | userid |
-|---|---|---|---|---|---|---|---|
-| 1 | ... | ... | ... | 1 | -363.823 | 1 | ... |
-| 1 | ... | ... | ... | 2 | -361.803 | 1 | ... |
-| ... | ... | ... | ... | ... | ... | ... |
+| id | last_modified | tag | n_level | value | hamiltonian_id | userid |
+|---|---|---|---|---|---|---|
+| 1 | ... | ... | 1 | -363.823 | 1 | ... |
+| 1 | ... | ... | 2 | -361.803 | 1 | ... |
+| ... | ... | ... | ... | ... | ... |
 
 Because the `hamiltonian_eigenvalue` table inherits from `Base`, it comes with the default `Base` columns.
 In addition, it now points to the `hamiltonian_id` in the `hamiltonian_hamiltonian` table which corresponds to either a specialized `Coulomb` or `Contact` entry.
@@ -147,7 +146,7 @@ This is generally possible and might also be good practice depending on the spec
 However, in case there are joined unique constraints, it might not always be possible because this constraint is enforced at the table level.
 
 Suppose you want all the `Contact` entries to be unique in `["n_sites", "spacing", "c"]`.
-If you place the additional columns `n_sites` and `spacing` from `Contact` to `Hamiltonian` and add an unique constraint in `Hamiltonian` according to `["n_sites", "spacing", "type"]`,
+If you place the additional columns `n_sites` and `spacing` from `Contact` to `Hamiltonian` and add an unique constraint in `Hamiltonian` according to `["n_sites", "spacing"]`,
 
 ```python
 class Hamiltonian(Base):
@@ -155,7 +154,7 @@ class Hamiltonian(Base):
     spacing = models.DecimalField(max_digits=5, decimal_places=3)
 
     class Meta:
-        unique_together = ["n_sites", "spacing", "type"]
+        unique_together = ["n_sites", "spacing"]
 
 class Contact(Hamiltonian):
     c = models.DecimalField(max_digits=5, decimal_places=3)
@@ -167,10 +166,10 @@ it is **not** possible to have table entries for same `n_site` and `spacing` but
 
 #### `hamiltonian_hamiltonian`
 
-| id | type | n_sites | spacing | ... |
-|---|---|---|---|---|
-| 1 | Contact | 10 | 0.1 | ...|
-| ... | ... | ... | ... | ...|
+| id | n_sites | spacing | ... |
+|---|---|---|---|
+| 1 | 10 | 0.1 | ...|
+| ... | ... | ... | ...|
 
 #### `hamiltonian_contact`
 
@@ -181,7 +180,7 @@ it is **not** possible to have table entries for same `n_site` and `spacing` but
 
 because each entry in `hamiltonian_contact` creates a new `id` in `hamiltonian_hamiltonian` which is unique constrained in the parameters we want to have present.
 
-In principle one could unique constrain `["id", "n_sites", "spacing", "type"]` in `hamiltonian_hamiltonian`, however unique constraining any combination of columns containing the `id` is equivalent to not constraining at all (because the `id` is supposed to be unique).
+In principle one could unique constrain `["id", "n_sites", "spacing"]` in `hamiltonian_hamiltonian`, however unique constraining any combination of columns containing the `id` is equivalent to not constraining at all (because the `id` is supposed to be unique).
 
 
 ### Queries and member access
