@@ -33,9 +33,9 @@ class IndexViewTest(TestCase):
         """
         self.username = "test user"
         self.password = "admin1234"
-        user = User.objects.create(username=self.username)
-        user.set_password(self.password)
-        user.save()
+        self.user = User.objects.create(username=self.username)
+        self.user.set_password(self.password)
+        self.user.save()
 
     def test_index_page(self):
         """Tests the HTTP status of the client
@@ -78,8 +78,31 @@ class IndexViewTest(TestCase):
         self.assertEqual(expected_links, self.get_links(response))
 
     def test_link_list_as_logged_in(self):
-        """Tests wether all links in the link list are present
+        """Tests wether all links in the link list are present as logged in user
         """
+        self.client.login(username=self.username, password=self.password)
+        expected_links = {"/populate/", "/logout/", "/notifications/"}
+        for level in ["debug", "info", "warning", "error"]:
+            expected_links.add(f"/notifications/{level}/")
+
+        for app_slug, app in get_apps_slug_map().items():
+            for patterns in get_resolver(app.name + ".urls").reverse_dict.values():
+                url = f"/{app_slug}/{patterns[0][0][0]}"
+                if not self.url_excluded(url):
+                    expected_links.add(url)
+
+            if app.get_models():
+                expected_links.add(f"/documentation/{app_slug}/")
+
+        response = self.client.get("/")
+        self.assertTrue("index.html" in response.template_name)
+        self.assertEqual(expected_links, self.get_links(response))
+
+    def test_link_list_as_staff(self):
+        """Tests wether all links in the link list are present as staff user
+        """
+        self.user.is_staff = True
+        self.user.save()
         self.client.login(username=self.username, password=self.password)
         expected_links = {"/populate/", "/logout/", "/admin/", "/notifications/"}
         for level in ["debug", "info", "warning", "error"]:
