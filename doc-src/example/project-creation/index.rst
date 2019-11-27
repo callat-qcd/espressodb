@@ -12,4 +12,3 @@ This section is a step by step tutorial how to create the `my_project` project c
     class-interface
     dependencies
     views
-    inheritance
