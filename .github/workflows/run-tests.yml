@@ -34,6 +34,10 @@ jobs:
               working-directory: ./example/my_project/
               run: pytest
 
+            - name: Run m2m tests
+              working-directory: ./example/espressodb_tests/
+              run: pytest
+
             - name: Run create new project
               working-directory: ./example/
               run: espressodb startproject new_test

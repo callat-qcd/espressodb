@@ -23,31 +23,7 @@ from django_pandas.managers import DataFrameManager
 
 from espressodb.base.utilities.apps import APPS_TO_SLUG
 
-from espressodb.base.exceptions import ConsistencyError
-
 LOGGER = logging.getLogger("base")
-
-
-class BaseManager(DataFrameManager):
-    """Manager class for Base model.
-
-    Same as regular manager but provides `safe` methods which run consistency checks.
-    """
-
-    def safe_create(self, **kwargs) -> "Base":
-        """Same as create but runs model dependent consistency checks before.
-        """
-        self.model._check_consistency(kwargs)  # pylint: disable=W0212
-        return self.create(**kwargs)
-
-    def safe_get_or_create(self, defaults=None, **kwargs) -> Tuple["Base", bool]:
-        """Same as get_or_create but runs model dependent consistency checks before.
-
-        Note:
-            The checks are run independent of if the entry exists or not.
-        """
-        self.model._check_consistency(kwargs)  # pylint: disable=W0212
-        return self.get_or_create(defaults=defaults, **kwargs)
 
 
 class Base(models.Model):
@@ -55,6 +31,9 @@ class Base(models.Model):
 
     This class provides api for auto rendering pages and recursive insertions.
     """
+
+    # Run consistency checks on save and m2m update.
+    run_checks: bool = True
 
     #: Primary key for the base class
     id = models.AutoField(primary_key=True, help_text="Primary key for Base class.")
@@ -85,7 +64,7 @@ class Base(models.Model):
         """Returns import path as slug name"""
         return slugify(cls.__name__)
 
-    objects = BaseManager()
+    objects = DataFrameManager()
 
     class Meta:
         abstract = True
@@ -160,32 +139,24 @@ class Base(models.Model):
             setattr(self.specialization, key, value)
         super().__setattr__(key, value)
 
-    @classmethod
-    def _check_consistency(cls, data: Dict[str, Any]):
-        """Wraps check_consistency method to raise custom ConsistencyError.
-
-        Copies the data before calling `check_consistency` to avoid unintended
-        manipulations.
-
-        Raises:
-            ConsistencyError: If check_consistency raises any error.
-
-        Arguments:
-            data: Dictionary containing the (open) column data of the class.
-        """
-        try:
-            cls.check_consistency(data.copy())
-        except Exception as error:
-            raise ConsistencyError(error, cls, data=data)
-
-    @classmethod
-    def check_consistency(cls, data: Dict[str, Any]):
+    def check_consistency(self):
         """Method is called before save.
 
         Raise errors here if the model must fulfill checks.
 
         Arguments:
             data: Dictionary containing the (open) column data of the class.
+        """
+
+    def check_m2m_consistency(
+        self, instances: List["Base"], column: Optional[str] = None
+    ):
+        """Method is called before adding to a many to many set.
+
+        Raise errors here if the adding must fulfill checks.
+
+        Note:
+            Different to
         """
 
     @classmethod
@@ -230,11 +201,7 @@ class Base(models.Model):
         return f"{specialization.__class__.__name__}{base}{info_str}"
 
     def save(  # pylint: disable=W0221
-        self,
-        *args,
-        save_instance_only: bool = False,
-        check_consistency: bool = True,
-        **kwargs,
+        self, *args, save_instance_only: bool = False, **kwargs,
     ) -> "Base":  # pylint: disable=W0221
         """Overwrites user with login info if not specified and runs consistency checks.
 
@@ -242,8 +209,6 @@ class Base(models.Model):
             save_instance_only:
                 If true, only saves columns of the instance and not associated
                 specialized columns.
-            check_consistency:
-                If true, runs consistency checks before saving.
 
         Note:
             The keyword ``save_instance_only`` and ``check_consistency`` is not present
@@ -255,20 +220,6 @@ class Base(models.Model):
                 self.user, _ = User.objects.get_or_create(username=username)
             else:
                 self.user, _ = User.objects.get_or_create(username="ananymous")
-
-        data = {}
-        for field in self.get_open_fields():
-            if not isinstance(field, models.ManyToManyField):
-                data[field.name] = getattr(self, field.name)
-            else:
-                data[field.name] = (
-                    getattr(self, field.name)
-                    if self.pk is not None
-                    else field.model.objects.none()
-                )
-
-        if check_consistency:
-            self._check_consistency(data)
 
         if self != self.specialization and not save_instance_only:
             self.specialization.save(*args, **kwargs)
