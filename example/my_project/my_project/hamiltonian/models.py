@@ -150,9 +150,8 @@ class Eigenvalue(Base):
     class Meta:  # pylint: disable=C0111, R0903
         unique_together = ["hamiltonian", "n_level"]
 
-    @classmethod
-    def check_consistency(cls, data: Dict[str, Any]):
+    def check_consistency(self):
         """Checks if the n_level entry does not exceed the dimension of the hamiltonian.
         """
-        if data["n_level"] > data["hamiltonian"].n_sites:
+        if self.n_level > self.hamiltonian.n_sites:  # pylint: disable=E1101
             raise ValueError("Eigenstate index larger than matrix allows.")

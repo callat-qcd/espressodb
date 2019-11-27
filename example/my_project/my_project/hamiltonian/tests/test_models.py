@@ -37,9 +37,9 @@ class EigenvalueTest(TestCase):
         eigenvalue = Eigenvalue(**data)
 
         with patch.object(Eigenvalue, "check_consistency") as mocked_check_consistency:
-            eigenvalue.save(check_consistency=True)
+            eigenvalue.save()
 
-        mocked_check_consistency.assert_called_with(data)
+        mocked_check_consistency.assert_called()
 
         eigenvalues = Eigenvalue.objects.all()
         self.assertEqual(1, eigenvalues.count())
@@ -69,8 +69,8 @@ class EigenvalueTest(TestCase):
         eigenvalues = Eigenvalue.objects.all()
         self.assertEqual(0, eigenvalues.count())
 
-    def test_safe_create_consistency(self):
-        """Tests wether inserting an eigenvalue entry using `safe_create` works as
+    def test_create_consistency(self):
+        """Tests wether inserting an eigenvalue entry using `create` works as
         expected.
 
         Tests:
@@ -85,9 +85,9 @@ class EigenvalueTest(TestCase):
         }
 
         with patch.object(Eigenvalue, "check_consistency") as mocked_check_consistency:
-            Eigenvalue.objects.safe_create(**data)
+            Eigenvalue.objects.create(**data)
 
-        mocked_check_consistency.assert_called_with(data)
+        mocked_check_consistency.assert_called()
 
         eigenvalues = Eigenvalue.objects.all()
         self.assertEqual(1, eigenvalues.count())
@@ -96,8 +96,8 @@ class EigenvalueTest(TestCase):
         for key, value in data.items():
             self.assertEqual(value, getattr(stored_eigenvalue, key))
 
-    def test_safe_create_consistency_fail(self):
-        """Calls `safe_create` such that an `ConsistencyError` is triggered.
+    def test_create_consistency_fail(self):
+        """Calls `create` such that an `ConsistencyError` is triggered.
 
         Expects `ConsistencyError` is raised an no eigenvalue is created.
         """
@@ -109,15 +109,15 @@ class EigenvalueTest(TestCase):
         }
 
         with self.assertRaises(ConsistencyError) as context:
-            Eigenvalue.objects.safe_create(**data)
+            Eigenvalue.objects.create(**data)
 
         self.assertIsInstance(context.exception.error, ValueError)
 
         eigenvalues = Eigenvalue.objects.all()
         self.assertEqual(0, eigenvalues.count())
 
-    def test_safe_get_or_create_consistency(self):
-        """Tests wether inserting an eigenvalue entry using `safe_get_or_create` works as
+    def test_get_or_create_consistency(self):
+        """Tests wether inserting an eigenvalue entry using `get_or_create` works as
         expected.
 
         Also checks if calling this method twice with the same input returns the same
@@ -135,10 +135,10 @@ class EigenvalueTest(TestCase):
         }
 
         with patch.object(Eigenvalue, "check_consistency") as mocked_check_consistency:
-            ev, created = Eigenvalue.objects.safe_get_or_create(**data)
+            ev, created = Eigenvalue.objects.get_or_create(**data)
 
         self.assertTrue(created)
-        mocked_check_consistency.assert_called_with(data)
+        mocked_check_consistency.assert_called()
 
         eigenvalues = Eigenvalue.objects.all()
         self.assertEqual(1, eigenvalues.count())
@@ -148,17 +148,17 @@ class EigenvalueTest(TestCase):
             self.assertEqual(value, getattr(stored_eigenvalue, key))
 
         with patch.object(Eigenvalue, "check_consistency") as mocked_check_consistency:
-            ev2, created = Eigenvalue.objects.safe_get_or_create(**data)
+            ev2, created = Eigenvalue.objects.get_or_create(**data)
 
         self.assertFalse(created)
-        mocked_check_consistency.assert_called_with(data)
+        mocked_check_consistency.assert_not_called()
 
         eigenvalues = Eigenvalue.objects.all()
         self.assertEqual(1, eigenvalues.count())
         self.assertEqual(ev, ev2)
 
-    def test_safe_get_or_create_consistency_fail(self):
-        """Calls `safe_get_or_create` such that an `ConsistencyError` is triggered.
+    def test_get_or_create_consistency_fail(self):
+        """Calls `get_or_create` such that an `ConsistencyError` is triggered.
 
         Expects `ConsistencyError` is raised an no eigenvalue is created.
         """
@@ -170,7 +170,7 @@ class EigenvalueTest(TestCase):
         }
 
         with self.assertRaises(ConsistencyError) as context:
-            Eigenvalue.objects.safe_get_or_create(**data)
+            Eigenvalue.objects.get_or_create(**data)
 
         self.assertIsInstance(context.exception.error, ValueError)
 
@@ -238,3 +238,32 @@ class EigenvalueTest(TestCase):
         self.assertEqual(eigenvalue.hamiltonian, hamiltonian)
         self.assertEqual(eigenvalue.value, data["value"])
         self.assertEqual(eigenvalue.n_level, data["n_level"])
+
+    def test_create_consistency_turned_off(self):
+        """Tests wether inserting an eigenvalue entry using `create` works as
+        expected when turning off consistency checks.
+
+        Tests:
+            1. Save method calls check_consistency with expected arguments
+            2. The eigenvalue is properly inserted
+        """
+        data = {
+            "hamiltonian": self.hamiltonian,
+            "n_level": 1000,
+            "value": Decimal("0.0"),
+            "tag": None,
+        }
+
+        ev = Eigenvalue(**data)
+        ev.run_checks = False
+        with patch.object(Eigenvalue, "check_consistency") as mocked_check_consistency:
+            ev.save()
+
+        mocked_check_consistency.assert_not_called()
+
+        eigenvalues = Eigenvalue.objects.all()
+        self.assertEqual(1, eigenvalues.count())
+
+        stored_eigenvalue = eigenvalues.first()
+        for key, value in data.items():
+            self.assertEqual(value, getattr(stored_eigenvalue, key))
