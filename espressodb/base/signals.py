@@ -82,7 +82,6 @@ def base_m2m_add_handler(sender: Model, **kwargs):
     else:
         # b.check_m2m_consistency((a1, a2, ...))
         instances_to_add = model.objects.filter(pk__in=pk_set)
-        instance = m2m_cls.objects.get(pk=pk)
         try:
             instance.check_m2m_consistency(instances_to_add, column=column)
         except Exception as error:
