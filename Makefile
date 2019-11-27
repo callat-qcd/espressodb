@@ -4,3 +4,8 @@ paper.pdf: paper.md paper.bib
 .PHONY: clean
 clean:
 	rm paper.pdf
+
+.PHONY: test
+test:
+	cd example/my_project && pytest
+	cd example/espressodb_tests && pytest
