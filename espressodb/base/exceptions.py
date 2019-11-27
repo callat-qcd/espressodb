@@ -14,7 +14,7 @@ class ConsistencyError(Exception):
     """
 
     def __init__(
-        self, error: Exception, model: Model, data: Optional[Dict[str, Any]] = None,
+        self, error: Exception, instance: Model, data: Optional[Dict[str, Any]] = None,
     ):
         """Initialize consistency error and prepares custom error method.
 
@@ -23,16 +23,22 @@ class ConsistencyError(Exception):
             model: The model which raises the check
             data: The data the model was checked with.
         """
-        data = data or {}
-        message = f"Consistency error when checking {model}.\n"
+        ddata = {
+            field.name: getattr(instance, field.name)
+            for field in instance.get_open_fields()
+        }
+        if data is not None:
+            ddata.update(data)
+
+        message = f"Consistency error when checking {instance.__class__}.\n"
         message += f"{type(error).__name__}"
         message += f":\n\t{error}\n" if str(error) else "\n"
         if data:
             message += "Data used for check:\n\t* "
-            message += "\n\t* ".join([f"{key}: {val}" for key, val in data.items()])
+            message += "\n\t* ".join([f"{key}: {val}" for key, val in ddata.items()])
 
         super().__init__(message)
 
-        self.data = data
-        self.model = model
+        self.data = ddata
+        self.instance = instance
         self.error = error
