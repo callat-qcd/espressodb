@@ -23,8 +23,6 @@ from django_pandas.managers import DataFrameManager
 
 from espressodb.base.utilities.apps import APPS_TO_SLUG
 
-from espressodb.base.exceptions import ConsistencyError
-
 LOGGER = logging.getLogger("base")
 
 
