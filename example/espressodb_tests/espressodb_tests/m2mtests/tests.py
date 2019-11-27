@@ -53,9 +53,7 @@ class M2MTest(TestCase):
         self.assertEqual(self.b1.a_set.count(), 1)
 
         calls = [call(A.objects.filter(pk=self.a1.pk), column="a_set")]
-        self.assertCallsEqual(
-            calls_expected=calls, calls_actual=self.b1.check_m2m_consistency.mock_calls
-        )
+        self.assertCallsEqual(calls, self.b1.check_m2m_consistency.mock_calls)
 
     def test_02_single_m2m_single_instance_reverse(self):
         """Adds one m2m instance to set with reverse relation
@@ -66,9 +64,7 @@ class M2MTest(TestCase):
         self.assertEqual(self.a1.b_set.count(), 1)
 
         calls = [call(A.objects.filter(pk=self.a1.pk), column="a_set")]
-        self.assertCallsEqual(
-            calls_expected=calls, calls_actual=self.b1.check_m2m_consistency.mock_calls
-        )
+        self.assertCallsEqual(calls, self.b1.check_m2m_consistency.mock_calls)
 
     def test_03_single_m2m_multiple_instances(self):
         """Adds multiple m2m instance to set without reverse relation
@@ -79,9 +75,7 @@ class M2MTest(TestCase):
         self.assertEqual(self.b1.a_set.count(), 2)
 
         calls = [call(A.objects.all(), column="a_set")]
-        self.assertCallsEqual(
-            calls_expected=calls, calls_actual=self.b1.check_m2m_consistency.mock_calls
-        )
+        self.assertCallsEqual(calls, self.b1.check_m2m_consistency.mock_calls)
 
     def test_04_single_m2m_multiple_instances_reverse(self):
         """Adds multiple m2m instance to set with reverse relation
@@ -95,6 +89,4 @@ class M2MTest(TestCase):
             call(A.objects.filter(pk=self.a1.pk), column="a_set"),
             call(A.objects.filter(pk=self.a1.pk), column="a_set"),
         ]
-        self.assertCallsEqual(
-            calls_expected=calls, calls_actual=self.b1.check_m2m_consistency.mock_calls
-        )
+        self.assertCallsEqual(calls, self.b1.check_m2m_consistency.mock_calls)
