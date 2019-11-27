@@ -7,6 +7,7 @@ from django.db.models.signals import pre_save, m2m_changed
 from django.dispatch import receiver
 
 from espressodb.base.models import Base
+from espressodb.base.exceptions import ConsistencyError
 
 
 @receiver(pre_save)
@@ -23,7 +24,10 @@ def base_save_handler(sender: Base, **kwargs):
         return
 
     if instance.run_checks:
-        instance.check_consistency()
+        try:
+            instance.check_consistency()
+        except Exception as error:
+            raise ConsistencyError(error, instance)
 
 
 @receiver(m2m_changed)
@@ -66,8 +70,24 @@ def base_m2m_add_handler(sender: Model, **kwargs):
         instances_to_add = instance.__class__.objects.filter(pk=instance.pk)
         for pk in pk_set:
             instance = m2m_cls.objects.get(pk=pk)
-            instance.check_m2m_consistency(instances_to_add, column=column)
+            try:
+                instance.check_m2m_consistency(instances_to_add, column=column)
+            except Exception as error:
+                raise ConsistencyError(
+                    error,
+                    instance,
+                    data={"instances_to_add": instances_to_add, "column": column},
+                )
+
     else:
         # b.check_m2m_consistency((a1, a2, ...))
         instances_to_add = model.objects.filter(pk__in=pk_set)
-        instance.check_m2m_consistency(instances_to_add, column=column)
+        instance = m2m_cls.objects.get(pk=pk)
+        try:
+            instance.check_m2m_consistency(instances_to_add, column=column)
+        except Exception as error:
+            raise ConsistencyError(
+                error,
+                instance,
+                data={"instances_to_add": instances_to_add, "column": column},
+            )
