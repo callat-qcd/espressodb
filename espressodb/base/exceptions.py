@@ -33,7 +33,7 @@ class ConsistencyError(Exception):
         message = f"Consistency error when checking {instance.__class__}.\n"
         message += f"{type(error).__name__}"
         message += f":\n\t{error}\n" if str(error) else "\n"
-        if data:
+        if ddata:
             message += "Data used for check:\n\t* "
             message += "\n\t* ".join([f"{key}: {val}" for key, val in ddata.items()])
 
