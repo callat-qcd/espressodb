@@ -35,6 +35,9 @@ def base_m2m_add_handler(sender: Model, **kwargs):
     """Runs many to many pre add logic of Base class
 
     This calls the check_m2m_consistency method of the class containing the m2m column.
+
+    Note:
+        For revese adding elements, the pk_set is sorted.
     """
     if kwargs.get("action") != "pre_add":
         return
@@ -68,7 +71,7 @@ def base_m2m_add_handler(sender: Model, **kwargs):
         # a1.check_m2m_consistency((b,))
         # a2.check_m2m_consistency((b,))
         instances_to_add = instance.__class__.objects.filter(pk=instance.pk)
-        for pk in pk_set:
+        for pk in sorted(pk_set):
             instance = m2m_cls.objects.get(pk=pk)
             try:
                 instance.check_m2m_consistency(instances_to_add, column=column)
