@@ -42,10 +42,10 @@ class M2MTest(TestCase):
             qe = arge[0]
             qa = arge[0]
 
-            self.assertQuerysetEqual(qe, qa, transform=lambda x: x)
+            self.assertQuerysetEqual(qe, qa, transform=lambda x: x, ordered=False)
 
     def test_01_single_m2m_single_instance(self):
-        """Adds m2m one m2m instance to set without reverse relation
+        """Adds one m2m instance to set without reverse relation
         """
         B.check_m2m_consistency = Mock()
 
@@ -53,6 +53,48 @@ class M2MTest(TestCase):
         self.assertEqual(self.b1.a_set.count(), 1)
 
         calls = [call(A.objects.filter(pk=self.a1.pk), column="a_set")]
+        self.assertCallsEqual(
+            calls_expected=calls, calls_actual=self.b1.check_m2m_consistency.mock_calls
+        )
+
+    def test_02_single_m2m_single_instance_reverse(self):
+        """Adds one m2m instance to set with reverse relation
+        """
+        B.check_m2m_consistency = Mock()
+
+        self.a1.b_set.add(self.b1)
+        self.assertEqual(self.a1.b_set.count(), 1)
+
+        calls = [call(A.objects.filter(pk=self.a1.pk), column="a_set")]
+        self.assertCallsEqual(
+            calls_expected=calls, calls_actual=self.b1.check_m2m_consistency.mock_calls
+        )
+
+    def test_03_single_m2m_multiple_instances(self):
+        """Adds multiple m2m instance to set without reverse relation
+        """
+        B.check_m2m_consistency = Mock()
+
+        self.b1.a_set.add(self.a1, self.a2)
+        self.assertEqual(self.b1.a_set.count(), 2)
+
+        calls = [call(A.objects.all(), column="a_set")]
+        self.assertCallsEqual(
+            calls_expected=calls, calls_actual=self.b1.check_m2m_consistency.mock_calls
+        )
+
+    def test_04_single_m2m_multiple_instances_reverse(self):
+        """Adds multiple m2m instance to set with reverse relation
+        """
+        B.check_m2m_consistency = Mock()
+
+        self.a1.b_set.add(self.b1, self.b2)
+        self.assertEqual(self.a1.b_set.count(), 2)
+
+        calls = [
+            call(A.objects.filter(pk=self.a1.pk), column="a_set"),
+            call(A.objects.filter(pk=self.a1.pk), column="a_set"),
+        ]
         self.assertCallsEqual(
             calls_expected=calls, calls_actual=self.b1.check_m2m_consistency.mock_calls
         )
