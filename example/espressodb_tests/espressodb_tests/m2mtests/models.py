@@ -9,12 +9,24 @@ class A(Base):
     """Blank table with no columns
     """
 
+    def __str__(self):
+        return f"A(pk={self.pk})"
+
+    def __repr__(self):
+        return str(self)
+
 
 class B(Base):
     """First many to many class
     """
 
     a_set = models.ManyToManyField(A)
+
+    def __str__(self):
+        return f"B(pk={self.pk})"
+
+    def __repr__(self):
+        return str(self)
 
 
 class C(Base):
@@ -23,3 +35,9 @@ class C(Base):
 
     a_set = models.ManyToManyField(A)
     b_set = models.ManyToManyField(B)
+
+    def __str__(self):
+        return f"C(pk={self.pk})"
+
+    def __repr__(self):
+        return str(self)
