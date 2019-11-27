@@ -179,7 +179,8 @@ class M2MTest(TestCase):  # pylint: disable=R0902
         calls = [
             ((self.c1, B.objects.filter(pk=self.b1.pk)), {"column": "b_set"}),
             ((self.c2, B.objects.filter(pk=self.b1.pk)), {"column": "b_set"}),
-            ((self.c2, A.objects.filter(pk=self.a1.pk)), {"column": "a_set"}),
+            # Note that the order has changed!
             ((self.c1, A.objects.filter(pk=self.a1.pk)), {"column": "a_set"}),
+            ((self.c2, A.objects.filter(pk=self.a1.pk)), {"column": "a_set"}),
         ]
         self.assertCallsEqual(calls, self.c_calls)
