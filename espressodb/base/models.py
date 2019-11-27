@@ -141,24 +141,6 @@ class Base(models.Model):
             setattr(self.specialization, key, value)
         super().__setattr__(key, value)
 
-    @classmethod
-    def _check_consistency(cls, data: Dict[str, Any]):
-        """Wraps check_consistency method to raise custom ConsistencyError.
-
-        Copies the data before calling `check_consistency` to avoid unintended
-        manipulations.
-
-        Raises:
-            ConsistencyError: If check_consistency raises any error.
-
-        Arguments:
-            data: Dictionary containing the (open) column data of the class.
-        """
-        try:
-            cls.check_consistency(data.copy())
-        except Exception as error:
-            raise ConsistencyError(error, cls, data=data)
-
     def check_consistency(self):
         """Method is called before save.
 
