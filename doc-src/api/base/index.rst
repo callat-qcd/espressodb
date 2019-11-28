@@ -9,6 +9,8 @@ espressodb.base
 .. autosummary::
     espressodb.base.admin
     espressodb.base.models
+    espressodb.base.exceptions
+    espressodb.base.signals
     espressodb.base.urls
     espressodb.base.views
     espressodb.base.static
