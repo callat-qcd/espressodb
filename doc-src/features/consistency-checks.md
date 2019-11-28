@@ -117,8 +117,8 @@ class B(Base):
                     raise ValueError("A instance has too large i...")
 
 b = B.objects.create()  # runs check_consistency on b
-a3 = A.objects.create(i=3)
-b.a_set.add(a3)  # this will fail
+a3 = A.objects.create(i=3) # runs check_consistency on a3
+b.a_set.add(a3)  # runs check_m2m_consistency on b with a3 and will fail
 ```
 
 Because on default, `ManyToMany` fields are symmetric, it is in principle possible to run
