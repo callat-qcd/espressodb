@@ -1,5 +1,5 @@
-Features of EspressoDB
-======================
+Advanced features of EspressoDB
+===============================
 
 EspressoDB provides certain features which help navigating complex table relations.
 In this section we present
