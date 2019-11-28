@@ -88,3 +88,59 @@ Data used for check:
 ```
 
 ## Many-to-many checks
+
+The general idea for many to many checks is analogue to the single instance checks.
+Different to this idea is that the many to many instances need to be created before storing their relation.
+Thus, this test is rather a test on association between different instances then an actual before creation test of individual instances (it checks consistency before insertion in the through table).
+E.g.,
+```python
+class B(Base):
+    a_set = models.ManyToManyField(A)
+
+a = A.objects.first()
+
+b = B.objects.create()  # runs check_consistency on b
+b.a_set.add(a) # runs check_m2m_consistency on b with a
+```
+
+By default, `check_m2m_consistency` is empty.
+To implement custom checks, one has to override the signature.
+E.g.,
+```python
+class B(Base):
+    a_set = models.ManyToManyField(A)
+
+    def check_m2m_consistency(self, instances_to_add, column):
+        if column == "a_set":
+            for a in instances_to_add:
+                if a.i > 2:
+                    raise ValueError("A instance has too large i...")
+
+b = B.objects.create()  # runs check_consistency on b
+a3 = A.objects.create(i=3)
+b.a_set.add(a3)  # this will fail
+```
+
+Because on default, `ManyToMany` fields are symmetric, it is in principle possible to run
+```python
+a3.b_set.add(b)
+```
+EspressoDB implements consistency checks such that the `check_m2m_consistency` is always called on the instance that has implemented the `ManyToManyField`.
+For example, the above call would result in
+```python
+b.check_consistency(<QuerySet [<A: A[Base](i=3)>]>, column="a_set")
+```
+
+Calling `add` with multiple instances results in
+```python
+> b.a_set.add(a1, a2)
+
+b.check_consistency(<QuerySet [<A: A[Base](i=1)>, <A: A[Base](i=2)>]>, column="a_set")
+```
+and in the reverse case
+```python
+> a3.b_set.add(b1, b2)
+
+b1.check_consistency(<QuerySet [<A: A[Base](i=3)>]>, column="a_set")
+b2.check_consistency(<QuerySet [<A: A[Base](i=3)>]>, column="a_set")
+```
