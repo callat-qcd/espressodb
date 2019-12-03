@@ -267,3 +267,28 @@ class EigenvalueTest(TestCase):
         stored_eigenvalue = eigenvalues.first()
         for key, value in data.items():
             self.assertEqual(value, getattr(stored_eigenvalue, key))
+
+    def test_get_or_create_from_parameters_fail_atomicness(self):
+        """Tests the get or create from parameters method for not existing hamiltonian
+        and fail at eigenvalue level.
+        """
+        data = {
+            "n_level": 11,  # causes fail
+            "value": Decimal("0.0"),
+            "n_sites": 10,
+            "spacing": Decimal("0.1"),
+            "c": Decimal("-2.0"),
+        }
+        tree = {"hamiltonian": "Contact"}
+
+        hamiltonians = Hamiltonian.objects.all()
+        self.assertEqual(hamiltonians.count(), 1)
+
+        with self.assertRaises(ConsistencyError):
+            Eigenvalue.get_or_create_from_parameters(data, tree=tree)
+
+        hamiltonians = Hamiltonian.objects.all()
+        self.assertEqual(hamiltonians.count(), 1)
+
+        eigenvalues = Eigenvalue.objects.all()
+        self.assertEqual(eigenvalues.count(), 0)

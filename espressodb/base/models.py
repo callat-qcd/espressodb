@@ -424,6 +424,7 @@ class Base(models.Model):
         return instance, created
 
     @classmethod
+    @transaction.atomic
     def get_or_create_from_parameters(  # pylint: disable=C0202, R0913, R0914, R0912
         calling_cls,
         parameters: Dict[str, Any],
