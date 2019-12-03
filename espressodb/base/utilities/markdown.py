@@ -2,13 +2,14 @@
 """
 from espressodb.base.utilities import blackmagicsorcery as re
 
+#: Patterns for markdown to html conversion
 PATTERNS = {r"`([^`]+)`": r"<code>\g<1></code>"}
 
 
 def convert_string(string: str, wrap_blocks: bool = False) -> str:
     """Converts Markdown like expression to html.
 
-    See `PATTERNS` for available substitutions.
+    See :data:`PATTERNS` for available substitutions.
 
     Arguments:
         string: The string to convert to html.
