@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView
 from django.http import Http404
 
 from espressodb.base.utilities.apps import get_apps_slug_map
-from espressodb.documentation.utilities.markdown import convert_string
+from espressodb.base.utilities.markdown import convert_string
 
 #: Maps app-slugs to apps
 SLUG_MAP = get_apps_slug_map()

@@ -12,6 +12,7 @@ import logging
 
 from django.db import models
 from django.db import connection
+from django.db import transaction
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
@@ -423,6 +424,7 @@ class Base(models.Model):
         return instance, created
 
     @classmethod
+    @transaction.atomic
     def get_or_create_from_parameters(  # pylint: disable=C0202, R0913, R0914, R0912
         calling_cls,
         parameters: Dict[str, Any],

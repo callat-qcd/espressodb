@@ -14,6 +14,7 @@ from espressodb.base.forms import MODELS
 
 from espressodb.base.models import Base
 from espressodb.base.utilities.models import iter_tree
+from espressodb.base.utilities.markdown import convert_string
 
 
 class IndexView(TemplateView):
@@ -166,7 +167,7 @@ class PopulationView(View):
             for sub_column, sub_model in iter_tree(model, column):
                 session["todo"].insert(0, (sub_column, sub_model.get_label()))
                 session["help"][sub_column] = [
-                    field.help_text
+                    convert_string(field.help_text)
                     for field in model.get_open_fields()
                     if field.name == sub_column.split(".")[-1]
                 ][0]
