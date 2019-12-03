@@ -40,22 +40,22 @@ jobs:
 
             - name: Run create new project
               working-directory: ./example/
-              run: espressodb startproject new_test
+              run: espressodb startproject espressodb_new_test
 
             - name: Test new project
-              working-directory: ./example/new_test/
+              working-directory: ./example/espressodb_new_test/
               run: python manage.py test
 
             - name: Run start app
-              working-directory: ./example/new_test/
+              working-directory: ./example/espressodb_new_test/
               run: |
                 python manage.py startapp new_app
-                echo "" >> new_test/new_app/models.py
-                echo "class MyTable(Base):" >> new_test/new_app/models.py
-                echo "    name=models.TextField()" >> new_test/new_app/models.py
-                sed -i -e "s/PROJECT_APPS: \[\]/PROJECT_APPS: \[new_test.new_app\]/g" settings.yaml
+                echo "" >> espressodb_new_test/new_app/models.py
+                echo "class MyTable(Base):" >> espressodb_new_test/new_app/models.py
+                echo "    name=models.TextField()" >> espressodb_new_test/new_app/models.py
+                sed -i -e "s/PROJECT_APPS: \[\]/PROJECT_APPS: \[espressodb_new_test.new_app\]/g" settings.yaml
                 python manage.py makemigrations
 
             - name: Test new project app
-              working-directory: ./example/new_test/
+              working-directory: ./example/espressodb_new_test/
               run: python manage.py test
