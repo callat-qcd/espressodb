@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from espressodb.base.utilities.apps import get_apps_slug_map, get_app_name
 
-from espressodb.documentation.utilities.markdown import convert_string
+from espressodb.base.utilities.markdown import convert_string
 
 
 register = template.Library()  # pylint: disable=C0103
