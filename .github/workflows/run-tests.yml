@@ -8,7 +8,7 @@ jobs:
             max-parallel: 4
             matrix:
                 python-version: [3.6, 3.7]
-                platform: [ubuntu-latest, macos-latest]
+                platform: [ubuntu-latest, macos-latest, windows-latest]
                 django-version: [2.2.*, 3.*]
         runs-on: ${{ matrix.platform }}
         steps:
