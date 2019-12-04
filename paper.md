@@ -100,10 +100,20 @@ The application of LQCD to forefront research applications in nuclear physics is
 As such, these LQCD computations require the completion of hundreds of thousands to millions of independent sub-calculations (or tasks), with chained dependencies, in order to complete a single calculation.  These chained tasks write large amounts of temporary files to the scratch file system which are used as input for subsequent files, often with multiple input files required for the later computations.
 Several such calculations (each with the hundreds-of-thousands to millions of independent tasks) must be performed in order to extrapolate the results to the limit of zero discretization (the continuum limit), infinite volume and to the physical values of the small number of input parameters, which are _a priori_ unknown.
 
-
-
-
-
+Inheriting the functionality of ``EspressoDB``, ``LatteDB`` has the flexibility to faithfully reproduce a one-to-one mapping
+between the computational workflow to database tables.
+For example, a table of gauge configurations is defined such that every row in the table specifies a specific realization
+of the QCD vacuum (*e.g.* a single gauge configuration). This reflects how on disk, we have thousands of files, each
+containing a snapshot of the QCD vacuum, and as such, every file, and every subsequent file as a result of the gauge configuration
+(*e.g.* propagators or correlation functions) can also be tracked individually.
+However, at the end of the calculation, an observable is only well defined with an ensemble of gauge configurations.
+``LatteDB`` allows one to define and ensemble table, with a ``Django ManyToMany`` data type which may be interpreted as
+a single column which constains a list of references (foreign keys) to the table of gauge configurations.
+In ``SQL``, a list of foreign keys is not a fundamental data type that is supported, and is only made possible with ``Django``.
+However, even with ``Django``, unique constraints can not be implemented on such a column.
+With ``LatteDB``, we make it possible to define a unique constraint, which for this example, restricts the user from
+inserting the exact same list of gauge configurations in the ensemble table more than once.
+Users are encouraged to consult the documentation of ``EspressoDB`` and examples in ``LatteDB`` for more information.
 
 > `@walkloud`, `@cchang5`: We need more verbosity here --- below you can find some ideas of what might fit.
 
