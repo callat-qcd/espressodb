@@ -15,7 +15,7 @@
 # sys.path.insert(0, os.path.abspath('.'))
 import os
 
-from espressodb import init
+from espressodb import init, __version__
 
 init(
     ROOT_DIR=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -29,7 +29,7 @@ copyright = "2019, Christopher Körber, Jason Chang"
 author = "Christopher Körber, Jason Chang"
 
 # The full version, including alpha/beta/rc tags
-release = "0.1.0"
+release = __version__
 
 
 # -- General configuration ---------------------------------------------------

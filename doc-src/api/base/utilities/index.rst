@@ -6,6 +6,7 @@ utilities
     espressodb.base.utilities.apps
     espressodb.base.utilities.models
     espressodb.base.utilities.blackmagicsorcery
+    espressodb.base.utilities.markdown
 
 --------------
 

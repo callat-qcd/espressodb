@@ -53,7 +53,7 @@
             <tr>
                 <td>{{key}}</td>
                 <td>{% if val.doc_url %}<a href="{{val.doc_url}}" target="_blank">{{val.label}}</a>{% else %}{{val.label}}{% endif %}</td>
-                <td>{{ request.session.help|get_item:key}}</td>
+                <td>{{ request.session.help|get_item:key|safe}}</td>
             </tr>
             {% endfor %}
         </tbody>

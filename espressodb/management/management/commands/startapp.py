@@ -4,6 +4,7 @@ import os
 import logging
 
 from django.core.management.commands.startapp import Command as StartAppCommand
+from django.core.management.base import CommandError
 
 from espressodb.management.utilities.settings import ROOT_DIR, PROJECT_NAME
 from espressodb.management.utilities.files import ESPRESSO_DB_ROOT
@@ -51,6 +52,7 @@ class Command(StartAppCommand):
         options["project_name"] = PROJECT_NAME
 
         super().handle(**options)
+
         LOGGER.info(
             "App `%s` was successfully created. In order to install it", app_name
         )
@@ -64,3 +66,21 @@ class Command(StartAppCommand):
         )
         LOGGER.info("3. Run `python manage.py makemigrations`")
         LOGGER.info("4. Run `python manage.py  migrate`")
+
+    def validate_name(  # pylint: disable=unused-argument, W0221
+        self, name, *args, **kwargs
+    ):
+        """This Override of `validate_name` disables the `import_module` check which was
+        implemented on django commit `fc9566d42daf28cdaa25a5db1b5ade253ceb064f` or
+        ticket https://code.djangoproject.com/ticket/30393#no1
+        (`TemplateCommand.handle` calls validate name on the target directory).
+        """
+        if name is None:
+            raise CommandError("you must provide an app name")
+
+        # Check it's a valid directory name.
+        if not name.isidentifier():
+            raise CommandError(
+                "'{name}' is not a valid appname. Please make sure the "
+                "name is a valid identifier.".format(name=name)
+            )
