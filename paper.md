@@ -56,28 +56,21 @@ The [*Use case* section](#use-case) presents how ``LatteDB`` is integrated in th
 
 # Features
 
-The main objective behind ``EspressoDB`` is to store vast amount of data
-<span style="color:red">[ANDRE: this is not the correct goal.  The goal is to "simplify" the life of the users for managing the scientific computing.  To achieve this goal, EspressoDB must be able to store vast amounts of meta-data and data...]</span>
-and provide an easy to use framework which help make fast and informed decisions.
-The latter condition demands that it be possible to query the data and store relations between different datasets, e.g., an SQL based framework.
-<span style="color:blue">More users are familiar with Python than SQL.  To maximize the accessibility of this framework,</span>
-~~To ensure that this framework is accessible and users do not have to learn SQL to get started,~~
-``EspressoDB`` <span style="color:blue">is written in Python and</span> makes use of an Object-Relational Mapping (ORM).
-E.g., instead of having a (file based) table system, tables correspond to Python classes and objects correspond to rows in this table.
+``EspressoDB`` <span style="color:blue">is written in Python's ``Django`` Object-Relational Mapping (ORM) framework.
+As a result, instead of having a (file based) table system, tables correspond to Python classes and objects correspond to rows in this table.
 Columns of such tables correspond to attributes of the objects.
 Thus it is possible to filter for objects by their attributes or generate summary tables (``pandas.DataFrame``) within one line of code.
 Furthermore, using an ORM allows to have the same interface independent of the backend.
 It is possible to store data in a file based `SQLite` solution, or use more scalable options like `MySQL` or `Postgresql`.
 
-``EspressoDB`` builds on top of Python's ``Django`` ORM framework.
 ``Django`` is part of many open-source projects and thus comes with extensive documentation.
 Additionally, ``Django`` is scalable, comes with reliable tests and vast community support which manifests in the fact that it is commonly  used in large scale projects (BitBucket, Instagram, Mozilla, NASA and many more).
-One guiding principle of ``EspressoDB`` is to <span style="color:blue">not "re-invent the wheel" but instead</span> ~~stay close to it's roots and therefore~~ leverage the support coming from ``Django``.
+One guiding principle of ``EspressoDB`` is to not "re-invent the wheel" but instead leverage the support coming from ``Django``.
 As a result, one can easily incorporate many of ``Django``'s extensions and find solutions to technical questions online.
 
 Data integrity is important to scientific projects and becomes more challenging the larger the project.
 In general, a SQL framework type-checks data before writing to the database and controls dependencies and relations between different tables to ensure internal consistency.
- ``EspressoDB`` implements an abstract ``Base`` class which allows additional user-defined constraints not supported by SQL.
+ ``EspressoDB`` implements an abstract ``Base`` class which allows additional user-defined constraints not supported by SQL (*e.g.* unique constraint where the data type is a list of Foreign Keys).
 Once the user has specified a set of conditions entries have to fulfill for each table, ``EspressoDB`` runs these cross checks for new data before storing it.
 
 Another aspect of ``EspressoDB`` is to support collaborative and open-data oriented projects.
@@ -93,9 +86,6 @@ In addition to providing a centralized data platform, it is possible to spawn[^1
 Further views can be implemented to interact with data and utilize existing Python libraries for summarizing and visualizing information.
 <span style="color:blue">This allows users to create visual progress updates on the fly and to integrate the database information to the data-processing workflow, significantly reducing the human overhead required due to improved automation.</span>
 
-
-It is possible to setup simple tables using ``EspressoDB`` and connect to these tables in existing projects
-<span style="color:blue">within a short time.</span> ~~within 10 minutes.~~
 More details, usage instructions and examples are documented at [espressodb.readthedocs.io](https://espressodb.readthedocs.io).
 
 [^1]: Depending on the configuration, it is possible to provide selected access for multiple users on different levels.
@@ -109,11 +99,6 @@ Lattice QCD (LQCD) is an inherently a stochastic method of simulating Quantum Ch
 The application of LQCD to forefront research applications in nuclear physics is an exascale challenge problem, see for example the recent review [@Drischler:2019xuo].  One of the main reasons these calculations are so expensive is that when LQCD is applied to one or more nucleons, an exponentially bad signal-to-noise problem must be overcome.  While the optimal strategy for overcoming this challenge is not yet known, one thing common to all methods is the need for an exponentially large amount of statistics.
 As such, these LQCD computations require the completion of hundreds of thousands to millions of independent sub-calculations (or tasks), with chained dependencies, in order to complete a single calculation.  These chained tasks write large amounts of temporary files to the scratch file system which are used as input for subsequent files, often with multiple input files required for the later computations.
 Several such calculations (each with the hundreds-of-thousands to millions of independent tasks) must be performed in order to extrapolate the results to the limit of zero discretization (the continuum limit), infinite volume and to the physical values of the small number of input parameters, which are _a priori_ unknown.
-
-
-
-
-
 
 
 
