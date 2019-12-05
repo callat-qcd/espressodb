@@ -9,3 +9,4 @@ dist/
 htmlcov/
 .coverage
 paper.pdf
+sample_joss_paper/
