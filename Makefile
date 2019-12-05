@@ -2,7 +2,10 @@ paper | paper.pdf: paper.md paper.bib
 	pandoc -t latex -o paper.pdf --bibliography paper.bib paper.md
 
 tex: paper.md paper.bib
-	pandoc -t latex -o paper.tex --bibliography paper.bib paper.md
+	pandoc -t latex -o arXiv/paper_body.tex --bibliography paper.bib paper.md
+	sed -i.bak 's:doc-src/_static/lattedb-example.png:lattedb-example.png:' arXiv/paper_body.tex
+	rm arXiv/paper_body.tex.bak
+	cp doc-src/_static/lattedb-example.png arXiv/
 
 
 .PHONY: clean
