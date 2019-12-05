@@ -170,7 +170,7 @@ Users are encouraged to consult the documentation of ``EspressoDB`` and examples
 
 We thank Even Berkowitz, Arjun Gambhir, Ben Hörz,  Kenneth McElvain and Enrico Rinaldi for useful insights and discussions which helped in creating ``EspressoDB`` and ``LatteDB``.
 C.K. gratefully acknowledges funding through the Alexander von Humboldt Foundation through a Feodor Lynen Research Fellowship.
-The work of A.W-L. was supported in part by the U.S. Department of Energy Exascale Computing Project.
+The work of A.W-L. was supported by the Exascale Computing Project (17-SC-20-SC), a joint project of the U.S. Department of Energy's Office of Science and National Nuclear Security Administration, responsible for delivering a capable exascale ecosystem, including software, applications, and hardware technology, to support the nation's exascale computing imperative. 
 
 This research used resources of the Oak Ridge Leadership Computing Facility, which is a DOE Office of Science User Facility supported under Contract DE-AC05-00OR22725, with access and computer time granted through the DOE INCITE Program.
 
