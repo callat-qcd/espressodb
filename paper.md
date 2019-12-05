@@ -115,8 +115,42 @@ For good reason, the LCF do not allow the submission of millions of small tasks 
 The nested dependencies of all the tasks, and the subsequent data processing and collection must happen in near real time.  In the case of the CalLat production, multiple peta-bytes of temporary files are written to the scratch file system and these must be used for subsequent computations and processed sufficiently quickly that they are not purged by the auto-purge mechanisms put in place by the supercomputing centers.  Ultimately, these multi-petabytes of data are processed down to hundreds of tera-bytes of valuable data worth saving spread over hundreds of thousands of files.  It is essential to have a light-weight, user-friendly, and real time tracking of what tasks have been completed, what files are missing etc., so that users can nimbly fill in missing dependent tasks to complete and process the data without having to keep the full working tree in human memory.
 
 
-Members of CalLat are addressing issue 1. through the creation of job management software, [METAQ](https://github.com/evanberkowitz/metaq) [@Berkowitz:2017vcp] and MPI_JM [@Berkowitz:2018gqe; @Berkowitz:2017xna].
+Members of CalLat are addressing issue 1 through the creation of job management software, [METAQ](https://github.com/evanberkowitz/metaq) [@Berkowitz:2017vcp] and MPI_JM [@Berkowitz:2018gqe; @Berkowitz:2017xna].  ``EspressoDB`` is designed to address the second issue.  A feature that will be added to ``LatteDB`` very soon is integration with MPI_JM.
 
+As a concrete example, we consider the nucleon elastic formfactor project being carried out by CalLat [@incite:2019; @incite:2020].  For each _ensemble_ of configurations used (one choice of input parameters) the computation requires the following dependent steps:
+1. For each configuration in an ensemble (O(1000)), make several quark sources (grouped in batches of 8);
+2. For each source, create a quark propagator;
+3. For each quark propagator:
+    1. Create a proton correlation function to determine the proton mass;
+    2. Create O(10) proton _sequential_ sinks at different separation times (times 4 for different spin and flavor combinations);
+4. For each time-separation, group the 8 _sequential_ sinks from the 8 propagators into a single _coherent sequential_ sink [@];
+5. For each time-separation, Solve a _sequential_ propagator from the _coherent sequential_ sink;
+6. For each time-separation, tie each of the original 8 propagators with the sequential propagator to construct a 4-dimensional (4D) _formfactor_ correlation function;
+7. Process the data to prepare it for analysis and the extraction of physics.
+8. Repeat for multiple source sets (of 8) if more statistics are required.
+
+Each of the steps above leads to the generation of many large (multi-gigabyte) data files, most of which are not saved.  ``LatteDB`` is used to track the status of these data files to know if they need to be created or if the next step can proceed.  The final data production step, 6, leads to our final data file that need further processing prior to our final analysis and saving of the files.
+``LatteDB`` is also tremendously useful for managing the data processing steps which proceed as:
+
+1. For each configuration, for each time separation, for each of the 8 sources, _time slice_ the 4D data formfactor files to only the time slices containing relevant data;
+2. For each configuration, for each time separation, for each source set, average the 8 formfactor_tsliced files to a source averaged file.
+3. When all configurations are complete, concatenate these files together.
+4. As needed, Fourier Transform these files to project the formfactors onto definite momentum transfers.
+5. Analyze the correlation functions to extract the relevant physics.
+
+In Figure 1, we show an example ``LatteDB`` Table from step 2.  The user is able to filter on each column to very quickly assess the production status (green means the tsliced_source_averaged file exists, red means it is missing) and decide what configurations in what ensembles need to be managed in production.
+
+More importantly, our production scripts interact with ``LatteDB`` and so, even without this visualization, the scripts will only try and generate work that in this case, ``LatteDB`` believes is missing.  This interaction with ``LatteDB`` significantly reduces the amount of human time required to manage the computations.  We are actively constructing routines to also store the final data files to tape, the status of which is stored in a related ``LatteDB`` table.  Thus, the user can query the database instead of the file system for the existence of data files, significantly reducing the load on the file system as well.  Example use scripts for interacting with ``LatteDB`` can be found in our management repository for these INCITE projects [https://github.com/callat-qcd/nucleon_elastic_FF](https://github.com/callat-qcd/nucleon_elastic_FF) in the `scripts` folder.  These scripts will be updated regularly to encompass more and more utilities from ``EspressoDB`` providing a complete working example.
+
+
+![Example table view of file status with column specific filters and dynamic progress bar.](doc-src/_static/lattedb-example.png)
+
+Other features that can be implemented is the storing of the data files in ``LatteDB`` as well as storing the analysis of the data files.  This allows for communal data analysis within a collaboration with a centralized location for results, making it easier to combine results from different members and reduce redundant work.
+Depending upon the success and popularity of ``EspressoDB``, it may be worth exploring weather OLCF (or other LCF) would be willing to allow users to host databases locally on the machines such that the compute nodes could interact with the database allowing users to minimize the number of small input files that are typically written to the file system as well.  In our case, each separate task requires an input file and typically generates two or three small output files, rapidly polluting the file system with millions of small files.  ``EspressoDB`` will minimally allow users to _clean up_ these small files and store the relevant log and output information in the database.
+
+
+
+<span style="color:red">[ANDRE: Jason's paragraph below]</span>
 
 Inheriting the functionality of ``EspressoDB``, ``LatteDB`` has the flexibility to faithfully reproduce a one-to-one mapping between the computational workflow to database tables.
 For example, a table of gauge configurations is defined such that every row in the table specifies a specific realization of the QCD vacuum (*e.g.* a single gauge configuration).
@@ -128,9 +162,12 @@ However, even with ``Django``, unique constraints can not be implemented on such
 With ``LatteDB``, we make it possible to define a unique constraint, which for this example, restricts the user from inserting the exact same list of gauge configurations in the ensemble table more than once.
 Users are encouraged to consult the documentation of ``EspressoDB`` and examples in ``LatteDB`` for more information.
 
+
+
+
 # Acknowledgements
 
-The authors thank Even Berkowitz, Arjun Gambhir, Ben Hörz,  Kenneth McElvain and Enrico Rinaldi for useful insights and discussions which helped in creating ``EspressoDB`` and ``LatteDB``.
+We thank Even Berkowitz, Arjun Gambhir, Ben Hörz,  Kenneth McElvain and Enrico Rinaldi for useful insights and discussions which helped in creating ``EspressoDB`` and ``LatteDB``.
 C.K. gratefully acknowledges funding through the Alexander von Humboldt Foundation through a Feodor Lynen Research Fellowship.
 The work of A.W-L. was supported in part by the U.S. Department of Energy Exascale Computing Project.
 
