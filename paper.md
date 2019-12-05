@@ -57,7 +57,7 @@ The [*Use case* section](#use-case) presents how ``LatteDB`` is integrated in th
 # Features
 
 ``EspressoDB`` utilizes Python's ``Django`` Object-Relational Mapping (ORM) framework.
-Tables correspond to Python classes, instances correspond to rows within this table and columns of such tables correspond to attributes of the instances.
+Tables correspond to Python classes, rows correspond to instances and columns correspond to attributes of the instances.
 Thus it is possible to filter for objects by their attributes or generate summary tables (``pandas.DataFrame``) within one line of code.
 Furthermore, using an ORM allows one to have the same interface independent of the backend.
 It is possible to store data in a file based `SQLite` solution, or use more scalable options like `MySQL` or `Postgresql`.
@@ -69,7 +69,7 @@ As a result, one can easily incorporate many of ``Django``'s extensions and find
 
 Data integrity is important to scientific projects and becomes more challenging the larger the project.
 In general, a SQL framework type-checks data before writing to the database and controls dependencies and relations between different tables to ensure internal consistency.
- ``EspressoDB`` implements an abstract ``Base`` class which allows additional user-defined constraints not supported by SQL (*e.g.* unique constraints using information spread across related tables).
+ ``EspressoDB`` implements an abstract ``Base`` class which allows additional user-defined constraints not supported by SQL (*e.g.* unique constraints using information across related tables).
 Once the user has specified a set of conditions that entries have to fulfill for each table, ``EspressoDB`` runs these cross checks for new data before inserting them in the database.
 
 Another aspect of ``EspressoDB`` is to support collaborative and open-data oriented projects.
@@ -91,7 +91,17 @@ More details, usage instructions and examples are documented at [espressodb.read
 [^1]: Depending on the configuration, it is possible to provide selected access for multiple users on different levels.
 
 
-# Use case
+# Acknowledgements
+
+We thank Even Berkowitz, Arjun Gambhir, Ben Hörz,  Kenneth McElvain and Enrico Rinaldi for useful insights and discussions which helped in creating ``EspressoDB`` and ``LatteDB``.
+C.K. gratefully acknowledges funding through the Alexander von Humboldt Foundation through a Feodor Lynen Research Fellowship.
+The work of A.W-L. was supported by the Exascale Computing Project (17-SC-20-SC), a joint project of the U.S. Department of Energy's Office of Science and National Nuclear Security Administration, responsible for delivering a capable exascale ecosystem, including software, applications, and hardware technology, to support the nation's exascale computing imperative. 
+
+This research used resources of the Oak Ridge Leadership Computing Facility, which is a DOE Office of Science User Facility supported under Contract DE-AC05-00OR22725, with access and computer time granted through the DOE INCITE Program.
+
+# References
+
+# Supplemental
 
 For an explicit use case, we describe the use of ``LatteDB`` by the CalLat Collaboration ([https://a51.lbl.gov/~callat/webhome/](https://a51.lbl.gov/~callat/webhome/)) in their computations on Summit at the Oak Ridge Leadership Computing Facility ([OLCF](https://www.olcf.ornl.gov)) through DOE INCITE Allocations [@incite:2019; @incite:2020].  LQCD is one of the main applications awarded time at leadership computing facilities each year through the competitive DOE [INCITE](https://www.doeleadershipcomputing.org) and [ALCC](https://science.osti.gov/ascr/Facilities/Accessing-ASCR-Facilities/ALCC) Allocations, and therefore represents a major use case.
 
@@ -101,8 +111,8 @@ The application of LQCD to forefront research applications in nuclear physics is
 
 
 The application of LQCD to nuclear physics is an exascale challenge.  One of the main reasons these calculations are so expensive is that when LQCD is applied to systems of one or more nucleons, an exponentially bad signal-to-noise problem must be overcome.  While the optimal strategy for overcoming this challenge is not yet known, one thing common to all methods is the need for an exponentially large amount of statistics.
-As such, these LQCD computations require the completion of hundreds of thousands to millions of independent sub-calculations (or tasks), with chained dependencies, in order to complete a single calculation.  These chained tasks write large amounts of temporary files to the scratch file system which are used as input for subsequent files, often with multiple input files required for the later computations.
-Several such calculations (each with the hundreds-of-thousands to millions of independent tasks) must be performed in order to extrapolate the results to the physical point, defined as the limit of zero discretization (the continuum limit), the infinite volume limit and the limit of physical quark masses which are _a priori_ unknown and so must be determined through this extrapolation/interpolation procedure.
+As such, these LQCD computations require the completion of millions of independent sub-calculations (or tasks), with chained dependencies, in order to complete a single calculation.  These chained tasks write large amounts of temporary files to the scratch file system which are used as input for subsequent files, often with multiple input files required for the later computations.
+Several such calculations must be performed in order to extrapolate the results to the physical point, defined as the limit of zero discretization (the continuum limit), the infinite volume limit and the limit of physical quark masses which are _a priori_ unknown and so must be determined through this extrapolation/interpolation procedure.
 These requirements lead to a very complex set of computations that must be carried out with great care and a significant amount of human time and effort to ensure the computing cycles are used as efficiently as possible.
 
 Compounding these challenges, the new computer Summit, is _disruptively fast_ compared to previous generations of leadership class computers.  Full machine-to-machine, Summit is approximately 15 times faster than Titan when applied to LQCD applications such as carried out by CalLat [@Berkowitz:2018gqe].  While this is great for scientific throughput, it also means the management of the computational jobs has become unwieldy with the management models typically used for such computations: Summit churns through the computations so fast, and produces so much data, it is not possible to keep up with the data processing and management with our older management tools.  At a high level, there are two challenges which are both critical to address for near-exascale computers such as Summit, which will become more important in the exascale era:
@@ -162,12 +172,3 @@ Depending upon the success and popularity of ``EspressoDB``, it may be worth exp
 
 
 
-# Acknowledgements
-
-We thank Even Berkowitz, Arjun Gambhir, Ben Hörz,  Kenneth McElvain and Enrico Rinaldi for useful insights and discussions which helped in creating ``EspressoDB`` and ``LatteDB``.
-C.K. gratefully acknowledges funding through the Alexander von Humboldt Foundation through a Feodor Lynen Research Fellowship.
-The work of A.W-L. was supported by the Exascale Computing Project (17-SC-20-SC), a joint project of the U.S. Department of Energy's Office of Science and National Nuclear Security Administration, responsible for delivering a capable exascale ecosystem, including software, applications, and hardware technology, to support the nation's exascale computing imperative. 
-
-This research used resources of the Oak Ridge Leadership Computing Facility, which is a DOE Office of Science User Facility supported under Contract DE-AC05-00OR22725, with access and computer time granted through the DOE INCITE Program.
-
-# References
