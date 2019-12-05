@@ -118,12 +118,13 @@ The nested dependencies of all the tasks, and the subsequent data processing and
 Members of CalLat are addressing issue 1 through the creation of job management software, [METAQ](https://github.com/evanberkowitz/metaq) [@Berkowitz:2017vcp] and MPI_JM [@Berkowitz:2018gqe; @Berkowitz:2017xna].  ``EspressoDB`` is designed to address the second issue.  A feature that will be added to ``LatteDB`` very soon is integration with MPI_JM.
 
 As a concrete example, we consider the nucleon elastic formfactor project being carried out by CalLat [@incite:2019; @incite:2020].  For each _ensemble_ of configurations used (one choice of input parameters) the computation requires the following dependent steps:
-1. For each configuration in an ensemble (O(1000)), make several quark sources (grouped in batches of 8);
+
+1. For each configuration (of O(1000)) in an ensemble (of O(20)), make several quark sources (grouped in batches of 8);
 2. For each source, create a quark propagator;
 3. For each quark propagator:
     1. Create a proton correlation function to determine the proton mass;
     2. Create O(10) proton _sequential_ sinks at different separation times (times 4 for different spin and flavor combinations);
-4. For each time-separation, group the 8 _sequential_ sinks from the 8 propagators into a single _coherent sequential_ sink [@];
+4. For each time-separation, group the 8 _sequential_ sinks from the 8 propagators into a single _coherent sequential_ sink [@Bratt:2010jn];
 5. For each time-separation, Solve a _sequential_ propagator from the _coherent sequential_ sink;
 6. For each time-separation, tie each of the original 8 propagators with the sequential propagator to construct a 4-dimensional (4D) _formfactor_ correlation function;
 7. Process the data to prepare it for analysis and the extraction of physics.
