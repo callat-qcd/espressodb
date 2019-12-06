@@ -9,3 +9,12 @@ dist/
 htmlcov/
 .coverage
 paper.pdf
+sample_joss_paper/
+arXiv/lattedb-example.png
+arXiv/paper.aux
+arXiv/paper.bcf
+arXiv/paper.log
+arXiv/paper.out
+arXiv/paper.run.xml
+arXiv/paper.synctex.gz
+arXiv/paper_body.tex
