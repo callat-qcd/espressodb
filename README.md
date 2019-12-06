@@ -81,8 +81,9 @@ The challenge we encountered where
 The core module of LatteDB, EspressoDB, is trying to address those challenges.
 
 ## Who is responsible for it?
+* [@ckoerber](https://www.ckoerber.com) (Feel free to contact me for questions)
 * [@cchang5](https://github.com/cchang5)
-* [@ckoerber](https://www.ckoerber.com)
+
 
 ## License
 
