@@ -12,12 +12,17 @@ import logging
 
 from django.db import models
 from django.db import connection
+from django.db import transaction
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.db.models.fields import Field
+from django.urls import reverse, Resolver404
+from django.apps.config import AppConfig
 
 from django_pandas.managers import DataFrameManager
+
+from espressodb.base.utilities.apps import APPS_TO_SLUG
 
 LOGGER = logging.getLogger("base")
 
@@ -28,15 +33,11 @@ class Base(models.Model):
     This class provides api for auto rendering pages and recursive insertions.
     """
 
+    # Run consistency checks on save and m2m update.
+    run_checks: bool = True
+
     #: Primary key for the base class
     id = models.AutoField(primary_key=True, help_text="Primary key for Base class.")
-    #: Type for the base class. Will be auto set to specialized type on save
-    type = models.TextField(
-        editable=False,
-        null=False,
-        help_text="Type for the base class."
-        " Will be auto set to specialized type on save",
-    )
     #: Date the class was last modified
     last_modified = models.DateTimeField(
         auto_now=True, help_text="Date the class was last modified"
@@ -53,7 +54,7 @@ class Base(models.Model):
     )
     #: User defined tag for easy searches
     tag = models.CharField(
-        max_length=20,
+        max_length=200,
         null=True,
         blank=True,
         help_text="User defined tag for easy searches",
@@ -89,6 +90,48 @@ class Base(models.Model):
                     self._specialized_keys.append(field.name)
                     setattr(self, field.name, getattr(self.specialization, field.name))
 
+    @property
+    def type(self) -> "Base":
+        """Returns the table type
+        """
+        return self.specialization.__class__.__name__
+
+    @classmethod
+    def get_app(cls) -> AppConfig:
+        """Returns the name of the current moule app
+        """
+        return cls._meta.app_config
+
+    @classmethod
+    def get_app_name(cls) -> str:
+        """Returns the name of the current moule app
+        """
+        return cls.get_app().verbose_name
+
+    @classmethod
+    def get_app_doc_url(cls) -> Optional[str]:
+        """Returns the url tp the doc page of the app.
+
+        Returns:
+            Url if look up exist else None.
+        """
+        app_slug = APPS_TO_SLUG.get(cls.get_app())
+        try:
+            url = reverse("documentation:details", args=[app_slug])
+        except Resolver404:
+            url = None
+        return url
+
+    @classmethod
+    def get_doc_url(cls) -> Optional[str]:
+        """Returns the url to the doc page.
+
+        Returns:
+            Url if look up exist else None.
+        """
+        app_url = cls.get_app_doc_url()
+        return f"{app_url}#{cls.get_slug()}" if app_url is not None else None
+
     def __setattr__(self, key, value):
         """Tries to set the attribute in specialization if it is a specialized attribute
         and else sets it in parent class.
@@ -97,13 +140,24 @@ class Base(models.Model):
             setattr(self.specialization, key, value)
         super().__setattr__(key, value)
 
-    def check_consistency(self, data: Dict[str, Any]):
+    def check_consistency(self):
         """Method is called before save.
 
         Raise errors here if the model must fulfill checks.
 
         Arguments:
             data: Dictionary containing the (open) column data of the class.
+        """
+
+    def check_m2m_consistency(
+        self, instances: List["Base"], column: Optional[str] = None
+    ):
+        """Method is called before adding to a many to many set.
+
+        Raise errors here if the adding must fulfill checks.
+
+        Note:
+            Different to
         """
 
     @classmethod
@@ -113,7 +167,7 @@ class Base(models.Model):
         fields = []
         for field in cls._meta.get_fields():  # pylint: disable=W0212
             if not (
-                field.name in ["id", "type", "user"]
+                field.name in ["id", "user"]
                 or not field.editable
                 or field.name.endswith("_ptr")
             ):
@@ -148,9 +202,9 @@ class Base(models.Model):
         return f"{specialization.__class__.__name__}{base}{info_str}"
 
     def save(  # pylint: disable=W0221
-        self, *args, save_instance_only: bool = False, **kwargs
+        self, *args, save_instance_only: bool = False, **kwargs,
     ) -> "Base":  # pylint: disable=W0221
-        """Overwrites type with the class name and user with login info if not specified.
+        """Overwrites user with login info if not specified and runs consistency checks.
 
         Arguments:
             save_instance_only:
@@ -158,28 +212,15 @@ class Base(models.Model):
                 specialized columns.
 
         Note:
-            The keyword ``save_instance_only`` is not present in standard Django.
+            The keyword ``save_instance_only`` and ``check_consistency`` is not present
+            in standard Django.
         """
-        self.type = self.__class__.__name__
         if not self.user:
             username = settings.DB_CONFIG.get("USER", None)
             if username:
                 self.user, _ = User.objects.get_or_create(username=username)
             else:
                 self.user, _ = User.objects.get_or_create(username="ananymous")
-
-        data = {}
-        for field in self.get_open_fields():
-            if not isinstance(field, models.ManyToManyField):
-                data[field.name] = getattr(self, field.name)
-            else:
-                data[field.name] = (
-                    getattr(self, field.name)
-                    if self.pk is not None
-                    else field.model.objects.none()
-                )
-
-        self.check_consistency(data)
 
         if self != self.specialization and not save_instance_only:
             self.specialization.save(*args, **kwargs)
@@ -383,6 +424,7 @@ class Base(models.Model):
         return instance, created
 
     @classmethod
+    @transaction.atomic
     def get_or_create_from_parameters(  # pylint: disable=C0202, R0913, R0914, R0912
         calling_cls,
         parameters: Dict[str, Any],
@@ -510,7 +552,9 @@ class Base(models.Model):
 
             else:
                 value = parameters.get(field.name, None)
-                if value is None and not field.null:
+                if value is None and not (
+                    field.null or isinstance(field, models.ManyToManyField)
+                ):
                     raise KeyError(
                         f"Missing value for constructing {cls}."
                         f" Parameter dictionary has no value for {field.name}."

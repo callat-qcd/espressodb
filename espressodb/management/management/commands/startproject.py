@@ -90,12 +90,12 @@ class Command(StartProjectCommand):
 
         LOGGER.info("-> Done!")
         LOGGER.info("-> You can now:")
-        LOGGER.info("     1a. Migrate models by running `python manange.py migrate`")
+        LOGGER.info("     1a. Migrate models by running `python manage.py migrate`")
         LOGGER.info(
-            "     1b. and launch a web app by running `python manange.py runserver`"
+            "     1b. and launch a web app by running `python manage.py runserver`"
         )
         LOGGER.info(
-            "     2. Add new models using `python manange.py startapp {APP_NAME}`"
+            "     2. Add new models using `python manage.py startapp {APP_NAME}`"
         )
         LOGGER.info(
             "     3. Run `python -m pip install [--user] [-e] .`"

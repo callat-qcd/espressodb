@@ -1,0 +1,5 @@
+SECRET_KEY: "d471al)=d#e23d7z)-mxb=ajor65+px%6^p!vlim!!l5cxh-i3"
+PROJECT_APPS:
+    - espressodb_tests.m2mtests
+ALLOWED_HOSTS: ["testserver", "localhost", "127.0.0.1"]
+DEBUG: True

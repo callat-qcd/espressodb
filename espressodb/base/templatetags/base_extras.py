@@ -1,9 +1,10 @@
 """Additional in template functions for the base module.
 """
-from typing import List, Dict, Tuple
+from typing import List, Dict, Tuple, Optional, Any
 
 from django import template
 from django.conf import settings
+from django.db.models import ForeignKey
 from django.db.models.fields import Field
 from django.template.defaultfilters import Truncator
 
@@ -23,7 +24,7 @@ register = template.Library()  # pylint: disable=C0103
 
 
 @register.inclusion_tag("link-list.html")
-def render_link_list(
+def render_link_list(  # pylint: disable=R0914
     exclude=("", "populate", "populate-result", "admin", "documentation")
 ) -> Dict[str, Tuple[str, str]]:
     """Renders all app and documentation page links
@@ -38,6 +39,10 @@ def render_link_list(
     Ignores urls which do not result in a match.
 
     Uses the template ``link-list.html``.
+
+    Note:
+        It is possible to give class based views the ``exclude_from_nav`` flag.
+        If this flag is set, the view will not be rendered.
     """
     urlconf = __import__(settings.ROOT_URLCONF, {}, {}, [""])
 
@@ -53,6 +58,14 @@ def render_link_list(
             continue
 
         if path.split("/")[0] in exclude:
+            continue
+
+        cls = None
+        if hasattr(view, "view_class"):
+            cls = view.view_class
+        elif hasattr(view, "cls"):
+            cls = view.cls
+        if cls and hasattr(cls, "exclude_from_nav") and cls.exclude_from_nav:
             continue
 
         import_path = view.__module__.split(".")
@@ -79,28 +92,50 @@ def render_link_list(
     return context
 
 
-def render_field(field: Field) -> str:
+def render_field(field: Field, instance_name: Optional[str] = None) -> str:
     """Returns verbose descriptor of model field
 
     Arguments:
-        field: The field to render.
+        field:
+            The field to render.
+        instance_name:
+            The name of model instance for which the fields are written.
+            If given, automatically insert the value for FK fields.
+            This assumes that the FK variables are defined before this class and follow
+            the convention `columnname1_columnname2_...`.
     """
     optional = "(Optional) " if field.null else ""
-    return f"{field.name}=..., # {optional}{Truncator(field.help_text).words(12)}"
+    if instance_name is not None and isinstance(field, ForeignKey):
+        field_value = (f"{instance_name}_" if instance_name else "") + field.name
+    else:
+        field_value = ""
+
+    return (
+        f"{field.name}={field_value},"
+        f" # {optional}{Truncator(field.help_text).words(12)}"
+    )
 
 
-def render_fields(fields: List[Field]) -> List[str]:
+def render_fields(
+    fields: List[Field], instance_name: Optional[str] = None
+) -> List[str]:
     """Renders fields to string.
 
     Arguments:
-        fields: The fields to render.
+        fields:
+            The fields to render.
+        instance_name:
+            The name of model instance for which the fields are written.
+            If given, automatically insert the value for FK fields.
+            This assumes that the FK variables are defined before this class and follow
+            the convention `column_name1_column_name2_...`.
 
     Sorts fields by being optional or not.
     """
     descriptions = []
     optional_descriptions = []
     for field in fields:
-        text = render_field(field)
+        text = render_field(field, instance_name=instance_name)
         if field.null:
             optional_descriptions.append(text)
         else:
@@ -125,8 +160,8 @@ def render_tree(tree: Dict[str, str], root: str) -> Dict[str, str]:
     content = ""
     models = {}
 
-    labels = set(tree.values())
-    labels.add(root)
+    labels = sorted(list(set(tree.values())))
+    labels.append(root)
 
     for label in labels:
         model = MODELS[label]
@@ -142,16 +177,16 @@ def render_tree(tree: Dict[str, str], root: str) -> Dict[str, str]:
     for name, label in list(tree.items())[::-1]:
         cls, model = models[label]
         fields = model.get_open_fields()
-        args = "\n\t".join(render_fields(fields))
         name = name.replace(".", "_")
-        content += f"{name} = {cls}.get_or_create(\n\t{args}\n)\n\n"
+        args = "\n\t".join(render_fields(fields, instance_name=name))
+        content += f"{name}, created ="
+        content += f" {cls}.objects.get_or_create(\n\t{args}\n)\n\n"
 
     cls, model = models[root]
     fields = model.get_open_fields()
 
-    args = "\n\t".join(render_fields(fields))
-    name = name.replace(".", "_")
-    content += f"{cls}.get_or_create(\n\t{args}\n)"
+    args = "\n\t".join(render_fields(fields, instance_name=""))
+    content += f"{cls.lower()}, created = {cls}.objects.get_or_create(\n\t{args}\n)"
 
     context = {"content": content}
     return context
@@ -179,3 +214,16 @@ def project_name() -> str:
     """Returns name of the project
     """
     return PROJECT_NAME
+
+
+@register.filter
+def get_item(dictionary: Dict[str, Any], key: str) -> Any:
+    """Extract key from dictionary
+
+    Arguments:
+        dictionary: The dictionary to search
+        key: The key to look up
+
+    See also: https://stackoverflow.com/a/8000091
+    """
+    return dictionary.get(key)

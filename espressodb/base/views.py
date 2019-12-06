@@ -14,6 +14,7 @@ from espressodb.base.forms import MODELS
 
 from espressodb.base.models import Base
 from espressodb.base.utilities.models import iter_tree
+from espressodb.base.utilities.markdown import convert_string
 
 
 class IndexView(TemplateView):
@@ -68,6 +69,7 @@ class PopulationView(View):
         to empty values.
         """
         form = self.form_class()
+        request.session["help"] = {}
         request.session["todo"] = []
         request.session["tree"] = {}
         request.session["column"] = None
@@ -96,7 +98,11 @@ class PopulationView(View):
             )
 
             if column_label:
-                form = self.form_class(subset=model_subset, name=column_label)
+                form = self.form_class(
+                    subset=model_subset,
+                    name=column_label,
+                    help_text=request.session["help"].get(column_label),
+                )
             else:
                 return redirect("base:populate-result")
 
@@ -151,12 +157,20 @@ class PopulationView(View):
         # Add current model to tree
         column = session.get("column", None)
         if column:
-            session["tree"][column] = model.get_label()
+            session["tree"][column] = {
+                "label": model.get_label(),
+                "doc_url": model.get_doc_url(),
+            }
 
         # Add dpendencies of sub model to tree
         if parse_tree:
             for sub_column, sub_model in iter_tree(model, column):
                 session["todo"].insert(0, (sub_column, sub_model.get_label()))
+                session["help"][sub_column] = [
+                    convert_string(field.help_text)
+                    for field in model.get_open_fields()
+                    if field.name == sub_column.split(".")[-1]
+                ][0]
 
         if session["todo"]:
 
@@ -200,14 +214,19 @@ class PopulationResultView(View):
         Modifies the ``session``.
         E.g., the ``todo`` and ``column`` entries are deleted.
         """
-
-        for key in ["todo", "column"]:
+        for key in ["todo", "column", "help"]:
             if key in request.session:
                 request.session.pop(key)
                 request.session.modified = True  # tell django to store changes
 
         context = (
-            {"root": request.session.get("root"), "tree": request.session.get("tree")}
+            {
+                "root": request.session.get("root"),
+                "tree": {
+                    key: value["label"]
+                    for key, value in request.session.get("tree", {}).items()
+                },
+            }
             if "root" in request.session and "tree" in request.session
             else {}
         )

@@ -209,7 +209,7 @@ from espressodb.base.models import Base
 class MyTable(Base):
     pass
 ```
-This implements a new model with the default columns provided by the EspressoDB base model (e.g., `user`, `last_modified`, `tag`, `type`).
+This implements a new model with the default columns provided by the EspressoDB base model (e.g., `user`, `last_modified`, `tag`).
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>

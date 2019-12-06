@@ -1,5 +1,10 @@
-[![Documentation Status](https://readthedocs.org/projects/espressodb/badge/?version=latest)](https://espressodb.readthedocs.io/en/latest/?badge=latest)
+![Python Version](https://img.shields.io/pypi/pyversions/espressodb)
+[![PyPI Version](https://img.shields.io/pypi/v/espressodb)](https://pypi.org/project/espressodb/)
 [![Tests](https://github.com/callat-qcd/espressodb/workflows/Tests/badge.svg)](https://github.com/callat-qcd/espressodb/actions)
+[![Documentation Status](https://readthedocs.org/projects/espressodb/badge/?version=latest)](https://espressodb.readthedocs.io/en/latest/?badge=latest)
+
+
+
 
 
 # EspressoDB
@@ -76,8 +81,9 @@ The challenge we encountered where
 The core module of LatteDB, EspressoDB, is trying to address those challenges.
 
 ## Who is responsible for it?
+* [@ckoerber](https://www.ckoerber.com) (Feel free to contact me for questions)
 * [@cchang5](https://github.com/cchang5)
-* [@ckoerber](https://github.com/ckoerber)
+
 
 ## License
 

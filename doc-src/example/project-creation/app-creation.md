@@ -84,10 +84,8 @@ allows to utilize EspressoDB's features like the population view or auto documen
 Each class will correspond to a table in your database.
 
 Each class attribute which is associated with a `models.Field` will be a column of the table.
-By default `Base` adds the following columns `user`, `tag`, `type`, `last_modified`.
+By default `Base` adds the following columns `user`, `tag`, `last_modified`.
 The user is set whenever EspressoDB identifies a logged in user (e.g., from your database connection file), the `tag` field is a string you can use for searching the database.
-The `type` is automatically set by EspressoDB to the actual name of the class.
-E.g., each `Contact` table entry will have the `type="Contact"`.
 This will become relevant for inheritance later on.
 The `last_modified` field is updated to the current time whenever a table row is changed (or saved for that matter).
 

@@ -6,6 +6,7 @@
 {% block head-extra %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/prettify.css'%}">
 <script type="text/javascript" src="{% static 'js/prettify.js'%}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -45,14 +46,22 @@
     </div>
 </div>
 
+
 <div class="container">
+    <div class="text-right">
+        <button class="btn btn-success my-2" data-clipboard-target="#population-code" id="clip-btn">
+            <i class="fas fa-copy"></i> Copy
+        </button>
+    </div>
     {% render_tree tree root %}
 </div>
+
 
 <script type="text/javascript">
     $(window).on('load', function() {
         PR.prettyPrint();
     });
+    new ClipboardJS('#clip-btn');
 </script>
 
 {% else %}

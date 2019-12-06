@@ -5,6 +5,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from espressodb.base.utilities.apps import get_apps_slug_map
+import espressodb.base.utilities.blackmagicsorcery as re
 
 URLS = ["/", "/populate/", "/populate-result/"]
 
@@ -25,6 +26,17 @@ class URLViewTest(TestCase):
     """Tests if all urls are present
     """
 
+    exclude_urls = []
+
+    @classmethod
+    def url_excluded(cls, url: str) -> bool:
+        """Checks if the url is in the exclude_urls pattern list
+
+        Arguments:
+            url: Regex pattern to match.
+        """
+        return any([re.match(pattern, url) is not None for pattern in cls.exclude_urls])
+
     def setUp(self):
         """Create a user for the test
         """
@@ -38,6 +50,9 @@ class URLViewTest(TestCase):
         """Tests the HTTP status of the client.
         """
         for url in URLS:
+            if self.url_excluded(url):
+                continue
+
             with self.subTest(url=url):
                 response = self.client.get(url)
                 self.assertEqual(response.status_code, 200)
@@ -46,6 +61,9 @@ class URLViewTest(TestCase):
         """Tests wether login required URLS are present but require login.
         """
         for url in LOGGED_IN_URLS:
+            if self.url_excluded(url):
+                continue
+
             with self.subTest(url=url):
                 with self.subTest(follow=False):
                     response = self.client.get(url, follow=False)
@@ -66,6 +84,9 @@ class URLViewTest(TestCase):
         self.assertTrue(login)
 
         for url in LOGGED_IN_URLS:
+            if self.url_excluded(url):
+                continue
+
             with self.subTest(url=url):
                 response = self.client.get(url)
                 self.assertEqual(response.status_code, 302 if "admin" in url else 200)

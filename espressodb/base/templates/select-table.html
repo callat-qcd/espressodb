@@ -2,6 +2,7 @@
 {% load bootstrap4 %}
 {% block content %}
 {% load widget_tweaks %}
+{% load base_extras %}
 
 <div class="jumbotron">
     <h1>
@@ -14,11 +15,14 @@
     <p>
         This page helps you to generate a python population script for a given database table.
     </p>
-    <p>
+    <div class="alert alert-warning" role="alert">
+        It is not supported to go backwards &mdash; you have to start over if you want to change entries.
+    </div>
+    <div>
         <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#help" aria-expanded="false" aria-controls="help">
             <i class="far fa-question-circle mr-1"></i>Help
         </button>
-    </p>
+    </div>
     <div class="collapse" id="help">
         <div class="card border-info mb-3">
             <div class="card-header">Info</div>
@@ -29,9 +33,6 @@
                 <li class="list-group-item">
                     If you already know how to create a certain object, (e.g. by a database query) you can tell the webpage to ignore dependencies.
                 </li>
-                <li class="list-group-item">
-                    It is not supported to go backwards &mdash; you have to start over if you want to change entries.
-                </li>
             </ul>
         </div>
     </div>
@@ -39,18 +40,20 @@
 <div class="container">
     {% if form.model.field.choices %}
     {% if request.session.tree %}
-    <table class="table table-striped">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Dependency</th>
                 <th>Type</th>
+                <th>Help</th>
             </tr>
         </thead>
         <tbody>
             {% for key, val in request.session.tree.items %}
             <tr>
                 <td>{{key}}</td>
-                <td>{{val}}</td>
+                <td>{% if val.doc_url %}<a href="{{val.doc_url}}" target="_blank">{{val.label}}</a>{% else %}{{val.label}}{% endif %}</td>
+                <td>{{ request.session.help|get_item:key|safe}}</td>
             </tr>
             {% endfor %}
         </tbody>
@@ -80,6 +83,11 @@
                         <button class="btn btn-outline-secondary" type="submit" type="submit">Submit</button>
                     </div>
                 </div>
+                {% if form.model.help_text %}
+                <div class="form-group">
+                    <small id="form-help" class="form-text text-muted">Help: {{form.model.help_text|safe}}</small>
+                </div>
+                {% endif %}
             </form>
         </div>
     </div>

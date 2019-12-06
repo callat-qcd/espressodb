@@ -1,5 +1,8 @@
 # More complicated tables
 
+This section explains how one can build tables such that they are extendable in the future.
+It is presented in the case of [the example project](../example/index).
+
 ## In which scenario are they helpful
 In science projects it is usually hard if not impossible to plan out each step at the beginning of a project.
 Thus it is important to stay flexible enough to incorporate unexpected changes -- which, on first thought, is not along the notions of using relatively fixed tables.
@@ -94,17 +97,16 @@ E.g., these models will create the following tables after migrating
 
 #### `hamiltonian_hamiltonian`
 
-| id | type | last_modified | tag | userid|
-|---|---|---|---|---|
-| 1 | Contact | ... | ... | ...|
-| 2 | Contact | ... | ... | ...|
-| ... | ... | ... | ... | ...|
-| 42 | Coulomb | ... | ... | ...|
-| ... | ... | ... | ... | ...|
+| id | last_modified | tag | userid|
+|---|---|---|---|
+| 1 | ... | ... | ...|
+| 2  ... | ... | ...|
+| ... | ... | ... | ...|
+| 42 | ... | ... | ...|
+| ... | ... | ... | ...|
 
 The `id` column is the primary key to identify a certain entry.
 All the other columns come from the EspressoDB `Base` class (which does not have it's own table) to enable EspressoDB's features and have additional meta information.
-For example the `type` column informs that the entry is associated with the *specialized* class `Contact` or `Coulomb`.
 
 #### `hamiltonian_contact`
 
@@ -125,17 +127,17 @@ The other entries are specific to the actual implementation.
 | 42 | 10 | 0.1 | -02 |
 | ... | ... | ... | ... |
 
-Similarly, the `hamiltonian_coulomb` borrwos it's primary key from the `hamiltonian_hamiltonian` table and adds information specific to it in it's own table.
+Similarly, the `hamiltonian_coulomb` borrows it's primary key from the `hamiltonian_hamiltonian` table and adds information specific to it in it's own table.
 
 Thus, all implementations have a corresponding entry in the base `hamiltonian_hamiltonian` table but specific information in their own table.
 
 #### `hamiltonian_eigenvalue`
 
-| id | type | last_modified | tag | n_level | value | hamiltonian_id | userid |
-|---|---|---|---|---|---|---|---|
-| 1 | ... | ... | ... | 1 | -363.823 | 1 | ... |
-| 1 | ... | ... | ... | 2 | -361.803 | 1 | ... |
-| ... | ... | ... | ... | ... | ... | ... |
+| id | last_modified | tag | n_level | value | hamiltonian_id | userid |
+|---|---|---|---|---|---|---|
+| 1 | ... | ... | 1 | -363.823 | 1 | ... |
+| 1 | ... | ... | 2 | -361.803 | 1 | ... |
+| ... | ... | ... | ... | ... | ... |
 
 Because the `hamiltonian_eigenvalue` table inherits from `Base`, it comes with the default `Base` columns.
 In addition, it now points to the `hamiltonian_id` in the `hamiltonian_hamiltonian` table which corresponds to either a specialized `Coulomb` or `Contact` entry.
@@ -147,7 +149,7 @@ This is generally possible and might also be good practice depending on the spec
 However, in case there are joined unique constraints, it might not always be possible because this constraint is enforced at the table level.
 
 Suppose you want all the `Contact` entries to be unique in `["n_sites", "spacing", "c"]`.
-If you place the additional columns `n_sites` and `spacing` from `Contact` to `Hamiltonian` and add an unique constraint in `Hamiltonian` according to `["n_sites", "spacing", "type"]`,
+If you place the additional columns `n_sites` and `spacing` from `Contact` to `Hamiltonian` and add an unique constraint in `Hamiltonian` according to `["n_sites", "spacing"]`,
 
 ```python
 class Hamiltonian(Base):
@@ -155,7 +157,7 @@ class Hamiltonian(Base):
     spacing = models.DecimalField(max_digits=5, decimal_places=3)
 
     class Meta:
-        unique_together = ["n_sites", "spacing", "type"]
+        unique_together = ["n_sites", "spacing"]
 
 class Contact(Hamiltonian):
     c = models.DecimalField(max_digits=5, decimal_places=3)
@@ -167,10 +169,10 @@ it is **not** possible to have table entries for same `n_site` and `spacing` but
 
 #### `hamiltonian_hamiltonian`
 
-| id | type | n_sites | spacing | ... |
-|---|---|---|---|---|
-| 1 | Contact | 10 | 0.1 | ...|
-| ... | ... | ... | ... | ...|
+| id | n_sites | spacing | ... |
+|---|---|---|---|
+| 1 | 10 | 0.1 | ...|
+| ... | ... | ... | ...|
 
 #### `hamiltonian_contact`
 
@@ -181,7 +183,7 @@ it is **not** possible to have table entries for same `n_site` and `spacing` but
 
 because each entry in `hamiltonian_contact` creates a new `id` in `hamiltonian_hamiltonian` which is unique constrained in the parameters we want to have present.
 
-In principle one could unique constrain `["id", "n_sites", "spacing", "type"]` in `hamiltonian_hamiltonian`, however unique constraining any combination of columns containing the `id` is equivalent to not constraining at all (because the `id` is supposed to be unique).
+In principle one could unique constrain `["id", "n_sites", "spacing"]` in `hamiltonian_hamiltonian`, however unique constraining any combination of columns containing the `id` is equivalent to not constraining at all (because the `id` is supposed to be unique).
 
 
 ### Queries and member access
@@ -189,22 +191,35 @@ In principle one could unique constrain `["id", "n_sites", "spacing", "type"]` i
 In case of inheritance, queries and member access changes slightly.
 E.g., if one wants to look up the corresponding `Contact` Hamiltonian of eigenvalues, one would have to use the following code
 ```
-h1 = Eigenvalue.objects.filter(hamiltonian__type="Contact").first()
-h2 = Eigenvalue.objects.filter(hamiltonian__contact__c=-1.0).first()
+h = Eigenvalue.objects.filter(hamiltonian__contact__c=-1.0).first()
 ```
 
 Or on the python level
 ```python
 e1 = Eigenvalue.objects.first()
-h2 = e1.hamiltonian.contact # potentially fails if wrong type
-h2.c == -1.0
+h = e1.hamiltonian.contact # potentially none if hamiltonian not of type contact
+h.c == -1.0
 ```
 Note that this access might fail if the Hamiltonian is a `Coulomb` Hamiltonian.
 
-EspressoDB provides convenience methods to circumvent the access of Python objects.
+To be save against this, EspressoDB provides the `specialization` attribute which identifies the type of the instance by it's primary key, e.g.,
+```python
+h0 = e1.hamiltonian.specialization
+h0 == h
+```
+
+Furthermore, to avoid redundancy, EspressoDB provides convenience methods to circumvent the access of the specialization attribute.
 E.g., it is possible to use the syntax
 ```python
 e1 = Eigenvalue.objects.first()
-h2 = e1.hamiltonian # no extra access to .contact
-h2.c == -1.0 # only present if h2 is of type contact, else it is .v
+h = e1.hamiltonian # no extra access to .contact
+h.c == -1.0 # only present if h2 is of type contact, else it is .v
 ```
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>
+    Note that <code>h</code> is still an instance of <code>Hamiltonian</code>, it just loads in all the members of <code>Contact</code>.
+    When you change the members belonging to <code>Contact</code>, and call <code>save</code>, also the corresponding save of <code>Contact</code> is called.
+</p>
+</div>
