@@ -1,5 +1,5 @@
 ---
-title: 'EspressoDB: A scientific database for managing high-performance computing workflow'
+title: 'EspressoDB: A scientific database for managing high-performance computing workflows'
 tags:
   - Python
   - Django
