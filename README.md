@@ -82,7 +82,7 @@ The core module of LatteDB, EspressoDB, is trying to address those challenges.
 
 ## Who is responsible for it?
 * [@cchang5](https://github.com/cchang5)
-* [@ckoerber](https://github.com/ckoerber)
+* [@ckoerber](https://www.ckoerber.com)
 
 ## License
 
