@@ -1,5 +1,3 @@
-paper | paper.pdf: paper.md paper.bib
-	pandoc -t latex -o paper.pdf --bibliography paper.bib paper.md
 
 tex: paper.md paper.bib
 	cp paper.md paper.tex.md
@@ -19,15 +17,20 @@ tex: paper.md paper.bib
 	cd doc-src/arXiv/; ln -sf ../../paper.bib paper.bib
 	rm paper.tex.md paper.tex.md.bak
 
-arxiv:
-	make tex
-	cd doc-src/arXiv; pdflatex arXiv.tex; bibtex arXiv; pdflatex arXiv.tex; pdflatex arXiv.tex;
-	cd doc-src; tar -czf arXiv.tgz arXiv/*.tex arXiv/arXiv.bbl arXiv/lattedb-example.png arXiv/joss-logo.png
+paper.pdf: paper.md paper.bib
+	pandoc -t latex -o paper.pdf --bibliography paper.bib paper.md
 
+.PHONY: arxiv
+arxiv:
+	make -C doc-src/arXiv
 
 .PHONY: clean
 clean:
 	rm paper.pdf
+
+.PHONY: docs
+docs:
+	make -C doc-src html
 
 .PHONY: test
 test: test_my_project test_m2m
