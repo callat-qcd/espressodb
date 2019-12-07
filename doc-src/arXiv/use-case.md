@@ -1,7 +1,16 @@
-# Use case
+# Django overview
+``EspressoDB`` utilizes Python's ``Django`` Object-Relational Mapping (ORM) framework.
+Tables correspond to Python classes, rows correspond to instances and columns correspond to attributes of the instances.
+Thus it is possible to filter for objects by their attributes or generate summary tables (``pandas.DataFrame``) within one line of code.
+Furthermore, using an ORM allows one to have the same interface independent of the backend.
+It is possible to store data in a file based `SQLite` solution, or use more scalable options like `MySQL` or `Postgresql`.
 
-For an explicit use case, we describe the use of ``LatteDB`` by the CalLat Collaboration ([https://a51.lbl.gov/~callat/webhome/](https://a51.lbl.gov/~callat/webhome/)) in their computations on Summit at the Oak Ridge Leadership Computing Facility ([OLCF](https://www.olcf.ornl.gov)) through DOE INCITE Allocations [@incite:2019; @incite:2020].  LQCD is one of the main applications awarded time at leadership computing facilities each year through the competitive DOE [INCITE](https://www.doeleadershipcomputing.org) and [ALCC](https://science.osti.gov/ascr/Facilities/Accessing-ASCR-Facilities/ALCC) Allocations, and therefore represents a major use case.
+``Django`` is part of many open-source projects and thus comes with extensive documentation.
+Additionally, ``Django`` is scalable, comes with reliable tests and vast community support which manifests in the fact that it is commonly  used in large scale projects (BitBucket, Instagram, Mozilla, NASA and many more).
+One guiding principle of ``EspressoDB`` is to not "re-invent the wheel" but instead leverage the support coming from ``Django``.
+As a result, one can easily incorporate many of ``Django``'s extensions and find solutions to technical questions online.
 
+# Lattice QCD use case
 
 LQCD is an inherently a stochastic method of simulating quantum chromodynamics (QCD) the fundamental theory of nuclear strong interactions, which is responsible for confining quarks into protons and neutrons and ultimately, for binding these nucleons into the atomic nuclei we observe in nature.
 The application of LQCD to forefront research applications in nuclear physics is necessary to build a quantitative connection between our understanding of nuclei and QCD.  This is important as nuclei serve as laboratories and/or detectors for many experiments aiming to test the limits of the Standard Model of particle physics in our quest to understand questions such as: Why is the universe composed of matter and not anti-matter?  Does dark matter interact with regular matter other than gravitationally?  What is the nature of the neutrino and is it related to the observed excess of matter over anti-matter?  See Ref. [@Drischler:2019xuo] for a recent review of the interface of LQCD with our understanding of nuclear physics.
@@ -12,16 +21,7 @@ As such, these LQCD computations require the completion of millions of independe
 Several such calculations must be performed in order to extrapolate the results to the physical point, defined as the limit of zero discretization (the continuum limit), the infinite volume limit and the limit of physical quark masses which are _a priori_ unknown and so must be determined through this extrapolation/interpolation procedure.
 These requirements lead to a very complex set of computations that must be carried out with great care and a significant amount of human time and effort to ensure the computing cycles are used as efficiently as possible.
 
-Compounding these challenges, the new computer Summit, is _disruptively fast_ compared to previous generations of leadership class computers.  Full machine-to-machine, Summit is approximately 15 times faster than Titan when applied to LQCD applications such as those carried out by CalLat [@Berkowitz:2018gqe].  While this is great for scientific throughput, it also means the management of the computational jobs has become unwieldy with the management models typically used for such computations: Summit churns through the computations so fast, and produces so much data, it is not possible to keep up with the data processing and management with our older management tools.  At a high level, there are two challenges which are both critical to address for near-exascale computers such as Summit, which will become more important in the exascale era:
-
-1. _Efficient bundling and management of millions on independent tasks with various resource requirements on heterogenous nodes_:
-For good reason, the leadership computing facilities do not allow the submission of millions of small tasks to the supercomputers (clogged queues, overtaxed service nodes etc.).  It is therefore imperative to have a light-weight, user-friendly task manager capable of efficiently bundling these millions of small tasks into large jobs while carefully distributing the work to various components of the heterogeneous nodes to take full advantage of the computing capability of current and future machines.  This also enables a throughput of work such that the full calculations can be completed in a typical allocation period;
-
-2. _Dependent task generation and data processing_:
-The nested dependencies of all the tasks, and the subsequent data processing and collection must happen in near real time.  In the case of the CalLat production, multiple peta-bytes of temporary files are written to the scratch file system and these must be used for subsequent computations and processed sufficiently quickly such that they are not purged by the supercomputing centers.  Ultimately, these multi-petabytes of data are processed down to hundreds of tera-bytes of valuable data worth saving spread over hundreds of thousands of files.  It is essential to have a light-weight, user-friendly, and real time tracking of what tasks have been completed, what files are missing etc., so that users can nimbly fill in missing dependent tasks to complete and process the data without having to keep the full working tree in human memory.
-
-
-Members of CalLat are addressing issue 1 through the creation of job management software, [METAQ](https://github.com/evanberkowitz/metaq) [@Berkowitz:2017vcp] and MPI_JM [@Berkowitz:2018gqe; @Berkowitz:2017xna].  ``EspressoDB`` is designed to address the second issue.  A feature that will be added to ``LatteDB`` very soon is integration with MPI_JM.
+Compounding these challenges, the new computer Summit, is _disruptively fast_ compared to previous generations of leadership class computers.  Full machine-to-machine, Summit is approximately 15 times faster than Titan when applied to LQCD applications such as those carried out by CalLat [@Berkowitz:2018gqe].  While this is great for scientific throughput, it also means the management of the computational jobs has become unwieldy with the management models typically used for such computations: Summit churns through the computations so fast, and produces so much data, it is not possible to keep up with the data processing and management with our older management tools.  
 
 As a concrete example, we consider the nucleon elastic form factor project being carried out by CalLat [@incite:2019; @incite:2020].  For each _ensemble_ of gauge configurations used (one choice of input parameters) the computation requires the following dependent steps:
 
