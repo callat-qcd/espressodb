@@ -174,6 +174,13 @@ production status (green means the tsliced\_source\_averaged file
 exists, red means it is missing) and decide what configurations in what
 ensembles need to be managed in production.
 
+\begin{figure}[t!]
+\centering
+\includegraphics{lattedb-example.png}
+\caption{Example table view of file status with column specific filters
+and dynamic progress bar.}
+\end{figure}
+
 More importantly, our production scripts interact with \texttt{LatteDB},
 therefore even without the visualization, the scripts will only generate
 work that \texttt{LatteDB} records as missing. This interaction with
@@ -191,13 +198,6 @@ Other examples can be found in the \texttt{notebooks} folder in
 \texttt{LatteDB}. These scripts will be updated regularly to encompass
 more and more utilities from \texttt{EspressoDB} providing a complete
 working example.
-
-\begin{figure}
-\centering
-\includegraphics{lattedb-example.png}
-\caption{Example table view of file status with column specific filters
-and dynamic progress bar.}
-\end{figure}
 
 Other features that can be implemented is the storing of the data files
 in \texttt{LatteDB} as well as storing the analysis of the data files.
