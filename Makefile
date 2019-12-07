@@ -15,7 +15,7 @@ tex: paper.md paper.bib
 	sed -i.bak 's:doc-src/_static/lattedb-example.png:lattedb-example.png:' doc-src/arXiv/paper_body.tex
 	rm doc-src/arXiv/paper_body.tex.bak
 	cp doc-src/_static/lattedb-example.png doc-src/arXiv/
-	cp paper.bib doc-src/arXiv/
+	cd doc-src/arXiv/; ln -s ../../paper.bib paper.bib
 	rm paper.tex.md paper.tex.md.bak
 
 
