@@ -5,7 +5,7 @@
 \texttt{EspressoDB} utilizes Python's \texttt{Django} Object-Relational
 Mapping (ORM) framework. Tables correspond to Python classes, rows
 correspond to instances and columns correspond to attributes of the
-instances. Thus it is possible to filter for objects by their attributes
+instances.  One can filter instances by their attributes
 or generate summary tables (\texttt{pandas.DataFrame}) within one line
 of code. Furthermore, using an ORM allows one to have the same interface
 independent of the backend. It is possible to store data in a file based
@@ -155,13 +155,13 @@ the data processing steps (step 7) which proceed as:
 \begin{enumerate}
 \setcounter{enumi}{6}\item Data processing:
 \begin{enumerate}
-\item For each configuration, for each time separation, for each of the 8 sources, \emph{time slice} the 4D data formfactor files to only the time slices containing relevant data;
+\item For each configuration, for each time separation, for each of the 8 sources, \emph{time slice} the 4D data \texttt{formfactor} files to only the time slices containing relevant data;
 
-\item For each configuration, for each time separation, for each source set, average the 8 formfactor\_tsliced files to a source averaged file;
+\item For each configuration, for each time separation, for each source set, average the 8 \texttt{formfactor\_tsliced} files to a source averaged file;
 
 \item When all configurations are complete, concatenate these files together;
 
-\item As needed, Fourier Transform these files to project the formfactors onto definite momentum transfers;
+\item As needed, Fourier Transform these files to project the \texttt{formfactors} onto definite momentum transfers;
 
 \item Analyze the correlation functions to extract the relevant physics.
 \end{enumerate}
@@ -170,7 +170,7 @@ the data processing steps (step 7) which proceed as:
 
 In Figure 1, we show an example \texttt{LatteDB} Table from step 7b. The
 user is able to filter on each column to very quickly assess the
-production status (green means the tsliced\_source\_averaged file
+production status (green means the \texttt{tsliced\_source\_averaged} file
 exists, red means it is missing) and decide what configurations in what
 ensembles need to be managed in production.
 
@@ -193,7 +193,7 @@ significantly reducing the load on the file system as well.
 Examples of interacting with \texttt{LatteDB} can be found in
 our management repository for these INCITE projects
 \url{https://github.com/callat-qcd/nucleon_elastic_FF}.
-The scripts for interacting with \texttt{LatteDB} are in the \texttt{scripts} folder and containt \texttt{lattedb} in the name.
+The scripts for interacting with \texttt{LatteDB} are in the \texttt{scripts} folder and contain \texttt{lattedb} in the name.
 Other examples can be found in the \texttt{notebooks} folder in
 \texttt{LatteDB}. These scripts will be updated regularly to encompass
 more and more utilities from \texttt{EspressoDB} providing a complete
