@@ -92,7 +92,7 @@ A future feature of ``LatteDB``  is integration with ``MPI_JM``.
 
 # Acknowledgements
 
-We thank Even Berkowitz, Arjun Gambhir, Ben Hörz,  Kenneth McElvain and Enrico Rinaldi for useful insights and discussions which helped in creating ``EspressoDB`` and ``LatteDB``.
+We thank Evan Berkowitz, Arjun Gambhir, Ben Hörz,  Kenneth McElvain and Enrico Rinaldi for useful insights and discussions which helped in creating ``EspressoDB`` and ``LatteDB``.
 C.K. gratefully acknowledges funding through the Alexander von Humboldt Foundation through a Feodor Lynen Research Fellowship.
 The work of A.W-L. was supported by the Exascale Computing Project (17-SC-20-SC), a joint project of the U.S. Department of Energy's Office of Science and National Nuclear Security Administration, responsible for delivering a capable exascale ecosystem, including software, applications, and hardware technology, to support the nation's exascale computing imperative.
 
