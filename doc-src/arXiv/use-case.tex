@@ -97,7 +97,7 @@ steps:
     Create a proton correlation function to determine the proton mass;
   \item
     Create O(10) proton \emph{sequential} sinks at different separation
-    times (times 4 for different spin and flavor combinations);
+    times (times 8 for different spin, flavor and parity combination);
   \end{enumerate}
 \item
   For each time-separation, group the 8 \emph{sequential} sinks from the
@@ -107,7 +107,7 @@ steps:
   For each time-separation, Solve a \emph{sequential} propagator from
   the \emph{coherent sequential} sink;
 \item
-  For each time-separation, tie each of the original 8 propagators with
+  For each time-separation, spin, flavor and parity, tie each of the original 8 propagators with
   the sequential propagator to construct a 4-dimensional (4D)
   \emph{formfactor} correlation function;
 \item
@@ -152,15 +152,21 @@ examples in \texttt{LatteDB} for more information.
 Additionally, \texttt{LatteDB} is also tremendously useful for managing
 the data processing steps (step 7) which proceed as:
 
-7a. For each configuration, for each time separation, for each of the 8
-sources, \emph{time slice} the 4D data formfactor files to only the time
-slices containing relevant data; 7b. For each configuration, for each
-time separation, for each source set, average the 8 formfactor\_tsliced
-files to a source averaged file. 7c. When all configurations are
-complete, concatenate these files together. 7d. As needed, Fourier
-Transform these files to project the formfactors onto definite momentum
-transfers. 7e. Analyze the correlation functions to extract the relevant
-physics.
+\begin{enumerate}
+\setcounter{enumi}{6}\item Data processing:
+\begin{enumerate}
+\item For each configuration, for each time separation, for each of the 8 sources, \emph{time slice} the 4D data formfactor files to only the time slices containing relevant data;
+
+\item For each configuration, for each time separation, for each source set, average the 8 formfactor\_tsliced files to a source averaged file;
+
+\item When all configurations are complete, concatenate these files together;
+
+\item As needed, Fourier Transform these files to project the formfactors onto definite momentum transfers;
+
+\item Analyze the correlation functions to extract the relevant physics.
+\end{enumerate}
+\end{enumerate}
+
 
 In Figure 1, we show an example \texttt{LatteDB} Table from step 7b. The
 user is able to filter on each column to very quickly assess the
