@@ -18,6 +18,11 @@ tex: paper.md paper.bib
 	cd doc-src/arXiv/; ln -sf ../../paper.bib paper.bib
 	rm paper.tex.md paper.tex.md.bak
 
+arxiv:
+	make tex
+	cd doc-src/arXiv; pdflatex arXiv.tex; bibtex arXiv; pdflatex arXiv.tex; pdflatex arXiv.tex;
+	cd doc-src; tar -czf arXiv.tgz arXiv/*.tex arXiv/arXiv.bbl arXiv/lattedb-example.png arXiv/joss-logo.png
+
 
 .PHONY: clean
 clean:
