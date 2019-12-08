@@ -11,3 +11,5 @@ paper_body.tex
 *.fdb_latexmk
 *.fls
 arXiv-blx.bib
+lattedb-example.png
+*.tgz
