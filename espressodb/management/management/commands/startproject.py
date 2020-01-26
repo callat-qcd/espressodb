@@ -100,6 +100,6 @@ class Command(StartProjectCommand):
         LOGGER.info(
             "     3. Run `python -m pip install [--user] [-e] .`"
             " in the project root directory to add your package to your python path."
-            "\n        See alse `%s`.",
+            "\n        See also `%s`.",
             os.path.join(settings_dir, "setup.py"),
         )

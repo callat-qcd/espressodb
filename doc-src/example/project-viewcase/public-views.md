@@ -40,8 +40,8 @@ class Contact(Hamiltonian)
 ```
 class in `my_project/hamiltonian/models.py`.
 
-For each app, each each model / table has an entry on this page which describe the columns of the table.
-E.g., the pages lists the name of the columns, the type and wether they are optional or have default values and the help text.
+For each app, each model / table has an entry on this page which describe the columns of the table.
+E.g., the pages lists the name of the columns, the type and whether they are optional or have default values and the help text.
 
 ### The population views
 

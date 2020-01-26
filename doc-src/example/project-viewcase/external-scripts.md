@@ -22,7 +22,7 @@ You can also run this in a virtual environment.
 Tables or models on the Python side are classes which can be adjusted to your means.
 Each row in the table can be loaded into a Python class instance.
 Each column in the table will be an attribute of the instance.
-You can thus filter the database to extract the class you where interested in, adjust it's attributes and push it back to the database.
+You can thus filter the database to extract the class you where interested in, adjust its attributes and push it back to the database.
 For example
 ```
 from my_project.hamiltonian.models import Contact as ContactHamiltonian

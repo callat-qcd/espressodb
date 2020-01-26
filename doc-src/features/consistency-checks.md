@@ -16,7 +16,7 @@ class A(Base):
     i = models.IntegerField()
 
     def check_consistency(self):
-        if i > 0:
+        if i < 0:
             raise ValueError("`i` too small...")
 
 A.objects.create(i=-2)  # will fail

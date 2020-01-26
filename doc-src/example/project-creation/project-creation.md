@@ -20,7 +20,7 @@ Setting up new project `my_project` in `/path/to/project`
      1b. and launch a web app by running `python manage.py runserver`
      2. Add new models using `python manage.py startapp {APP_NAME}`
      3. Run `python -m pip install [--user] [-e] .` in the project root directory to add your package to your python path.
-        See alse `/path/to/project/my_project/setup.py`.
+        See also `/path/to/project/my_project/setup.py`.
 ```
 and create the folder structure of the project.
 

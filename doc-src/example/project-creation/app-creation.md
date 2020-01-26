@@ -51,7 +51,7 @@ class Contact(Base):
     $$
     where \( p^2 \) is the Laplace operator.
 
-    The basis is a lattice with constant lattice spacing and peridic boundary conditions.
+    The basis is a lattice with constant lattice spacing and periodic boundary conditions.
     """
 
     n_sites = models.IntegerField(
