@@ -103,7 +103,7 @@ As default, it uses the file based `sqlite` database.
 For this case, the name points to the absolute path of the file (which allows interface for external apps).
 You can specify different database options like a `postgres` model in this file (see also the [docs](https://docs.djangoproject.com/en/dev/ref/settings/#databases)).
 
-The `settings.yaml` specifies the database encryption, which [apps](Create a new app) your projects will use and, in case you want to, how you want to run the web server
+The `settings.yaml` specifies the database encryption, which [apps](#create-a-new-app) your projects will use and, in case you want to, how you want to run the web server
 ```
 SECRET_KEY: "Sup3r_compl1cated-P4ssw0rd!"
 PROJECT_APPS: []

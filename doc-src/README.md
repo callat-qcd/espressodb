@@ -1,7 +1,7 @@
 # EspressoDB
 
-EspressoDB is a Python framework designed to organize (relational) data without loosing flexibility.
-It's objective is to be intuitve and fast.
+EspressoDB is a Python framework designed to organize (relational) data without losing flexibility.
+It's objective is to be intuitive and fast.
 
 More specifically, EspressoDB is build on top of the Object-Relational Mapping web framework [Django](https://docs.djangoproject.com) and adds additional convenience functionalities to easily set up your project.
 
@@ -48,8 +48,8 @@ EspressoDB was developed when we created [LatteDB](https://www.github.com/callat
 We intended to create a database for several purposes, e.g. to optimize the scheduling of architecture dependent many-node jobs and to help in the eventual analysis process.
 For this reason we started to abstract our thinking of how to organize physics objects.
 
-It was the goal to have easily sharable and completely reproducible snapshots of our workflow, while being flexible and not restricting ourselves too much -- in the end science is full of surprises.
-The challenge we encountered where
+It was the goal to have easily shareable and completely reproducible snapshots of our workflow, while being flexible and not restricting ourselves too much -- in the end science is full of surprises.
+The challenges we encountered were
 1. How can we program a table structure which can be easily extended in the future?
 2. How do we write a database such that users not familiar with the database concept can start using this tool with minimal effort?
 

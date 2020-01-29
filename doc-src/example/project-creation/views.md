@@ -7,7 +7,7 @@ When you enter an url in your browser, django figures out which Python object to
 EspressoDB implements default views like the project homepage called which is rendered by the `index.html` template.
 
 ## Adjusting the index template
-When looking for the index template, django first checks your project tempalte directories, e.g., `my_project/hamiltonian/templates/` and then enters EspressoDB's template dirs.
+When looking for the index template, django first checks your project template directories, e.g., `my_project/hamiltonian/templates/` and then enters EspressoDB's template dirs.
 It renders the first template which matches the specification.
 Thus, when you create `my_project/hamiltonian/templates/index.html`, you will overwrite the default index page.
 
@@ -40,8 +40,8 @@ E.g., `{% ... %}` denote template tags which can be loops, if statements and mor
 The `{{ ... }}` templates will render variables.
 
 Most importantly, for this template are the texts `{% extends 'base.html' %}`, which tells that it should use the `base.html` template and extend it.
-Thus the link navbar and further html content will be present without you not having to write anything.
-The `{% block content %}` and `{% endblock %}` denotes that within the `base.html` template, the content between the same exact blocks will be replace with what you want to render.
+Thus the link navbar and further html content will be present without you having to write anything.
+The `{% block content %}` and `{% endblock %}` denotes that within the `base.html` template, the content between the same exact blocks will be replaced with what you want to render.
 
 See also [the django docs for more information on templates](https://docs.djangoproject.com/en/dev/ref/templates/language/).
 
@@ -54,7 +54,7 @@ Whenever new data is added, your plot is dynamically updated.
 So a possible plot page for this project would be a status view which summaries for which Hamiltonian all of the eigenvalues have been computed and which computations need to be repeated.
 
 It is possible to just use matplotlib, store images dynamically and display them in your view.
-In this example we have decided to use [Bokeh](https://bokeh.pydata.org/en/latest/) as it allows to have dynamic plots, which allow to, e.g., to zoomi, or use mouse over effects on the web view (without storing images in an intermediate step).
+In this example we have decided to use [Bokeh](https://bokeh.pydata.org/en/latest/) as it allows to have dynamic plots, which allow to, e.g., to zoom, or use mouse over effects on the web view (without storing images in an intermediate step).
 
 To prepare the usage, you should install
 ```bash
@@ -87,7 +87,7 @@ class HamiltonianStatusView(TemplateView):
 * The `TemplateView` class is a class with streamlines generating views.
 * The `template_name = "status.html"` tells django to look for a file called `status.html` to render this view
 * The `get_context_data` method provides additional information to the rendering. E.g., that the model we are using is a `ContactHamiltonian`.
-    We overload the default method to guarantee that we do not eliminate other needed infromation.
+    We overload the default method to guarantee that we do not eliminate other needed information.
 
 ### Creating the template
 Next we actually have to create the to be rendered template.
