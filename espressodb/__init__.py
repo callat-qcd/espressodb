@@ -1,8 +1,6 @@
 # pylint: disable=C0413
 """Initializes minimal settings to launch EspressoDB
 """
-from django import setup as _setup
-from django.conf import settings
 
 __version__ = "1.0.0"
 
@@ -36,6 +34,9 @@ def init(**kwargs):
     Keyword Args:
         kwargs: Kwargs are fed to ``settings.configure``.
     """
+    from django import setup as _setup
+    from django.conf import settings
+
     options = {**DEFAULT_OPTIONS, **kwargs}
     settings.configure(**options)
 
