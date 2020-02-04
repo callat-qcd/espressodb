@@ -85,7 +85,7 @@ The core module of LatteDB, EspressoDB, is trying to address those challenges.
 * [@cchang5](https://github.com/cchang5)
 
 ## Contributing
-Thanks for your interest in contributing! There are many ways to contribute to this project. 
+Thanks for your interest in contributing! There are many ways to contribute to this project.
 [Get started here](CONTRIBUTING.md).
 
 ## License

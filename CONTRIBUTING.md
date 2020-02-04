@@ -32,9 +32,9 @@ But also if you feel you have an idea for potential improvement, we welcome issu
 
 #### Filing Bugs
 
-When filing a bug report, please let us know
+When filing a bug report, please let us know:
 
-1. what is your Python, Django and EspressoDB version?
+1. What is your Python, Django and EspressoDB version?
 2. What did you do?
 3. What did you expect to see?
 4. What did you see instead?
