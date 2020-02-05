@@ -12,7 +12,6 @@ This functionality can be used to insert default values for columns that depend 
 </p>
 </div>
 
-
 ## Implementing a code version storage
 
 The most prominent use case for employing a `pre_save` check is to store code revision information.
@@ -53,3 +52,11 @@ If a user now runs
 Data(value=6.123).save()
 ```
 the `Data` class will fill the `tag` field with `get_code_revision()` and only store entries if they are not part of `BAD_REVISIONS`.
+
+Similar to `.check_consistency()`, `.pre_save()` can be disabled for the whole class or for a single instance by the `run_pre_save` attribute:
+```bash
+Data.run_pre_save = False # for all future instances
+# or
+instance = Data(value=1.23)
+instance.run_pre_save = False # for only this instance
+```
