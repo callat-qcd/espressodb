@@ -29,7 +29,7 @@ def record_calls(calls):
 
 
 class M2MTest(TestCase):  # pylint: disable=R0902
-    """Tests specific for the Eigenvalue model
+    """Tests m2m check consistency calls
     """
 
     def setUp(self):
