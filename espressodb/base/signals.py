@@ -14,7 +14,7 @@ from espressodb.base.exceptions import ConsistencyError
 def base_save_handler(sender: Base, **kwargs):
     """Runs pre save logic of Base class
 
-    This calls the check_consistency method of the instance.
+    This calls the ``.pre_save()`` and  ``.check_consistency()`` method of the instance.
     """
     if not issubclass(sender, Base):
         return
@@ -22,6 +22,9 @@ def base_save_handler(sender: Base, **kwargs):
     instance = kwargs.get("instance")
     if instance is None:
         return
+
+    if instance.run_pre_save:
+        instance.pre_save()
 
     if instance.run_checks:
         try:

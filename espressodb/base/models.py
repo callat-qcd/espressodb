@@ -35,6 +35,8 @@ class Base(models.Model):
 
     # Run consistency checks on save and m2m update.
     run_checks: bool = True
+    # Run custom pre save actions on model before inserting.
+    run_pre_save: bool = True
 
     #: Primary key for the base class
     id = models.AutoField(primary_key=True, help_text="Primary key for Base class.")
@@ -144,9 +146,13 @@ class Base(models.Model):
         """Method is called before save.
 
         Raise errors here if the model must fulfill checks.
+        """
 
-        Arguments:
-            data: Dictionary containing the (open) column data of the class.
+    def pre_save(self):
+        """Method is called before save and before check consistency.
+
+        This method can be used to overwrite custom column values.
+        It has access to all information present at the ``.save()`` call.
         """
 
     def check_m2m_consistency(
@@ -155,9 +161,6 @@ class Base(models.Model):
         """Method is called before adding to a many to many set.
 
         Raise errors here if the adding must fulfill checks.
-
-        Note:
-            Different to
         """
 
     @classmethod
