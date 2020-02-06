@@ -13,7 +13,7 @@ def main():
 
     CWD = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 
-    PROJECT_APPS = [f"migration_tests.app{APP_ID}"] if APP_ID is not None else []
+    PROJECT_APPS = [f"migration_states.app{APP_ID}"] if APP_ID is not None else []
     _init(
         DATABASES={
             "default": {
@@ -32,7 +32,7 @@ def main():
         ],
         PROJECT_APPS=PROJECT_APPS,
         ROOT_DIR=CWD,
-        PROJECT_NAME="migration_tests",
+        PROJECT_NAME="migration_states",
     )
     os.environ["ESPRESSODB_INIT_CHECKS"] = "0"  # Do not run checks for manage.py
 
