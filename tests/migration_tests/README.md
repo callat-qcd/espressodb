@@ -10,7 +10,7 @@ Thus tests run outside the regular Django framework and treat the project as an 
 
 ## State 1
 
-For this state, the models, migrations and database are all up to date.
+For this state, the models, migrations, and database are all up to date.
 No error should be raised.
 
 ## State 2
