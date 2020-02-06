@@ -1,9 +1,13 @@
 .PHONY: test
-test: test_m2m test_project_creation
+test: espressodb_tests migration_tests test_project_creation
 
-.PHONY: test_m2m
-test_m2m:
-	cd espressodb_tests && pytest
+.PHONY: espressodb_tests
+espressodb_tests:
+	make -C espressodb_tests test
+
+.PHONY: migration_tests
+migration_tests:
+	make -C migration_tests test
 
 .PHONY: test_project_creation
 test_project_creation:
