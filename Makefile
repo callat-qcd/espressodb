@@ -20,3 +20,4 @@ docs:
 .PHONY: test
 test:
 	make -C example/ test
+	make -C tests/ test
