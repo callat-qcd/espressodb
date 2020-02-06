@@ -18,7 +18,7 @@ class MigrationTest(ProjectSetup, TestCase):
     app_id = 4
 
     @staticmethod
-    def test_01_check_model_state(self):
+    def test_01_check_model_state():
         """Checks if all model fields agree with all migrations
         """
         check_model_state()
