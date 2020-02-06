@@ -1,4 +1,0 @@
-SECRET_KEY: "h6$^j)0e8g31^e-2)-%4s*&e8b9stbr*j!r$*20tp5jqs))-j@"
-PROJECT_APPS: []
-ALLOWED_HOSTS: ["testserver", "localhost", "127.0.0.1"]
-DEBUG: True
