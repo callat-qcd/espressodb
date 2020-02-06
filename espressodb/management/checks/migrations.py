@@ -116,7 +116,9 @@ def check_migration_state():
                     plan.add(node.key)
                     seen.add(migration)
 
-        applied_migrations = set(loader.applied_migrations.keys())
+        # Apparently Django returns {} if no connection (which is a set not a dict).
+        tmp = loader.applied_migrations
+        applied_migrations = set(tmp if isinstance(tmp, set) else tmp.keys())
 
     except Exception as error:
         raise MigrationStateError(
