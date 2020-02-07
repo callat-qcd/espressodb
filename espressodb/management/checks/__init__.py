@@ -7,6 +7,6 @@ def run_all_checks():
     """Runs all checks and raises check specific error in case script fails
 
     The order of checks are:
-        1. run_migration_checks
+        1. :py:meth:`espressodb.management.checks.migrations.run_migration_checks`
     """
     run_migration_checks()
