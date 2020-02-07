@@ -1,5 +1,5 @@
 # Django overview
-``EspressoDB`` utilizes Python's Django Object-Relational Mapping (ORM) framework.
+EspressoDB utilizes Python's Django Object-Relational Mapping (ORM) framework.
 Tables correspond to Python classes, rows correspond to instances and columns correspond to attributes of the instances.
 Thus it is possible to filter for objects by their attributes or generate summary tables (``pandas.DataFrame``) within one line of code.
 Furthermore, using an ORM allows one to have the same interface independent of the backend.
@@ -7,7 +7,7 @@ It is possible to store data in a file based `SQLite` solution, or use more scal
 
 Django is part of many open-source projects and thus comes with extensive documentation.
 Additionally, Django is scalable, comes with reliable tests and vast community support which manifests in the fact that it is commonly  used in large scale projects (BitBucket, Instagram, Mozilla, NASA and many more).
-One guiding principle of ``EspressoDB`` is to not "re-invent the wheel" but instead leverage the support coming from Django.
+One guiding principle of EspressoDB is to not "re-invent the wheel" but instead leverage the support coming from Django.
 As a result, one can easily incorporate many of Django's extensions and find solutions to technical questions online.
 
 # Lattice QCD use case
@@ -36,19 +36,19 @@ As a concrete example, we consider the nucleon elastic form factor project being
 7. Process the data to prepare it for analysis and the extraction of physics.
 8. Repeat for multiple source sets (of 8) if more statistics are required.
 
-Each of the steps above leads to the generation of many large (multi-gigabyte) data files, most of which are not saved.  ``LatteDB`` is used to track the status of these data files to know if they need to be created or if the next step can proceed.  The final data production step, 6, leads to our final data file that need further processing prior to our final analysis and saving of the files.
+Each of the steps above leads to the generation of many large (multi-gigabyte) data files, most of which are not saved.  LatteDB is used to track the status of these data files to know if they need to be created or if the next step can proceed.  The final data production step, 6, leads to our final data file that need further processing prior to our final analysis and saving of the files.
 
-Inheriting the functionality of ``EspressoDB``, ``LatteDB`` has the flexibility to faithfully reproduce a one-to-one mapping between the above computational workflow to database tables.
+Inheriting the functionality of EspressoDB, LatteDB has the flexibility to faithfully reproduce a one-to-one mapping between the above computational workflow to database tables.
 For example, in step 1, the table of gauge configurations is defined such that every row in the table specifies a single gauge configuration.
 This reflects how on disk, we have thousands of files, each containing a snapshot of the QCD vacuum, and as such, every file, and every subsequent file as a result of the gauge configuration (*e.g.* propagators or correlation functions in steps 2 through 6) can also be tracked individually.
 However, at the end of the calculation, an observable is only well defined with an ensemble of gauge configurations.
-``LatteDB`` allows one to define an ensemble table, with a ``Django ManyToMany`` data type which may be interpreted as a single column containing a list of references (foreign keys) to the table of gauge configurations.
+LatteDB allows one to define an ensemble table, with a ``Django ManyToMany`` data type which may be interpreted as a single column containing a list of references (foreign keys) to the table of gauge configurations.
 In ``SQL``, a list of foreign keys is not a fundamental data type that is supported, and is only made possible with Django.
 However, even with Django, unique constraints can not be implemented on such a column.
-With ``LatteDB``, we make it possible to define a unique constraint, which for this example, prohibits the user from inserting the exact same list of gauge configurations in the ensemble table more than once.
-Users are encouraged to consult the documentation of ``EspressoDB`` and examples in ``LatteDB`` for more information.
+With LatteDB, we make it possible to define a unique constraint, which for this example, prohibits the user from inserting the exact same list of gauge configurations in the ensemble table more than once.
+Users are encouraged to consult the documentation of EspressoDB and examples in LatteDB for more information.
 
-Additionally, ``LatteDB`` is also tremendously useful for managing the data processing steps (step 7) which proceed as:
+Additionally, LatteDB is also tremendously useful for managing the data processing steps (step 7) which proceed as:
 
 7a. For each configuration, for each time separation, for each of the 8 sources, _time slice_ the 4D data formfactor files to only the time slices containing relevant data;
 7b. For each configuration, for each time separation, for each source set, average the 8 formfactor_tsliced files to a source averaged file.
@@ -56,12 +56,12 @@ Additionally, ``LatteDB`` is also tremendously useful for managing the data proc
 7d. As needed, Fourier Transform these files to project the formfactors onto definite momentum transfers.
 7e. Analyze the correlation functions to extract the relevant physics.
 
-In Figure 1, we show an example ``LatteDB`` Table from step 7b.  The user is able to filter on each column to very quickly assess the production status (green means the tsliced_source_averaged file exists, red means it is missing) and decide what configurations in what ensembles need to be managed in production.
+In Figure 1, we show an example LatteDB Table from step 7b.  The user is able to filter on each column to very quickly assess the production status (green means the tsliced_source_averaged file exists, red means it is missing) and decide what configurations in what ensembles need to be managed in production.
 
-More importantly, our production scripts interact with ``LatteDB``, therefore even without the visualization, the scripts will only generate work that ``LatteDB`` records as missing.  This interaction with ``LatteDB`` significantly reduces the amount of human time required to manage the computations.  We are actively constructing routines to also store the final data files to tape, the status of which is stored in a related ``LatteDB`` table.  Thus, the user can query the database instead of the file system for the existence of data files, significantly reducing the load on the file system as well.  Example use scripts for interacting with ``LatteDB`` can be found in our management repository for these INCITE projects [https://github.com/callat-qcd/nucleon_elastic_FF](https://github.com/callat-qcd/nucleon_elastic_FF) in the `scripts` folder and the `notebooks` folder in ``LatteDB``.  These scripts will be updated regularly to encompass more and more utilities from ``EspressoDB`` providing a complete working example.
+More importantly, our production scripts interact with LatteDB, therefore even without the visualization, the scripts will only generate work that LatteDB records as missing.  This interaction with LatteDB significantly reduces the amount of human time required to manage the computations.  We are actively constructing routines to also store the final data files to tape, the status of which is stored in a related LatteDB table.  Thus, the user can query the database instead of the file system for the existence of data files, significantly reducing the load on the file system as well.  Example use scripts for interacting with LatteDB can be found in our management repository for these INCITE projects [https://github.com/callat-qcd/nucleon_elastic_FF](https://github.com/callat-qcd/nucleon_elastic_FF) in the `scripts` folder and the `notebooks` folder in LatteDB.  These scripts will be updated regularly to encompass more and more utilities from EspressoDB providing a complete working example.
 
 
 ![Example table view of file status with column specific filters and dynamic progress bar.](doc-src/_static/lattedb-example.png)
 
-Other features that can be implemented is the storing of the data files in ``LatteDB`` as well as storing the analysis of the data files.  This allows for communal data analysis within a collaboration with a centralized location for results, making it easier to combine results from different members and reduce redundant work.
-Depending upon the success and popularity of ``EspressoDB``, it may be worth exploring whether OLCF (or other LCF) would be willing to allow users to host databases locally on the machines such that the compute nodes could interact with the database allowing users to minimize the number of small input files that are typically written to the file system as well.  In our case, each separate task requires an input file and typically generates two or three small output files, rapidly polluting the file system with millions of small files.  ``EspressoDB`` will minimally allow users to _clean up_ these small files and store the relevant log and output information in the database.
+Other features that can be implemented is the storing of the data files in LatteDB as well as storing the analysis of the data files.  This allows for communal data analysis within a collaboration with a centralized location for results, making it easier to combine results from different members and reduce redundant work.
+Depending upon the success and popularity of EspressoDB, it may be worth exploring whether OLCF (or other LCF) would be willing to allow users to host databases locally on the machines such that the compute nodes could interact with the database allowing users to minimize the number of small input files that are typically written to the file system as well.  In our case, each separate task requires an input file and typically generates two or three small output files, rapidly polluting the file system with millions of small files.  EspressoDB will minimally allow users to _clean up_ these small files and store the relevant log and output information in the database.
