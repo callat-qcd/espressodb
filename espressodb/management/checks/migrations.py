@@ -1,8 +1,4 @@
 """Cross checks for local migrations and models compared to state of database
-
-Notes:
-    ./manage.py showmigrations is able to list non-applied migrations
-    ./manage.py makemigrations is able to detect changes to models not captured by db
 """
 from typing import Dict, List, Optional
 
@@ -21,18 +17,18 @@ class MigrationStateError(Exception):
     """
 
     def __init__(
-        self, state_type: str, data: Optional[Dict[str, List[str]]] = None,
+        self, header: str, data: Optional[Dict[str, List[str]]] = None,
     ):
         """Initialize MigrationStateError and prepares custom error method.
 
         Arguments:
-            state_type: What is the reason for raising the error?
+            header: What is the reason for raising the error?
                 E.g., changes, conflicts, ...
             data: Dictionary where keys are app names and values are migration names.
         """
         data = data or {}
 
-        messages = [f"Migration state error: {state_type}."]
+        messages = [header]
         for app, names in data.items():
             if names:
                 sub_msg = f"{app}:\n\t- "
@@ -44,15 +40,14 @@ class MigrationStateError(Exception):
         super().__init__(message)
 
         self.data = data
-        self.state_type = state_type
+        self.header = header
 
 
 def check_model_state():
     """Checks if the state of local models is represented by migration files.
 
     This code follows the logic of Djangos makemigrations
-    https://github.com/django/django/blob/master/
-        django/core/management/commands/makemigrations.py
+    https://github.com/django/django/blob/master/django/core/management/commands/makemigrations.py
 
     Raises:
         MigrationStateError: If the loader detects conflicts or unapplied changes.
@@ -60,9 +55,6 @@ def check_model_state():
     Future:
         It might be desirable to allow partial checks by, e.g., providing an app_labels
         argument.
-
-    Todo:
-        Tests fail if migration conflict and fail in model conflict
     """
 
     try:
@@ -72,31 +64,28 @@ def check_model_state():
 
         # Identify conflicting apps
         conflicts = loader.detect_conflicts()
-        if conflicts:
-            raise MigrationStateError("conflicting migrations", conflicts)
 
-        # Set up autodetector
-        autodetector = MigrationAutodetector(
+        # Set up autodetector and detect changes
+        changes = MigrationAutodetector(
             loader.project_state(), ProjectState.from_apps(apps),
-        )
-
-        # Detect changes
-        changes = autodetector.changes(graph=loader.graph)
-        if changes:
-            raise MigrationStateError(f"migrations have changed", changes)
-
+        ).changes(graph=loader.graph)
     except Exception as error:
         raise MigrationStateError(
-            f"error when checking state of migrations conflicts: {error}"
+            f"Error when checking state of migrations conflicts:\n{error}"
         )
+
+    if conflicts:
+        raise MigrationStateError("Conflicting migrations", conflicts)
+
+    if changes:
+        raise MigrationStateError(f"Migrations have changed", changes)
 
 
 def check_migration_state():
     """Checks if the state of local migrations is represented by the database.
 
     This code follows the logic of Djangos showmigrations
-    https://github.com/django/django/blob/master/
-        django/core/management/commands/showmigrations.py
+    https://github.com/django/django/blob/master/django/core/management/commands/showmigrations.py
 
     Raises:
         MigrationStateError: If the loader detects conflicts or unapplied changes.
@@ -105,31 +94,51 @@ def check_migration_state():
         It might be desirable to allow partial checks by, e.g., providing an app_labels
         argument.
     """
-    connection = connections[DEFAULT_DB_ALIAS]
-    loader = MigrationLoader(connection, ignore_no_migrations=True)
+    try:
+        connection = connections[DEFAULT_DB_ALIAS]
+        loader = MigrationLoader(connection, ignore_no_migrations=True)
 
-    graph = loader.graph
-    targets = graph.leaf_nodes()
+        graph = loader.graph
+        targets = graph.leaf_nodes()
 
-    plan = set()
-    seen = set()
-    # Generate the plan
-    for target in targets:
-        for migration in graph.forwards_plan(target):
-            if migration not in seen:
-                node = graph.node_map[migration]
-                plan.add(node.key)
-                seen.add(migration)
+        plan = set()
+        seen = set()
+        # Generate the plan
+        for target in targets:
+            for migration in graph.forwards_plan(target):
+                if migration not in seen:
+                    node = graph.node_map[migration]
+                    plan.add(node.key)
+                    seen.add(migration)
 
-    if loader.applied_migrations != plan:
+        # Apparently Django returns {} if no connection (which is a set not a dict).
+        tmp = loader.applied_migrations
+        applied_migrations = set(tmp if isinstance(tmp, set) else tmp.keys())
+
+    except Exception as error:
+        raise MigrationStateError(
+            f"Error when checking state of migrations conflicts:\n{error}"
+        )
+
+    if applied_migrations != plan:
         data = {
-            "The DB is ahead of your tables by": loader.applied_migrations.difference(
-                plan
-            ),
-            "Your tables are ahead of the DB by": plan.difference(
-                loader.applied_migrations
-            ),
+            "The DB is ahead of your tables by": applied_migrations.difference(plan),
+            "Your tables are ahead of the DB by": plan.difference(applied_migrations),
         }
         raise MigrationStateError(
-            "applied migrations do not match local migration files", data
+            "Applied migrations do not match local migration files", data
         )
+
+
+def run_migration_checks():
+    """Runs all migration checks at once
+
+    In order:
+        1. :py:meth:`espressodb.management.checks.migrations.check_model_state`
+        2. :py:meth:`espressodb.management.checks.migrations.check_migration_state`
+
+    Raises:
+        MigrationStateError: If the loader detects conflicts or unapplied changes.
+    """
+    check_model_state()
+    check_migration_state()

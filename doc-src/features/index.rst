@@ -12,4 +12,5 @@ In this section we present
 
     consistency-checks
     pre-save
+    init-checks
     model-specializations

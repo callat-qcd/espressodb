@@ -1,13 +1,13 @@
-"""Prepares the usage of the {{project_name}} module
+"""Prepares the usage of the espressodb_tests module
 """
 import os
 from django import setup as _setup
 
 
 def _init():
-    """Initializes the django environment for {{project_name}}
+    """Initializes the django environment for espressodb_tests
     """
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{project_name}}.config.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "espressodb_tests.config.settings")
     _setup()
 
     if os.environ.get("ESPRESSODB_INIT_CHECKS", "0") == "1":

@@ -1,7 +1,5 @@
 """Models of hamiltonian
 """
-from typing import Dict, Any
-
 from django.db import models
 
 import numpy as np

@@ -6,6 +6,7 @@ import sys
 
 def main():
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "espressodb_tests.config.settings")
+    os.environ["ESPRESSODB_INIT_CHECKS"] = "0"  # Do not run checks for manage.py
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

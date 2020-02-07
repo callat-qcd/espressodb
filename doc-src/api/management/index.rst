@@ -8,6 +8,7 @@ espressodb.management
 
 .. autosummary::
    espressodb.management.utilities
+   espressodb.management.checks
    espressodb.management.management.commands
 
 The ``startapp`` and ``startproject`` templates are located in ``espressodb/management/templates``.
@@ -17,4 +18,5 @@ The ``startapp`` and ``startproject`` templates are located in ``espressodb/mana
     :hidden:
 
     utilities/index
+    checks/index
     management_commands/index
