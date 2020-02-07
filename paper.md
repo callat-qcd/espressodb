@@ -42,15 +42,21 @@ A typical scientific computing workflow includes:
 4. Post-processing these data files;
 5. Performing data analysis on output.
 
-[EspressoDB](https://github.com/callat-qcd/espressodb/) is a programmatic object-relational data management framework implemented in Python and based on the [Django web framework](https://www.djangoproject.com).
-EspressoDB was developed to streamline data management workflows, centralize and guarantee data integrity, while providing domain flexibility and ease of use.
+
+[EspressoDB](https://github.com/callat-qcd/espressodb/) is a programmatic object-relational mapping (ORM) data management framework implemented in Python and based on the [Django web framework](https://www.djangoproject.com).
+EspressoDB was developed to streamline data management, centralize and promote data integrity, while providing domain flexibility and ease of use.
+It is designed to directly integrate in utilized software to allow dynamical access to vast amount of relational data at runtime.
+Compared to existing ORM frameworks like SQLAlchemy or Django itself, EspressoDB lowers the barrier of access by providing default templates.
+Additionally, EspressoDB provides an extended framework of data consistency checks, giving users the freedom to define data tables and their relationships which uniquely mirror the underlying computation.
+Compared to software like DVC, Taverna or VisTrails which describe the workflow of computations, EspressoDB rather specifies the data itself and can thus be used in a complementary spirit.
+
 
 The framework provided by EspressoDB aims to support the ever-increasing complexity of workflows of scientific computing at leadership computing facilities (LCFs), with the goal of reducing the amount of human time required to manage the jobs, thus giving scientists more time to focus on science.
 
 # Features
 Data integrity is important to scientific projects and becomes more challenging the larger the project.
 In general, a ``SQL`` framework type-checks data before writing to the database and controls dependencies and relations between different tables to ensure internal consistency.
- EspressoDB allows additional user-defined constraints not supported by ``SQL`` (*e.g.* unique constraints using information across related tables).
+EspressoDB allows additional user-defined constraints not supported by ``SQL`` (*e.g.* unique constraints using information across related tables).
 Once the user has specified a set of conditions that entries have to fulfill for each table, EspressoDB runs these cross-checks for new data before inserting them in the database.
 
 EspressoDB also supports collaborative and open-data oriented projects by leveraging and extending Django's web hosting component.
