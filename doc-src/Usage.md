@@ -1,7 +1,7 @@
 # How to use EspressoDB
 
 This section explains how to use EspressoDB to create projects and apps.
-It provides a wrapper interface for [`djangos` project creation](https://docs.djangoproject.com/en/2.2/intro/tutorial01/#creating-a-project) which streamlines the creation process.
+It provides a wrapper interface for [`djangos` project creation](https://docs.djangoproject.com/en/dev/intro/tutorial01/#creating-a-project) which streamlines the creation process.
 
 ## TL;DR
 1. [Install EspressoDB](#install-espressodb)
@@ -229,7 +229,7 @@ python manage.py runserver
 ```
 and visit [http://127.0.0.1:8000/documentation/my_app/](http://127.0.0.1:8000/documentation/my_app/).
 
-For implementing more sophisticated tables, see also the [django model documentation](https://docs.djangoproject.com/en/2.2/topics/db/models/).
+For implementing more sophisticated tables, see also the [django model documentation](https://docs.djangoproject.com/en/dev/topics/db/models/).
 
 
 ### Install your project locally
@@ -251,4 +251,4 @@ all_entries = MyTable.objects.all()
 for entry in all_entries:
     print(entry, entry.tag)
 ```
-See also the [django query docs](https://docs.djangoproject.com/en/2.2/topics/db/queries/) for more sophisticated options.
+See also the [django query docs](https://docs.djangoproject.com/en/dev/topics/db/queries/) for more sophisticated options.
