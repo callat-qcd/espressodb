@@ -47,8 +47,7 @@ def check_model_state():
     """Checks if the state of local models is represented by migration files.
 
     This code follows the logic of Djangos makemigrations
-    https://github.com/django/django/blob/master/
-        django/core/management/commands/makemigrations.py
+    https://github.com/django/django/blob/master/django/core/management/commands/makemigrations.py
 
     Raises:
         MigrationStateError: If the loader detects conflicts or unapplied changes.
@@ -56,9 +55,6 @@ def check_model_state():
     Future:
         It might be desirable to allow partial checks by, e.g., providing an app_labels
         argument.
-
-    Todo:
-        Tests fail if migration conflict and fail in model conflict
     """
 
     try:
@@ -89,8 +85,7 @@ def check_migration_state():
     """Checks if the state of local migrations is represented by the database.
 
     This code follows the logic of Djangos showmigrations
-    https://github.com/django/django/blob/master/
-        django/core/management/commands/showmigrations.py
+    https://github.com/django/django/blob/master/django/core/management/commands/showmigrations.py
 
     Raises:
         MigrationStateError: If the loader detects conflicts or unapplied changes.
@@ -139,8 +134,8 @@ def run_migration_checks():
     """Runs all migration checks at once
 
     In order:
-        1. check_model_state
-        2. check_migration_state
+        1. :py:meth:`espressodb.management.checks.migrations.check_model_state`
+        2. :py:meth:`espressodb.management.checks.migrations.check_migration_state`
 
     Raises:
         MigrationStateError: If the loader detects conflicts or unapplied changes.
