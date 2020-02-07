@@ -1,14 +1,14 @@
 # Django overview
-``EspressoDB`` utilizes Python's ``Django`` Object-Relational Mapping (ORM) framework.
+``EspressoDB`` utilizes Python's Django Object-Relational Mapping (ORM) framework.
 Tables correspond to Python classes, rows correspond to instances and columns correspond to attributes of the instances.
 Thus it is possible to filter for objects by their attributes or generate summary tables (``pandas.DataFrame``) within one line of code.
 Furthermore, using an ORM allows one to have the same interface independent of the backend.
 It is possible to store data in a file based `SQLite` solution, or use more scalable options like `MySQL` or `Postgresql`.
 
-``Django`` is part of many open-source projects and thus comes with extensive documentation.
-Additionally, ``Django`` is scalable, comes with reliable tests and vast community support which manifests in the fact that it is commonly  used in large scale projects (BitBucket, Instagram, Mozilla, NASA and many more).
-One guiding principle of ``EspressoDB`` is to not "re-invent the wheel" but instead leverage the support coming from ``Django``.
-As a result, one can easily incorporate many of ``Django``'s extensions and find solutions to technical questions online.
+Django is part of many open-source projects and thus comes with extensive documentation.
+Additionally, Django is scalable, comes with reliable tests and vast community support which manifests in the fact that it is commonly  used in large scale projects (BitBucket, Instagram, Mozilla, NASA and many more).
+One guiding principle of ``EspressoDB`` is to not "re-invent the wheel" but instead leverage the support coming from Django.
+As a result, one can easily incorporate many of Django's extensions and find solutions to technical questions online.
 
 # Lattice QCD use case
 
@@ -43,8 +43,8 @@ For example, in step 1, the table of gauge configurations is defined such that e
 This reflects how on disk, we have thousands of files, each containing a snapshot of the QCD vacuum, and as such, every file, and every subsequent file as a result of the gauge configuration (*e.g.* propagators or correlation functions in steps 2 through 6) can also be tracked individually.
 However, at the end of the calculation, an observable is only well defined with an ensemble of gauge configurations.
 ``LatteDB`` allows one to define an ensemble table, with a ``Django ManyToMany`` data type which may be interpreted as a single column containing a list of references (foreign keys) to the table of gauge configurations.
-In ``SQL``, a list of foreign keys is not a fundamental data type that is supported, and is only made possible with ``Django``.
-However, even with ``Django``, unique constraints can not be implemented on such a column.
+In ``SQL``, a list of foreign keys is not a fundamental data type that is supported, and is only made possible with Django.
+However, even with Django, unique constraints can not be implemented on such a column.
 With ``LatteDB``, we make it possible to define a unique constraint, which for this example, prohibits the user from inserting the exact same list of gauge configurations in the ensemble table more than once.
 Users are encouraged to consult the documentation of ``EspressoDB`` and examples in ``LatteDB`` for more information.
 

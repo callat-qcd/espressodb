@@ -42,7 +42,7 @@ A typical scientific computing workflow includes:
 4. Post-processing these data files;
 5. Performing data analysis on output.
 
-[``EspressoDB``](https://github.com/callat-qcd/espressodb/) is a programmatic object-relational data management framework implemented in Python and based on the [``Django`` web framework](https://www.djangoproject.com).
+[``EspressoDB``](https://github.com/callat-qcd/espressodb/) is a programmatic object-relational data management framework implemented in Python and based on the [Django web framework](https://www.djangoproject.com).
 ``EspressoDB`` was developed to streamline data management workflows, centralize and guarantee data integrity, while providing domain flexibility and ease of use.
 
 The framework provided by ``EspressoDB`` aims to support the ever-increasing complexity of workflows of scientific computing at leadership computing facilities (LCFs), with the goal of reducing the amount of human time required to manage the jobs, thus giving scientists more time to focus on science.
@@ -53,9 +53,9 @@ In general, a ``SQL`` framework type-checks data before writing to the database 
  ``EspressoDB`` allows additional user-defined constraints not supported by ``SQL`` (*e.g.* unique constraints using information across related tables).
 Once the user has specified a set of conditions that entries have to fulfill for each table, ``EspressoDB`` runs these cross-checks for new data before inserting them in the database.
 
-``EspressoDB`` also supports collaborative and open-data oriented projects by leveraging and extending ``Django``'s web hosting component.
+``EspressoDB`` also supports collaborative and open-data oriented projects by leveraging and extending Django's web hosting component.
 In addition to providing a centralized data platform, it is possible to spawn customized web pages which can be hosted locally or on the world wide web[^1].
-``EspressoDB`` simplifies creating projects by providing default ``Django`` configurations that set up, for example, connections to the database and webpages to view associated tables.
+``EspressoDB`` simplifies creating projects by providing default Django configurations that set up, for example, connections to the database and webpages to view associated tables.
 For example, with the default setting, ``EspressoDB`` spawns:
 
 * Documentation views of implemented tables;
