@@ -13,6 +13,8 @@ EspressoDB is a Python framework designed to organize (relational) data without 
 Its objective is to be intuitive and fast.
 
 More specifically, EspressoDB is built on top of the Object-Relational Mapping web framework [Django](https://docs.djangoproject.com) and adds additional convenience functionalities to easily set up your project.
+Additionally, EspressoDB provides an extended framework of data consistency checks, giving users the freedom to define data tables and their relationships which uniquely mirror the underlying computation.
+
 
 ## What does EspressoDB provide?
 
