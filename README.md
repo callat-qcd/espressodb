@@ -86,6 +86,11 @@ The core module of LatteDB, EspressoDB, is trying to address those challenges.
 * [@ckoerber](https://www.ckoerber.com) (Feel free to contact me for questions)
 * [@cchang5](https://github.com/cchang5)
 
+## Comparison to related technologies
+
+1. [SQLAlchemy](https://www.sqlalchemy.org) - SQLAlchemy is a minimal low-level Python-SQL interface. While it also provides an ORM (Data Mapper implementation), setting up projects, establishing access to the database and migrating changes are not automated and thus interfacing to an existing project is less beginner-friendly than, e.g., interfacing with an existing Django project.
+2. [Django](https://www.djangoproject.com) - Django is the parent of EspressoDB. It uses an active record implementation (direct correspondence between table rows and Python objects). While Django is intended to serve as a web framework, EspressoDB reinterprets and expands Django to be directly used in computational projects. To do so, EspressoDB streamlines the project creation, automates the setup components and provides additional cross-checks needed for multi-user scenarios.
+
 ## Contributing
 Thanks for your interest in contributing! There are many ways to contribute to this project.
 [Get started here](CONTRIBUTING.md).
