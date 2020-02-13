@@ -88,7 +88,10 @@ Summit at OLCF is disruptively fast compared to previous generations of leadersh
 LCFs prohibit the submission of millions of small tasks to their supercomputers (clogged queues, overtaxed service nodes, etc.).  It is imperative to have a task manager capable of bundling many tasks into large jobs while distributing the work to various components of the heterogeneous nodes;
 
 2. _Dependent task generation and data processing_:
-As an example, CalLat creates petabytes of temporary files that are written to the scratch file system, used for subsequent computations and ultimately processed down to hundreds of tera-bytes that are saved for analysis.
+The computational model for lattice QCD computations can be organized as a directed multi-graph:
+a single complete calculation requires tens-of-thousands to millions of independent MPI tasks to be completed and these tasks, while independent, have nested and chained interdependencies (the output of some tasks are part of the input for other tasks).
+In order to extrapolate the results of these computations to extract final answers, several such complete computations must be performed.
+In order to manage such computations on Leadership Class computing Facilities requires these tasks to be bundled together and run as a much smaller number of large jobs and to keep the nodes from going idle, the jobs must be backfilled while running with the next set of available tasks (item 1 above).  Keeping track of the tasks, optimizing the order of tasks and ensuring no work is repeated requires a task manger that understands all these dependencies and the uniqueness of each task.  Software to track and manage such a computational model at runtime, which does not require in-depth knowledge of managing databases, does not currently exist.  As a specific example, CalLat creates petabytes of temporary files that are written to the scratch file system, used for subsequent computations and ultimately processed down to hundreds of tera-bytes that are saved for analysis.
 It is essential to track the status of these files in real-time to identify corrupt, missing, or purgeable files.
 
 Members of CalLat are addressing issue 1 through the creation of job management software, [METAQ](https://github.com/evanberkowitz/metaq) [@Berkowitz:2017vcp], and ``MPI_JM`` [@Berkowitz:2018gqe; @Berkowitz:2017xna].
