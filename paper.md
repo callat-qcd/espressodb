@@ -53,12 +53,12 @@ The framework provided by EspressoDB aims to support the ever-increasing complex
 
 # Features
 Data integrity is important to scientific projects and becomes more challenging the larger the project.
-In general, a ``SQL`` framework type-checks data before writing to the database and controls dependencies and relations between different tables to ensure internal consistency.
-EspressoDB allows additional user-defined constraints not supported by ``SQL`` (*e.g.* unique constraints using information across related tables).
+In general, a SQL framework type-checks data before writing to the database and controls dependencies and relations between different tables to ensure internal consistency.
+EspressoDB allows additional user-defined constraints not supported by SQL (*e.g.* unique constraints using information across related tables).
 Once the user has specified a set of conditions that entries have to fulfill for each table, EspressoDB runs these cross-checks for new data before inserting them in the database.
 
 EspressoDB also supports collaborative and open-data oriented projects by leveraging and extending Django's ORM interface and web hosting component.
-The object oriented approach allows the whole team to determine table architectures without knowing ``SQL``.
+The object oriented approach allows the whole team to determine table architectures without knowing SQL.
 Once tables have been implemented by users familiar with the details of the EspressoDB project, additional users can access data without detailed knowledge of the project itself.
 In addition to providing a centralized data platform, it is possible to spawn customized web pages which can be hosted locally or on the world wide web[^1].
 EspressoDB simplifies creating projects by providing default Django configurations that set up, for example, connections to the database and webpages to view associated tables.
