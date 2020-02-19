@@ -204,12 +204,14 @@ Because the project is empty, nothing significant has changed thus far.
 To implement your first table, you must adjust the app models.
 E.g., to create a table which works with the EspressoDB default features, update `my_project/my_app/models.py` to
 ```python
+from django.db import models
 from espressodb.base.models import Base
 
 class MyTable(Base):
-    pass
+    i = models.IntegerField(help_text="An important integer")
 ```
-This implements a new model with the default columns provided by the EspressoDB base model (e.g., `user`, `last_modified`, `tag`).
+This implements a new model with the default columns provided by the EspressoDB base model (e.g., `user`, `last_modified`, `tag`) and adds an integer column called `i`.
+You can find more information about tables in EspressoDB in our [example project](example/project-creation/app-creation.md) or take a look at the [django models documentation](https://docs.djangoproject.com/en/dev/topics/db/models/) for a complete reference.
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -228,8 +230,6 @@ After this, you should be able to see a  _My Table_  entry within the documentat
 python manage.py runserver
 ```
 and visit [http://127.0.0.1:8000/documentation/my_app/](http://127.0.0.1:8000/documentation/my_app/).
-
-For implementing more sophisticated tables, see also the [django model documentation](https://docs.djangoproject.com/en/dev/topics/db/models/).
 
 
 ### Install your project locally
