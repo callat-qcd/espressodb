@@ -96,7 +96,7 @@ Both of them may contain passwords (`SECRET_KEY` in the `settings` and database 
 The `db-config.yaml` provides the `default` database option
 ```
 ENGINE: django.db.backends.sqlite3
-NAME: /path/to/project/my_project/db-config.yaml
+NAME: /path/to/project/my_project/my-project-db.sqlite
 ```
 The first option specifies the database backend.
 As default, it uses the file based `sqlite` database.
