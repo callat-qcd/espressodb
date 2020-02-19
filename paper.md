@@ -47,7 +47,8 @@ A typical scientific computing workflow includes:
 EspressoDB was developed to streamline data management, centralize and promote data integrity, while providing domain flexibility and ease of use.
 It is designed to directly integrate in utilized software to allow dynamical access to vast amount of relational data at runtime.
 Compared to existing ORM frameworks like [SQLAlchemy](https://www.sqlalchemy.org) or Django itself, EspressoDB lowers the barrier of access by simplifying the project setup and provides further features to satisfy uniqueness and consistency over multiple data dependencies.
-In contrast to software like [DVC](https://github.com/iterative/dvc), [Taverna](https://taverna.incubator.apache.org) or [VisTrails](https://www.vistrails.org/index.php/Main_Page) which describe the workflow of computations, EspressoDB rather interacts with data itself and thus can be used in a complementary spirit.
+In contrast to software like [DVC](https://github.com/iterative/dvc),
+[VisTrails](https://www.vistrails.org/index.php/Main_Page), or [Taverna](https://taverna.incubator.apache.org) [@10.1093/nar/gkt328], which describe the workflow of computations, EspressoDB rather interacts with data itself and thus can be used in a complementary spirit.
 
 The framework provided by EspressoDB aims to support the ever-increasing complexity of workflows of scientific computing at leadership computing facilities (LCFs), with the goal of reducing the amount of human time required to manage the jobs, thus giving scientists more time to focus on science.
 
