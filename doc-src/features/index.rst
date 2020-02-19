@@ -11,4 +11,6 @@ In this section we present
     :caption: Contents:
 
     consistency-checks
+    pre-save
+    init-checks
     model-specializations

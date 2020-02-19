@@ -42,7 +42,7 @@ Since we always expect to have the same mass, this mass is not a column but a in
 
 Also note that the `spacing` and `c` column values are cast to a float because they were stored as a `DecimalField`.
 
-To test if it works, start an IPython shell
+To test if it works, start a Python shell (by default, Django will use IPython or bpython if either is installed)
 ```bash
 python manage.py shell
 ```

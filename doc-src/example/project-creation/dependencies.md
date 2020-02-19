@@ -96,3 +96,13 @@ def main():
     print("Done")
 ```
 Running this script will compute all the eigenvalues.
+
+<div class="admonition warning">
+<p class="admonition-title">Note</p>
+<p>
+    EspressoDB automatically stores `user` and `last_modified` information for each entry.
+    In some cases it might be desirable to also store code revision information.
+    This can be done by specifying the `tag` column.
+    See also [the `pre_save` functionality.](../../features/pre-save.md).
+</p>
+</div>

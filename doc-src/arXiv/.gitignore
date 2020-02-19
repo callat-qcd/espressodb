@@ -1,0 +1,15 @@
+*.aux
+*.log
+*.out
+*.run.*
+*.pdf
+*.synctex.*
+*.bbl
+paper_body.tex
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+arXiv-blx.bib
+lattedb-example.png
+*.tgz

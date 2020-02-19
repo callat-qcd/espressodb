@@ -1,10 +1,12 @@
 % -------------------- Acknowledgement -------------------------
 %
 % This latex file is copied from that prepared by Matthew Pitkin
-% for his JOSS article: 
+% for his JOSS article:
 %     psrqpy: a python interface for querying the ATNF pulsar catalogue
 %     https://joss.theoj.org/papers/10.21105/joss.00538
 %     https://arxiv.org/abs/1806.07809
+%
+% With modifications to the bibtex, hypersetup
 % --------------------------------------------------------------
 \documentclass[10pt,a4paper,onecolumn]{article}
 \usepackage{marginnote}
@@ -15,32 +17,36 @@
 \usepackage{calc}
 \usepackage{tikz}
 \usepackage{hyperref}
-\hypersetup{colorlinks,breaklinks,
-            urlcolor=[rgb]{0.0, 0.5, 1.0},
-            linkcolor=[rgb]{0.0, 0.5, 1.0}}
+\hypersetup{
+    colorlinks=true,     % false: boxed links; true: colored links
+    linkcolor=blue,      % color of internal links
+    citecolor=blue,      % color of links to bibliography
+    filecolor=blue,      % color of file links
+    urlcolor=blue        % color of external links
+}
 \usepackage{caption}
 \usepackage{tcolorbox}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{seqsplit}
-\usepackage{fixltx2e} % provides \textsubscript
-\usepackage[
-  backend=biber,
+%\usepackage{fixltx2e} % provides \textsubscript
+%\usepackage[
+%  backend=bibtex,
 %  style=alphabetic,
 %  citestyle=numeric
-]{biblatex}
-\bibliography{paper.bib}
+%]{biblatex}
+%\bibliography{paper.bib}
 
 
 % --- Page layout -------------------------------------------------------------
-\usepackage[top=3.5cm, bottom=3cm, right=1.5cm, left=1.0cm,
-            headheight=2.2cm, reversemp, includemp, marginparwidth=4.5cm]{geometry}
+\usepackage[top=3.5cm, bottom=3cm, right=1.5cm, left=1.5cm,
+            headheight=2.2cm, reversemp, includemp, marginparwidth=4.0cm]{geometry}
 
 % --- Default font ------------------------------------------------------------
 % \renewcommand\familydefault{\sfdefault}
 
 % --- Style -------------------------------------------------------------------
-\renewcommand{\bibfont}{\small \sffamily}
+%\renewcommand{\bibfont}{\small \sffamily}
 \renewcommand{\captionfont}{\small\sffamily}
 \renewcommand{\captionlabelfont}{\bfseries}
 
@@ -67,9 +73,8 @@
 \fancyhead[L]{\hspace{-0.75cm}\includegraphics[width=5.5cm]{joss-logo.png}}
 \fancyhead[C]{}
 \fancyhead[R]{}
-\renewcommand{\footrulewidth}{0.25pt}
+%\renewcommand{\footrulewidth}{0.25pt}
 
-\fancyfoot[L]{\footnotesize{\sffamily Pitkin, (2018). psrqpy: a python interface for querying the ATNF pulsar catalogue. \textit{Journal of Open Source Software}, 3(22), 538. \href{https://doi.org/10.21105/joss.00538}{https://doi.org/10.21105/joss.00538}}}
 
 
 \fancyfoot[R]{\sffamily \thepage}
@@ -150,9 +155,9 @@
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
 
-\usepackage{hyperref}
+%\usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={psrqpy: a python interface for querying the ATNF pulsar catalogue},
+            pdftitle={EspressoDB: A scientific database for managing high-performance computing workflows.},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -188,14 +193,17 @@
 \title{EspressoDB: A scientific database for managing high-performance computing workflow}
 
         \author[1,2,3]{Chia Cheng Chang}
-        \author[2,3]{Christopher K{\"o}rber}
+        \author[2,3$\dagger$]{Christopher K{\"o}rber}
         \author[3,2]{Andr{\'e}~Walker-Loud}
-    
+
       \affil[1]{iTHEMS RIKEN, Wako, Saitama 351-0198, Japan}
       \affil[2]{Department of Physics, University of California, Berkeley, California 94720, USA}
       \affil[3]{Nuclear Science Division, Lawrence Berkeley National Laboratory, Berkeley, California 94720}
+      \affil[$\dagger$]{\textit {\href{mailto:software@ckoerber.com}{software@ckoerber.com}}}
 
   \date{\vspace{-5ex}}
+
+
 
 \begin{document}
 \maketitle
@@ -204,31 +212,43 @@
   %\hrule
   \sffamily\small
 
-  {\bfseries DOI:} \href{XXX}{\color{linky}{XXX}}
+  %{\bfseries DOI:} \href{XXX}{\color{linky}{TBD}}
 
   \vspace{2mm}
 
   {\bfseries Software}
   \begin{itemize}
     \setlength\itemsep{0em}
-    \item \href{XXX}{\color{linky}{Review}} \ExternalLink
-    \item \href{https://github.com/callat-qcd/espressodb}{\color{linky}{Repository}} \ExternalLink
-    \item \href{https://github.com/callat-qcd/lattedb}{\color{linky}{Repository}} \ExternalLink
-    \item \href{XXX}{\color{linky}{Archive}} \ExternalLink
+    \item \href{https://github.com/openjournals/joss-reviews/issues/1936}{\color{linky}{Review}} \ExternalLink
+    \item \href{https://github.com/callat-qcd/espressodb}{\color{linky}{EspressoDB}} \ExternalLink
+    \item \href{https://github.com/callat-qcd/lattedb}{\color{linky}{LattedDB}} \ExternalLink
   \end{itemize}
+
+
 
   \vspace{2mm}
 
-  {\bfseries Submitted:} XX December 2019\\
-  {\bfseries Published:} XX XXX 20XX
+  {\bfseries Submitted:} 06 Dec. 2019\\
+  %{\bfseries Published:} XX XXX 20XX
 
   \vspace{2mm}
   {\bfseries Licence}\\
   Authors of papers retain copyright and release the work under a Creative Commons Attribution 4.0 International License (\href{http://creativecommons.org/licenses/by/4.0/}{\color{linky}{CC-BY}}).
 }
 
-
+%---------------------------------------------------------
+% Main body
 \input{paper_body}
+
+%---------------------------------------------------------
+% bib file
+
+\bibliography{paper}
+\bibliographystyle{ieeetr}
+
+\appendix
+\input{use-case}
+
 
 
 \end{document}

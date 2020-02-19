@@ -36,20 +36,28 @@ jobs:
               working-directory: ./example/my_project/
               run: pytest
 
-            - name: Run m2m tests
-              working-directory: ./example/espressodb_tests/
+            - name: Run espressodb tests
+              working-directory: ./tests/espressodb_tests/
               run: pytest
 
+            - name: Run migration check tests
+              working-directory: ./tests/migration_tests/
+              run: |
+                pytest tests/test_state1.py
+                pytest tests/test_state2.py
+                pytest tests/test_state3.py
+                pytest tests/test_state4.py
+
             - name: Run create new project
-              working-directory: ./example/
+              working-directory: ./tests/
               run: espressodb startproject espressodb_new_test
 
             - name: Test new project
-              working-directory: ./example/espressodb_new_test/
+              working-directory: ./tests/espressodb_new_test/
               run: python manage.py test
 
             - name: Run start app
-              working-directory: ./example/espressodb_new_test/
+              working-directory: ./tests/espressodb_new_test/
               run: |
                 python manage.py startapp new_app
                 echo "" >> espressodb_new_test/new_app/models.py
@@ -59,5 +67,5 @@ jobs:
                 python manage.py makemigrations
 
             - name: Test new project app
-              working-directory: ./example/espressodb_new_test/
+              working-directory: ./tests/espressodb_new_test/
               run: python manage.py test

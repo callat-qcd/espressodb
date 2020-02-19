@@ -16,7 +16,7 @@ App `hamiltonian` was successfully created. In order to install it
 ```
 
 This will create the folder structure for the `my_project.hamiltonian` submodule.
-To let django know that you want to include this app in your project, modify `settings.yaml` to
+To let Django know that you want to include this app in your project, modify `settings.yaml` to
 ```
 SECRET_KEY: "{sup3r-secr3t-p4ssw0rd}"
 PROJECT_APPS:

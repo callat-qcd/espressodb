@@ -1,7 +1,7 @@
 # How to use EspressoDB
 
 This section explains how to use EspressoDB to create projects and apps.
-It provides a wrapper interface for [`djangos` project creation](https://docs.djangoproject.com/en/2.2/intro/tutorial01/#creating-a-project) which streamlines the creation process.
+It provides a wrapper interface for [`djangos` project creation](https://docs.djangoproject.com/en/dev/intro/tutorial01/#creating-a-project) which streamlines the creation process.
 
 ## TL;DR
 1. [Install EspressoDB](#install-espressodb)
@@ -96,7 +96,7 @@ Both of them may contain passwords (`SECRET_KEY` in the `settings` and database 
 The `db-config.yaml` provides the `default` database option
 ```
 ENGINE: django.db.backends.sqlite3
-NAME: /path/to/project/my_project/db-config.yaml
+NAME: /path/to/project/my_project/my-project-db.sqlite
 ```
 The first option specifies the database backend.
 As default, it uses the file based `sqlite` database.
@@ -120,16 +120,16 @@ Django provides an interface to manage the communication with the database witho
 Specifically, you can program Python classes, which specify a given table layout, and know how to talk to a database.
 This concept is called Object-Relational Mapping (ORM).
 These classes are called models and have a one-to-one correspondence to tables within the database.
-By default django provides a few basic models like the `User` class.
+By default Django provides a few basic models like the `User` class.
 
 Updating the database with new tables or modifying old ones is a crucial step.
 If the Python backend encounters tables which do not match what the user specified, this could cause the ORM to fail.
-To ensure table and code updates are executed in a consistent way django, implements the following two-step procedure:
+To ensure table and code updates are executed in a consistent way Django, implements the following two-step procedure:
 
 #### Create migrations
-Once the Python models have been updated, django identifies a strategy how the existing tables within the DB must be adjusted to match the new specifications.
+Once the Python models have been updated, Django identifies a strategy how the existing tables within the DB must be adjusted to match the new specifications.
 E.g., if a column was added, how to populate old entries which did not have this column yet.
-If a change is implemented which needs user input, django will ask you how to proceed.
+If a change is implemented which needs user input, Django will ask you how to proceed.
 This update strategy will be summarized in a `migration` file.
 You start this procedure by running
 ```
@@ -149,7 +149,7 @@ python manage.py migrate
 
 After successfully migrating new or updated models, you are good to go and can for example [launch a web app](#launch-a-local-web-app).
 
-For further [migration strategies, see also the django docs](https://docs.djangoproject.com/en/dev/topics/migrations/).
+For further [migration strategies, see also the Django docs](https://docs.djangoproject.com/en/dev/topics/migrations/).
 
 ### Launch a local web app
 Django provides an easy interface to launch a local web server.
@@ -204,17 +204,19 @@ Because the project is empty, nothing significant has changed thus far.
 To implement your first table, you must adjust the app models.
 E.g., to create a table which works with the EspressoDB default features, update `my_project/my_app/models.py` to
 ```python
+from django.db import models
 from espressodb.base.models import Base
 
 class MyTable(Base):
-    pass
+    i = models.IntegerField(help_text="An important integer")
 ```
-This implements a new model with the default columns provided by the EspressoDB base model (e.g., `user`, `last_modified`, `tag`).
+This implements a new model with the default columns provided by the EspressoDB base model (e.g., `user`, `last_modified`, `tag`) and adds an integer column called `i`.
+You can find more information about tables in EspressoDB in our [example project](example/project-creation/app-creation.md) or take a look at the [Django models documentation](https://docs.djangoproject.com/en/dev/topics/db/models/) for a complete reference.
 
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>
-    Note that you have to replace <code>models.Model</code> with EspressoDB's <code>Base</code>. <code>Base</code> derives from django's default <code>models.Model</code> but provides further features needed by EspressoDB.
+    Note that you have to replace <code>models.Model</code> with EspressoDB's <code>Base</code>. <code>Base</code> derives from Django's default <code>models.Model</code> but provides further features needed by EspressoDB.
 </p>
 </div>
 
@@ -228,8 +230,6 @@ After this, you should be able to see a  _My Table_  entry within the documentat
 python manage.py runserver
 ```
 and visit [http://127.0.0.1:8000/documentation/my_app/](http://127.0.0.1:8000/documentation/my_app/).
-
-For implementing more sophisticated tables, see also the [django model documentation](https://docs.djangoproject.com/en/2.2/topics/db/models/).
 
 
 ### Install your project locally
@@ -251,4 +251,4 @@ all_entries = MyTable.objects.all()
 for entry in all_entries:
     print(entry, entry.tag)
 ```
-See also the [django query docs](https://docs.djangoproject.com/en/2.2/topics/db/queries/) for more sophisticated options.
+See also the [Django query docs](https://docs.djangoproject.com/en/dev/topics/db/queries/) for more sophisticated options.
