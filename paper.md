@@ -12,7 +12,7 @@ authors:
   - name: Christopher Körber
     orcid: 0000-0002-9271-8022
     affiliation: "2, 3"
-  - name: André~Walker-Loud
+  - name: André&#160;Walker-Loud
     orcid: 0000-0002-4686-3667
     affiliation: "3, 2"
 affiliations:
