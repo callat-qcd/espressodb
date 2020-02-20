@@ -1,0 +1,38 @@
+{
+    "description": "EspressoDB is a programmatic object-relational mapping (ORM) data management framework implemented in Python and based on the Django web framework. EspressoDB was developed to streamline data management, centralize and promote data integrity, while providing domain flexibility and ease of use. It is designed to directly integrate in utilized software to allow dynamical access to vast amount of relational data at runtime.",
+    "license": "BSD-3-Clause",
+    "title": "EspressoDB: A scientific database for managing high-performance computing workflows",
+    "version": "v1.1.0",
+    "upload_type": "software",
+    "publication_date": "2020-02-19",
+    "creators": [
+        {
+            "affiliation": "iTHEMS RIKEN, UC Berkeley, Lawrence Berkeley National Laboratory",
+            "name": "Chia Cheng Chang",
+            "orcid": "0000-0002-3790-309X"
+        },
+        {
+            "affiliation": "UC Berkeley, Lawrence Berkeley National Laboratory",
+            "name": "Christopher Körber",
+            "orcid": "0000-0002-9271-8022"
+        },
+        {
+            "affiliation": "Lawrence Berkeley National Laboratory, UC Berkeley",
+            "name": "André Walker-Loud",
+            "orcid": "0000-0002-4686-3667"
+        },
+    ],
+    "keywords": [
+        "Data Management",
+        "High-Performance Computing",
+        "Open-Source Software"
+    ]
+    "access_right": "open",
+    "related_identifiers": [
+        {
+            "scheme": "url",
+            "identifier": "https://github.com/callat-qcd/espressodb/tree/v1.1.0",
+            "relation": "isSupplementTo"
+        }
+    ]
+}
