@@ -2,6 +2,7 @@
 [![PyPI Version](https://img.shields.io/pypi/v/espressodb)](https://pypi.org/project/espressodb/)
 [![Tests](https://github.com/callat-qcd/espressodb/workflows/Tests/badge.svg)](https://github.com/callat-qcd/espressodb/actions)
 [![Documentation Status](https://readthedocs.org/projects/espressodb/badge/?version=latest)](https://espressodb.readthedocs.io/en/latest/?badge=latest)
+[![Publication](https://joss.theoj.org/papers/d0342f15684b9a464faed7c59784f734/status.svg)](https://joss.theoj.org/papers/d0342f15684b9a464faed7c59784f734)
 
 
 
