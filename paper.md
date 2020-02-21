@@ -97,7 +97,7 @@ It is essential to track the status of these files in real-time to identify corr
 Understandably, LCFs prohibit the submission of millions of small tasks to their supercomputers (clogged queues, overtaxed service nodes, etc.).
 It is therefore imperative to have a task manager capable of bundling many tasks into large jobs while distributing the work to various components of the heterogeneous nodes;
 To keep the nodes from going idle, the jobs must be backfilled while running with the next set of available tasks (item 1).
-Members of CalLat are addressing the task bundling through the creation of job management software, [METAQ](https://github.com/evanberkowitz/metaq) [@Berkowitz:2017vcp], and ``MPI_JM`` [@Berkowitz:2018gqe; @Berkowitz:2017xna], while
+Members of CalLat are addressing the task bundling through the creation of job management software, [METAQ](https://github.com/evanberkowitz/metaq) [@Berkowitz:2017vcp], and ``MPI_JM`` [@8665785; @Berkowitz:2017xna], while
 LatteDB is designed to address the dependent task generation.
 A future feature of LatteDB  is integration with ``MPI_JM``.
 
