@@ -30,7 +30,7 @@ bibliography: paper.bib
 
 # Summary
 
-Leadership computing facilities around the world support cutting-edge scientific research across a broad spectrum of disciplines including understanding climate change [@Kurth_2018], combating opioid addiction [@Joubert:2018:AOE:3291656.3291732], or simulating the decay of a neutron [@Berkowitz:2018gqe].
+Leadership computing facilities around the world support cutting-edge scientific research across a broad spectrum of disciplines including understanding climate change [@Kurth_2018], combating opioid addiction [@Joubert:2018:AOE:3291656.3291732], or simulating the decay of a neutron [@8665785].
 While the increase in computational power has allowed scientists to better evaluate the
 underlying model, the size of these computational projects has grown to a point where
 a framework is desired to facilitate managing the workflow.
