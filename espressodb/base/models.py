@@ -45,14 +45,14 @@ class Base(models.Model):
         auto_now=True, help_text="Date the class was last modified"
     )
     #: User who updated this object. Set on save by connection to database.
-    #: Ananymous if not found.
+    #: Anonymous if not found.
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         null=True,
         blank=True,
         help_text="User who updated this object. Set on save by connection to database."
-        " Ananymous if not found.",
+        " Anonymous if not found.",
     )
     #: User defined tag for easy searches
     tag = models.CharField(
@@ -223,7 +223,7 @@ class Base(models.Model):
             if username:
                 self.user, _ = User.objects.get_or_create(username=username)
             else:
-                self.user, _ = User.objects.get_or_create(username="ananymous")
+                self.user, _ = User.objects.get_or_create(username="anonymous")
 
         if self != self.specialization and not save_instance_only:
             self.specialization.save(*args, **kwargs)
