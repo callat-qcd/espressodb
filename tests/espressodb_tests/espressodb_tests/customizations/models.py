@@ -20,8 +20,4 @@ class CB(Base):
     """First many to many class
     """
 
-    def __str__(self):
-        return f"B(pk={self.pk})"
-
-    def __repr__(self):
-        return str(self)
+    value = models.IntegerField(null=True)
