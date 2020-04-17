@@ -104,7 +104,7 @@ class ListViewAdmin(admin.ModelAdmin):
         return str(obj)
 
 
-def register_admins(app_name: str):
+def register_admins(app_name: str, exclude_models: Optional[List[str]] = None):
     """Tries to load all models from this app and registers :class:`ListViewAdmin` sites.
 
     Arguments:
@@ -112,11 +112,14 @@ def register_admins(app_name: str):
 
     Calls :meth:`admin.site.register` for all models within the specified app.
     """
+    exclude_models = exclude_models or []
+
     apps = [app for app in get_project_apps() if app.name == app_name]
 
     if len(apps) == 1:
         for model in apps[0].get_models():
-            admin.site.register(model, ListViewAdmin)
+            if model.__name__ not in exclude_models:
+                admin.site.register(model, ListViewAdmin)
     else:
         LOGGER.warning(
             "Was not able to locate app `%s`."
