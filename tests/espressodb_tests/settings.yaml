@@ -3,5 +3,6 @@ PROJECT_APPS:
     - espressodb_tests.m2mtests
     - espressodb_tests.pre_save_tests
     - espressodb_tests.init_check_tests
+    - espressodb_tests.customizations
 ALLOWED_HOSTS: ["testserver", "localhost", "127.0.0.1"]
 DEBUG: True
