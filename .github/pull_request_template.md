@@ -15,7 +15,7 @@ Feel free to reach out if you have questions.*
 
 - [ ] I have read the [CONTRIBUTING](https://github.com/callat-qcd/espressodb/blob/master/CONTRIBUTING.md) doc
 - [ ] Existing unit tests pass locally with my changes
-- [ ] I have added unit tests that prove my that my feature works
+- [ ] I have added unit tests that prove that my feature works
 - [ ] I have added necessary documentation
 
 ## Further comments
