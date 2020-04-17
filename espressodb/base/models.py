@@ -193,16 +193,14 @@ class Base(models.Model):
                 for field in self.get_open_fields()
                 if not isinstance(field, models.ForeignKey)
                 and not isinstance(field, models.ManyToManyField)
-                and getattr(self, field.name)
+                and getattr(self, field.name) is not None
             }
             base = (
                 f"[{self.__class__.mro()[1].__name__}]"
                 if type(self) != Base  # pylint: disable=C0123
                 else ""
             )
-            info = ", ".join(
-                [f"{key}={val}" for key, val in kwargs.items() if val is not None]
-            )
+            info = ", ".join([f"{key}={val}" for key, val in kwargs.items()])
             info_str = f"({info})" if info else ""
             out = f"{self.__class__.__name__}{base}{info_str}"
         else:
