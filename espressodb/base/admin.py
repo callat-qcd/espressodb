@@ -109,6 +109,8 @@ def register_admins(app_name: str, exclude_models: Optional[List[str]] = None):
 
     Arguments:
         app_name: The name of the app.
+        exclude_models: Models contained in this app which should not appear on the admin
+            page. Uses the class name of the model.
 
     Calls :meth:`admin.site.register` for all models within the specified app.
     """
