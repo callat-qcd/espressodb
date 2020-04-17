@@ -8,6 +8,8 @@ from unittest.mock import patch
 from django.contrib.auth.models import User
 from django.test import TestCase
 
+from bs4 import BeautifulSoup
+
 from espressodb_tests.customizations.models import CB
 
 LOGGER = getLogger("espressodb")
@@ -84,3 +86,43 @@ class BaseStringTest(TestCase):
         with patch.object(CB, "__str__", new=new_str):
             b = CB(value=1).save()
             self.assertEqual(str(b), new_str(b))
+
+
+class NavbarLinkTest(TestCase):
+    """Checks for extending the navbar template
+    """
+
+    def test_01_template_used(self):
+        """Checks if correct template is used
+        """
+        url = ""
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTemplateNotUsed(response, "customized-index.html")
+        self.assertTemplateUsed(response, "index.html")
+
+        url = "/customizations/"
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+
+        self.assertTemplateUsed(response, "customized-index.html")
+        self.assertTemplateNotUsed(response, "index.html")
+
+    def test_02_navbar_items(self):
+        """Checks if the customized navbar only shows the Index link
+        """
+        url = "/customizations/"
+        response = self.client.get(url)
+
+        soup = BeautifulSoup(response.content)
+        customized_links = [
+            a.text
+            for a in soup.find("ul").find_all("a")
+            if not "dropdown-toggle" in a.attrs.get("class", [])
+        ]
+
+        self.assertEqual(len(customized_links), 1)
+        self.assertEqual(customized_links[0], "Index")
