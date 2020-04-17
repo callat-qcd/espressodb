@@ -28,6 +28,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            {% block nav %}
             <!-- Brand -->
             <a class="navbar-brand" href="{% url 'base:index' %}">
                 <img src="{% static 'logo.svg' %}" alt="{% project_name %}" style="height: 35px" class="align-top">
@@ -38,7 +39,11 @@
             <!-- Links -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
+                    {% block nav-app-links %}
                     {% render_link_list %}
+                    {% endblock nav-app-links %}
+                    {% block nav-default-links %}
+                    {% render_documentation_links %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'base:populate' %}">
                             <i class="fas fa-plus mx-1"></i>Populate
@@ -52,6 +57,7 @@
                         </a>
                     </li>
                     {% endif %}
+                    {% endblock nav-default-links %}
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated %}
@@ -68,6 +74,7 @@
                     {% endif %}
                 </ul>
             </div>
+            {% endblock nav %}
         </nav>
     </header>
     <main role="main">
