@@ -1,0 +1,12 @@
+{% if documentation %}
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        <i class="fas fa-book mx-1"></i>Documentation
+    </a>
+    <div class="dropdown-menu">
+        {% for app_slug, app_name in documentation %}
+        <a class="dropdown-item" href="{% url 'documentation:details' app_slug %}">{{app_name}}</a>
+        {% endfor%}
+    </div>
+</li>
+{% endif %}
