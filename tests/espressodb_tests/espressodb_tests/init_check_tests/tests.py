@@ -24,7 +24,7 @@ class RunCheckTest(TestCase):
         """Sets the ESPRESSODB_INIT_CHECKS environment variable to zero to check if
         run_all_checks is called.
         """
-        os.environ.pop("ESPRESSODB_INIT_CHECKS")
+        os.environ.pop("ESPRESSODB_INIT_CHECKS", None)
 
         importlib.reload(espressodb_tests)
 
