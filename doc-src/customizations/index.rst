@@ -16,7 +16,7 @@ For example `my_project/hamiltonian/admin.py` file looks like
 
     register_admins("my_project.hamiltonian")
 
-Adding the :code:`exclude_models` key word argument to the method, prevents rendering models in the admin page.
+Adding the :code:`exclude_models` keyword argument to the method, prevents rendering models in the admin page.
 
 This feature can be used to customize your admin view for a specific model
 
