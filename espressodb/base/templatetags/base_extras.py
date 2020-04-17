@@ -24,10 +24,10 @@ register = template.Library()  # pylint: disable=C0103
 
 
 @register.inclusion_tag("link-list.html")
-def render_link_list(  # pylint: disable=R0914
+def render_link_list(
     exclude=("", "populate", "populate-result", "admin", "documentation")
-) -> Dict[str, Tuple[str, str]]:
-    """Renders all app and documentation page links
+) -> List[Tuple[str, str]]:
+    """Renders all app page links
 
     Arguments:
         exclude: The link names to exclude.
@@ -81,15 +81,30 @@ def render_link_list(  # pylint: disable=R0914
         else:
             urls[app_name] = [(link_name, reverse_name)]
 
+    context = {"urls": urls}
+
+    return context
+
+
+@register.inclusion_tag("documentation-links.html")
+def render_documentation_links() -> List[Tuple[str, str]]:
+    """Renders all app documentation page links
+
+    Returns:
+        Context with keys ``urls`` and ``documentation`` where each value is a list
+        of Tuples with the reverse url name and display name.
+
+    Ignores urls which do not result in a match.
+
+    Uses the template ``documentation-links.html``.
+    """
     documentation = []
 
     if "espressodb.documentation" in settings.INSTALLED_APPS:
         for app_slug, app in get_apps_slug_map().items():
             documentation.append((app_slug, get_app_name(app)))
 
-    context = {"urls": urls, "documentation": documentation}
-
-    return context
+    return {"documentation": documentation}
 
 
 def render_field(field: Field, instance_name: Optional[str] = None) -> str:
