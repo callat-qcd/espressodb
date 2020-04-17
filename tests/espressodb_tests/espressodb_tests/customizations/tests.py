@@ -3,9 +3,12 @@
 """
 from logging import getLogger
 
+from unittest.mock import patch
+
 from django.contrib.auth.models import User
 from django.test import TestCase
 
+from espressodb_tests.customizations.models import CB
 
 LOGGER = getLogger("espressodb")
 
@@ -45,3 +48,39 @@ class AminPageTest(TestCase):
         admin_models = app_context_data[0]["models"]
         self.assertEqual(len(admin_models), 1)
         self.assertEqual(admin_models[0]["object_name"], "CB")
+
+
+class BaseStringTest(TestCase):
+    """
+    """
+
+    def test_01_default_str(self):
+        """Test EspressoDB string
+
+        The class `CB` does not implement a default string.
+        Thus one would expect the default espressodb behavior.
+        """
+
+        # Test string for value which does not default to False
+        b = CB(value=1).save()
+        self.assertEqual(str(b), f"CB[Base](value={b.value})")
+
+        # Test string for value which defaults to False
+        b = CB(value=0).save()
+        self.assertEqual(str(b), f"CB[Base](value={b.value})")
+
+        # Test string for value which defaults to None
+        b = CB(value=None).save()
+        self.assertEqual(str(b), f"CB[Base]")
+
+    def test_02_str_overload(self):
+        """Test EspressoDB string
+
+        The class `CB` does not implement a default string.
+        Thus one would expect the default espressodb behavior.
+        """
+        new_str = lambda obj: f"CB->value: {obj.value}"
+
+        with patch.object(CB, "__str__", new=new_str):
+            b = CB(value=1).save()
+            self.assertEqual(str(b), new_str(b))
