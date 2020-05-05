@@ -10,11 +10,12 @@ paper_body.tex: ../../paper.md
 	cp ../../paper.md paper.tex.md
 	sed -i.bak 's/\[@Kurth_2018]/\\cite{Kurth_2018}/' paper.tex.md
 	sed -i.bak 's/\[@Joubert:2018:AOE:3291656.3291732]/\\cite{Joubert:2018:AOE:3291656.3291732}/' paper.tex.md
-	sed -i.bak 's/\[@Berkowitz:2018gqe]/\\cite{Berkowitz:2018gqe}/' paper.tex.md
+	sed -i.bak 's/\[@8665785]/\\cite{8665785}/' paper.tex.md
 	sed -i.bak 's/\[@incite:2019; @incite:2020]/\\cite{incite:2019,incite:2020}/' paper.tex.md
 	sed -i.bak 's/\[@Nicholson:2018mwc; @Chang:2018uxx]/\\cite{Nicholson:2018mwc,Chang:2018uxx}/' paper.tex.md
 	sed -i.bak 's/\[@Berkowitz:2017vcp]/\\cite{Berkowitz:2017vcp}/' paper.tex.md
-	sed -i.bak 's/\[@Berkowitz:2018gqe; @Berkowitz:2017xna]/\\cite{Berkowitz:2018gqe,Berkowitz:2017xna}/' paper.tex.md
+	sed -i.bak 's/\[@8665785; @Berkowitz:2017xna]/\\cite{8665785,Berkowitz:2017xna}/' paper.tex.md
+	sed -i.bak 's/\[@10.1093\/nar\/gkt328]/\\cite{10.1093\/nar\/gkt328}/' paper.tex.md
 	sed -i.bak 's/# References//' paper.tex.md
 	pandoc -t latex -o paper_body.tex paper.tex.md
 	sed -i.bak 's:doc-src/_static/lattedb-example.png:lattedb-example.png:' paper_body.tex
