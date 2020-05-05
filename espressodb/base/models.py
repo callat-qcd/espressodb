@@ -45,14 +45,14 @@ class Base(models.Model):
         auto_now=True, help_text="Date the class was last modified"
     )
     #: User who updated this object. Set on save by connection to database.
-    #: Ananymous if not found.
+    #: Anonymous if not found.
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         null=True,
         blank=True,
         help_text="User who updated this object. Set on save by connection to database."
-        " Ananymous if not found.",
+        " Anonymous if not found.",
     )
     #: User defined tag for easy searches
     tag = models.CharField(
@@ -187,22 +187,25 @@ class Base(models.Model):
     def __str__(self) -> str:
         """Verbose description of instance name, parent and column values.
         """
-        specialization = self.specialization
-        kwargs = {
-            field.name: getattr(specialization, field.name)
-            for field in specialization.get_open_fields()
-            if not isinstance(field, models.ForeignKey)
-            and not isinstance(field, models.ManyToManyField)
-            and getattr(specialization, field.name)
-        }
-        base = (
-            f"[{specialization.__class__.mro()[1].__name__}]"
-            if type(specialization) != Base  # pylint: disable=C0123
-            else ""
-        )
-        info = ", ".join([f"{key}={val}" for key, val in kwargs.items() if val])
-        info_str = f"({info})" if info else ""
-        return f"{specialization.__class__.__name__}{base}{info_str}"
+        if self == self.specialization:
+            kwargs = {
+                field.name: getattr(self, field.name)
+                for field in self.get_open_fields()
+                if not isinstance(field, models.ForeignKey)
+                and not isinstance(field, models.ManyToManyField)
+                and getattr(self, field.name) is not None
+            }
+            base = (
+                f"[{self.__class__.mro()[1].__name__}]"
+                if type(self) != Base  # pylint: disable=C0123
+                else ""
+            )
+            info = ", ".join([f"{key}={val}" for key, val in kwargs.items()])
+            info_str = f"({info})" if info else ""
+            out = f"{self.__class__.__name__}{base}{info_str}"
+        else:
+            out = self.specialization.__str__()
+        return out
 
     def save(  # pylint: disable=W0221
         self, *args, save_instance_only: bool = False, **kwargs,
@@ -223,7 +226,7 @@ class Base(models.Model):
             if username:
                 self.user, _ = User.objects.get_or_create(username=username)
             else:
-                self.user, _ = User.objects.get_or_create(username="ananymous")
+                self.user, _ = User.objects.get_or_create(username="anonymous")
 
         if self != self.specialization and not save_instance_only:
             self.specialization.save(*args, **kwargs)

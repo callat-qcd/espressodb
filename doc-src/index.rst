@@ -18,5 +18,6 @@ Welcome to the documentation of `EspressoDB` -- an open source Python package fo
    example/index
    faq
    features/index
+   customizations/index
    api/index
    CONTRIBUTING
