@@ -70,7 +70,7 @@ def render_documentation(app_slug: str, model_slug: str):
         context["name"] = model.__name__
         context["module"] = model.__module__
         context["doc"] = convert_string(model.__doc__, wrap_blocks=True)
-        context["base"] = model.__base__
+        context["base"] = str(model.__base__.__name__)
         # For the rare case where a field name is items, prefer this key val iteration
         context["columns"] = [(key, val) for key, val in fields.items()]
 
