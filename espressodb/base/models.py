@@ -150,7 +150,7 @@ class Base(models.Model):
         """
 
     def clean(self):
-        """Calls super clean, check_consistency and check_m2m_consistency.
+        """Calls super clean, check_consistency.
 
         Consistency errors are wrapped as validation errors.
         This ensures consistencies are properly captured in form validations and do not
@@ -159,7 +159,6 @@ class Base(models.Model):
         super().clean()
         try:
             self.check_consistency()
-            self.check_m2m_consistency()
         except Exception as error:
             raise ValidationError(message=str(error), params={"instance": self})
 
