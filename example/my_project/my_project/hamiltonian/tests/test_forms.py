@@ -34,7 +34,7 @@ class EigenvalueTest(TestCase):
             1. Form is_valid method calls check_consistency with expected arguments
         """
         data = {
-            "hamiltonian": self.hamiltonian,
+            "hamiltonian": self.hamiltonian.pk,
             "n_level": 0,
             "value": Decimal("0.0"),
         }
@@ -53,11 +53,12 @@ class EigenvalueTest(TestCase):
             2. Form is_valid method raises error if inconsistent as validation error
         """
         data = {
-            "hamiltonian": self.hamiltonian,
+            "hamiltonian": self.hamiltonian.pk,
             "n_level": 0,
             "value": Decimal("0.0"),
         }
-        self.assertTrue(EigenValueForm(data).is_valid())
+        form = EigenValueForm(data)
+        self.assertTrue(form.is_valid())
 
         data["n_level"] = 20
         form = EigenValueForm(data)
