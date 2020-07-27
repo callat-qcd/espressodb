@@ -26,7 +26,7 @@ class MigrationTest(ProjectSetup, TestCase):
     def test_02_migration_state():
         """Checks if all migrations agree with database state
         """
-        check_migration_state()
+        check_migration_state(exclude=["auth"])
 
 
 if __name__ == "__main__":
