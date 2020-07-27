@@ -19,6 +19,7 @@ from django.template.defaultfilters import slugify
 from django.db.models.fields import Field
 from django.urls import reverse, Resolver404
 from django.apps.config import AppConfig
+from django.core.exceptions import ValidationError
 
 from django_pandas.managers import DataFrameManager
 
@@ -147,6 +148,19 @@ class Base(models.Model):
 
         Raise errors here if the model must fulfill checks.
         """
+
+    def clean(self):
+        """Calls super clean, check_consistency.
+
+        Consistency errors are wrapped as validation errors.
+        This ensures consistencies are properly captured in form validations and do not
+        raise errors berfore.
+        """
+        super().clean()
+        try:
+            self.check_consistency()
+        except Exception as error:
+            raise ValidationError(message=str(error), params={"instance": self})
 
     def pre_save(self):
         """Method is called before save and before check consistency.
