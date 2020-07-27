@@ -209,11 +209,12 @@ class M2MTest(TransactionTestCase):  # pylint: disable=R0902
                 model = D
                 fields = ["a_set"]
 
-        form = DForm({"a_set": [self.a1]})
+        form = DForm({"a_set": [self.a1.pk]})
         self.assertTrue(form.is_valid())
 
         a3 = A.objects.create()
 
-        form = DForm({"a_set": [self.a2, a3]})
+        form = DForm({"a_set": [self.a2.pk, a3.pk]})
+        # This line will currently fail
         self.assertTrue(form.is_valid())
         # form.save() would trigger an consistency error.
