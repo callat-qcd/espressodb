@@ -3,9 +3,11 @@
 """
 from logging import getLogger
 
-from django.test import TestCase
+from django.test import TransactionTestCase
+from django.forms import ModelForm
 
-from espressodb_tests.m2mtests.models import A, B, C
+from espressodb.base.exceptions import ConsistencyError
+from espressodb_tests.m2mtests.models import A, B, C, D
 
 
 LOGGER = getLogger("espressodb")
@@ -28,7 +30,7 @@ def record_calls(calls):
     return decorator
 
 
-class M2MTest(TestCase):  # pylint: disable=R0902
+class M2MTest(TransactionTestCase):  # pylint: disable=R0902
     """Tests m2m check consistency calls
     """
 
@@ -47,6 +49,7 @@ class M2MTest(TestCase):  # pylint: disable=R0902
         self.b2 = B.objects.create()
         self.c1 = C.objects.create()
         self.c2 = C.objects.create()
+        self.d1 = D.objects.create()
 
     def assertCallsEqual(self, calls_expected, calls_actual):
         """Asserts both calls are equal.
@@ -184,3 +187,30 @@ class M2MTest(TestCase):  # pylint: disable=R0902
             ((self.c2, A.objects.filter(pk=self.a1.pk)), {"column": "a_set"}),
         ]
         self.assertCallsEqual(calls, self.c_calls)
+
+    def test_07_raising_consistency_errors(self):
+        """Purpusefully triggering consistency errors for D class."""
+        self.d1.a_set.add(self.a1)
+        self.assertEqual(self.d1.a_set.count(), 1)
+
+        a3 = A.objects.create()
+
+        with self.assertRaises(ConsistencyError):
+            self.d1.a_set.add(self.a2, a3)
+        self.assertEqual(self.d1.a_set.count(), 1)
+
+    def test_08_form_validates_properly(self):
+        """Tests if consistency error is triggered properly for m2m field in form."""
+
+        class DForm(ModelForm):
+            class Meta:
+                model = D
+                fields = ["a_set"]
+
+        form = DForm({"a_set": [self.a1]})
+        self.assertTrue(form.is_valid())
+
+        a3 = A.objects.create()
+
+        form = DForm({"a_set": [self.a2, a3]})
+        self.assertTrue(form.is_valid())
