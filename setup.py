@@ -26,7 +26,7 @@ setup(
     name="espressodb",
     python_requires=">=3.6",
     version=__version__,
-    description=None,
+    description="Science database interface using Django as the content manager.",
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     url="https://github.com/callat-qcd/espressodb",

@@ -81,11 +81,14 @@ def check_model_state():
         raise MigrationStateError(f"Migrations have changed", changes)
 
 
-def check_migration_state():
+def check_migration_state(exclude: Optional[List[str]] = None):
     """Checks if the state of local migrations is represented by the database.
 
     This code follows the logic of Djangos showmigrations
     https://github.com/django/django/blob/master/django/core/management/commands/showmigrations.py
+
+    Arguments:
+        exclude: List of apps to ignore when checking migration states.
 
     Raises:
         MigrationStateError: If the loader detects conflicts or unapplied changes.
@@ -94,6 +97,7 @@ def check_migration_state():
         It might be desirable to allow partial checks by, e.g., providing an app_labels
         argument.
     """
+    exclude = exclude or []
     try:
         connection = connections[DEFAULT_DB_ALIAS]
         loader = MigrationLoader(connection, ignore_no_migrations=True)
@@ -119,6 +123,12 @@ def check_migration_state():
         raise MigrationStateError(
             f"Error when checking state of migrations conflicts:\n{error}"
         )
+
+    if exclude:
+        applied_migrations = set(
+            [el for el in applied_migrations if el[0] not in exclude]
+        )
+        plan = set([el for el in plan if el[0] not in exclude])
 
     if applied_migrations != plan:
         data = {

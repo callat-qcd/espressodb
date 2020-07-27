@@ -37,6 +37,9 @@ This feature can be used to customize your admin view for a specific model
 
 See also the `Django admin reference <https://docs.djangoproject.com/en/dev/ref/contrib/admin/>`_ for more details
 
+On default, EspressoDB uses :class:`espressodb.base.admin.ListViewAdmin` to render model admins.
+You can change the default template by providing the ``admin_class`` keyword to :meth:`espressodb.base.admin.register_admins`.
+
 Navigation customizations
 -------------------------
 
