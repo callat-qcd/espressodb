@@ -59,13 +59,18 @@ The check function :func:`espressodb.management.checks.run_all_checks` is called
 
 This function is run whenever you import your project.
 
-EspressoDB projects before version 1.1.0 do not contain the above ``if`` statement.
-Copy these lines in your project's ``_init()`` function to allow automated checks.
+.. note::
+    The method :func:`~espressodb.management.checks.run_all_checks` wraps :func:`~espressodb.management.checks.migrations.check_model_state` and :func:`~espressodb.management.checks.migrations.check_migration_state`.
+    If you do not want to check the state of migrations all apps, you can provide a list of apps to exclude to :func:`~espressodb.management.checks.migrations.check_migration_state`.
 
-This ``_init()`` function is the place where you can globally change the default behavior for checks.
-For example, to turn on checks if the ``ESPRESSODB_INIT_CHECKS`` is not set, change the ``if`` condition to
+.. warning::
+    EspressoDB projects before version 1.1.0 do not contain the above ``if`` statement.
+    Copy these lines in your project's ``_init()`` function to allow automated checks.
 
-.. code ::
+    This ``_init()`` function is the place where you can globally change the default behavior for checks.
+    For example, to turn on checks if the ``ESPRESSODB_INIT_CHECKS`` is not set, change the ``if`` condition to
 
-    if os.environ.get("ESPRESSODB_INIT_CHECKS", "1") != "0":
-        ...
+    .. code ::
+
+        if os.environ.get("ESPRESSODB_INIT_CHECKS", "1") != "0":
+            ...
