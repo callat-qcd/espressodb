@@ -2,7 +2,7 @@
 """Initializes minimal settings to launch EspressoDB
 """
 
-__version__ = "1.2.1"
+__version__ = "1.2.2"
 
 DEFAULT_OPTIONS = {
     "DEBUG": True,
