@@ -1,5 +1,5 @@
 """Setter for django config options."""
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from django.core.exceptions import ImproperlyConfigured
 
@@ -14,6 +14,7 @@ def set_project_options(
     context: Dict,
     keys: List[str] = ("SECRET_KEY", "PROJECT_APPS", "ALLOWED_HOSTS", "DEBUG"),
     fail_on_duplicate: bool = True,
+    environment_kwargs: Optional[Dict] = None,
 ):
     """Add database entry to context."""
     duplicate_keys = [key for key in keys if key in context]
@@ -24,7 +25,8 @@ def set_project_options(
         )
 
     if source == "environment":
-        options = parse_project_config(keys=keys)
+        environment_kwargs = environment_kwargs or dict()
+        options = parse_project_config(keys=keys, **environment_kwargs)
     elif source.endswith(".yaml") or source.endswith(".yml"):
         options = read_project_config_from_yaml(source, keys=keys)
     elif source is None:
@@ -38,10 +40,17 @@ def set_project_options(
     context.update(options)
 
 
-def set_db_options(source: str, context: Dict, database: str = "default"):
+def set_db_options(
+    source: str,
+    context: Dict,
+    database: str = "default",
+    environment_kwargs: Optional[Dict] = None,
+):
     """Add database entry to context."""
+
     if source == "environment":
-        options = parse_db_config()
+        environment_kwargs = environment_kwargs or dict()
+        options = parse_db_config(**environment_kwargs)
     elif source.endswith(".yaml") or source.endswith(".yml"):
         options = read_db_config_from_yaml(source)
     elif source is None:
