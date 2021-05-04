@@ -14,7 +14,7 @@ def set_project_options(
     context: Dict,
     keys: List[str] = ("SECRET_KEY", "PROJECT_APPS", "ALLOWED_HOSTS", "DEBUG"),
     fail_on_duplicate: bool = True,
-    environment_kwargs: Optional[Dict] = None,
+    environment_prefix: Optional[str] = None,
 ):
     """Add database entry to context."""
     duplicate_keys = [key for key in keys if key in context]
@@ -25,9 +25,9 @@ def set_project_options(
         )
 
     if source == "environment":
-        environment_kwargs = environment_kwargs or dict()
         try:
-            options = parse_project_config(keys=keys, **environment_kwargs)
+            environment_prefix = environment_prefix or ""
+            options = parse_project_config(prefix=environment_prefix, keys=keys)
         except Exception as e:
             raise ImproperlyConfigured(
                 "Failed to parse settings from environment." f"Details: {e}"
@@ -54,13 +54,13 @@ def set_db_options(
     source: str,
     context: Dict,
     database: str = "default",
-    environment_kwargs: Optional[Dict] = None,
+    environment_prefix: Optional[str] = None,
 ):
     """Add database entry to context."""
     if source == "environment":
-        environment_kwargs = environment_kwargs or dict()
         try:
-            options = parse_db_config(**environment_kwargs)
+            environment_prefix = environment_prefix or ""
+            options = parse_db_config(prefix=environment_prefix)
         except Exception as e:
             raise ImproperlyConfigured(
                 "Failed to parse db config from environment." f"Details: {e}"
