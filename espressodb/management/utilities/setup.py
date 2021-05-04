@@ -26,9 +26,19 @@ def set_project_options(
 
     if source == "environment":
         environment_kwargs = environment_kwargs or dict()
-        options = parse_project_config(keys=keys, **environment_kwargs)
+        try:
+            options = parse_project_config(keys=keys, **environment_kwargs)
+        except Exception as e:
+            raise ImproperlyConfigured(
+                "Failed to parse settings from environment." f"Details: {e}"
+            )
     elif source.endswith(".yaml") or source.endswith(".yml"):
-        options = read_project_config_from_yaml(source, keys=keys)
+        try:
+            options = read_project_config_from_yaml(source, keys=keys)
+        except Exception as e:
+            raise ImproperlyConfigured(
+                "Failed to parse settings from yaml." f"Details: {e}"
+            )
     elif source is None:
         options = dict()
     else:
@@ -47,12 +57,22 @@ def set_db_options(
     environment_kwargs: Optional[Dict] = None,
 ):
     """Add database entry to context."""
-
     if source == "environment":
         environment_kwargs = environment_kwargs or dict()
-        options = parse_db_config(**environment_kwargs)
+        try:
+            options = parse_db_config(**environment_kwargs)
+        except Exception as e:
+            raise ImproperlyConfigured(
+                "Failed to parse db config from environment." f"Details: {e}"
+            )
     elif source.endswith(".yaml") or source.endswith(".yml"):
-        options = read_db_config_from_yaml(source)
+        try:
+            options = read_db_config_from_yaml(source)
+        except Exception as e:
+            raise ImproperlyConfigured(
+                "Failed to parse db config from yaml." f"Details: {e}"
+            )
+
     elif source is None:
         options = dict()
     else:
