@@ -47,6 +47,11 @@ def set_settings(
             " Allowed options are `.yaml` files or 'environment'."
         )
 
+    if set(keys) != options.keys():
+        raise ImproperlyConfigured(
+            "Parsed more than specified configuration options from config file."
+        )
+
     context.update(options)
 
 

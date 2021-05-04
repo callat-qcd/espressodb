@@ -27,7 +27,7 @@ set_settings(
     source=os.path.join(ROOT_DIR, "settings.yaml"),
     context=locals(),
     keys=("SECRET_KEY", "PROJECT_APPS", "ALLOWED_HOSTS", "DEBUG"),
-    fail_duplicates=True,
+    fail_on_duplicate=True,
 )
 validate_settings(locals())
 
