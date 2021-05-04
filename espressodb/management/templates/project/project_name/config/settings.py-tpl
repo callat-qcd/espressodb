@@ -14,8 +14,8 @@ This file has been adjusted to espressodb settings.
 import os
 
 
-from espressodb.management.utilities import set_project_options
-from espressodb.management.utilities import set_db_options
+from espressodb.management.utilities import set_settings, validate_settings
+from espressodb.management.utilities import set_db_config, validate_db_config
 from espressodb.management.utilities.files import ESPRESSO_DB_ROOT
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,12 +23,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(BASE_DIR)
 
 # This defines the module variables "SECRET_KEY", "PROJECT_APPS", "ALLOWED_HOSTS" and "DEBUG"
-set_project_options(
+set_settings(
     source=os.path.join(ROOT_DIR, "settings.yaml"),
     context=locals(),
     keys=("SECRET_KEY", "PROJECT_APPS", "ALLOWED_HOSTS", "DEBUG"),
     fail_duplicates=True,
 )
+validate_settings(locals())
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/{{ docs_version }}/howto/deployment/checklist/
@@ -97,11 +98,12 @@ WSGI_APPLICATION = "{{ project_name }}.config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/{{ docs_version }}/ref/settings/#databases
 DATABASES = dict()
-set_db_options(
+set_db_config(
     source=os.path.join(ROOT_DIR, "db-config.yaml"),
     context=DATABASES,
     database="default"
 )
+validate_db_config(DATABASES)
 # This defines the dict entry DATABASES["default"]
 
 

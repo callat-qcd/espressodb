@@ -9,7 +9,7 @@ from espressodb.management.utilities.environment import parse_project_config
 from espressodb.management.utilities.environment import parse_db_config
 
 
-def set_project_options(
+def set_settings(
     source: str,
     context: Dict,
     keys: List[str] = ("SECRET_KEY", "PROJECT_APPS", "ALLOWED_HOSTS", "DEBUG"),
@@ -50,7 +50,7 @@ def set_project_options(
     context.update(options)
 
 
-def set_db_options(
+def set_db_config(
     source: str,
     context: Dict,
     database: str = "default",
@@ -85,3 +85,26 @@ def set_db_options(
         context[database] = options
     else:
         context[database].update(options)
+
+
+def validate_settings(context: Dict):
+    for key in ["SECRET_KEY", "DEBUG", "ALLOWED_HOSTS", "PROJECT_APPS"]:
+        if key not in context:
+            raise ImproperlyConfigured(
+                f"The EspressoDB depends on you setting the '{key}' value."
+            )
+
+
+def validate_db_config(databases: Dict):
+    for db, db_config in databases.items():
+        if "ENGINE" not in db_config:
+            raise KeyError(
+                f"The espressodb depends on you setting the 'ENGINE' argument for db {db}."
+                f" Here is a list of available keys: {db_config.keys()}"
+            )
+
+        if "NAME" not in db_config:
+            raise KeyError(
+                f"The espressodb depends on you setting the 'NAME' argument for db {db}."
+                f" Here is a list of available keys: {db_config.keys()}"
+            )
