@@ -51,6 +51,7 @@ def get_values_from_env(
 
 def parse_db_config(prefix: str):
     """..."""
+    return get_values_from_env(prefix, keys=None, fail_if_missing=False)
 
 
 def parse_project_config(prefix: str, keys: List[str]):
